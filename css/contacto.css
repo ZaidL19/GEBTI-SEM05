@@ -1,0 +1,133 @@
+/* ======================================== */
+/* SECCIÓN CONTACTO */
+/* ======================================== */
+
+.contacto{
+    width: 100%;
+    padding: 80px 10%;
+    background: #f5f5f5;
+}
+
+.contenedor-contacto{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+/* ======================================== */
+/* INFORMACIÓN */
+/* ======================================== */
+
+.info-contacto{
+    flex: 1;
+    min-width: 300px;
+}
+
+.info-contacto h2{
+    font-size: 40px;
+    color: #0077b6;
+    margin-bottom: 20px;
+}
+
+.info-contacto p{
+    font-size: 18px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.dato{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #333;
+}
+
+.dato i{
+    width: 45px;
+    height: 45px;
+    background: #0096d6;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+}
+
+/* ======================================== */
+/* FORMULARIO */
+/* ======================================== */
+
+.form-contacto{
+    flex: 1;
+    min-width: 320px;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 20px rgba(0,0,0,0.1);
+}
+
+.form-contacto input,
+.form-contacto textarea{
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.form-contacto input:focus,
+.form-contacto textarea:focus{
+    border-color: #0096d6;
+    box-shadow: 0px 0px 8px rgba(0,150,214,0.3);
+}
+
+.form-contacto textarea{
+    resize: none;
+    height: 150px;
+}
+
+.form-contacto button{
+    width: 100%;
+    padding: 15px;
+    background: #0096d6;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form-contacto button:hover{
+    background: #0077b6;
+    transform: translateY(-3px);
+}
+
+/* ======================================== */
+/* RESPONSIVE */
+/* ======================================== */
+
+@media(max-width: 900px){
+
+    .contenedor-contacto{
+        flex-direction: column;
+    }
+
+    .info-contacto{
+        text-align: center;
+    }
+
+    .dato{
+        justify-content: center;
+    }
+
+}
