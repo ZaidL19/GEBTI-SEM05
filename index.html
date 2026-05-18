@@ -1,106 +1,98 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Red Integrada de Salud Pacífico Norte</title>
-
-<link rel="stylesheet" href="css/styles.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Integrada de Salud Pacífico Norte</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
 
-<!-- HEADER -->
-<header class="topbar">
-
-    <div class="logo-section">
-        <img src="logo.png" alt="Logo">
-        <div>
-            <h1>RED INTEGRADA DE SALUD</h1>
-            <p>Pacífico Norte</p>
-        </div>
-    </div>
-
-    <nav>
-        <a href="#">Inicio</a>
-        <a href="#">Institucional</a>
-        <a href="#">Noticias</a>
-        <a href="convocatorias.html">Convocatorias</a>
-        <a href="#">Contacto</a>
-    </nav>
-
-</header>
-
-<!-- HERO -->
-<section class="hero">
-
-    <div class="overlay"></div>
-
-    <div class="hero-content">
-        <h2>#UnidosContraElDengue</h2>
-        <p>Comprometidos con la salud de nuestra comunidad.</p>
-
-        <button>Más Información</button>
-    </div>
-
-</section>
-
-<!-- INFO -->
-<section class="info">
-
-    <div class="card">
-        <h3>Atención Médica</h3>
-        <p>Servicios de salud para toda la población.</p>
-    </div>
-
-    <div class="card">
-        <h3>Prevención</h3>
-        <p>Campañas permanentes contra enfermedades.</p>
-    </div>
-
-    <div class="card">
-        <h3>Emergencias</h3>
-        <p>Atención inmediata las 24 horas.</p>
-    </div>
-
-</section>
-
-<!-- NOTICIAS -->
-<section class="news">
-
-    <h2>Últimas Noticias</h2>
-
-    <div class="news-container">
-
-        <div class="news-card">
-            <img src="noticia1.jpg" alt="">
-            <h3>145 Ambulancias para Ancash</h3>
-            <p>Se fortalece el sistema regional de salud.</p>
+    <header class="topbar">
+        <div class="logo-section">
+            <img src="logo.png" alt="Logo">
+            <div>
+                <h1>RED INTEGRADA DE SALUD</h1>
+                <p>Pacífico Norte</p>
+            </div>
         </div>
 
-        <div class="news-card">
-            <img src="noticia2.jpg" alt="">
-            <h3>Jornada Nacional</h3>
-            <p>Capacitación para el cuidado de la salud.</p>
+        <nav class="main-nav">
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                
+                <li class="dropdown">
+                    <a href="institucional.html" class="dropdown-trigger">Institucional <i class="fa-solid fa-chevron-down" style="font-size: 11px; margin-left: 5px;"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="institucional.html#quienes-somos">¿Quiénes Somos?</a></li>
+                        <li><a href="institucional.html#historia">Historia</a></li>
+                        <li><a href="institucional.html#mision-vision">Visión y Misión</a></li>
+                        <li><a href="institucional.html#directorio">Directorio Institucional</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="#">Noticias</a></li>
+                <li><a href="convocatorias.html">Convocatorias</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <h2>#UnidosContraElDengue</h2>
+            <p>Comprometidos con la salud de nuestra comunidad.</p>
+            <button>Más Información</button>
         </div>
+    </section>
 
-        <div class="news-card">
-            <img src="noticia3.jpg" alt="">
-            <h3>Campaña Médica</h3>
-            <p>Atención gratuita en diferentes sectores.</p>
+    <section class="info">
+        <div class="card">
+            <h3>Atención Médica</h3>
+            <p>Servicios de salud para toda la población.</p>
         </div>
+        <div class="card">
+            <h3>Prevención</h3>
+            <p>Campañas permanentes contra enfermedades.</p>
+        </div>
+        <div class="card">
+            <h3>Emergencias</h3>
+            <p>Atención inmediata las 24 horas.</p>
+        </div>
+    </section>
 
-    </div>
+    <section class="news">
+        <h2>Últimas Noticias</h2>
+        
+        <div class="news-container">
+            <div class="news-card">
+                <img src="noticia1.jpg" alt="Ambulancias">
+                <h3>145 Ambulancias para Ancash</h3>
+                <p>Se fortalece el sistema regional de salud.</p>
+            </div>
 
-</section>
+            <div class="news-card">
+                <img src="noticia2.jpg" alt="Jornada">
+                <h3>Jornada Nacional</h3>
+                <p>Capacitación para el cuidado de la salud.</p>
+            </div>
 
-<!-- FOOTER -->
-<footer>
+            <div class="news-card">
+                <img src="noticia3.jpg" alt="Campaña">
+                <h3>Campaña Médica</h3>
+                <p>Atención gratuita en diferentes sectores.</p>
+            </div>
+        </div>
+    </section>
 
-    <h3>Red Integrada de Salud Pacífico Norte</h3>
-    <p>Chimbote - Perú</p>
-
-</footer>
+    <footer>
+        <h3>Red Integrada de Salud Pacífico Norte</h3>
+        <p>Chimbote - Perú</p>
+    </footer>
 
 </body>
 </html>
