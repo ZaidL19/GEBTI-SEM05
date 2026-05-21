@@ -78,13 +78,17 @@ body{
 /* HEADER */
 
 .topbar{
-    background:#0086c7;
-    color:white;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:15px 8%;
-    flex-wrap:wrap;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 8%;
+    background: transparent !important;
+    color: white;
+    z-index: 1000;
 }
 
 .logo-section{
@@ -114,53 +118,81 @@ nav a:hover{
 }
 
 /* HERO */
-
 .hero{
-    height:85vh;
-    background:url('banner.jpg') center/cover;
-    position:relative;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
+
+/* VIDEO */
+
+.bg-video{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    z-index: -2;
+}
+
+/* CAPA OSCURA */
 
 .overlay{
-    position:absolute;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.4);
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0,0,0,0.45);
+
+    z-index: -1;
 }
 
+/* CONTENIDO */
+
 .hero-content{
-    position:relative;
-    color:white;
-    text-align:center;
-    z-index:2;
+    position: relative;
+    z-index: 2;
+    color: white;
+
+    padding: 20px;
 }
 
 .hero-content h2{
-    font-size:60px;
-    margin-bottom:20px;
+    font-size: 70px;
+    margin-bottom: 20px;
 }
 
 .hero-content p{
-    font-size:22px;
-    margin-bottom:25px;
+    font-size: 28px;
+    margin-bottom: 30px;
 }
 
 .hero-content button{
-    padding:14px 30px;
-    border:none;
-    background:#00a6ff;
-    color:white;
-    font-size:18px;
-    border-radius:8px;
-    cursor:pointer;
-    transition:0.3s;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 10px;
+
+    background: #009dff;
+    color: white;
+
+    font-size: 20px;
+    cursor: pointer;
+
+    transition: 0.3s;
 }
 
 .hero-content button:hover{
-    background:#007bbd;
+    background: #007acc;
 }
 
 /* INFO */
