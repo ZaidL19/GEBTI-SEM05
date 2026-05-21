@@ -1,0 +1,167 @@
+/* --- Diseño de la Página Institucional --- */
+.institutional-page {
+    display: flex;
+    gap: 40px;
+    padding: 50px 20px;
+    align-items: flex-start;
+}
+
+/* --- Menú Lateral (Sidebar) --- */
+.sidebar-nav {
+    flex: 0 0 280px; /* Ancho fijo para el menú lateral */
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(15, 76, 129, 0.05);
+    border: 1px solid #e2e8f0;
+    position: sticky;
+    top: 100px; /* Se queda fijo al hacer scroll si tu header es sticky */
+}
+
+.sidebar-nav h3 {
+    margin: 0 0 20px 0;
+    color: var(--primary-blue, #0f4c81);
+    font-size: 18px;
+    font-weight: 700;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 10px;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    margin-bottom: 8px;
+}
+
+.sidebar-nav .sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: #475569;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+}
+
+.sidebar-nav .sidebar-link i {
+    font-size: 16px;
+    color: #94a3b8;
+    transition: color 0.25s;
+}
+
+/* Estados Hover y Activo del menú */
+.sidebar-nav .sidebar-link:hover {
+    background-color: #f0f7ff;
+    color: var(--accent-sky, #0284c7);
+}
+
+.sidebar-nav .sidebar-link:hover i {
+    color: var(--accent-sky, #0284c7);
+}
+
+.sidebar-nav .sidebar-link.active {
+    background-color: var(--primary-blue, #0f4c81);
+    color: #ffffff;
+}
+
+.sidebar-nav .sidebar-link.active i {
+    color: #ffffff;
+}
+
+/* --- Cuerpo del Contenido (Derecha) --- */
+.content-body {
+    flex: 1;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(15, 76, 129, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.inst-section {
+    margin-bottom: 50px; /* Si prefieren scroll continuo */
+}
+
+.inst-section h2 {
+    font-size: 28px;
+    color: var(--primary-blue, #0f4c81);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.inst-section p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #334155;
+    margin-bottom: 20px;
+}
+
+/* --- Cuadrícula de Misión y Visión --- */
+.mv-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 25px;
+}
+
+.mv-card {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 24px;
+    border-top: 4px solid var(--accent-sky, #0284c7);
+}
+
+.mv-card h3 {
+    margin: 0 0 12px 0;
+    color: var(--primary-blue, #0f4c81);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* --- Tabla de Directorio Pro --- */
+.directory-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.directory-table th, .directory-table td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.directory-table th {
+    background-color: #f1f5f9;
+    color: var(--primary-blue, #0f4c81);
+    font-weight: 700;
+}
+
+.directory-table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .institutional-page {
+        flex-direction: column;
+    }
+    .sidebar-nav {
+        flex: 1 1 100%;
+        width: 100%;
+        position: relative;
+        top: 0;
+    }
+    .mv-grid {
+        grid-template-columns: 1fr;
+    }
+}

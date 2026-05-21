@@ -1,117 +1,145 @@
-// ===============================
-// RED INTEGRADA DE SALUD PACÍFICO NORTE
-// script.js
-// ===============================
+// ========================================
+// SCRIPT PRINCIPAL - RED DE SALUD
+// ========================================
 
-// ===== MENU ACTIVO =====
-const menuLinks = document.querySelectorAll("nav ul li a");
+// ===== MENU RESPONSIVE =====
+const menuToggle = document.querySelector(".menu-toggle");
+const navMenu = document.querySelector(".nav-menu");
 
-menuLinks.forEach(link => {
-    link.addEventListener("click", function () {
+if(menuToggle){
 
-        menuLinks.forEach(item => {
-            item.classList.remove("activo");
-        });
+    menuToggle.addEventListener("click", () => {
 
-        this.classList.add("activo");
-    });
-});
+        navMenu.classList.toggle("active");
 
-// ===== SLIDER AUTOMÁTICO =====
-const slides = document.querySelectorAll(".slide");
-const prevBtn = document.querySelector(".prev");
-const nextBtn = document.querySelector(".next");
-
-let currentSlide = 0;
-
-function mostrarSlide(index) {
-
-    slides.forEach(slide => {
-        slide.classList.remove("active");
     });
 
-    slides[index].classList.add("active");
 }
 
-// ===== BOTÓN SIGUIENTE =====
-function siguienteSlide() {
-
-    currentSlide++;
-
-    if (currentSlide >= slides.length) {
-        currentSlide = 0;
-    }
-
-    mostrarSlide(currentSlide);
-}
-
-// ===== BOTÓN ANTERIOR =====
-function anteriorSlide() {
-
-    currentSlide--;
-
-    if (currentSlide < 0) {
-        currentSlide = slides.length - 1;
-    }
-
-    mostrarSlide(currentSlide);
-}
-
-// ===== EVENTOS BOTONES =====
-if (nextBtn) {
-    nextBtn.addEventListener("click", siguienteSlide);
-}
-
-if (prevBtn) {
-    prevBtn.addEventListener("click", anteriorSlide);
-}
-
-// ===== AUTO SLIDE CADA 5 SEGUNDOS =====
-setInterval(() => {
-    siguienteSlide();
-}, 5000);
-
-// ===== EFECTO SCROLL HEADER =====
+// ========================================
+// HEADER SCROLL
+// ========================================
 window.addEventListener("scroll", () => {
 
     const header = document.querySelector("header");
 
-    if (window.scrollY > 50) {
+    if(window.scrollY > 50){
+
         header.classList.add("header-scroll");
-    } else {
+
+    }else{
+
         header.classList.remove("header-scroll");
+
     }
+
 });
 
-// ===== ANIMACIÓN NOTICIAS =====
-const noticias = document.querySelectorAll(".card-noticia");
+// ========================================
+// SLIDER AUTOMÁTICO
+// ========================================
+const slides = document.querySelectorAll(".slide");
 
-window.addEventListener("scroll", () => {
+let currentSlide = 0;
 
-    noticias.forEach(card => {
+function showSlide(index){
 
-        const posicion = card.getBoundingClientRect().top;
-        const tamañoPantalla = window.innerHeight;
+    slides.forEach(slide => {
 
-        if (posicion < tamañoPantalla - 100) {
-            card.classList.add("mostrar");
-        }
+        slide.classList.remove("active");
+
     });
+
+    slides[index].classList.add("active");
+
+}
+
+function nextSlide(){
+
+    currentSlide++;
+
+    if(currentSlide >= slides.length){
+
+        currentSlide = 0;
+
+    }
+
+    showSlide(currentSlide);
+
+}
+
+// Cambia cada 5 segundos
+setInterval(() => {
+
+    nextSlide();
+
+}, 5000);
+
+// ========================================
+// SCROLL SUAVE MENU
+// ========================================
+const enlaces = document.querySelectorAll('a[href^="#"]');
+
+enlaces.forEach(enlace => {
+
+    enlace.addEventListener("click", function(e){
+
+        e.preventDefault();
+
+        const destino = document.querySelector(this.getAttribute("href"));
+
+        destino.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    });
+
 });
 
-// ===== BOTÓN VOLVER ARRIBA =====
+// ========================================
+// ANIMACIONES AL HACER SCROLL
+// ========================================
+const elementos = document.querySelectorAll(".animado");
+
+function mostrarElementos(){
+
+    elementos.forEach(el => {
+
+        const posicion = el.getBoundingClientRect().top;
+        const pantalla = window.innerHeight;
+
+        if(posicion < pantalla - 100){
+
+            el.classList.add("mostrar");
+
+        }
+
+    });
+
+}
+
+window.addEventListener("scroll", mostrarElementos);
+
+// ========================================
+// BOTON VOLVER ARRIBA
+// ========================================
 const btnTop = document.querySelector(".btn-top");
 
 window.addEventListener("scroll", () => {
 
-    if (window.scrollY > 300) {
+    if(window.scrollY > 300){
+
         btnTop.classList.add("visible");
-    } else {
+
+    }else{
+
         btnTop.classList.remove("visible");
+
     }
+
 });
 
-if (btnTop) {
+if(btnTop){
 
     btnTop.addEventListener("click", () => {
 
@@ -119,54 +147,40 @@ if (btnTop) {
             top: 0,
             behavior: "smooth"
         });
+
     });
+
 }
 
-// ===== FECHA ACTUAL =====
-const fecha = new Date();
+// ========================================
+// FORMULARIO CONTACTO
+// ========================================
+const form = document.querySelector(".form-contacto");
 
-const opciones = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric"
-};
+if(form){
 
-const fechaTexto = fecha.toLocaleDateString("es-PE", opciones);
+    form.addEventListener("submit", (e) => {
 
-const fechaElemento = document.querySelector(".fecha-actual");
+        e.preventDefault();
 
-if (fechaElemento) {
-    fechaElemento.textContent = fechaTexto;
+        const nombre = document.querySelector("#nombre").value;
+        const correo = document.querySelector("#correo").value;
+        const mensaje = document.querySelector("#mensaje").value;
+
+        if(nombre === "" || correo === "" || mensaje === ""){
+
+            alert("Complete todos los campos.");
+
+        }else{
+
+            alert("Mensaje enviado correctamente.");
+
+            form.reset();
+
+        }
+
+    });
+
 }
 
-// ===== PRELOADER =====
-window.addEventListener("load", () => {
-
-    const loader = document.querySelector(".loader");
-
-    if (loader) {
-
-        loader.classList.add("loader-hidden");
-
-        setTimeout(() => {
-            loader.style.display = "none";
-        }, 1000);
-    }
-});
-
-// ===== EFECTO HOVER TARJETAS =====
-const cards = document.querySelectorAll(".card-noticia");
-
-cards.forEach(card => {
-
-    card.addEventListener("mouseenter", () => {
-        card.style.transform = "translateY(-10px)";
-    });
-
-    card.addEventListener("mouseleave", () => {
-        card.style.transform = "translateY(0px)";
-    });
-});
-
-console.log("Sistema RIS Pacífico Norte cargado correctamente.");
+console.log("Sistema cargado correctamente.");
