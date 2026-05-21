@@ -530,3 +530,64 @@ td a{
     }
 
 }
+
+/* ========================= */
+/* TRANSICION ENTRE PAGINAS */
+/* ========================= */
+
+.transition-screen{
+
+    position:fixed;
+    inset:0;
+
+    background:#0086c7;
+
+    z-index:9999;
+
+    pointer-events:none;
+
+}
+
+/* SALIDA */
+
+.transition-screen.exit{
+
+    animation:circleOut 0.5s ease-in-out forwards;
+
+}
+
+/* ENTRADA */
+
+.transition-screen.enter{
+
+    animation:circleIn 0.5s ease-in-out forwards;
+
+}
+
+/* ANIMACION SALIDA */
+
+@keyframes circleOut{
+
+    0%{
+        clip-path:circle(0% at center);
+    }
+
+    100%{
+        clip-path:circle(150% at center);
+    }
+
+}
+
+/* ANIMACION ENTRADA */
+
+@keyframes circleIn{
+
+    0%{
+        clip-path:circle(150% at center);
+    }
+
+    100%{
+        clip-path:circle(0% at center);
+    }
+
+}

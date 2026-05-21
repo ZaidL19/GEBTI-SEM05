@@ -1,0 +1,252 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+/* HEADER */
+
+.topbar{
+    background:#0086c7;
+    padding:15px 5%;
+    color:white;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.logo img{
+    width:70px;
+}
+
+.logo h1{
+    font-size:32px;
+}
+
+nav{
+    margin-top:20px;
+    display:flex;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    padding:10px 15px;
+    border-radius:5px;
+    transition:0.3s;
+}
+
+nav a:hover,
+.active{
+    background:white;
+    color:#0086c7;
+}
+
+/* TITULO */
+
+.titulo{
+    text-align:center;
+    padding:50px 20px;
+}
+
+.titulo h2{
+    color:#0086c7;
+    font-size:40px;
+}
+
+/* TABLAS */
+
+.tabla-section{
+    width:90%;
+    margin:40px auto;
+}
+
+.tabla-section h3{
+    text-align:center;
+    margin-bottom:20px;
+    font-size:30px;
+    color:#222;
+}
+
+.tabla-container{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+thead{
+    background:#005cb3;
+    color:white;
+}
+
+th, td{
+    padding:10px;
+    border:1px solid #ddd;
+    text-align:center;
+}
+
+td a{
+    text-decoration:none;
+    color:#d60000;
+    font-weight:bold;
+}
+
+.proceso{
+    color:#ff8800;
+    font-weight:bold;
+}
+
+.finalizado{
+    color:green;
+    font-weight:bold;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    .logo{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .logo h1{
+        font-size:24px;
+    }
+
+    nav{
+        justify-content:center;
+    }
+
+    .titulo h2{
+        font-size:28px;
+    }
+
+}
+
+/* MEJORAS TABLAS */
+
+th{
+    font-size:12px;
+    border:1px solid #3a8fff;
+}
+
+td{
+    font-size:10px;
+    border:1px solid #3a8fff;
+}
+
+/* LINKS PDF */
+
+td a{
+    text-decoration:none;
+    font-size:14px;
+    transition:0.3s;
+}
+
+td a:hover{
+    transform:scale(1.2);
+}
+
+/* TABLAS GRANDES */
+
+table{
+    min-width:1200px;
+}
+
+/* SOMBRA */
+
+.tabla-container{
+    overflow-x:auto;
+    background:white;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* TITULOS */
+
+.tabla-section h3{
+    font-size:28px;
+    font-weight:bold;
+}
+
+/* EFECTO HOVER FILAS */
+
+tbody tr:hover{
+    background:#f2f8ff;
+}
+
+/* ========================= */
+/* TRANSICION ENTRE PAGINAS */
+/* ========================= */
+
+.transition-screen{
+
+    position:fixed;
+    inset:0;
+
+    background:#0086c7;
+
+    z-index:9999;
+
+    pointer-events:none;
+
+}
+
+/* SALIDA */
+
+.transition-screen.exit{
+
+    animation:circleOut 0.5s ease-in-out forwards;
+
+}
+
+/* ENTRADA */
+
+.transition-screen.enter{
+
+    animation:circleIn 0.5s ease-in-out forwards;
+
+}
+
+/* ANIMACION SALIDA */
+
+@keyframes circleOut{
+
+    0%{
+        clip-path:circle(0% at center);
+    }
+
+    100%{
+        clip-path:circle(150% at center);
+    }
+
+}
+
+/* ANIMACION ENTRADA */
+
+@keyframes circleIn{
+
+    0%{
+        clip-path:circle(150% at center);
+    }
+
+    100%{
+        clip-path:circle(0% at center);
+    }
+
+}
