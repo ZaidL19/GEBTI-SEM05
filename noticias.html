@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noticia Modal</title>
+  <style>
+    /* 1. Estilos del botón de abrir */
+    .btn-noticia {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #0056b3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    /* 2. Estilos de la ventana emergente (modal) */
+    dialog {
+      width: 80%;
+      max-width: 600px;
+      padding: 0;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* 3. Fondo oscuro detrás de la ventana modal */
+    dialog::backdrop {
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(3px); /* Efecto de desenfoque opcional */
+    }
+
+    /* 4. Estilos del contenido interno */
+    .modal-contenido {
+      padding: 25px;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    .btn-cerrar {
+      margin-top: 15px;
+      padding: 8px 15px;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- El icono o botón que el usuario va a presionar -->
+  <button class="btn-noticia" id="btn-abrir">📰 Leer Noticia</button>
+
+  <!-- La ventana modal que estará oculta por defecto -->
+  <dialog id="modal-noticia">
+    <div class="modal-contenido">
+      <h2>Titular de tu noticia</h2>
+      <p>
+        Aquí puedes colocar todo el desarrollo de tu noticia, agregar imágenes o cualquier etiqueta HTML.
+        Como está dentro de un modal, se abrirá por encima de tu página web actual sin necesidad de recargarla.
+      </p>
+      <!-- Botón para cerrar la ventana -->
+      <button class="btn-cerrar" id="btn-cerrar">Cerrar Noticia</button>
+    </div>
+  </dialog>
+
+  <script>
+    // Seleccionamos los elementos del HTML
+    const btnAbrir = document.getElementById('btn-abrir');
+    const btnCerrar = document.getElementById('btn-cerrar');
+    const modal = document.getElementById('modal-noticia');
+
+    // Función para abrir la ventana modal
+    btnAbrir.addEventListener('click', () => {
+      modal.showModal();
+    });
+
+    // Función para cerrar la ventana modal
+    btnCerrar.addEventListener('click', () => {
+      modal.close();
+    });
+
+    // (Opcional) Cerrar el modal si el usuario hace clic fuera de la caja blanca
+    modal.addEventListener('click', (evento) => {
+      const dimensiones = modal.getBoundingClientRect();
+      if (
+        evento.clientX < dimensiones.left ||
+        evento.clientX > dimensiones.right ||
+        evento.clientY < dimensiones.top ||
+        evento.clientY > dimensiones.bottom
+      ) {
+        modal.close();
+      }
+    });
+  </script>
+
+</body>
+</html>
