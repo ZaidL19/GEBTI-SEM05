@@ -3,45 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Noticia Modal</title>
+  <title>Noticias Dinámicas</title>
   <style>
-    /* 1. Estilos del botón de abrir */
-    .btn-noticia {
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      padding: 20px;
+    }
+
+    /* 1. Cuadrícula para las 3 noticias principales */
+    .contenedor-noticias {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .tarjeta-noticia {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 300px;
+      text-align: center;
+    }
+
+    .btn-abrir {
+      padding: 10px 15px;
       background-color: #0056b3;
       color: white;
       border: none;
       border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
     }
 
-    /* 2. Estilos de la ventana emergente (modal) */
+    .btn-abrir:hover { background-color: #003d82; }
+
+    /* 2. Estilos del Modal */
     dialog {
-      width: 80%;
+      width: 90%;
       max-width: 600px;
-      padding: 0;
+      padding: 25px;
       border: none;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
     }
 
-    /* 3. Fondo oscuro detrás de la ventana modal */
     dialog::backdrop {
-      background-color: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(3px); /* Efecto de desenfoque opcional */
+      background-color: rgba(0, 0, 0, 0.7);
     }
 
-    /* 4. Estilos del contenido interno */
-    .modal-contenido {
-      padding: 25px;
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
+    .modal-imagen {
+      width: 100%;
+      height: 300px;
+      object-fit: cover; /* Ajusta la imagen sin deformarla */
+      border-radius: 8px;
+      margin-bottom: 15px;
     }
 
     .btn-cerrar {
-      margin-top: 15px;
-      padding: 8px 15px;
+      margin-top: 20px;
+      padding: 10px 20px;
       background-color: #dc3545;
       color: white;
       border: none;
@@ -52,51 +75,90 @@
 </head>
 <body>
 
-  <!-- El icono o botón que el usuario va a presionar -->
-  <button class="btn-noticia" id="btn-abrir">📰 Leer Noticia</button>
+  <h1 style="text-align: center;">Últimas Noticias</h1>
 
-  <!-- La ventana modal que estará oculta por defecto -->
-  <dialog id="modal-noticia">
-    <div class="modal-contenido">
-      <h2>Titular de tu noticia</h2>
-      <p>
-        Aquí puedes colocar todo el desarrollo de tu noticia, agregar imágenes o cualquier etiqueta HTML.
-        Como está dentro de un modal, se abrirá por encima de tu página web actual sin necesidad de recargarla.
-      </p>
-      <!-- Botón para cerrar la ventana -->
-      <button class="btn-cerrar" id="btn-cerrar">Cerrar Noticia</button>
+  <div class="contenedor-noticias">
+    <div class="tarjeta-noticia">
+      <h3>Noticia 1</h3>
+      <p>Un breve resumen de la primera noticia...</p>
+      <button class="btn-abrir" data-id="1">Leer Noticia 1</button>
     </div>
+
+    <div class="tarjeta-noticia">
+      <h3>Noticia 2</h3>
+      <p>Un breve resumen de la segunda noticia...</p>
+      <button class="btn-abrir" data-id="2">Leer Noticia 2</button>
+    </div>
+
+    <div class="tarjeta-noticia">
+      <h3>Noticia 3</h3>
+      <p>Un breve resumen de la tercera noticia...</p>
+      <button class="btn-abrir" data-id="3">Leer Noticia 3</button>
+    </div>
+  </div>
+
+  <dialog id="modal-noticia">
+    <h2 id="titulo-modal"></h2>
+    <img id="imagen-modal" class="modal-imagen" src="" alt="Imagen de noticia">
+    <p id="texto-modal"></p>
+    
+    <button class="btn-cerrar" id="btn-cerrar">Cerrar Noticia</button>
   </dialog>
 
   <script>
-    // Seleccionamos los elementos del HTML
-    const btnAbrir = document.getElementById('btn-abrir');
-    const btnCerrar = document.getElementById('btn-cerrar');
-    const modal = document.getElementById('modal-noticia');
+    // 1. Nuestra "Base de datos" de noticias
+    const datosNoticias = {
+      "1": {
+        titulo: "El nuevo rover aterriza en Marte",
+        imagen: "https://picsum.photos/id/1015/600/300", // Imagen de prueba
+        contenido: "Hoy por la mañana, el nuevo vehículo de exploración tocó la superficie marciana enviando las primeras fotografías en alta resolución del cráter. La misión busca rastros de agua."
+      },
+      "2": {
+        titulo: "Descubren nueva especie de ave",
+        imagen: "https://picsum.photos/id/1024/600/300", // Imagen de prueba
+        contenido: "En las profundidades de la selva amazónica, biólogos han documentado una nueva especie de ave con un canto único y plumaje fluorescente bajo luz ultravioleta."
+      },
+      "3": {
+        titulo: "Avances en la tecnología cuántica",
+        imagen: "https://picsum.photos/id/175/600/300", // Imagen de prueba
+        contenido: "Un equipo de ingenieros logró mantener la estabilidad de un procesador cuántico a temperatura ambiente, marcando un hito histórico para la computación del futuro."
+      }
+    };
 
-    // Función para abrir la ventana modal
-    btnAbrir.addEventListener('click', () => {
-      modal.showModal();
+    // 2. Seleccionamos los elementos del HTML
+    const modal = document.getElementById('modal-noticia');
+    const tituloModal = document.getElementById('titulo-modal');
+    const imagenModal = document.getElementById('imagen-modal');
+    const textoModal = document.getElementById('texto-modal');
+    const btnCerrar = document.getElementById('btn-cerrar');
+
+    // Seleccionamos TODOS los botones que abren noticias
+    const botonesAbrir = document.querySelectorAll('.btn-abrir');
+
+    // 3. Le damos la orden a cada botón de abrir
+    botonesAbrir.forEach(boton => {
+      boton.addEventListener('click', () => {
+        // Obtenemos el ID de la noticia que presionamos (1, 2 o 3)
+        const idNoticia = boton.getAttribute('data-id');
+        
+        // Buscamos esa información en nuestros datos
+        const info = datosNoticias[idNoticia];
+
+        // Rellenamos el modal con la información correspondiente
+        tituloModal.textContent = info.titulo;
+        imagenModal.src = info.imagen;
+        textoModal.textContent = info.contenido;
+
+        // Finalmente, mostramos el modal
+        modal.showModal();
+      });
     });
 
-    // Función para cerrar la ventana modal
+    // 4. Función para cerrar el modal
     btnCerrar.addEventListener('click', () => {
       modal.close();
     });
 
-    // (Opcional) Cerrar el modal si el usuario hace clic fuera de la caja blanca
-    modal.addEventListener('click', (evento) => {
-      const dimensiones = modal.getBoundingClientRect();
-      if (
-        evento.clientX < dimensiones.left ||
-        evento.clientX > dimensiones.right ||
-        evento.clientY < dimensiones.top ||
-        evento.clientY > dimensiones.bottom
-      ) {
-        modal.close();
-      }
-    });
   </script>
-
 </body>
 </html>
