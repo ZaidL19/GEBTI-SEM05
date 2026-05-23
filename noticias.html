@@ -3,59 +3,147 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Noticias Dinámicas con Imágenes Locales</title>
+  <title>Noticias Dinámicas con Imágenes</title>
   <style>
-    /* ... (Todos los estilos CSS de antes se quedan igual) ... */
-    body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 20px; }
-    .contenedor-noticias { display: flex; gap: 20px; justify-content: center; }
-    .tarjeta-noticia { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); width: 300px; text-align: center; }
-    .btn-abrir { padding: 10px 15px; background-color: #0056b3; color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      padding: 20px;
+    }
+
+    /* 1. Contenedor principal para las 3 noticias */
+    .contenedor-noticias {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap; /* Para que en pantallas pequeñas se pongan una debajo de otra */
+    }
+
+    /* 2. Estilos de la tarjeta individual */
+    .tarjeta-noticia {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 300px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* Para empujar el botón al final */
+    }
+
+    /* ⬇️ NUEVO: Estilos para la imagen pequeña (miniatura) en la tarjeta ⬇️ */
+    .imagen-tarjeta {
+      width: 100%;
+      height: 180px; /* Altura fija para que todas las tarjetas se vean iguales */
+      object-fit: cover; /* Recorta la imagen sin deformarla para que quepa */
+      border-radius: 5px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    /* Estilos del botón de abrir */
+    .btn-abrir {
+      padding: 10px 15px;
+      background-color: #0056b3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
     .btn-abrir:hover { background-color: #003d82; }
-    dialog { width: 90%; max-width: 600px; padding: 25px; border: none; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); text-align: center; }
-    dialog::backdrop { background-color: rgba(0, 0, 0, 0.7); }
-    .modal-imagen { width: 100%; height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
-    .btn-cerrar { margin-top: 20px; padding: 10px 20px; background-color: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer; }
+
+    /* 3. Estilos del Modal (ya lo teníamos, se queda igual para que se vea grande) */
+    dialog {
+      width: 90%;
+      max-width: 600px;
+      padding: 25px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    dialog::backdrop {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-imagen {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .btn-cerrar {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
 
-  <h1 style="text-align: center;">Últimas Noticias (Locales)</h1>
+  <h1 style="text-align: center;">Últimas Noticias</h1>
 
   <div class="contenedor-noticias">
     <div class="tarjeta-noticia">
       <h3>Noticia 1</h3>
-      <p>Un breve resumen...</p>
+      <img src="img/sarampion.png" alt="Miniatura de noticia 1" class="imagen-tarjeta">
+      <p>Un breve resumen de la primera noticia...</p>
       <button class="btn-abrir" data-id="1">Leer Noticia 1</button>
     </div>
+
+    <div class="tarjeta-noticia">
+      <h3>Noticia 2</h3>
+      <img src="img/tos ferina.png" alt="Miniatura de noticia 2" class="imagen-tarjeta">
+      <p>Un breve resumen de la segunda noticia...</p>
+      <button class="btn-abrir" data-id="2">Leer Noticia 2</button>
     </div>
+
+    <div class="tarjeta-noticia">
+      <h3>Noticia 3</h3>
+      <img src="img/noticia3.jpg" alt="Miniatura de noticia 3" class="imagen-tarjeta">
+      <p>Un breve resumen de la tercera noticia...</p>
+      <button class="btn-abrir" data-id="3">Leer Noticia 3</button>
+    </div>
+  </div>
 
   <dialog id="modal-noticia">
     <h2 id="titulo-modal"></h2>
-    <img id="imagen-modal" class="modal-imagen" src="" alt="Imagen de noticia">
+    <img id="imagen-modal" class="modal-imagen" src="" alt="Imagen grande de noticia">
     <p id="texto-modal"></p>
+    
     <button class="btn-cerrar" id="btn-cerrar">Cerrar Noticia</button>
   </dialog>
 
   <script>
     const datosNoticias = {
       "1": {
-        titulo: "Mi Noticia Local 1",
-        // 'img/' es la carpeta, 'noticia1.jpg' es tu archivo
-        imagen: "img/sarampion.png", 
-        contenido: "Este contenido se carga desde tu propia computadora. Asegúrate de que el nombre del archivo coincida exactamente (mayúsculas y minúsculas)."
+        titulo: "El nuevo rover aterriza en Marte",
+        imagen: "img/sarampion.jpg", 
+        contenido: "Hoy por la mañana, el nuevo vehículo de exploración tocó la superficie marciana enviando las primeras fotografías en alta resolución del cráter. La misión busca rastros de agua."
       },
       "2": {
-        titulo: "Noticia Local con PNG",
-        imagen: "img/campaña contra dengue.png", // Asegúrate de la extensión correcta
-        contenido: "Si tu imagen es .png, asegúrate de escribir .png aquí."
+        titulo: "Descubren nueva especie de ave",
+        imagen: "img/tos ferina.png", 
+        contenido: "En las profundidades de la selva amazónica, biólogos han documentado una nueva especie de ave con un canto único y plumaje fluorescente bajo luz ultravioleta."
       },
       "3": {
-        titulo: "Otra Noticia Local",
-        imagen: "img/tos ferina.jpg",
-        contenido: "Tercer ejemplo de contenido local."
+        titulo: "Avances en la tecnología cuántica",
+        imagen: "img/noticia3.jpg",
+        contenido: "Un equipo de ingenieros logró mantener la estabilidad de un procesador cuántico a temperatura ambiente, marcando un hito histórico para la computación del futuro."
       }
     };
 
+    // El resto del JavaScript se mantiene igual
     const modal = document.getElementById('modal-noticia');
     const tituloModal = document.getElementById('titulo-modal');
     const imagenModal = document.getElementById('imagen-modal');
@@ -68,8 +156,9 @@
         const idNoticia = boton.getAttribute('data-id');
         const info = datosNoticias[idNoticia];
 
+        // Rellenamos el modal con la información grande
         tituloModal.textContent = info.titulo;
-        imagenModal.src = info.imagen; // ¡Aquí inyectamos el camino local!
+        imagenModal.src = info.imagen; // ¡Aquí usamos la misma imagen local!
         textoModal.textContent = info.contenido;
 
         modal.showModal();
