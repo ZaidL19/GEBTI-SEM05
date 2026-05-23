@@ -32,7 +32,7 @@
       justify-content: space-between; /* Para empujar el botón al final */
     }
 
-    /* ⬇️ NUEVO: Estilos para la imagen pequeña (miniatura) en la tarjeta ⬇️ */
+    /* Estilos de imagen */
     .imagen-tarjeta {
       width: 100%;
       height: 180px; /* Altura fija para que todas las tarjetas se vean iguales */
@@ -42,7 +42,7 @@
       margin-bottom: 10px;
     }
 
-    /* Estilos del botón de abrir */
+    /*Botón de abrir */
     .btn-abrir {
       padding: 10px 15px;
       background-color: #0056b3;
@@ -55,7 +55,6 @@
 
     .btn-abrir:hover { background-color: #003d82; }
 
-    /* 3. Estilos del Modal (ya lo teníamos, se queda igual para que se vea grande) */
     dialog {
       width: 90%;
       max-width: 600px;
@@ -127,18 +126,18 @@
   <script>
     const datosNoticias = {
       "1": {
-        titulo: "El nuevo rover aterriza en Marte",
+        titulo: "Que es la Sarampion?",
         imagen: "img/sarampion.png", 
         contenido: "Hoy por la mañana, el nuevo vehículo de exploración tocó la superficie marciana enviando las primeras fotografías en alta resolución del cráter. La misión busca rastros de agua."
       },
       "2": {
-        titulo: "Descubren nueva especie de ave",
+        titulo: "Campaña contra la tos ferina",
         imagen: "img/tos ferina.png", 
         contenido: "En las profundidades de la selva amazónica, biólogos han documentado una nueva especie de ave con un canto único y plumaje fluorescente bajo luz ultravioleta."
       },
       "3": {
-        titulo: "Avances en la tecnología cuántica",
-        imagen: "img/noticia3.jpg",
+        titulo: "Se realiza campaña en contra del dengue",
+        imagen: "img/Campaña contra Dengue.jpg",
         contenido: "Un equipo de ingenieros logró mantener la estabilidad de un procesador cuántico a temperatura ambiente, marcando un hito histórico para la computación del futuro."
       }
     };
@@ -156,9 +155,9 @@
         const idNoticia = boton.getAttribute('data-id');
         const info = datosNoticias[idNoticia];
 
-        // Rellenamos el modal con la información grande
+        // Rellenamos el modal con la información
         tituloModal.textContent = info.titulo;
-        imagenModal.src = info.imagen; // ¡Aquí usamos la misma imagen local!
+        imagenModal.src = info.imagen; 
         textoModal.textContent = info.contenido;
 
         modal.showModal();
