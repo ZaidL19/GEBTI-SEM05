@@ -5,276 +5,254 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-    content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Noticias RIS Pacífico Norte</title>
 
-    <link rel="stylesheet"
-    href="css/noticias.css">
+    <link rel="stylesheet" href="css/noticias.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
 
-<!-- HEADER -->
+    <!-- HEADER -->
 
-<header class="topbar">
+    <header class="topbar">
 
-    <div class="topbar-top">
+        <div class="topbar-top">
 
-        <div class="logo">
-            <img src="img/logo.png" alt="">
-            <h1>RED INTEGRADA DE SALUD PACÍFICO NORTE</h1>
+            <div class="logo">
+                <img src="img/logo.png" alt="">
+                <h1>RED INTEGRADA DE SALUD PACÍFICO NORTE</h1>
+            </div>
+
+            <div class="social-header">
+
+                <a href="https://www.facebook.com/rispnorte" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+
+                <a href="https://www.instagram.com/rispacificonorte/" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+
+            </div>
+
         </div>
 
-        <div class="social-header">
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="institucional.html">Institucional</a>
+            <a href="noticias.html" class="active">Noticias</a>
+            <a href="convocatorias.html">Convocatorias</a>
+            <a href="contacto.html">Contacto</a>
+        </nav>
 
-            <a href="https://www.facebook.com/rispnorte" target="_blank">
-                <i class="fab fa-facebook-f"></i>
-            </a>
+    </header>
 
-            <a href="https://www.instagram.com/rispacificonorte/" target="_blank">
-                <i class="fab fa-instagram"></i>
-            </a>
+    <!-- TITULO -->
+
+    <section class="hero">
+        <h1>Últimas Noticias</h1>
+        <p>
+            Información importante sobre salud y campañas
+            preventivas
+        </p>
+    </section>
+
+    <!-- CONTENEDOR -->
+
+    <div class="contenedor-noticias">
+
+        <!-- TARJETA 1 -->
+
+        <div class="tarjeta-noticia" id="noticia-dengue">
+
+            <img src="img/noticias/noticias-dengue.jpg" alt="campaña dengue" class="imagen-tarjeta">
+
+            <div class="contenido-card">
+
+                <h3>
+                    Unidos contra el dengue
+                </h3>
+
+                <p>
+                    Instituciones educativas fortalecen
+                    acciones preventivas y promueven
+                    entornos saludables.
+                </p>
+
+                <button class="btn-abrir" data-id="1">
+
+                    Leer Noticia
+
+                </button>
+
+            </div>
 
         </div>
 
-    </div>
+        <!-- TARJETA 2 -->
 
-    <nav>
-        <a href="index.html">Inicio</a>
-        <a href="institucional.html">Institucional</a>
-        <a href="noticias.html" class="active">Noticias</a>
-        <a href="convocatorias.html">Convocatorias</a>
-        <a href="contacto.html">Contacto</a>
-    </nav>
+        <div class="tarjeta-noticia">
 
-</header>
+            <img src="img/noticias/noticias-anemia.jpg" alt="anemia infantil" class="imagen-tarjeta">
 
-<!-- TITULO -->
+            <div class="contenido-card">
 
-<section class="hero">
-    <h1>Últimas Noticias</h1>
-    <p>
-        Información importante sobre salud y campañas
-        preventivas
-    </p>
-</section>
+                <h3>
+                    Prevención de la anemia infantil
+                </h3>
 
-<!-- CONTENEDOR -->
+                <p>
+                    Detectar la anemia a tiempo ayuda
+                    a proteger el crecimiento y desarrollo
+                    de nuestros niños.
+                </p>
 
-<div class="contenedor-noticias">
+                <button class="btn-abrir" data-id="2">
 
-<!-- TARJETA 1 -->
+                    Leer Noticia
 
-<div class="tarjeta-noticia"
-id="noticia-dengue">
+                </button>
 
-    <img src="img/noticias/noticias-dengue.jpg"
-    alt="campaña dengue"
-    class="imagen-tarjeta">
+            </div>
 
-    <div class="contenido-card">
+        </div>
 
-        <h3>
-            Unidos contra el dengue
-        </h3>
+        <!-- TARJETA 3 -->
 
-        <p>
-            Instituciones educativas fortalecen
-            acciones preventivas y promueven
-            entornos saludables.
-        </p>
+        <div class="tarjeta-noticia">
 
-        <button class="btn-abrir"
-        data-id="1">
+            <img src="img/noticias/noticias-hipertension.jpg" alt="hipertension arterial" class="imagen-tarjeta">
 
-            Leer Noticia
+            <div class="contenido-card">
 
-        </button>
+                <h3>
+                    Día Mundial de la Hipertensión
+                </h3>
 
-    </div>
+                <p>
+                    La hipertensión puede prevenirse
+                    y detectarse a tiempo con controles
+                    médicos periódicos.
+                </p>
 
-</div>
+                <button class="btn-abrir" data-id="3">
 
-<!-- TARJETA 2 -->
+                    Leer Noticia
 
-<div class="tarjeta-noticia">
+                </button>
 
-    <img src="img/noticias/noticias-anemia.jpg"
-    alt="anemia infantil"
-    class="imagen-tarjeta">
+            </div>
 
-    <div class="contenido-card">
+        </div>
 
-        <h3>
-            Prevención de la anemia infantil
-        </h3>
+        <!-- TARJETA 4 -->
 
-        <p>
-            Detectar la anemia a tiempo ayuda
-            a proteger el crecimiento y desarrollo
-            de nuestros niños.
-        </p>
+        <div class="tarjeta-noticia">
 
-        <button class="btn-abrir"
-        data-id="2">
+            <img src="img/noticias/noticias-comunicado.jpg" alt="comunicado oficial" class="imagen-tarjeta">
 
-            Leer Noticia
+            <div class="contenido-card">
 
-        </button>
+                <h3>
+                    Comunicado Oficial a la ciudadanía
+                </h3>
 
-    </div>
+                <p>
+                    La RIS Pacífico Norte informa sobre
+                    los lineamientos oficiales para la
+                    difusión institucional.
+                </p>
 
-</div>
+                <button class="btn-abrir" data-id="4">
 
-<!-- TARJETA 3 -->
+                    Leer Noticia
 
-<div class="tarjeta-noticia">
+                </button>
 
-    <img src="img/noticias/noticias-hipertension.jpg"
-    alt="hipertension arterial"
-    class="imagen-tarjeta">
+            </div>
 
-    <div class="contenido-card">
+        </div>
 
-        <h3>
-            Día Mundial de la Hipertensión
-        </h3>
+        <!-- TARJETA 5 -->
 
-        <p>
-            La hipertensión puede prevenirse
-            y detectarse a tiempo con controles
-            médicos periódicos.
-        </p>
+        <div class="tarjeta-noticia">
 
-        <button class="btn-abrir"
-        data-id="3">
+            <img src="img/noticias/noticias-radio.jpg" alt="prevenir es vivir" class="imagen-tarjeta">
 
-            Leer Noticia
+            <div class="contenido-card">
 
-        </button>
+                <h3>
+                    Jornada Nacional “Prevenir es Vivir”
+                </h3>
 
-    </div>
+                <p>
+                    RIS Pacífico Norte fortalece las
+                    acciones preventivas y promueve
+                    el cuidado integral de las familias.
+                </p>
 
-</div>
+                <button class="btn-abrir" data-id="5">
 
-<!-- TARJETA 4 -->
+                    Leer Noticia
 
-<div class="tarjeta-noticia">
+                </button>
 
-    <img src="img/noticias/noticias-comunicado.jpg"
-    alt="comunicado oficial"
-    class="imagen-tarjeta">
+            </div>
 
-    <div class="contenido-card">
+        </div>
 
-        <h3>
-            Comunicado Oficial a la ciudadanía
-        </h3>
+        <!-- TARJETA 6 -->
 
-        <p>
-            La RIS Pacífico Norte informa sobre
-            los lineamientos oficiales para la
-            difusión institucional.
-        </p>
+        <div class="tarjeta-noticia">
 
-        <button class="btn-abrir"
-        data-id="4">
+            <img src="img/noticias/noticias-equipos.jpg" alt="equipos computacionales" class="imagen-tarjeta">
 
-            Leer Noticia
+            <div class="contenido-card">
 
-        </button>
+                <h3>
+                    RIS fortalece establecimientos de salud
+                </h3>
 
-    </div>
+                <p>
+                    Nuevos equipos computacionales permitirán
+                    mejorar el registro y atención en los
+                    establecimientos de salud.
+                </p>
 
-</div>
+                <button class="btn-abrir" data-id="6">
 
-<!-- TARJETA 5 -->
+                    Leer Noticia
 
-<div class="tarjeta-noticia">
+                </button>
 
-    <img src="img/noticias/noticias-radio.jpg"
-    alt="prevenir es vivir"
-    class="imagen-tarjeta">
+            </div>
 
-    <div class="contenido-card">
+        </div>
 
-        <h3>
-            Jornada Nacional “Prevenir es Vivir”
-        </h3>
+        <!-- MODAL -->
 
-        <p>
-            RIS Pacífico Norte fortalece las
-            acciones preventivas y promueve
-            el cuidado integral de las familias.
-        </p>
+        <dialog id="modal-noticia">
 
-        <button class="btn-abrir"
-        data-id="5">
+            <h2 id="titulo-modal"></h2>
 
-            Leer Noticia
+            <img id="imagen-modal" class="modal-imagen" src="">
 
-        </button>
+            <p id="texto-modal"></p>
+
+            <button class="btn-cerrar" id="btn-cerrar">
+
+                ✖ Cerrar Noticia
+
+            </button>
+
+        </dialog>
+
+        <script src="js/noticias.js"></script>
 
     </div>
-
-</div>
-
-<!-- TARJETA 6 -->
-
-<div class="tarjeta-noticia">
-
-    <img src="img/noticias/noticias-equipos.jpg"
-    alt="equipos computacionales"
-    class="imagen-tarjeta">
-
-    <div class="contenido-card">
-
-        <h3>
-            RIS fortalece establecimientos de salud
-        </h3>
-
-        <p>
-            Nuevos equipos computacionales permitirán
-            mejorar el registro y atención en los
-            establecimientos de salud.
-        </p>
-
-        <button class="btn-abrir"
-        data-id="6">
-
-            Leer Noticia
-
-        </button>
-
-    </div>
-
-</div>
-
-<!-- MODAL -->
-
-<dialog id="modal-noticia">
-
-    <h2 id="titulo-modal"></h2>
-
-    <img id="imagen-modal"
-    class="modal-imagen"
-    src="">
-
-    <p id="texto-modal"></p>
-
-    <button class="btn-cerrar"
-    id="btn-cerrar">
-
-         ✖ Cerrar Noticia
-
-    </button>
-
-</dialog>
-
-<script src="js/noticias.js"></script>
 
 </body>
 

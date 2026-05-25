@@ -127,34 +127,29 @@ nav a.active {
 /* CARDS */
 /* ===================== */
 
-.contenedor-noticias{
-
-    display:flex;
-
-    gap:30px;
-
-    justify-content:center;
-
-    flex-wrap:wrap;
-
-    padding:40px;
-
+.contenedor-noticias {
+    display: grid;
+    /* Divide el espacio en exactamente 3 columnas iguales */
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+    padding: 40px;
+    width: 100%;
+    max-width: 1200px; /* Evita que las tarjetas se estiren infinito en pantallas gigantes */
+    margin: 0 auto;    /* Centra todo el bloque en el navegador */
 }
 
-.tarjeta-noticia{
-
-    background:white;
-
-    width:330px;
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-    box-shadow:0 10px 25px rgba(0,0,0,0.1);
-
-    transition:0.4s;
-
+.tarjeta-noticia {
+    background: white;
+    /* Quitamos el width: 330px fijo para que la grilla controle el ancho de forma limpia */
+    width: 100%; 
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: 0.4s;
+    
+    /* Extra tip: Asegura que todas las tarjetas tengan la misma altura si un texto es más largo */
+    display: flex;
+    flex-direction: column;
 }
 
 .tarjeta-noticia:hover{
@@ -433,4 +428,19 @@ dialog::backdrop{
 
     align-items:center;
 
+}
+
+/* Para Tablets (Pantallas medianas) */
+@media (max-width: 1024px) {
+    .contenedor-noticias {
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* Baja a 2 columnas */
+    }
+}
+
+/* Para Celulares (Pantallas chicas) */
+@media (max-width: 700px) {
+    .contenedor-noticias {
+        grid-template-columns: 1fr; /* 1 sola columna vertical */
+        padding: 20px;
+    }
 }
