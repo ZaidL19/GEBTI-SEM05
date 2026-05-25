@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Noticias Dinámicas</title>
+  <title>Noticias Dinámicas con Imágenes</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -11,22 +11,39 @@
       padding: 20px;
     }
 
-    /* 1. Cuadrícula para las 3 noticias principales */
+    /*Contenedor principal para las 3 noticias */
     .contenedor-noticias {
       display: flex;
       gap: 20px;
       justify-content: center;
+      flex-wrap: wrap; 
+
     }
 
+    /*Estilos de la tarjeta individual */
     .tarjeta-noticia {
-      background: white;
+      background: rgb(68, 139, 144);
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       width: 300px;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; 
     }
 
+    /* Estilos de imagen */
+    .imagen-tarjeta {
+      width: 100%;
+      height: 180px; /* Altura fija para que todas las tarjetas se vean iguales */
+      object-fit: cover; /* Recorta la imagen sin deformarla para que quepa */
+      border-radius: 5px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    /*Botón de abrir */
     .btn-abrir {
       padding: 10px 15px;
       background-color: #0056b3;
@@ -39,7 +56,6 @@
 
     .btn-abrir:hover { background-color: #003d82; }
 
-    /* 2. Estilos del Modal */
     dialog {
       width: 90%;
       max-width: 600px;
@@ -57,7 +73,7 @@
     .modal-imagen {
       width: 100%;
       height: 300px;
-      object-fit: cover; /* Ajusta la imagen sin deformarla */
+      object-fit: cover;
       border-radius: 8px;
       margin-bottom: 15px;
     }
@@ -79,86 +95,79 @@
 
   <div class="contenedor-noticias">
     <div class="tarjeta-noticia">
-      <h3>Noticia 1</h3>
-      <p>El Sarampion</p>
-      <button class="btn-abrir" data-id="1">Leer Noticia 1</button>
+      <h3>Sarampion sintomas</h3>
+      <img src="img/sarampion.png" alt="Miniatura de noticia sobre la sarampion" class="imagen-tarjeta">
+      <p>Un breve resumen de la primera noticia...</p>
+      <button class="btn-abrir" data-id="1">Leer Noticia Sarampion</button>
     </div>
 
     <div class="tarjeta-noticia">
-      <h3>Noticia 2</h3>
-      <p>Un breve resumen de la segunda noticia...</p>
-      <button class="btn-abrir" data-id="2">Leer Noticia 2</button>
+      <h3>Tos Ferina</h3>
+      <img src="img/tos ferina.png" alt="Miniatura de la tos ferina" class="imagen-tarjeta">
+      <p>Hay casos reportados de tos ferina en la zona.</p>
+      <button class="btn-abrir" data-id="2">Leer Noticia Tos Ferina</button>
     </div>
 
     <div class="tarjeta-noticia">
-      <h3>Noticia 3</h3>
-      <p>Un breve resumen de la tercera noticia...</p>
-      <button class="btn-abrir" data-id="3">Leer Noticia 3</button>
+      <h3>Campaña contra el Dengue</h3>
+      <img src="img/campaña contra dengue.png" alt="Miniatura de la campaña contra el dengue" class="imagen-tarjeta">
+      <p>Se lanza una nueva campaña de prevención contra el dengue en la ciudad.</p>
+      <button class="btn-abrir" data-id="3">Leer Noticia Dengue</button>
     </div>
   </div>
 
   <dialog id="modal-noticia">
     <h2 id="titulo-modal"></h2>
-    <img id="imagen-modal" class="modal-imagen" src="" alt="Imagen de noticia">
+    <img id="imagen-modal" class="modal-imagen" src="" alt="Imagen grande de noticia">
     <p id="texto-modal"></p>
     
     <button class="btn-cerrar" id="btn-cerrar">Cerrar Noticia</button>
   </dialog>
 
   <script>
-    // 1. Nuestra "Base de datos" de noticias
     const datosNoticias = {
       "1": {
-        titulo: "El nuevo brote de sarampion esta afectando al norte del pais",
-        imagen: "https://picsum.photos/id/1015/600/300", // Imagen de prueba
-        contenido: "Hoy por la mañana, el nuevo vehículo de exploración tocó la superficie marciana enviando las primeras fotografías en alta resolución del cráter. La misión busca rastros de agua."
+        titulo: "Que es la Sarampion?",
+        imagen: "img/sarampion.png", 
+        contenido: "El sarampión es una enfermedad viral aguda y muy contagiosa que ha afectado a millones de personas en todo el mundo, especialmente a niños menores de cinco años. Es causada por el virus del sarampión, perteneciente a la familia Paramyxoviridae, y se transmite principalmente a través de pequeñas gotas expulsadas al hablar, toser o estornudar. Debido a su alta capacidad de contagio, una sola persona infectada puede transmitir la enfermedad rápidamente a quienes no están vacunados o no poseen inmunidad. Los primeros síntomas suelen aparecer entre 10 y 14 días después del contagio e incluyen fiebre alta, cansancio, tos seca, congestión nasal, dolor de garganta y ojos enrojecidos o sensibles a la luz. Posteriormente aparecen pequeñas manchas blancas dentro de la boca, conocidas como manchas de Koplik, y luego una erupción rojiza que inicia en el rostro y se extiende por todo el cuerpo.Aunque muchas personas logran recuperarse después de algunas semanas, el sarampión puede ocasionar complicaciones graves, sobre todo en niños pequeños, personas desnutridas o individuos con sistemas inmunológicos debilitados. Entre las complicaciones más frecuentes se encuentran la neumonía, infecciones del oído, diarrea severa, deshidratación e inflamación cerebral llamada encefalitis, que puede dejar secuelas permanentes o incluso causar la muerte. Antes de la creación de las vacunas, el sarampión provocaba epidemias frecuentes y era una de las principales causas de mortalidad infantil en diversos países. Gracias a los programas de vacunación, los casos disminuyeron considerablemente; sin embargo, en los últimos años han reaparecido brotes en algunas regiones debido a la disminución de la cobertura de vacunación y la desinformación sobre las vacunas.La prevención más efectiva contra el sarampión es la aplicación de la vacuna triple viral (SRP), que también protege contra las paperas y la rubéola. Esta vacuna es segura, eficaz y forma parte de los calendarios de vacunación en muchos países. Además de la vacunación, es importante mantener buenas medidas de higiene y evitar el contacto cercano con personas infectadas para reducir el riesgo de propagación. El sarampión sigue siendo un problema de salud pública en algunas partes del mundo, por lo que la educación y la prevención son fundamentales para proteger a la población y evitar nuevas epidemias."
       },
       "2": {
-        titulo: "Descubren nueva especie de ave",
-        imagen: "https://picsum.photos/id/1024/600/300", // Imagen de prueba
-        contenido: "En las profundidades de la selva amazónica, biólogos han documentado una nueva especie de ave con un canto único y plumaje fluorescente bajo luz ultravioleta."
+        titulo: "Campaña contra la tos ferina",
+        imagen: "img/tos ferina.png", 
+        contenido: "La tos ferina es una enfermedad infecciosa y muy contagiosa causada por la bacteria *Bordetella pertussis*, que afecta principalmente las vías respiratorias. Se transmite de persona a persona a través de las gotas que se expulsan al toser, estornudar o hablar. Esta enfermedad puede afectar a personas de cualquier edad, pero representa un mayor peligro para los bebés y niños pequeños, ya que su sistema inmunológico aún es débil. La tos ferina comienza con síntomas parecidos a los de un resfriado común, como congestión nasal, fiebre leve, estornudos y malestar general; sin embargo, después de algunos días aparece una tos intensa y repetitiva que dificulta respirar y puede provocar vómitos o un sonido agudo al intentar recuperar el aire, conocido como “gallo” o silbido inspiratorio.En los casos más graves, especialmente en bebés, la tos ferina puede causar complicaciones como neumonía, convulsiones, deshidratación, daño cerebral e incluso la muerte. Debido a su facilidad de contagio, la enfermedad puede propagarse rápidamente en lugares donde hay poca vacunación. Antes de que existieran las vacunas, la tos ferina era una de las principales causas de mortalidad infantil en el mundo. Actualmente, gracias a los programas de inmunización, los casos han disminuido considerablemente, aunque todavía se presentan brotes en algunos países.La mejor forma de prevenir la tos ferina es mediante la vacunación, especialmente con la vacuna DPT o pentavalente, que protege también contra la difteria y el tétanos. Además, se recomienda que las mujeres embarazadas reciban la vacuna para proteger a los recién nacidos durante sus primeros meses de vida. Mantener una buena higiene, cubrirse al toser y evitar el contacto con personas enfermas también ayuda a reducir el riesgo de contagio. La prevención y la vacunación son fundamentales para controlar esta enfermedad y proteger la salud de la población."
       },
       "3": {
-        titulo: "Avances en la tecnología cuántica",
-        imagen: "https://picsum.photos/id/175/600/300", // Imagen de prueba
-        contenido: "Un equipo de ingenieros logró mantener la estabilidad de un procesador cuántico a temperatura ambiente, marcando un hito histórico para la computación del futuro."
+        titulo: "Se realiza campaña en contra del dengue",
+        imagen: "img/Campaña contra Dengue.png",
+        contenido: "La campaña en contra del dengue tiene como principal objetivo informar y concientizar a la población sobre los peligros de esta enfermedad y las medidas necesarias para prevenir su propagación. El dengue es una enfermedad viral transmitida por la picadura del mosquito *Aedes aegypti*, el cual se reproduce en recipientes con agua acumulada, especialmente en zonas cálidas y húmedas. Esta enfermedad representa un problema de salud pública en muchos países, ya que puede afectar a personas de todas las edades y, en los casos más graves, provocar complicaciones que ponen en riesgo la vida. Entre los síntomas más comunes del dengue se encuentran la fiebre alta, dolor de cabeza intenso, dolor muscular y articular, náuseas, cansancio y manchas en la piel.La campaña preventiva busca que las personas adopten hábitos de limpieza y cuidado dentro y fuera de sus hogares para evitar la reproducción del mosquito. Entre las principales recomendaciones se encuentran eliminar recipientes que acumulen agua, como llantas, botellas, baldes y latas; mantener tapados los tanques y depósitos de agua; limpiar canaletas y patios; cambiar frecuentemente el agua de floreros y bebederos de animales; y utilizar repelente, mosquiteros o ropa que cubra la mayor parte del cuerpo. Asimismo, las autoridades de salud realizan fumigaciones, inspecciones sanitarias y charlas educativas en colegios, comunidades y centros de trabajo para reforzar la prevención y el control del dengue.La participación de toda la comunidad es fundamental para combatir esta enfermedad, ya que la prevención depende del compromiso de cada persona en mantener espacios limpios y libres de criaderos de mosquitos. También es importante acudir rápidamente a un centro de salud si se presentan síntomas, evitando la automedicación, porque algunos medicamentos pueden empeorar la enfermedad. Gracias a las campañas de información y prevención, es posible reducir los casos de dengue y proteger la salud y bienestar de las familias y de toda la población."
       }
     };
 
-    // 2. Seleccionamos los elementos del HTML
+    // El resto se mantiene igual
     const modal = document.getElementById('modal-noticia');
     const tituloModal = document.getElementById('titulo-modal');
     const imagenModal = document.getElementById('imagen-modal');
     const textoModal = document.getElementById('texto-modal');
     const btnCerrar = document.getElementById('btn-cerrar');
-
-    // Seleccionamos TODOS los botones que abren noticias
     const botonesAbrir = document.querySelectorAll('.btn-abrir');
 
-    // 3. Le damos la orden a cada botón de abrir
     botonesAbrir.forEach(boton => {
       boton.addEventListener('click', () => {
-        // Obtenemos el ID de la noticia que presionamos (1, 2 o 3)
         const idNoticia = boton.getAttribute('data-id');
-        
-        // Buscamos esa información en nuestros datos
         const info = datosNoticias[idNoticia];
 
-        // Rellenamos el modal con la información correspondiente
+        // Rellenamos el modal con la información
         tituloModal.textContent = info.titulo;
-        imagenModal.src = info.imagen;
+        imagenModal.src = info.imagen; 
         textoModal.textContent = info.contenido;
 
-        // Finalmente, mostramos el modal
         modal.showModal();
       });
     });
 
-    // 4. Función para cerrar el modal
     btnCerrar.addEventListener('click', () => {
       modal.close();
     });
-
   </script>
 </body>
 </html>
