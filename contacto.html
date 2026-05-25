@@ -1,63 +1,96 @@
-<!-- ======================================== -->
-<!-- SECCIÓN CONTACTO -->
-<!-- ======================================== -->
+<!DOCTYPE html>
+<html lang="es">
 
-<section class="contacto" id="contacto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Red de Salud Pacífico Norte</title>
 
-    <div class="contenedor-contacto">
+    <link rel="stylesheet" href="css/contacto.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
 
-        <div class="info-contacto">
+<body>
 
-            <h2>Contáctanos</h2>
+    <!-- HEADER -->
+    <header class="topbar">
 
-            <p>
-                Estamos comprometidos con brindar atención y orientación
-                a toda la comunidad de Pacífico Norte.
-            </p>
+        <div class="logo">
+            <img src="img/logo.png" alt="Logo">
+            <h1>RED INTEGRADA DE SALUD PACÍFICO NORTE</h1>
+        </div>
 
-            <div class="dato">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Chimbote - Perú</span>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="institucional.html">Institucional</a>
+            <a href="noticias.html">Noticias</a>
+            <a href="convocatorias.html">Convocatorias</a>
+            <a href="contacto.html" class="active">Contacto</a>
+        </nav>
+
+    </header>
+
+    <!-- CONTACTO -->
+    <section class="contacto">
+
+        <div class="contenedor-contacto">
+
+            <!-- INFO -->
+            <div class="info-contacto">
+
+                <h2>Contáctanos</h2>
+
+                <p>
+                    Estamos comprometidos con brindar atención y orientación a toda la comunidad.
+                </p>
+
+            <div class="mapa-contacto">
+
+                <h3>Ubicación</h3>
+
+                <iframe
+                    src="https://www.google.com/maps?q=RED+INTEGRADA+DE+SALUD+PACIFICO+NORTE&output=embed"
+                    width="100%"
+                    height="350"
+                    style="border:0; border-radius:10px;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+
             </div>
 
-            <div class="dato">
-                <i class="fas fa-phone"></i>
-                <span>043-698402</span>
+                <div class="dato">
+                    <i class="fas fa-phone"></i>
+                    <span>Teléfono: 043-698402</span>
+                </div>
+
+                <div class="dato">
+                    <i class="fas fa-envelope"></i>
+                    <span>informes@redsalud.gob.pe</span>
+                </div>
+
             </div>
 
-            <div class="dato">
-                <i class="fas fa-envelope"></i>
-                <span>informes@redsalud.gob.pe</span>
-            </div>
+            <!-- FORM -->
+            <form class="form-contacto" id="formContacto">
+
+                <input type="text" id="nombre" placeholder="Nombres y Apellidos">
+                <input type="email" id="correo" placeholder="Correo">
+                <textarea id="mensaje" placeholder="Mensaje"></textarea>
+
+                <button type="submit">Enviar Mensaje</button>
+
+                <p id="estado"></p>
+
+            </form>
 
         </div>
 
-        <!-- FORMULARIO -->
-        <form class="form-contacto">
+    </section>
 
-            <input 
-                type="text"
-                id="nombre"
-                placeholder="Ingrese su nombre"
-            >
+    <script src="js/contacto.js"></script>
 
-            <input 
-                type="email"
-                id="correo"
-                placeholder="Ingrese su correo"
-            >
+</body>
 
-            <textarea 
-                id="mensaje"
-                placeholder="Escriba su mensaje"
-            ></textarea>
-
-            <button type="submit">
-                Enviar Mensaje
-            </button>
-
-        </form>
-
-    </div>
-
-</section>
+</html>
