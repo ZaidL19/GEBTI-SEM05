@@ -1,0 +1,429 @@
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+
+}
+
+body{
+
+    background:#f4f7fb;
+
+}
+
+/* ======================= */
+/* HEADER */
+/* ======================= */
+
+.topbar{
+
+    background:#0086c7;
+
+    padding:15px 5%;
+
+    color:white;
+
+}
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.logo img{
+
+    width:70px;
+
+}
+
+.logo h1{
+
+    font-size:32px;
+
+}
+
+nav{
+
+    margin-top:20px;
+
+    display:flex;
+
+    gap:25px;
+
+    flex-wrap:wrap;
+
+}
+
+nav a{
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    padding:10px 15px;
+
+    border-radius:5px;
+
+    transition:0.3s;
+
+}
+
+nav a:hover,
+.active{
+
+    background:white;
+
+    color:#0086c7;
+
+}
+
+/* ===================== */
+/* HERO */
+/* ===================== */
+
+.hero{
+
+    text-align:center;
+
+    padding:60px 20px;
+
+}
+
+.hero h1{
+
+    font-size:50px;
+
+    color:#0077b6;
+
+    margin-bottom:10px;
+
+}
+
+.hero p{
+
+    font-size:18px;
+
+    color:#555;
+
+}
+
+/* ===================== */
+/* CARDS */
+/* ===================== */
+
+.contenedor-noticias{
+
+    display:flex;
+
+    gap:30px;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    padding:40px;
+
+}
+
+.tarjeta-noticia{
+
+    background:white;
+
+    width:330px;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+
+    transition:0.4s;
+
+}
+
+.tarjeta-noticia:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,0.2);
+
+}
+
+.imagen-tarjeta{
+
+    width:100%;
+
+    height:220px;
+
+    object-fit:cover;
+
+    transition:0.4s;
+
+}
+
+.tarjeta-noticia:hover .imagen-tarjeta{
+
+    transform:scale(1.05);
+
+}
+
+.contenido-card{
+
+    padding:25px;
+
+}
+
+.contenido-card h3{
+
+    color:#0077b6;
+
+    margin-bottom:15px;
+
+    font-size:28px;
+
+    text-align:center;
+
+}
+
+/* ===================== */
+/* BOTON */
+/* ===================== */
+
+.btn-abrir{
+
+    margin-top:20px;
+
+    padding:12px 18px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:linear-gradient(
+        135deg,
+        #0077b6,
+        #00b4d8
+    );
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:0.3s;
+
+}
+
+.btn-abrir:hover{
+
+    transform:scale(1.05);
+
+}
+
+/* ===================== */
+/* MODAL */
+/* ===================== */
+
+dialog{
+
+    width:90%;
+
+    max-width:850px;
+
+    max-height:90vh;
+
+    overflow-y:auto;
+
+    border:none;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    box-shadow:0 20px 40px rgba(0,0,0,0.3);
+
+    animation:modalEntrada 0.4s ease;
+
+    margin:auto;
+
+}
+
+@keyframes modalEntrada{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+dialog::backdrop{
+
+    background:rgba(0,0,0,0.7);
+
+}
+
+.modal-imagen{
+
+    width:100%;
+
+    max-height:450px;
+
+    object-fit:contain;
+
+    border-radius:12px;
+
+    margin:20px 0;
+
+    background:white;
+
+}
+
+.btn-cerrar{
+
+    margin-top:25px;
+
+    padding:12px 22px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#dc3545;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:0.3s;
+
+}
+
+.btn-cerrar:hover{
+
+    transform:scale(1.05);
+
+    background:#b02a37;
+
+}
+
+/* ===================== */
+/* RESPONSIVE */
+/* ===================== */
+
+@media(max-width:768px){
+
+    .topbar{
+
+        flex-direction:column;
+
+        text-align:center;
+
+        gap:20px;
+
+    }
+
+    nav{
+
+        justify-content:center;
+
+    }
+
+    .hero h1{
+
+        font-size:38px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .logo{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+    .logo h1{
+
+        font-size:24px;
+
+    }
+
+    nav{
+
+        justify-content:center;
+
+    }
+
+}
+
+/* ===================== */
+/* TITULO MODAL */
+/* ===================== */
+
+#titulo-modal{
+
+    color:#0077b6;
+
+    margin-bottom:15px;
+
+    font-size:34px;
+
+    line-height:1.3;
+
+}
+
+/* ===================== */
+/* TEXTO MODAL */
+/* ===================== */
+
+#texto-modal{
+
+    line-height:1.9;
+
+    text-align:justify;
+
+    margin-top:15px;
+
+    color:#444;
+
+}
+
+.contenido-card{
+
+    padding:25px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
