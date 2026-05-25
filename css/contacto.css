@@ -20,13 +20,15 @@
 }
 
 .logo img {
-    width: 70px;
+    width: 100px;
+    height: auto;
 }
 
 .logo h1 {
-    font-size: 28px;
+    font-size: 24px;
+    line-height: 1.2;
+    margin: 0;
 }
-
 nav {
     margin-top: 15px;
     display: flex;
@@ -46,6 +48,38 @@ nav a:hover,
 nav a.active {
     background: white;
     color: #0086c7;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.social-header {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.social-header a {
+    width: 35px;
+    height: 35px;
+    background: white;
+    color: #0086c7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.social-header a:hover {
+    background: #006aa3;
+    color: white;
 }
 
 /* CONTACTO */

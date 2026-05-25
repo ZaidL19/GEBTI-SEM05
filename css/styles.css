@@ -260,12 +260,57 @@ nav a:hover{
 
 /* FOOTER */
 
-footer{
-    background:#00689c;
-    color:white;
-    text-align:center;
-    padding:30px;
-    margin-top:50px;
+.footer {
+    background: #0086c7;
+    color: white;
+    padding: 25px 5%;
+}
+
+/* CONTENEDOR FLEX */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* TEXTO */
+.footer-info h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.footer-info p {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* REDES */
+.social-footer {
+    display: flex;
+    gap: 12px;
+}
+
+.social-footer a {
+    width: 40px;
+    height: 40px;
+    background: white;
+    color: #0086c7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.social-footer a:hover {
+    background: #006aa3;
+    color: white;
+    transform: scale(1.1);
 }
 
 /* RESPONSIVE */

@@ -13,77 +13,84 @@ body{
 
 }
 
-/* ======================= */
 /* HEADER */
-/* ======================= */
-
-.topbar{
-
-    background:#0086c7;
-
-    padding:15px 5%;
-
-    color:white;
-
+.topbar {
+    background: #0086c7;
+    padding: 15px 5%;
+    color: white;
 }
 
-.logo{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
-
+/* 🔥 FILA SUPERIOR */
+.topbar-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-wrap: nowrap;
 }
 
-.logo img{
-
-    width:70px;
-
+/* LOGO */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+    min-width: 0;
 }
 
-.logo h1{
-
-    font-size:32px;
-
+.logo img {
+    width: 100px;
 }
 
-nav{
-
-    margin-top:20px;
-
-    display:flex;
-
-    gap:25px;
-
-    flex-wrap:wrap;
-
+.logo h1 {
+    font-size: 24px;
+    margin: 0;
 }
 
-nav a{
+/* REDES A LA DERECHA */
+.social-header {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
 
-    color:white;
+/* ICONOS */
+.social-header a {
+    width: 35px;
+    height: 35px;
+    background: white;
+    color: #0086c7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 16px;
+}
 
-    text-decoration:none;
+.social-header a i {
+    color: #0086c7 !important;
+    font-size: 16px;
+}
+/* NAV */
+nav {
+    margin-top: 15px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
 
-    font-weight:bold;
-
-    padding:10px 15px;
-
-    border-radius:5px;
-
-    transition:0.3s;
-
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
 }
 
 nav a:hover,
-.active{
-
-    background:white;
-
-    color:#0086c7;
-
+nav a.active {
+    background: white;
+    color: #0086c7;
 }
 
 /* ===================== */
