@@ -50,46 +50,85 @@
         <div class="hero-content">
             <h2>#UnidosContraElDengue</h2>
             <p>Comprometidos con la salud de nuestra comunidad.</p>
-            <button>Más Información</button>
-        </div>
-    </section>
-
-    <section class="info">
-        <div class="card">
-            <h3>Atención Médica</h3>
-            <p>Servicios de salud para toda la población.</p>
-        </div>
-        <div class="card">
-            <h3>Prevención</h3>
-            <p>Campañas permanentes contra enfermedades.</p>
-        </div>
-        <div class="card">
-            <h3>Emergencias</h3>
-            <p>Atención inmediata las 24 horas.</p>
+            <a href="noticias.html?noticia=1">
+                <button>
+                    Más Información
+                </button>
+            </a>
         </div>
     </section>
 
     <section class="news">
         <h2>Últimas Noticias</h2>
-        
-        <div class="news-container">
-            <div class="news-card">
-                <img src="noticia1.jpg" alt="Ambulancias">
-                <h3>145 Ambulancias para Ancash</h3>
-                <p>Se fortalece el sistema regional de salud.</p>
-            </div>
+        <div class="carousel-background"></div>
 
-            <div class="news-card">
-                <img src="noticia2.jpg" alt="Jornada">
-                <h3>Jornada Nacional</h3>
-                <p>Capacitación para el cuidado de la salud.</p>
-            </div>
+        <div class="carousel-container">
+            <button class="carousel-btn prev">
+                ❮
+            </button>
+            <div class="carousel">
+                <!-- CARD 1 -->
+                <div class="news-card active"
+                onclick="window.location.href='noticias.html?noticia=2'">
+                    <img src="img/noticias/noticias-anemia.jpg">
+                    <div class="news-info">
+                        <h3>
+                            Prevención de la anemia infantil
+                        </h3>
+                        <p>
+                            Detectar la anemia a tiempo ayuda
+                            a proteger el crecimiento y desarrollo
+                            de nuestros niños.
+                        </p>
+                    </div>
+                </div>
 
-            <div class="news-card">
-                <img src="noticia3.jpg" alt="Campaña">
-                <h3>Campaña Médica</h3>
-                <p>Atención gratuita en diferentes sectores.</p>
-            </div>
+                <!-- CARD 2 -->
+                <div class="news-card"
+                onclick="window.location.href='noticias.html?noticia=4'">
+
+                    <img src="img/noticias/noticias-comunicado.jpg">
+
+                    <div class="news-info">
+
+                        <h3>
+                            Comunicado Oficial a la ciudadanía
+                        </h3>
+
+                        <p>
+                            La RIS Pacífico Norte fortalece
+                            sus lineamientos de comunicación
+                            institucional.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- CARD 3 -->
+                <div class="news-card"
+                onclick="window.location.href='noticias.html?noticia=6'">
+
+                    <img src="img/noticias/noticias-equipos.jpg">
+
+                    <div class="news-info">
+
+                        <h3>
+                            RIS fortalece establecimientos
+                        </h3>
+
+                        <p>
+                            Nuevos equipos computacionales
+                            optimizarán la atención y registro
+                            en salud.
+                        </p>
+
+                    </div>
+
+                </div>
+            <button class="carousel-btn next">
+                ❯
+            </button>
         </div>
     </section>
 
@@ -143,6 +182,91 @@ document.querySelectorAll("a").forEach(link => {
 
 });
 
+</script>
+<script>
+
+const cards =
+document.querySelectorAll(".news-card");
+
+const nextBtn =
+document.querySelector(".next");
+
+const prevBtn =
+document.querySelector(".prev");
+const background =
+document.querySelector(
+".carousel-background"
+);
+
+let current = 0;
+
+function updateCarousel(){
+    
+    cards.forEach(card => {
+
+        card.classList.remove(
+            "active",
+            "prev",
+            "next"
+        );
+
+    });
+
+    cards[current]
+    .classList.add("active");
+    
+    /* CAMBIAR FONDO */
+    const activeImage =
+    cards[current]
+    .querySelector("img").src;
+    background.style.backgroundImage =
+    `url(${activeImage})`;
+    cards[
+        (current - 1 + cards.length)
+        % cards.length
+    ].classList.add("prev");
+
+    cards[
+        (current + 1)
+        % cards.length
+    ].classList.add("next");
+
+}
+
+nextBtn.addEventListener("click", () => {
+
+    current =
+    (current + 1)
+    % cards.length;
+
+    updateCarousel();
+
+});
+
+prevBtn.addEventListener("click", () => {
+
+    current =
+    (current - 1 + cards.length)
+    % cards.length;
+
+    updateCarousel();
+
+});
+
+updateCarousel();
+/* ========================= */
+/* AUTO PLAY */
+/* ========================= */
+
+setInterval(() => {
+
+    current =
+    (current + 1)
+    % cards.length;
+
+    updateCarousel();
+
+}, 4000);
 </script>
 </body>
 </html>

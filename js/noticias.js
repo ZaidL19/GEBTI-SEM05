@@ -140,3 +140,32 @@ btnCerrar.addEventListener("click", () => {
     modal.close();
 
 });
+
+/* ========================= */
+/* ABRIR NOTICIA AUTOMATICA */
+/* ========================= */
+
+const parametros =
+new URLSearchParams(window.location.search);
+
+const noticiaAutomatica =
+parametros.get("noticia");
+
+if(noticiaAutomatica &&
+datosNoticias[noticiaAutomatica]){
+
+    const info =
+    datosNoticias[noticiaAutomatica];
+
+    tituloModal.textContent =
+    info.titulo;
+
+    imagenModal.src =
+    info.imagen;
+
+    textoModal.textContent =
+    info.contenido;
+
+    modal.showModal();
+
+}
