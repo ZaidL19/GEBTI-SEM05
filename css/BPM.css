@@ -105,93 +105,144 @@ nav a.active{
 }
 
 /* ========================= */
-/* BPM */
+/* TITULO BPM */
 /* ========================= */
 
-.bpm-section{
-
-    width:90%;
-    margin:50px auto;
-
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
-
+.titulo{
+    text-align:center;
+    padding:60px 20px 40px;
+    background:#f4f4f4;
 }
 
-.bpm-card{
+.titulo h2{
+    font-size:42px;
+    color:#0086c7;
+    margin-bottom:15px;
+    font-weight:bold;
+}
+
+.titulo p{
+    max-width:800px;
+    margin:0 auto;
+    color:#555;
+    font-size:18px;
+    line-height:1.6;
+}
+
+/* ========================= */
+/* PROCESO BPM */
+/* ========================= */
+
+.proceso-container{
+
+    width:90%;
+    max-width:1200px;
+
+    margin:40px auto 80px;
+
+    text-align:center;
+}
+
+.proceso-container h3{
+
+    color:#0086c7;
+    font-size:32px;
+
+    margin-bottom:15px;
+}
+
+.proceso-descripcion{
+
+    max-width:900px;
+
+    margin:0 auto 30px;
+
+    color:#555;
+
+    line-height:1.7;
+}
+
+/* IMAGEN DEL DIAGRAMA */
+
+.diagrama-preview{
 
     background:white;
 
-    padding:30px 25px;
+    padding:20px;
 
     border-radius:12px;
 
-    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
 
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
-
-    transition:0.3s;
-
+    margin-bottom:40px;
 }
 
-.bpm-card:hover{
+.diagrama-preview img{
 
-    transform:translateY(-8px);
+    width:100%;
 
-    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+    height:auto;
 
+    border-radius:8px;
 }
 
-.bpm-icon{
+/* TARJETAS DOCUMENTOS */
 
-    width:80px;
-    height:80px;
+.documentos-grid{
 
-    margin:auto;
+    display:grid;
 
-    background:#0086c7;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
 
-    color:white;
-
-    border-radius:50%;
-
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-    font-size:32px;
-
-    margin-bottom:20px;
-
+    gap:25px;
 }
 
-.bpm-card h3{
+.documento-card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:12px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.documento-card i{
+
+    font-size:45px;
 
     color:#0086c7;
 
     margin-bottom:15px;
-
-    font-size:22px;
-
 }
 
-.bpm-card p{
+.documento-card h4{
+
+    margin-bottom:10px;
+
+    color:#0086c7;
+}
+
+.documento-card p{
 
     color:#555;
 
-    line-height:1.6;
-
     margin-bottom:20px;
-
 }
 
-.bpm-card a{
+.botones{
 
-    display:inline-block;
+    display:flex;
 
-    padding:12px 25px;
+    justify-content:center;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+}
+
+.botones a{
 
     background:#0086c7;
 
@@ -199,16 +250,16 @@ nav a.active{
 
     text-decoration:none;
 
-    border-radius:6px;
+    padding:10px 18px;
+
+    border-radius:5px;
 
     font-weight:bold;
 
-    transition:0.3s;
-
+    transition:.3s;
 }
 
-.bpm-card a:hover{
+.botones a:hover{
 
     background:#005f91;
-
 }
