@@ -13,19 +13,19 @@
 
     <header class="topbar">
         <div class="logo-section">
-            <img src="img/logo.png" alt="Logo">
-            <div>
-                <h1>RED INTEGRADA DE SALUD</h1>
-                <p>Pacífico Norte</p>
+            <img src="img/Index/logo.png" alt="Logo 1">
+            <div class="titulo-header">
+
+                <h1>RED INTEGRADA DE SALUD PACÍFICO NORTE</h1>
             </div>
         </div>
+    </header>
 
-        <nav class="main-nav">
+    <nav class="main-nav">
             <ul class="nav-links">
                 <li><a href="index.html">Inicio</a></li>
-                
                 <li class="dropdown">
-                    <a href="institucional.html" class="dropdown-trigger">Institucional <i class="fa-solid fa-chevron-down" style="font-size: 11px; margin-left: 5px;"></i></a>
+                    <a href="institucional.html" class="dropdown-trigger">Nosotros <i class="fa-solid fa-chevron-down" style="font-size: 11px; margin-left: 5px;"></i></a>
                     <ul class="dropdown-menu">
                         <li><a href="institucional.html#quienes-somos">¿Quiénes Somos?</a></li>
                         <li><a href="institucional.html#historia">Historia</a></li>
@@ -35,19 +35,16 @@
                 </li>
                 <li><a href="noticias.html">Noticias</a></li>
                 <li><a href="convocatorias.html">Convocatorias</a></li>
-                <li><a href="bpm.html">Procesos</a></li>
+                <li><a href="Normativa.html">Normativas</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
             </ul>
-        </nav>
-    </header>
+    </nav>
 
     <section class="hero">
         <video autoplay muted loop playsinline class="bg-video">
             <source src="video/VID-FONDO.mp4" type="video/mp4">
         </video>
-
         <div class="overlay"></div>
-
         <div class="hero-content">
             <h2>#UnidosContraElDengue</h2>
             <p>Comprometidos con la salud de nuestra comunidad.</p>
@@ -59,10 +56,60 @@
         </div>
     </section>
 
+    <section class="servicios">
+        <h2>Nuestros Servicios</h2>
+        <div class="servicios-carousel">
+            <button class="servicio-btn prev-servicio">❮</button>
+            <div class="servicios-track">
+
+                <div class="servicio-card active">
+                    <img src="img/Index/Servicios/Servicio1.webp" alt="">
+                </div>
+
+                <div class="servicio-card">
+                    <img src="img/Index/Servicios/Servicio2.jpg" alt="">
+                </div>
+
+                <div class="servicio-card">
+                    <img src="img/Index/Servicios/Servicio3.jpg" alt="">
+                </div>
+
+                <div class="servicio-card">
+                    <img src="img/Index/Servicios/Servicio4.jpeg" alt="">
+                </div>
+
+                <div class="servicio-card">
+                    <img src="img/Index/Servicios/Servicio5.jpg" alt="">
+                </div>
+
+                <div class="servicio-card">
+                    <img src="img/Index/Servicios/Servicio6.webp" alt="">
+                </div>
+
+                <div class="servicio-card">
+                    <img src="img/Index/Servicios/Servicio7.jpg" alt="">
+                </div>
+
+            </div>
+            <button class="servicio-btn next-servicio">❯</button>
+        </div>
+
+        <div class="servicio-info">
+            <h3 id="servicio-titulo">
+                Consulta por médico general
+            </h3>
+            <p id="servicio-descripcion">
+                Atención integral orientada al diagnóstico,
+                tratamiento y seguimiento de diversas
+                condiciones de salud de la población en Chimbote.
+            </p>
+        </div>
+
+    </section>
+
     <section class="news">
         <h2>Últimas Noticias</h2>
         <div class="carousel-background"></div>
-
         <div class="carousel-container">
             <button class="carousel-btn prev">
                 ❮
@@ -87,45 +134,33 @@
                 <!-- CARD 2 -->
                 <div class="news-card"
                 onclick="window.location.href='noticias.html?noticia=4'">
-
                     <img src="img/noticias/noticias-comunicado.jpg">
-
                     <div class="news-info">
-
                         <h3>
                             Comunicado Oficial a la ciudadanía
                         </h3>
-
                         <p>
                             La RIS Pacífico Norte fortalece
                             sus lineamientos de comunicación
                             institucional.
                         </p>
-
                     </div>
-
                 </div>
 
                 <!-- CARD 3 -->
                 <div class="news-card"
                 onclick="window.location.href='noticias.html?noticia=6'">
-
                     <img src="img/noticias/noticias-equipos.jpg">
-
                     <div class="news-info">
-
                         <h3>
                             RIS fortalece establecimientos
                         </h3>
-
                         <p>
                             Nuevos equipos computacionales
                             optimizarán la atención y registro
                             en salud.
                         </p>
-
                     </div>
-
                 </div>
             <button class="carousel-btn next">
                 ❯
@@ -134,160 +169,299 @@
     </section>
 
     <footer class="footer">
-
-        <div class="footer-content">
-
-            <div class="footer-info">
-                <h3>Red Integrada de Salud Pacífico Norte</h3>
-                <p>Chimbote - Perú</p>
+        <div class="footer-grid">
+            <!-- COLUMNA 1 -->
+            <div class="footer-col">
+                <h3>RED INTEGRADA DE SALUD PACÍFICO NORTE</h3>
+                <div class="footer-logos">
+                    <img src="img/Index/logo.png" alt="Logo 1">
+                    <img src="img/Index/DireccionReginalSalud.png" alt="Logo 2">
+                    <img src="img/Index/LogoAncash.png" alt="Logo 3">
+                </div>
             </div>
 
-            <div class="social-footer">
-
-                <a href="https://www.facebook.com/rispnorte" target="_blank">
-                    <i class="fab fa-facebook-f"></i>
+            <!-- COLUMNA 2 -->
+            <div class="footer-col">
+                <a href="institucional.html"><h4>Nosotros</h4></a>
+                <a href="institucional.html#quienes-somos">
+                    ¿Quiénes Somos?
                 </a>
-
-                <a href="https://www.instagram.com/rispacificonorte/" target="_blank">
-                    <i class="fab fa-instagram"></i>
+                <a href="institucional.html#historia">
+                    Historia
                 </a>
-
+                <a href="institucional.html#mision-vision">
+                    Misión y Visión
+                </a>
+                <a href="institucional.html#directorio">
+                    Directorio Institucional
+                </a>
+                <a href="convocatorias.html">
+                    <h4 class="footer-subtitulo">
+                    Convocatorias
+                    </h4>
+                </a>
             </div>
 
+            <!-- COLUMNA 3 -->
+            <div class="footer-col">
+                <a href="Normativa.html">
+                    <h4>Normativas</h4>
+                </a>
+                <h4 class="footer-subtitulo">
+                    <a href="noticias.html">
+                        Noticias
+                    </a>
+                </h4>
+            </div>
+
+            <!-- COLUMNA 4 -->
+            <div class="footer-col">
+                <a href="contacto.html">
+                    <h4>Contacto</h4>
+                </a>
+                <p>Ubicación: Av. Enrique Meiggs 835, Chimbote</p>
+                <p>Teléfono: 43-698402</p>
+                <h4>Horario de atencion</h4>
+                <p>Lunes a Viernes</p>
+                <p>7:45 am - 3:30 pm</p>
+
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/rispnorte" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/rispacificonorte/" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
         </div>
 
+        <div class="footer-bottom">
+            © 2026 Red Integrada de Salud Pacífico Norte
+        </div>
     </footer>
 
     <div class="transition-screen"></div>
 
 <script>
+    /*Transiciones */
+    const transition =
+    document.querySelector(".transition-screen");
 
+    /* ANIMACION ENTRADA */
 
-/*Transiciones */
-const transition =
-document.querySelector(".transition-screen");
+    window.addEventListener("load", () => {
 
-/* ANIMACION ENTRADA */
-
-window.addEventListener("load", () => {
-
-    transition.classList.add("enter");
-
-});
-
-/* ANIMACION SALIDA */
-
-document.querySelectorAll("a").forEach(link => {
-
-    link.addEventListener("click", function(e){
-
-        const href = this.getAttribute("href");
-
-        if(href && !href.startsWith("#")){
-
-            e.preventDefault();
-
-            transition.classList.remove("enter");
-
-            transition.classList.add("exit");
-
-            setTimeout(() => {
-
-                window.location.href = href;
-
-            }, 450);
-
-        }
+        transition.classList.add("enter");
 
     });
 
-});
+    /* ANIMACION SALIDA */
+    document.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", function(e){
+            const href = this.getAttribute("href");
+            if(href && !href.startsWith("#")){
+                e.preventDefault();
+                transition.classList.remove("enter");
+                transition.classList.add("exit");
+                setTimeout(() => {
+                    window.location.href = href;
 
+                }, 450);
+            }
+        });
+    });
 </script>
+
 <script>
+    const cards =
+    document.querySelectorAll(".news-card");
+    const nextBtn =
+    document.querySelector(".next");
+    const prevBtn =
+    document.querySelector(".prev");
+    const background =
+    document.querySelector(
+    ".carousel-background"
+    );
+    let current = 0;
+    function updateCarousel(){
+        cards.forEach(card => {
+            card.classList.remove(
+                "active",
+                "prev",
+                "next"
+            );
+        });
+        cards[current]
+        .classList.add("active");
+        
+        /* CAMBIAR FONDO */
+        const activeImage =
+        cards[current]
+        .querySelector("img").src;
+        background.style.backgroundImage =
+        `url(${activeImage})`;
+        cards[
+            (current - 1 + cards.length)
+            % cards.length
+        ].classList.add("prev");
 
-const cards =
-document.querySelectorAll(".news-card");
+        cards[
+            (current + 1)
+            % cards.length
+        ].classList.add("next");
 
-const nextBtn =
-document.querySelector(".next");
+    }
+    nextBtn.addEventListener("click", () => {
+        current =
+        (current + 1)
+        % cards.length;
+        updateCarousel();
+    });
 
-const prevBtn =
-document.querySelector(".prev");
-const background =
-document.querySelector(
-".carousel-background"
-);
+    prevBtn.addEventListener("click", () => {
+        current =
+        (current - 1 + cards.length)
+        % cards.length;
+        updateCarousel();
+    });
 
-let current = 0;
+    updateCarousel();
+    /* ========================= */
+    /* AUTO PLAY */
+    /* ========================= */
 
-function updateCarousel(){
-    
-    cards.forEach(card => {
+    setInterval(() => {
+        current =
+        (current + 1)
+        % cards.length;
+        updateCarousel();
 
-        card.classList.remove(
-            "active",
-            "prev",
-            "next"
-        );
+    }, 4000);
+</script>
+
+<script>
+    const servicios = [
+    {
+    titulo:"Consulta por médico general",
+    descripcion:"Atención integral orientada al diagnóstico, tratamiento y seguimiento de diversas condiciones de salud."
+    },
+
+    {
+    titulo:"Atención ambulatoria por obstetriz",
+    descripcion:"Control y seguimiento de la salud sexual y reproductiva de la mujer."
+    },
+
+    {
+    titulo:"Monitoreo de gestantes con complicaciones",
+    descripcion:"Vigilancia especializada para embarazos que requieren seguimiento permanente."
+    },
+
+    {
+    titulo:"Atención inmediata del recién nacido",
+    descripcion:"Evaluación y cuidados especializados durante las primeras horas de vida."
+    },
+
+    {
+    titulo:"Radiología convencional",
+    descripcion:"Estudios diagnósticos mediante rayos X."
+    },
+
+    {
+    titulo:"Ecografía general y Dopler",
+    descripcion:"Exámenes ecográficos para evaluación de órganos y flujo sanguíneo."
+    },
+
+    {
+    titulo:"Dispensación de medicamentos",
+    descripcion:"Entrega segura y controlada de medicamentos prescritos."
+    }
+
+    ];
+
+    const cardsServicio =
+    document.querySelectorAll(".servicio-card");
+
+    const tituloServicio =
+    document.getElementById("servicio-titulo");
+
+    const descripcionServicio =
+    document.getElementById("servicio-descripcion");
+
+    let servicioActual = 0;
+    function actualizarServicios(){
+        cardsServicio.forEach(card => {
+            card.classList.remove(
+                "active",
+                "prev",
+                "next",
+                "prev2",
+                "next2"
+            );
+        });
+
+        cardsServicio[servicioActual]
+        .classList.add("active");
+        cardsServicio[
+            (servicioActual - 1 + cardsServicio.length)
+            % cardsServicio.length
+        ].classList.add("prev");
+
+        cardsServicio[
+            (servicioActual + 1)
+            % cardsServicio.length
+        ].classList.add("next");
+
+        cardsServicio[
+            (servicioActual - 2 + cardsServicio.length)
+            % cardsServicio.length
+        ].classList.add("prev2");
+
+        cardsServicio[
+            (servicioActual + 2)
+            % cardsServicio.length
+        ].classList.add("next2");
+
+        const info =
+        document.querySelector(".servicio-info");
+        info.classList.add("fade");
+        setTimeout(() => {
+            tituloServicio.textContent =
+            servicios[servicioActual].titulo;
+            descripcionServicio.textContent =
+            servicios[servicioActual].descripcion;
+            info.classList.remove("fade");
+        }, 250);
+    }
+
+    document
+    .querySelector(".next-servicio")
+    .addEventListener("click", () => {
+        servicioActual =
+        (servicioActual + 1)
+        % servicios.length;
+        actualizarServicios();
+    });
+
+    document
+    .querySelector(".prev-servicio")
+    .addEventListener("click", () => {
+        servicioActual =
+        (servicioActual - 1 + servicios.length)
+        % servicios.length;
+        actualizarServicios();
 
     });
 
-    cards[current]
-    .classList.add("active");
-    
-    /* CAMBIAR FONDO */
-    const activeImage =
-    cards[current]
-    .querySelector("img").src;
-    background.style.backgroundImage =
-    `url(${activeImage})`;
-    cards[
-        (current - 1 + cards.length)
-        % cards.length
-    ].classList.add("prev");
+    setInterval(() => {
+        servicioActual =
+        (servicioActual + 1)
+        % servicios.length;
+        actualizarServicios();
+    }, 5000);
 
-    cards[
-        (current + 1)
-        % cards.length
-    ].classList.add("next");
-
-}
-
-nextBtn.addEventListener("click", () => {
-
-    current =
-    (current + 1)
-    % cards.length;
-
-    updateCarousel();
-
-});
-
-prevBtn.addEventListener("click", () => {
-
-    current =
-    (current - 1 + cards.length)
-    % cards.length;
-
-    updateCarousel();
-
-});
-
-updateCarousel();
-/* ========================= */
-/* AUTO PLAY */
-/* ========================= */
-
-setInterval(() => {
-
-    current =
-    (current + 1)
-    % cards.length;
-
-    updateCarousel();
-
-}, 4000);
+    actualizarServicios();
 </script>
 </body>
 </html>
