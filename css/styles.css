@@ -28,7 +28,7 @@
     transition: all 0.3s ease;
 }
 
-/* --- TRUCO DEL DROPDOWN (Desplegable) --- */
+/* DROPDOWN (Desplegable) */
 .dropdown {
     position: relative; /* Clave para que el submenú se posicione justo debajo */
 }
@@ -148,9 +148,7 @@ nav a:hover{
     position: relative;
     width: 100%;
     height: 100vh;
-
     overflow: hidden;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -163,12 +161,9 @@ nav a:hover{
     position: absolute;
     top: 0;
     left: 0;
-
     width: 100%;
     height: 100%;
-
     object-fit: cover;
-
     z-index: -2;
 }
 
@@ -177,9 +172,7 @@ nav a:hover{
 .overlay{
     position: absolute;
     inset: 0;
-
     background: rgba(0,0,0,0.45);
-
     z-index: -1;
 }
 
@@ -207,13 +200,10 @@ nav a:hover{
     padding: 15px 35px;
     border: none;
     border-radius: 10px;
-
     background: #009dff;
     color: white;
-
     font-size: 20px;
     cursor: pointer;
-
     transition: 0.3s;
 }
 
@@ -449,9 +439,7 @@ nav a:hover{
 }
 
 .footer-subtitulo{
-
     margin-top:25px;
-
 }
 .footer-col a{
     display:block;
@@ -480,67 +468,41 @@ nav a:hover{
 .footer-logos img{
     width:60px;
     height:auto;
-
 }
 
 .footer-social{
-
     display:flex;
-
     gap:15px;
-
     margin-top:20px;
-
 }
 
 .footer-social a{
-
     width:40px;
-
     height:40px;
-
     background:white;
-
     color:#005b8f;
-
     border-radius:50%;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     text-decoration:none;
-
     font-size:18px;
-
     transition:0.3s;
-
 }
 
 .footer-social a:hover{
-
     transform:scale(1.1);
-
 }
 
 .footer-bottom{
-
     margin-top:40px;
-
     padding-top:20px;
-
     border-top:1px solid rgba(255,255,255,0.25);
-
     text-align:center;
-
     font-size:14px;
-
 }
 
 /* RESPONSIVE */
-
 @media(max-width:768px){
 
     .topbar{
@@ -557,120 +519,6 @@ nav a:hover{
         font-size:38px;
     }
 
-}
-
-/* ======================================== */
-/* SECCIÓN CONTACTO */
-/* ======================================== */
-
-.contacto{
-    width: 100%;
-    padding: 80px 10%;
-    background: #f5f5f5;
-}
-
-.contenedor-contacto{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 50px;
-    flex-wrap: wrap;
-}
-
-/* ======================================== */
-/* INFORMACIÓN */
-/* ======================================== */
-
-.info-contacto{
-    flex: 1;
-    min-width: 300px;
-}
-
-.info-contacto h2{
-    font-size: 40px;
-    color: #0077b6;
-    margin-bottom: 20px;
-}
-
-.info-contacto p{
-    font-size: 18px;
-    color: #555;
-    line-height: 1.7;
-    margin-bottom: 30px;
-}
-
-.dato{
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-    font-size: 18px;
-    color: #333;
-}
-
-.dato i{
-    width: 45px;
-    height: 45px;
-    background: #0096d6;
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-}
-
-/* ======================================== */
-/* FORMULARIO */
-/* ======================================== */
-
-.form-contacto{
-    flex: 1;
-    min-width: 320px;
-    background: white;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0px 5px 20px rgba(0,0,0,0.1);
-}
-
-.form-contacto input,
-.form-contacto textarea{
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    outline: none;
-    font-size: 16px;
-    transition: 0.3s;
-}
-
-.form-contacto input:focus,
-.form-contacto textarea:focus{
-    border-color: #0096d6;
-    box-shadow: 0px 0px 8px rgba(0,150,214,0.3);
-}
-
-.form-contacto textarea{
-    resize: none;
-    height: 150px;
-}
-
-.form-contacto button{
-    width: 100%;
-    padding: 15px;
-    background: #0096d6;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.form-contacto button:hover{
-    background: #0077b6;
-    transform: translateY(-3px);
 }
 
 /* ======================================== */
@@ -854,45 +702,33 @@ td a{
 /* SALIDA */
 
 .transition-screen.exit{
-
     animation:circleOut 0.5s ease-in-out forwards;
-
 }
 
 /* ENTRADA */
-
 .transition-screen.enter{
 
     animation:circleIn 0.5s ease-in-out forwards;
-
 }
 
 /* ANIMACION SALIDA */
-
 @keyframes circleOut{
-
     0%{
         clip-path:circle(0% at center);
     }
-
     100%{
         clip-path:circle(150% at center);
     }
-
 }
 
 /* ANIMACION ENTRADA */
-
 @keyframes circleIn{
-
     0%{
         clip-path:circle(150% at center);
     }
-
     100%{
         clip-path:circle(0% at center);
     }
-
 }
 
 /* ===================== */
@@ -900,23 +736,15 @@ td a{
 /* ===================== */
 
 .news{
-
     padding:80px 20px;
-
     background:#f4f7fb;
-
     text-align:center;
-
 }
 
 .news h2{
-
     font-size:42px;
-
     color:#0077b6;
-
     margin-bottom:50px;
-
 }
 
 /* ===================== */
@@ -924,294 +752,164 @@ td a{
 /* ===================== */
 
 .news{
-
     position:relative;
-
     overflow:hidden;
-
 }
 
 .carousel-background{
-
     position:absolute;
-
     inset:0;
-
     background-size:cover;
-
     background-position:center;
-
     filter:blur(3px);
-
     transform:scale(1.1);
-
     opacity:0.45;
-
     transition:0.7s;
-
     z-index:0;
-
 }
 
 /* OSCURECER */
 
 .news::after{
-
     content:"";
-
     position:absolute;
-
     inset:0;
-
     background:rgba(255,255,255,0.45);
-
     z-index:1;
-
 }
 
 /* CONTENIDO ENCIMA */
 
 .news h2,
 .carousel-container{
-
     position:relative;
-
     z-index:2;
-
 }
 
 .carousel-container{
-
     position:relative;
-
     width:100%;
-
     max-width:1100px;
-
     margin:auto;
-
     overflow:hidden;
-
 }
 
 .carousel{
-
     position:relative;
-
     height:500px;
-
 }
 
 .news-card{
-
     position:absolute;
-
     width:70%;
-
     left:50%;
-
     top:50%;
-
     transform:
     translate(-50%, -50%)
     scale(0.8);
-
     opacity:0;
-
     transition:0.6s;
-
     background:white;
-
     border-radius:25px;
-
     overflow:hidden;
-
     box-shadow:0 15px 35px rgba(0,0,0,0.2);
-
 }
 
 .news-card img{
-
     width:100%;
-
     height:320px;
-
     object-fit:cover;
-
 }
 
 .news-info{
-
     padding:25px;
-
 }
 
 .news-info h3{
-
     color:#0077b6;
-
     margin-bottom:15px;
-
     font-size:28px;
-
 }
 
 .news-info p{
-
     color:#555;
-
     line-height:1.6;
-
 }
 
 /* CARD ACTIVA */
 
 .news-card.active{
-
     opacity:1;
-
     z-index:3;
-
     transform:
     translate(-50%, -50%)
     scale(1);
-
 }
 
 /* CARD IZQUIERDA */
 
 .news-card.prev{
-
     opacity:0.5;
-
     z-index:2;
-
     transform:
     translate(-80%, -50%)
     scale(0.85);
-
 }
 
 /* CARD DERECHA */
 
 .news-card.next{
-
     opacity:0.5;
-
     z-index:2;
-
     transform:
     translate(-20%, -50%)
     scale(0.85);
-
 }
 
 /* BOTONES */
 
 .carousel-btn{
-
     position:absolute;
-
     top:50%;
-
     transform:translateY(-50%);
-
     background:#0077b6;
-
     color:white;
-
     border:none;
-
     width:55px;
-
     height:55px;
-
     border-radius:50%;
-
     cursor:pointer;
-
     font-size:24px;
-
     z-index:5;
-
     transition:0.3s;
-
 }
 
 .carousel-btn:hover{
-
     background:#023e8a;
-
     transform:
     translateY(-50%)
     scale(1.1);
-
 }
 
 .prev{
-
     left:10px;
-
 }
 
 .next{
-
     right:10px;
-
 }
 
 /* RESPONSIVE */
 
 @media(max-width:768px){
-
     .news-card{
-
         width:90%;
-
     }
-
     .news-info h3{
-
         font-size:22px;
-
     }
-
 }
 
 .news-card{
-
     cursor:pointer;
-
-}
-
-/* BOTÓN FLOTANTE WHATSAPP */
-.whatsapp-float {
-    position: fixed;
-    width: 90px !important;
-    height: 90px !important;
-    bottom: 30px;
-    right: 30px;
-    background-color: #25D366;
-    color: white;
-    border-radius: 50%;
-    font-size: 50px !important; /* ICONO GRANDE */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-}
-.whatsapp-float {
-    animation: pulso 1.5s infinite;
-}
-
-@keyframes pulso {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.15); }
-    100% { transform: scale(1); }
-}
-.whatsapp-float:hover {
-    background-color: #128C7E;
-    transform: scale(1.2);
-    transition: 0.3s;
 }
