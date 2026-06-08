@@ -16,43 +16,19 @@
     <aside class="sidebar">
 
         <div class="perfil">
-                <img src="img/logo.png" alt="Logo Red de Salud">
-                <h2>Red de Salud<br>Pacífico Norte</h2>
-                <p>Administrador</p>
-        </div>
-
+            <img src="img/logo.png" alt="Logo">
+            <h2>Red de Salud</h2>
+            <p>Pacífico Norte</p>
         </div>
 
         <ul>
-
-            <li class="active">
-                🏠 Dashboard
-            </li>
-
-            <li onclick="goCRM()">
-                👥 CRM Pacientes
-            </li>
-
-            <li onclick="goERP()">
-                📦 ERP Inventario
-            </li>
-
-            <li>
-                💊 Farmacia
-            </li>
-
-            <li>
-                📅 Citas Médicas
-            </li>
-
-            <li>
-                📊 Reportes
-            </li>
-
-            <li>
-                ⚙ Configuración
-            </li>
-
+            <li class="active">🏠 Dashboard</li>
+            <li onclick="goCRM()">👥 CRM Pacientes</li>
+            <li onclick="goERP()">📦 ERP Inventario</li>
+            <li>💊 Farmacia</li>
+            <li>📅 Citas Médicas</li>
+            <li>📊 Reportes</li>
+            <li>⚙ Configuración</li>
         </ul>
 
     </aside>
@@ -61,51 +37,34 @@
     <main class="contenido">
 
         <header>
-
-            <div>
-                <h1>Dashboard</h1>
-                <p>Sistema ERP y CRM - Red de Salud Pacífico Norte</p>
-            </div>
+            <h1>Dashboard General</h1>
 
             <input
             type="text"
-            placeholder="Buscar paciente o medicamento">
-
+            placeholder="Buscar paciente o producto">
         </header>
 
         <!-- TARJETAS -->
         <section class="cards">
 
             <div class="card-info">
-
                 <h3>Pacientes</h3>
-
                 <span id="clientesCount">0</span>
-
             </div>
 
             <div class="card-info">
-
-                <h3>Medicamentos</h3>
-
+                <h3>Productos</h3>
                 <span id="productosCount">0</span>
-
             </div>
 
             <div class="card-info">
-
                 <h3>Citas Hoy</h3>
-
-                <span id="citasCount">0</span>
-
+                <span>25</span>
             </div>
 
             <div class="card-info">
-
-                <h3>Personal Médico</h3>
-
-                <span id="personalCount">0</span>
-
+                <h3>Personal</h3>
+                <span>48</span>
             </div>
 
         </section>
@@ -116,14 +75,12 @@
             <h2>Atenciones Semanales</h2>
 
             <div class="bars">
-
                 <div style="height:60%"></div>
-                <div style="height:80%"></div>
-                <div style="height:45%"></div>
+                <div style="height:85%"></div>
+                <div style="height:40%"></div>
                 <div style="height:90%"></div>
-                <div style="height:70%"></div>
+                <div style="height:75%"></div>
                 <div style="height:100%"></div>
-
             </div>
 
         </section>
@@ -132,34 +89,26 @@
         <section class="bottom">
 
             <div class="inventario">
-
                 <h2>Inventario Crítico</h2>
 
-                <ul id="inventarioCritico">
-
-                    <li>No hay alertas</li>
-
+                <ul>
+                    <li>Paracetamol - 10 unidades</li>
+                    <li>Guantes - 15 cajas</li>
+                    <li>Jeringas - 8 paquetes</li>
                 </ul>
-
             </div>
 
             <div class="noticias">
-
                 <h2>Noticias Internas</h2>
 
-                <div class="news-card">
-                    Nuevo lote de medicamentos recibido.
-                </div>
+                <p>Nuevo lote de medicamentos recibido.</p>
 
-                <div class="news-card">
-                    Campaña médica gratuita este sábado.
-                </div>
-
+                <p>Campaña médica programada para el sábado.</p>
             </div>
 
         </section>
 
-        <button class="btnSalir" onclick="logout()">
+        <button onclick="logout()" class="btnSalir">
             Cerrar Sesión
         </button>
 
