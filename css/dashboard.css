@@ -22,26 +22,20 @@ body{
     display:flex;
     flex-direction:column;
 }
-
+.perfil img{
+    width:90px;
+    height:90px;
+    object-fit:contain;
+    border-radius:50%;
+    background:white;
+    padding:5px;
+    margin:auto;
+    display:block;
+}
 .perfil{
     text-align:center;
     padding:30px;
 }
-
-.avatar{
-    width:90px;
-    height:90px;
-    border-radius:50%;
-    background:white;
-    color:#0096e6;
-    font-size:45px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin:auto;
-    margin-bottom:15px;
-}
-
 .sidebar ul{
     list-style:none;
     flex:1;
