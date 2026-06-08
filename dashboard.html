@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard</title>
+<link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Panel del Sistema</h1>
+
+    <!-- RESUMEN -->
+    <div class="resumen">
+
+        <div class="box">
+            <h3>CRM</h3>
+            <p>Clientes registrados: <span id="clientesCount">0</span></p>
+        </div>
+
+        <div class="box">
+            <h3>ERP</h3>
+            <p>Productos registrados: <span id="productosCount">0</span></p>
+        </div>
+
+    </div>
+
+    <!-- ACCESOS -->
+    <div class="menu">
+
+        <div class="card" onclick="goCRM()">
+            <h2>📊 CRM</h2>
+            <p>Gestión de clientes</p>
+        </div>
+
+        <div class="card" onclick="goERP()">
+            <h2>📦 ERP</h2>
+            <p>Inventario y productos</p>
+        </div>
+
+    </div>
+
+    <button onclick="logout()">Cerrar sesión</button>
+
+</div>
+<script>
+/* seguridad */
+if(localStorage.getItem("session") !== "active"){
+    window.location.href = "login.html";
+}
+
+/* navegación */
+function goCRM(){
+    window.location.href = "crm.html";
+}
+
+function goERP(){
+    window.location.href = "erp.html";
+}
+
+function logout(){
+    localStorage.removeItem("session");
+    window.location.href = "index.html";
+}
+
+/* RESUMEN */
+const clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+const productos = JSON.parse(localStorage.getItem("productos")) || [];
+
+document.getElementById("clientesCount").textContent = clientes.length;
+document.getElementById("productosCount").textContent = productos.length;
+</script>
+
+</body>
+</html>
