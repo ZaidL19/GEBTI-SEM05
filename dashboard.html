@@ -2,123 +2,85 @@
 <html lang="es">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard - Red de Salud Pacífico Norte</title>
-
-<link rel="stylesheet" href="css/dashboard.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Red de Salud Pacífico Norte</title>
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
 
 <body>
 
 <div class="dashboard">
 
-    <!-- SIDEBAR -->
     <aside class="sidebar">
+        <div class="perfil">
+            <img src="img/index/logo.png" alt="Red de Salud Pacífico Norte">
+            <h2>
+                Red de Salud<br>
+                Pacífico Norte
+            </h2>
+            <p>Administrador</p>
+            <button onclick="logout()">Cerrar sesión</button>
+        </div>
 
-    <div class="perfil">
-
-        <img src="img/index/logo.png" alt="Red de Salud Pacífico Norte">
-
-        <h2>
-            Red de Salud<br>
-            Pacífico Norte
-        </h2>
-
-        <p>Administrador</p>
-
-        <button onclick="logout()">Cerrar sesión</button>
-
-    </div>
-    <script>
-        /* seguridad */
-        if (localStorage.getItem("session") !== "active") {
-            window.location.href = "login.html";
-        }
-
-    <ul>
-
-        <li class="active">
-            🏠 Dashboard
-        </li>
-
-        <li onclick="goCRM()">
-            👥 CRM Pacientes
-        </li>
-
-        <li onclick="goERP()">
-            📦 ERP Inventario
-        </li>
-
-        <li>
-            💊 Farmacia
-        </li>
-
-        <li>
-            📅 Citas Médicas
-        </li>
-
-        <li>
-            📊 Reportes
-        </li>
-
-        <li>
-            ⚙ Configuración
-        </li>
-
-    </ul>
+        <ul>
+            <li class="active">
+                🏠 Dashboard
+            </li>
+            <li onclick="goCRM()">
+                👥 CRM Pacientes
+            </li>
+            <li onclick="goERP()">
+                📦 ERP Inventario
+            </li>
+            <li>
+                💊 Farmacia
+            </li>
+            <li>
+                📅 Citas Médicas
+            </li>
+            <li>
+                📊 Reportes
+            </li>
+            <li>
+                ⚙ Configuración
+            </li>
+        </ul>
 
         <div class="sidebar-footer">
-
             <button class="btnSalir" onclick="logout()">
                 🚪 Cerrar Sesión
             </button>
-
         </div>
-
     </aside>
 
-    <!-- CONTENIDO -->
     <main class="contenido">
-
         <header>
             <h1>Dashboard General</h1>
-
-            <input
-            type="text"
-            placeholder="Buscar paciente o producto">
+            <input type="text" placeholder="Buscar paciente o producto">
         </header>
 
-        <!-- TARJETAS -->
         <section class="cards">
-
             <div class="card-info">
                 <h3>Pacientes</h3>
                 <span id="clientesCount">0</span>
             </div>
-
             <div class="card-info">
                 <h3>Productos</h3>
                 <span id="productosCount">0</span>
             </div>
-
             <div class="card-info">
                 <h3>Citas Hoy</h3>
-                <span>25</span>
+                <span id="citasCount">25</span>
             </div>
-
             <div class="card-info">
                 <h3>Personal</h3>
-                <span>48</span>
+                <span id="personalCount">48</span>
             </div>
-
         </section>
 
-        <!-- GRAFICO -->
         <section class="grafico">
-
             <h2>Atenciones Semanales</h2>
-
             <div class="bars">
                 <div style="height:60%"></div>
                 <div style="height:85%"></div>
@@ -127,16 +89,12 @@
                 <div style="height:75%"></div>
                 <div style="height:100%"></div>
             </div>
-
         </section>
 
-        <!-- PANEL INFERIOR -->
         <section class="bottom">
-
             <div class="inventario">
                 <h2>Inventario Crítico</h2>
-
-                <ul>
+                <ul id="inventarioCritico">
                     <li>Paracetamol - 10 unidades</li>
                     <li>Guantes - 15 cajas</li>
                     <li>Jeringas - 8 paquetes</li>
@@ -145,127 +103,84 @@
 
             <div class="noticias">
                 <h2>Noticias Internas</h2>
-
                 <p>Nuevo lote de medicamentos recibido.</p>
-
                 <p>Campaña médica programada para el sábado.</p>
             </div>
-
         </section>
     </main>
 
 </div>
 
 <script>
-
 // ====================
 // SEGURIDAD
 // ====================
-
-if(localStorage.getItem("session") !== "active"){
+if (localStorage.getItem("session") !== "active") {
     window.location.href = "login.html";
 }
 
 // ====================
-// NAVEGACIÓN
+// NAVEGACIÓN INTELIGENTE (Rutas locales vs Flask)
 // ====================
-
-function goCRM(){
-    window.location.href = "crm.html";
+function goCRM() {
+    const isLocal = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost";
+    
+    if (isLocal) {
+        // Redirección forzada al backend de Flask para procesar Jinja2
+        window.location.href = "http://127.0.0.1:5000/crm";
+    } else {
+        window.location.href = "templates/crm.html";
+    }
 }
 
-function goERP(){
+function goERP() {
     window.location.href = "erp.html";
 }
 
-function logout(){
-
-    if(confirm("¿Desea cerrar sesión?")){
-
+function logout() {
+    if (confirm("¿Desea cerrar sesión?")) {
         localStorage.removeItem("session");
         window.location.href = "index.html";
-
     }
-
 }
 
 // ====================
-// DATOS CRM
+// CONTROL DE DATOS Y RENDERIZADO
 // ====================
+const clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+const clientesElem = document.getElementById("clientesCount");
+if (clientesElem) clientesElem.textContent = clientes.length;
 
-const clientes =
-JSON.parse(localStorage.getItem("clientes")) || [];
+const productos = JSON.parse(localStorage.getItem("productos")) || [];
+const productosElem = document.getElementById("productosCount");
+if (productosElem) productosElem.textContent = productos.length;
 
-document.getElementById("clientesCount")
-.textContent = clientes.length;
+const citas = JSON.parse(localStorage.getItem("citas")) || [];
+const citasElem = document.getElementById("citasCount");
+if (citasElem && citas.length > 0) citasElem.textContent = citas.length;
 
-// ====================
-// DATOS ERP
-// ====================
-
-const productos =
-JSON.parse(localStorage.getItem("productos")) || [];
-
-document.getElementById("productosCount")
-.textContent = productos.length;
-
-// ====================
-// CITAS
-// ====================
-
-const citas =
-JSON.parse(localStorage.getItem("citas")) || [];
-
-document.getElementById("citasCount")
-.textContent = citas.length;
+const personal = JSON.parse(localStorage.getItem("personal")) || [];
+const personalElem = document.getElementById("personalCount");
+if (personalElem && personal.length > 0) personalElem.textContent = personal.length;
 
 // ====================
-// PERSONAL
+// GENERACIÓN DE INVENTARIO CRÍTICO DINÁMICO
 // ====================
+const listaInventario = document.getElementById("inventarioCritico");
 
-const personal =
-JSON.parse(localStorage.getItem("personal")) || [];
+if (listaInventario) {
+    const inventarioCritico = productos.filter(producto => Number(producto.stock) <= 10);
 
-document.getElementById("personalCount")
-.textContent = personal.length;
-
-// ====================
-// INVENTARIO CRÍTICO
-// ====================
-
-const listaInventario =
-document.getElementById("inventarioCritico");
-
-listaInventario.innerHTML = "";
-
-const inventarioCritico =
-productos.filter(producto =>
-Number(producto.stock) <= 10
-);
-
-if(inventarioCritico.length === 0){
-
-    listaInventario.innerHTML =
-    "<li>No existen productos críticos.</li>";
-
-}else{
-
-    inventarioCritico.forEach(producto => {
-
-        const li =
-        document.createElement("li");
-
-        li.innerHTML =
-        `${producto.nombre} - ${producto.stock} unidades`;
-
-        listaInventario.appendChild(li);
-
-    });
-
+    if (inventarioCritico.length > 0) {
+        listaInventario.innerHTML = "";
+        inventarioCritico.forEach(producto => {
+            const li = document.createElement("li");
+            li.innerHTML = `${producto.nombre} - ${producto.stock} unidades`;
+            listaInventario.appendChild(li);
+        });
+    }
 }
-
 </script>
 
 </body>
-
 </html>
