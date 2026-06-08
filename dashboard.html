@@ -1,77 +1,85 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<title>Dashboard</title>
-<link rel="stylesheet" href="css/dashboard.css">
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <h1>Panel del Sistema</h1>
+        <h1>Panel del Sistema</h1>
 
-    <!-- RESUMEN -->
-    <div class="resumen">
+        <!-- RESUMEN -->
+        <div class="resumen">
 
-        <div class="box">
-            <h3>CRM</h3>
-            <p>Clientes registrados: <span id="clientesCount">0</span></p>
+            <div class="box">
+                <h3>CRM</h3>
+                <p>Clientes registrados: <span id="clientesCount">0</span></p>
+            </div>
+
+            <div class="box">
+                <h3>ERP</h3>
+                <p>Productos registrados: <span id="productosCount">0</span></p>
+            </div>
+
         </div>
 
-        <div class="box">
-            <h3>ERP</h3>
-            <p>Productos registrados: <span id="productosCount">0</span></p>
+        <!-- ACCESOS -->
+        <div class="menu">
+
+            <div class="card" onclick="goCRM()">
+                <h2>📊 CRM</h2>
+                <p>Gestión de clientes</p>
+            </div>
+
+            <div class="card" onclick="goERP()">
+                <h2>📦 ERP</h2>
+                <p>Inventario y productos</p>
+            </div>
+
         </div>
+
+        <button onclick="logout()">Cerrar sesión</button>
 
     </div>
+    <script>
+        /* seguridad */
+        if (localStorage.getItem("session") !== "active") {
+            window.location.href = "login.html";
+        }
 
-    <!-- ACCESOS -->
-    <div class="menu">
+        /* navegación */
+        function goCRM() {
+            // Si estás en un servidor local (sea puerto 3000 o cualquier otro), te manda al puerto de Flask
+            if (window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost") {
+                window.location.href = "http://127.0.0.1:5000/crm";
+            } else {
+                // Si lo abren por archivo plano (file:///)
+                window.location.href = "templates/crm.html";
+            }
+        }
 
-        <div class="card" onclick="goCRM()">
-            <h2>📊 CRM</h2>
-            <p>Gestión de clientes</p>
-        </div>
+        function goERP() {
+            window.location.href = "erp.html";
+        }
 
-        <div class="card" onclick="goERP()">
-            <h2>📦 ERP</h2>
-            <p>Inventario y productos</p>
-        </div>
+        function logout() {
+            localStorage.removeItem("session");
+            window.location.href = "index.html";
+        }
 
-    </div>
+        /* RESUMEN */
+        const clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+        const productos = JSON.parse(localStorage.getItem("productos")) || [];
 
-    <button onclick="logout()">Cerrar sesión</button>
-
-</div>
-<script>
-/* seguridad */
-if(localStorage.getItem("session") !== "active"){
-    window.location.href = "login.html";
-}
-
-/* navegación */
-function goCRM(){
-    window.location.href = "crm.html";
-}
-
-function goERP(){
-    window.location.href = "erp.html";
-}
-
-function logout(){
-    localStorage.removeItem("session");
-    window.location.href = "index.html";
-}
-
-/* RESUMEN */
-const clientes = JSON.parse(localStorage.getItem("clientes")) || [];
-const productos = JSON.parse(localStorage.getItem("productos")) || [];
-
-document.getElementById("clientesCount").textContent = clientes.length;
-document.getElementById("productosCount").textContent = productos.length;
-</script>
+        document.getElementById("clientesCount").textContent = clientes.length;
+        document.getElementById("productosCount").textContent = productos.length;
+    </script>
 
 </body>
+
 </html>

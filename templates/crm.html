@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM - Red de Salud Pacífico Norte</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-100 font-sans min-h-screen">
+
+    <div class="container mx-auto p-6">
+        <header class="bg-blue-800 text-white p-6 rounded-lg shadow-md mb-8">
+            <h1 class="text-3xl font-bold">Módulo CRM: Campañas de Prevención Automatizadas</h1>
+            <p class="text-blue-200 mt-1">Dirección del Sistema Integrado de Salud - Red Pacífico Norte</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-emerald-500">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">🚀 Automatización de Campañas</h2>
+                <p class="text-sm text-gray-600 mb-6">El motor de reglas del CRM analiza brotes epidemiológicos o vulnerabilidad y segmenta en tiempo real.</p>
+                
+                <div class="space-y-4">
+                    <div class="p-4 border border-gray-200 rounded-lg bg-orange-50">
+                        <h3 class="font-bold text-orange-800 text-base">Alerta Brote de Dengue</h3>
+                        <p class="text-xs text-gray-600 mt-1"><strong>Filtro automático:</strong> Sectores con alta tasa vectorial (Coishco, Santa, Chimbote Centro).</p>
+                        <button onclick="enviarCampana('DENGUE')" class="w-full mt-3 bg-orange-600 text-white font-semibold py-2 px-4 rounded hover:bg-orange-700 transition text-sm">
+                            Ejecutar Alerta Georreferenciada
+                        </button>
+                    </div>
+
+                    <div class="p-4 border border-gray-200 rounded-lg bg-blue-50">
+                        <h3 class="font-bold text-blue-800 text-base">Campaña Invierno (Influenza)</h3>
+                        <p class="text-xs text-gray-600 mt-1"><strong>Filtro automático:</strong> Población vulnerable (Adultos mayores de 60 años y Niños).</p>
+                        <button onclick="enviarCampana('INFLUENZA')" class="w-full mt-3 bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition text-sm">
+                            Ejecutar Segmentación por Riesgo
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md lg:col-span-2">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">👥 Base de Datos Segmentada del Ciudadano</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="bg-gray-200 text-gray-700 font-semibold">
+                                <th class="p-3">Paciente</th>
+                                <th class="p-3">Edad</th>
+                                <th class="p-3">Distrito / Zona</th>
+                                <th class="p-3">Grupo Riesgo</th>
+                                <th class="p-3">Celular</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 text-gray-600">
+                            {% for c in ciudadanos %}
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 font-medium text-gray-900">{{ c.nombre }}</td>
+                                <td class="p-3">{{ c.edad }} años</td>
+                                <td class="p-3">{{ c.zona }}</td>
+                                <td class="p-3">
+                                    <span class="px-2 py-1 rounded text-xs {{ 'bg-red-100 text-red-800' if c.riesgo != 'Ninguno' else 'bg-gray-100 text-gray-800' }}">
+                                        {{ c.riesgo }}
+                                    </span>
+                                </td>
+                                <td class="p-3 text-mono">{{ c.telefono }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md mt-8 border-t-4 border-blue-600">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">📊 Historial de Salida de Alertas Preventivas (Log del Servidor)</h2>
+            <div class="overflow-y-auto max-h-60" id="contenedor-log">
+                {% if not historial %}
+                <p id="sin-datos" class="text-gray-500 text-sm italic">Esperando ejecuciones automáticas del motor CRM...</p>
+                {% endif %}
+                <div id="lista-logs" class="space-y-2">
+                    {% for h in historial %}
+                    <div class="p-3 bg-gray-50 border-l-4 border-blue-500 rounded text-xs">
+                        <span class="text-gray-400 font-mono">[{{ h.fecha }}]</span> 
+                        <strong class="text-blue-700">{{ h.campana }}</strong> enviado a <strong>{{ h.ciudadano }}</strong> ({{ h.zona }}) al número <span class="underline">{{ h.contacto }}</span>.
+                        <p class="text-gray-600 italic mt-1">"{{ h.mensaje_enviado }}"</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function enviarCampana(tipo) {
+            fetch('/disparar_campana', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ tipo_campana: tipo })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert(`CRM Automatizado: Se enviaron ${data.enviados} alertas para la ${data.detalles}.`);
+                    window.location.reload(); // Recarga para refrescar los logs simulados
+                }
+            })
+            .catch(err => console.error("Error en el CRM:", err));
+        }
+    </script>
+</body>
+</html>
