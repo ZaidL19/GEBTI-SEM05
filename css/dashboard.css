@@ -1,3 +1,4 @@
+```css
 *{
     margin:0;
     padding:0;
@@ -7,57 +8,102 @@
 
 body{
     background:#edf2f7;
+    overflow-x:hidden;
 }
+
+/* ======================
+   CONTENEDOR PRINCIPAL
+====================== */
 
 .dashboard{
     display:flex;
     min-height:100vh;
 }
 
+/* ======================
+   SIDEBAR
+====================== */
+
 .sidebar{
-    width:260px;
+    width:300px;
+    min-width:300px;
     background:#0096e6;
     color:white;
+    display:flex;
+    flex-direction:column;
+    box-shadow:2px 0 10px rgba(0,0,0,.15);
 }
+
+/* ======================
+   PERFIL
+====================== */
 
 .perfil{
     text-align:center;
-    padding:30px;
+    padding:20px;
+    border-bottom:1px solid rgba(255,255,255,.2);
 }
 
-.avatar{
-    width:80px;
-    height:80px;
-    border-radius:50%;
+.perfil img{
+    width:140px;
+    height:140px;
+    object-fit:contain;
     background:white;
-    color:#0096e6;
-    font-size:40px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin:auto;
-    margin-bottom:15px;
+    border-radius:50%;
+    padding:10px;
+    display:block;
+    margin:0 auto 15px auto;
 }
+
+.perfil h2{
+    font-size:18px;
+    font-weight:600;
+    line-height:1.3;
+    margin-bottom:5px;
+}
+
+.perfil p{
+    font-size:14px;
+    opacity:.9;
+}
+
+/* ======================
+   MENÚ
+====================== */
 
 .sidebar ul{
     list-style:none;
+    margin-top:20px;
 }
 
 .sidebar li{
     padding:18px 25px;
     cursor:pointer;
     transition:.3s;
+    font-size:17px;
 }
 
-.sidebar li:hover,
-.sidebar .active{
+.sidebar li:hover{
     background:#0079c9;
 }
+
+.sidebar .active{
+    background:#0079c9;
+    font-weight:bold;
+}
+
+/* ======================
+   CONTENIDO
+====================== */
 
 .contenido{
     flex:1;
     padding:25px;
 }
+
+/* ======================
+   HEADER
+====================== */
 
 header{
     display:flex;
@@ -66,17 +112,28 @@ header{
     margin-bottom:25px;
 }
 
+header h1{
+    font-size:42px;
+    color:#222;
+}
+
 header p{
-    color:gray;
+    color:#666;
+    margin-top:5px;
 }
 
 header input{
     width:320px;
-    padding:12px;
+    padding:12px 18px;
     border:none;
-    border-radius:20px;
+    border-radius:25px;
     background:#dfe7ed;
+    outline:none;
 }
+
+/* ======================
+   TARJETAS
+====================== */
 
 .cards{
     display:grid;
@@ -87,25 +144,35 @@ header input{
 .card-info{
     background:white;
     padding:25px;
-    border-radius:10px;
-    box-shadow:0 3px 8px rgba(0,0,0,.1);
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
 }
 
 .card-info h3{
     color:#666;
+    margin-bottom:10px;
 }
 
 .card-info span{
-    font-size:38px;
+    font-size:42px;
     font-weight:bold;
     color:#0096e6;
 }
 
+/* ======================
+   GRÁFICO
+====================== */
+
 .grafico{
     margin-top:25px;
     background:white;
-    border-radius:10px;
+    border-radius:12px;
     padding:20px;
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
+}
+
+.grafico h2{
+    margin-bottom:15px;
 }
 
 .bars{
@@ -113,14 +180,22 @@ header input{
     display:flex;
     align-items:flex-end;
     gap:15px;
-    margin-top:20px;
 }
 
 .bars div{
     flex:1;
     background:#0096e6;
     border-radius:5px 5px 0 0;
+    transition:.3s;
 }
+
+.bars div:hover{
+    opacity:.8;
+}
+
+/* ======================
+   PANEL INFERIOR
+====================== */
 
 .bottom{
     margin-top:25px;
@@ -132,25 +207,36 @@ header input{
 .inventario,
 .noticias{
     background:white;
-    border-radius:10px;
+    border-radius:12px;
     padding:20px;
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
 }
 
 .inventario h2,
 .noticias h2{
     margin-bottom:15px;
+    color:#333;
+}
+
+.inventario ul{
+    list-style:none;
 }
 
 .inventario li{
-    margin-bottom:10px;
+    padding:10px;
+    border-bottom:1px solid #eee;
 }
 
 .news-card{
-    background:#e6ebef;
+    background:#eef3f7;
     padding:12px;
-    border-radius:6px;
+    border-radius:8px;
     margin-bottom:10px;
 }
+
+/* ======================
+   BOTÓN SALIR
+====================== */
 
 .btnSalir{
     margin-top:25px;
@@ -160,8 +246,70 @@ header input{
     border:none;
     border-radius:8px;
     cursor:pointer;
+    font-size:15px;
+    transition:.3s;
 }
 
 .btnSalir:hover{
     background:#c62828;
+}
+
+/* ======================
+   RESPONSIVE TABLET
+====================== */
+
+@media(max-width:1200px){
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+/* ======================
+   RESPONSIVE MÓVIL
+====================== */
+
+@media(max-width:768px){
+
+    .dashboard{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        min-width:100%;
+    }
+
+    .contenido{
+        padding:15px;
+    }
+
+    header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    header h1{
+        font-size:32px;
+    }
+
+    header input{
+        width:100%;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .bottom{
+        grid-template-columns:1fr;
+    }
+
+    .perfil img{
+        width:120px;
+        height:120px;
+    }
+
 }
