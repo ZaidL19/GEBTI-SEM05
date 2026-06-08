@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Login Sistema</title>
+<link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <h2>Acceso al Sistema</h2>
+
+    <input type="text" id="user" placeholder="Usuario">
+    <input type="password" id="pass" placeholder="Contraseña">
+
+    <button onclick="login()">Ingresar</button>
+    <button onclick="register()">Registrarse</button>
+
+</div>
+
+<script>
+/* =========================
+   USUARIOS PREDEFINIDOS
+========================= */
+let users = [
+    { user: "admin", pass: "admin123", role: "admin" },
+    { user: "doctor", pass: "1234", role: "user" }
+];
+
+/* =========================
+   CARGAR USUARIOS GUARDADOS
+========================= */
+const savedUsers = JSON.parse(localStorage.getItem("users")) || [];
+users = users.concat(savedUsers);
+
+/* =========================
+   LOGIN
+========================= */
+function login(){
+    const user = document.getElementById("user").value;
+    const pass = document.getElementById("pass").value;
+
+    const foundUser = users.find(u => u.user === user && u.pass === pass);
+
+    if(foundUser){
+        localStorage.setItem("session", "active");
+        localStorage.setItem("role", foundUser.role);
+        localStorage.setItem("currentUser", foundUser.user);
+
+        window.location.href = "dashboard.html";
+    } else {
+        alert("Usuario o contraseña incorrectos");
+    }
+}
+
+/* =========================
+   REGISTRO
+========================= */
+function register(){
+    const user = document.getElementById("user").value;
+    const pass = document.getElementById("pass").value;
+
+    if(!user || !pass){
+        alert("Completa los campos");
+        return;
+    }
+
+    const exists = users.find(u => u.user === user);
+
+    if(exists){
+        alert("El usuario ya existe");
+        return;
+    }
+
+    const newUser = {
+        user,
+        pass,
+        role: "user" // los nuevos siempre son usuarios normales
+    };
+
+    users.push(newUser);
+
+    /* guardar SOLO los nuevos en localStorage */
+    localStorage.setItem("users", JSON.stringify(
+        users.filter(u =>
+            u.user !== "admin" && u.user !== "doctor"
+        )
+    ));
+
+    alert("Usuario registrado con éxito");
+}
+</script>
+
+</body>
+</html>
