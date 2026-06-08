@@ -8,15 +8,73 @@
 
 <body>
 
-<div class="login-container">
+<div class="login-wrapper">
 
-    <h2>Acceso al Sistema</h2>
+    <!-- PANEL IZQUIERDO -->
+    <div class="left-panel">
 
-    <input type="text" id="user" placeholder="Usuario">
-    <input type="password" id="pass" placeholder="Contraseña">
+        <div class="brand">
+            <img src="img/Index/logo.png" alt="Logo">
+            <div>
+                <h1>Sistema de Gestión</h1>
+                <h3>RED INTEGRADA DE SALUD PACÍFICO NORTE</h3>
+            </div>
+        </div>
 
-    <button onclick="login()">Ingresar</button>
-    <button onclick="register()">Registrarse</button>
+        <div class="medical-image">
+            <img src="img/login/doctor.png" alt="Personal Médico">
+        </div>
+
+        <p class="footer-text">
+            Gestión eficiente y segura de la información en salud
+        </p>
+
+    </div>
+
+    <!-- PANEL DERECHO -->
+    <div class="right-panel">
+
+        <div class="login-container">
+
+            <h2>Acceso al Sistema</h2>
+
+            <input type="text" id="user" placeholder="Usuario">
+
+            <input type="password" id="pass" placeholder="Contraseña">
+
+            <button onclick="login()">Ingresar</button>
+
+            <button class="btn-register" onclick="register()">
+                Registrarse
+            </button>
+
+            <div class="social-title">
+                Síguenos
+            </div>
+
+            <div class="socials">
+
+                <a href="#">
+                    <img src="img/facebook.png" alt="">
+                </a>
+
+                <a href="#">
+                    <img src="img/instagram.png" alt="">
+                </a>
+
+                <a href="#">
+                    <img src="img/twitter.png" alt="">
+                </a>
+
+                <a href="#">
+                    <img src="img/youtube.png" alt="">
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 
