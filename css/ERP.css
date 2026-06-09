@@ -1,0 +1,147 @@
+/* ========================= */
+/* MÓDULO ERP (Estilo adaptado de BPM) */
+/* ========================= */
+
+.erp-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto 80px;
+    text-align: center;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.erp-header {
+    margin-bottom: 40px;
+}
+
+.erp-header h2 {
+    color: #0086c7;
+    font-size: 32px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.erp-header p {
+    max-width: 900px;
+    margin: 0 auto;
+    color: #555;
+    line-height: 1.7;
+    font-size: 18px;
+}
+
+/* ========================= */
+/* TARJETAS MÓDULOS ERP */
+/* ========================= */
+
+.erp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.erp-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.1);
+    display: flex;
+    flex-direction: column;
+    transition: .3s;
+}
+
+.erp-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,.15);
+}
+
+.erp-card h3 {
+    color: #0086c7;
+    font-size: 22px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.erp-card h3 i {
+    font-size: 28px;
+}
+
+.erp-card p {
+    color: #555;
+    margin-bottom: 20px;
+    flex-grow: 1;
+    line-height: 1.6;
+}
+
+/* ========================= */
+/* ESTADÍSTICAS ERP */
+/* ========================= */
+
+.erp-stats {
+    background: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 14px;
+    border-left: 4px solid #0086c7;
+    text-align: left;
+}
+
+.erp-stats strong {
+    color: #0086c7;
+}
+
+/* ========================= */
+/* BOTONES ACCIÓN ERP */
+/* ========================= */
+
+.btn-action {
+    background: #0086c7;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    transition: .3s;
+    width: 100%;
+}
+
+.btn-action:hover {
+    background: #005f91;
+}
+
+/* ========================= */
+/* BOTÓN DESPLEGABLE PRINCIPAL */
+/* ========================= */
+
+.btn-erp-nav {
+    background: #0086c7;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    transition: .3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 10px rgba(0,134,199,.2);
+}
+
+.btn-erp-nav:hover {
+    background: #005f91;
+    transform: scale(1.05);
+}
+
+/* ANIMACIÓN */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
