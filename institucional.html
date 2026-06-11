@@ -5,66 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Institucional - Red Integrada de Salud Pacífico Norte</title>
     <link rel="stylesheet" href="css/institucional_styles.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body>
-
+<body class="internal-page"></body>
     <!-- HEADER -->
     <header class="topbar">
-
-        <div class="logo">
-            <img src="img/Index/logo.png" alt="Logo">
-            <h1>
-                RED INTEGRADA DE SALUD PACÍFICO NORTE
-            </h1>
+        <div class="logo-section">
+            <img src="img/Index/logo.png" alt="Logo 1">
+            <div class="titulo-header">
+                <h1>RED INTEGRADA DE SALUD PACÍFICO NORTE</h1>
+            </div>
         </div>
-
-        <div class="social-header">
-            <a href="https://www.facebook.com/rispnorte" target="_blank">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://www.instagram.com/" target="_blank">
-                <i class="fab fa-instagram"></i>
-            </a>
-        </div>
-
-        <nav>
-            <a href="index.html">
-                Inicio
-            </a>
-            <a href="institucional.html" class="active">
-                Institucional
-            </a>
-            <a href="noticias.html">
-                Noticias
-            </a>
-            <a href="convocatorias.html">
-                Convocatorias
-            </a>
-            <a href="bpm.html">
-                Procesos
-
-            </a>
-            <a href="contacto.html">
-                Contacto
-            </a>
-        </nav>
-
     </header>
-        
+
+    <nav class="main-nav">
+        <ul class="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+
+            <li class="dropdown">
+                <a href="institucional.html" class="dropdown-trigger">
+                    Nosotros
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#quienes-somos">¿Quiénes Somos?</a></li>
+                    <li><a href="#historia">Historia</a></li>
+                    <li><a href="#mision-vision">Visión y Misión</a></li>
+                    <li><a href="#directorio">Directorio Institucional</a></li>
+                </ul>
+            </li>
+
+            <li><a href="noticias.html">Noticias</a></li>
+            <li><a href="convocatorias.html">Convocatorias</a></li>
+            <li><a href="Normativa.html">Normativas</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+
+            <li>
+                <a href="login.html" class="btn-login">
+                    Acceder
+                </a>
+            </li>
+        </ul>
+    </nav>
+
     <main class="institutional-page container">
 
         <aside class="sidebar-nav">
             <h3>Nuestra Institución</h3>
             <ul>
-                <li><a href="#quienes-somos" class="sidebar-link active"><i class="fa-solid fa-users"></i> ¿Quiénes
-                        Somos?</a></li>
-                <li><a href="#historia" class="sidebar-link"><i class="fa-solid fa-book-medical"></i> Historia</a></li>
+                <li><a href="#quienes-somos" class="sidebar-link active"><i class="fa-solid fa-users"></i> 
+                        ¿Quiénes Somos?
+                    </a></li>
+                <li><a href="#historia" class="sidebar-link"><i class="fa-solid fa-book-medical"></i> 
+                        Historia
+                    </a></li>
                 <li><a href="#mision-vision" class="sidebar-link"><i class="fa-solid fa-bullseye"></i> Misión y
-                        Visión</a></li>
-                <li><a href="#directorio" class="sidebar-link"><i class="fa-solid fa-address-book"></i> Directorio
-                        Institucional</a></li>
+                        Visión
+                    </a></li>
+                <li><a href="#directorio" class="sidebar-link"><i class="fa-solid fa-address-book"></i> 
+                        Directorio Institucional
+                    </a></li>
+                <li>
+                    <a href="#directorio-telefonico" class="sidebar-link"><i class="fa-solid fa-phone"></i>
+                        Directorio Telefónico
+                    </a></li>
+                <li>
+                    <a href="#procesos-bpm" class="sidebar-link"><i class="fa-solid fa-diagram-project"></i>
+                        Procesos BPM
+                    </a></li>
             </ul>
         </aside>
 
@@ -92,10 +101,11 @@
 
             <section id="historia" class="inst-section">
                 <h2>Nuestra Historia</h2>
-               <p>Nace el 20 de enero de 2009 mediante la Resolución Ejecutiva Regional N.º 0652, tras la desactivación de las antiguas UTES de Áncash. La UTES La Caleta se transforma en la Dirección de Red de Salud Pacífico Norte, iniciando operaciones formalmente el 11 de noviembre de 2009 en condiciones muy precarias: dentro del Hospital La Caleta, con solo 9 trabajadores y sin equipos propios.</p>
-               <p>Tras cuatro años de gestión, el 15 de enero de 2014 se logra un hito clave con la Resolución N.º 00005, creándose la Unidad Ejecutora N.º 409, lo que le otorgó la autonomía presupuestal necesaria para gestionar sus propios recursos separados del hospital.</p>
-               <p>En octubre de 2024, bajo la reforma del sistema de salud y la Resolución Directoral N.º 1105, se formaliza su transformación actual a Red Integrada de Salud (RIS) Pacífico Norte, enfocada en un modelo más accesible, articulado y eficiente para la comunidad.</p>
-               <p>Hoy en día, bajo la dirección ejecutiva del Dr. Alex Corcuera Cruz, la institución cuenta con 15 años de trayectoria. Su red abarca una sede administrativa en la Av. Enrique Meiggs N.º 835 (Chimbote), 46 establecimientos de salud, 2 Centros de Salud Mental y un equipo de más de 1,020 colaboradores que atienden a una población de casi 290,000 personas entre las provincias del Santa y Pallasca.</p>
+               <p>Bajo la dirección del Dr. Alex Corcuera Cruz, Director Ejecutivo de la Red Integrada de Salud Pacífico Norte La Red de Salud Pacífico Norte tiene sus orígenes en el proceso de reorganización del sistema sanitario de la región Áncash. Mediante Resolución Ejecutiva Regional N.º 0652-2009-GRA/PRE, de fecha 20 de enero de 2009, se dispuso la desactivación de las Unidades Territoriales de Salud (UTES) de la Dirección Regional de Salud de Áncash, dando paso a las nuevas Direcciones de Redes de Salud. En este marco, la UTES La Caleta fue transformada en la Dirección de Red de Salud Pacífico Norte. Posteriormente, mediante la Resolución Directoral N.º 0803-2009-REGIÓN ÁNCASH-DIRES/DIPER, del 7 de octubre del mismo año, se delegaron a esta nueva dirección las facultades necesarias para ejecutar acciones de gestión en los sistemas administrativos de personal, logística y economía. No obstante, sus inicios fueron precarios: funcionaba en los ambientes del Hospital La Caleta, con apenas nueve trabajadores, sin mobiliario, equipos de cómputo ni autonomía presupuestal, dependiendo aún del citado hospital.</p>
+               <p>Gracias al compromiso de su primer equipo humano, el 11 de noviembre de 2009 se iniciaron formalmente las operaciones de la Red. Con vocación y esfuerzo, los trabajadores trajeron desde sus propios hogares mobiliario, equipos y otros enseres, sentando las bases de lo que hoy representa esta institución. Así nació una nueva etapa en la gestión de la salud pública en la zona norte de la región.</p>
+               <p>Tras cuatro años de gestión continua y coordinaciones con el Ministerio de Economía y Finanzas, el Hospital La Caleta y la DIRESA Áncash, el 15 de enero de 2014 se alcanzó un hito trascendental: mediante la Resolución Ejecutiva Regional N.º 00005-2014-REGIÓN ÁNCASH-PRE, se creó la Unidad Ejecutora N.º 409 – Red de Salud Pacífico Norte, otorgándole autonomía presupuestal. Posteriormente, la Resolución Directoral N.º 00270-2014-R-A-DIRES/OGDRH estableció oficialmente sus funciones como Unidad Ejecutora.</p>
+               <p>En octubre de 2024, en el marco de la reforma del sistema de salud, la Dirección Regional de Salud de Áncash formaliza su transformación en Red Integrada de Salud Pacífico Norte (RIS Pacífico Norte) mediante Resolución Directoral N.º 1105-2024. Este nuevo modelo busca mejorar la accesibilidad, calidad y continuidad de los servicios, integrando las acciones de salud individual y colectiva, así como el abordaje de los determinantes sociales de la salud.</p>
+               <p>Desde entonces, la RIS Pacífico Norte ha venido desarrollando funciones administrativas, gerenciales y sanitarias con plena autonomía. Actualmente, cuenta con 15 años desde su creación y 10 años como Unidad Ejecutora. Su estructura organizativa está compuesta por 07 zonas sanitarias, 46 establecimientos de salud, 02 Centros de Salud Mental Comunitarios, un hogar protegido y una sede administrativa ubicada en la Av. Enrique Meiggs N.º 835, en la ciudad de Chimbote. Brinda atención a una población estimada de 288,489 personas en las provincias del Santa y Pallasca, abarcando 15 distritos distribuidos en la costa, sierra y zona del Marañón. El equipo humano está conformado por más de 1,020 colaboradores, entre profesionales, técnicos y personal administrativo. Este tránsito hacia el modelo de Redes Integradas de Salud busca asegurar un enfoque más eficiente, articulado y centrado en las personas, reafirmando el compromiso institucional con la mejora de la salud pública en la región, bajo el liderazgo del Dr. Alex Corcuera Cruz, actual Director Ejecutivo de la RIS Pacífico Norte.</p>
             </section>
 
             <section id="mision-vision" class="inst-section">
@@ -141,12 +151,765 @@
                             <td>Noriega Castañeda Javier Agustin</td>
                             <td>administracion@rspnorte.gob.pe</td>
                         </tr>
+                        <tr>
+                            <td><strong>Jefe de Planeamiento y Presupuesto</strong></td>
+                            <td>Calvo Neira Oscar Xavier</td>
+                            <td>u_planeamiento@rspnorte.gob.pe</td>
+                        </tr>
+                        <tr>
+                            <td><strong> Jefe de Recursos Humanos</strong></td>
+                            <td>Tarrillo Huaman Ronald Cruz</td>
+                            <td>u_recursoshumanos@rspnorte.gob.pe</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Jefe de Logística</strong></td>
+                            <td>Varas Valerio Samuel</td>
+                            <td>u_logistica@rspnorte.gob.pe</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Asesor Legal</strong></td>
+                            <td>Mendoza Tello Jose Antonio</td>
+                            <td>asesoria_legal@rspnorte.gob.pe</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Secretraria Legal</strong></td>
+                            <td>Caro Tello Jose Antonio</td>
+                            <td>secretariatecnica@rspnorte.gob.pe</td>
+                        </tr>
                     </tbody>
                 </table>
             </section>
 
+            <section id="directorio-telefonico" class="inst-section">
+                <h2>Directorio Telefónico de los Establecimientos de Salud</h2>
+                <p>
+                    Relación de establecimientos de salud pertenecientes a la Red Integrada de Salud Pacífico Norte.
+                </p>
+                <h3 class="microred-title">Microred Progreso</h3>
+                <div class="table-responsive">
+                <table class="directory-table">
+                <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>RENAES</th>
+                    <th>IPRESS</th>
+                    <th>Categoría</th>
+                    <th>Correo</th>
+                    <th>Dirección</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr>
+                    <td>1</td>
+                    <td>1658</td>
+                    <td>P. S. 14 Incas</td>
+                    <td>I-1</td>
+                    <td><a href="mailto:p.s.14incas@rspnorte.gob.pe">p.s.14incas@rspnorte.gob.pe</a></td>
+                    <td>Otros 14 Incas Cascajal Izquierdo S/N</td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>1656</td>
+                    <td>P. S. Cambio Puente</td>
+                    <td>I-2</td>
+                    <td><a href="mailto:p.s.cambio_puente@rspnorte.gob.pe">p.s.cambio_puente@rspnorte.gob.pe</a></td>
+                    <td>Calle Central S/N</td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td>1657</td>
+                    <td>P. S. Chachapoyas</td>
+                    <td>I-1</td>
+                    <td><a href="mailto:p.s.chachapoyas@rspnorte.gob.pe">p.s.chachapoyas@rspnorte.gob.pe</a></td>
+                    <td>Av. Santa Rosa Mz D Lte 2</td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td>1675</td>
+                    <td>C. S. La Esperanza</td>
+                    <td>I-3</td>
+                    <td><a href="c.s.la_esperanza@rspnorte.gob.pe">c.s.coishco@rspnorte.gob.pe</a></td>
+                    <td> Jirón Ramon Castilla H 01 A Una Cuadra Del Cementerio Divino Maestro</td>
+                </tr>
+
+                <tr>
+                    <td>5</td>
+                    <td>31454</td>
+                    <td>C. S. La Esperanza/td>
+                    <td>I-3</td>
+                    <td><a href="c.s.la_esperanza@rspnorte.gob.pe">c.s.la_esperanza@rspnorte.gob.pe</a></td>
+                    <td>Jirón Ramon Castilla H 01 A Una Cuadra Del Cementerio Divino Maestro</td>
+                </tr>
+
+                <tr>
+                    <td>6</td>
+                    <td>1660</td>
+                    <td>C. S. La Unión</td>
+                    <td>I-3</td>
+                    <td><a href="mailto:c.s.la_union@rspnorte.gob.pe">c.s.la_union@rspnorte.gob.pe</a></td>
+                    <td>Jr. Manco Capac S/N Mza 1 Lte. 10A</td>
+                </tr>
+
+                <tr>
+                <td>7</td>
+                <td>1667</td>
+                <td>P. S. Lupahuari</td>
+                <td>I-1</td>
+                <td><a href="mailto:p.s.lupahuari@rspnorte.gob.pe">p.s.lupahuari@rspnorte.gob.pe</a></td>
+                <td>Otros Lupahuary S/N</td>
+                </tr>
+
+                <tr>
+                    <td>8</td>
+                    <td>1659</td>
+                    <td>C. S. Progreso</td>
+                    <td>I-4</td>
+                    <td><a href="mailto:c.s.progreso@rspnorte.gob.pe">c.s.progreso@rspnorte.gob.pe</a></td>
+                    <td>Av. Jose Galves Nº 1110</td>
+                </tr>
+
+                <tr>
+                    <td>9</td>
+                    <td>1661</td>
+                    <td>P. S. San Pedro</td>
+                    <td>I-2</td>
+                    <td><a href="mailto:p.s.san_pedro@rspnorte.gob.pe">p.s.san_pedro@rspnorte.gob.pe</a></td>
+                    <td>Jr.Los Angeles Mz-L1 -Lt -1</td>
+                </tr>
+
+                <tr>
+                    <td>10</td>
+                    <td>1668</td>
+                    <td>P. S. Santa Ana Sierra</td>
+                    <td>I-1</td>
+                    <td><a href="mailto:p.s.santa_ana_sierra@rspnorte.gob.pe">p.s.santa_ana_sierra@rspnorte.gob.pe</a></td>
+                    <td>Jr. Santa Anita Mza. D Lte 1</td>
+                </tr>
+
+                <tr>
+                    <td>11</td>
+                    <td>1672</td>
+                    <td>P. S. Santa Rosa De Paquirca</td>
+                    <td>I-1</td>
+                    <td><a href="mailto:p.s.santa_rosa_paquirca@rspnorte.gob.pe">p.s.santa_rosa_paquirca@rspnorte.gob.pe</a></td>
+                    <td>Otros Santa Rosa De Paquirca S/N</td>
+                </tr>
+
+                <tr>
+                    <td>12</td>
+                    <td>1662</td>
+                    <td>P. S. Victor Raul</td>
+                    <td>I-2</td>
+                    <td><a href="mailto:p.s.victor_raul@rspnorte.gob.pe">p.s.victor_raul@rspnorte.gob.pe</a></td>
+                    <td>Jr. Ferrocarril S/N Mza H Lte. 01 B La Balanza</td>
+                </tr>
+
+                </tbody>
+                </table>
+                </div>
+
+                <h3 class="microred-title">Microred Miraflores Alto</h3>
+
+                <div class="table-responsive">
+                <table class="directory-table">
+
+                <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>RENAES</th>
+                    <th>IPRESS</th>
+                    <th>Categoría</th>
+                    <th>Correo</th>
+                    <th>Dirección</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>13</td>
+                    <td>1655</td>
+                    <td>C. S. Florida</td>
+                    <td>I-3</td>
+                    <td><a href="mailto:c.s.florida@rspnorte.gob.pe">c.s.florida@rspnorte.gob.pe</a></td>
+                    <td>Jr. Moquegua N° 200</td>
+                </tr>
+
+                <tr>
+                    <td>14</td>
+                    <td>1654</td>
+                    <td>C. S. Miraflores Alto</td>
+                    <td>I-3</td>
+                    <td><a href="mailto:c.s.miraflores_alto@rspnorte.gob.pe">c.s.miraflores_alto@rspnorte.gob.pe</a></td>
+                    <td>Otros Pp.Jj. Miraflores Alto Mz. 23 - 1</td>
+                </tr>
+
+                <tr>
+                    <td>15</td>
+                    <td>1653</td>
+                    <td>C. S. San Juan</td>
+                    <td>I-3</td>
+                    <td><a href="mailto:c.s.san_juan@rspnorte.gob.pe">c.s.san_juan@rspnorte.gob.pe</a></td>
+                    <td>Otros Jose Carlos Mariategui S/N</td>
+                </tr>
+
+                </tbody>
+                </table>
+                </div>
+
+                <h3 class="microred-title">Microred Magdalena Nueva</h3>
+                <div class="table-responsive">
+                <table class="directory-table">
+                
+                <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>RENAES</th>
+                    <th>IPRESS</th>
+                    <th>Categoría</th>
+                    <th>Correo</th>
+                    <th>Dirección</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                    <td>16</td>
+                    <td>1669</td>
+                    <td>C. S. Magdalena Nueva</td>
+                    <td>I-3</td>
+                    <td><a href="mailto:c.s.magdalena_nueva@rspnorte.gob.pe">c.s.magdalena_nueva@rspnorte.gob.pe</a></td>
+                    <td>Avenida Atahualpa Cuadra 3 S/N</td>
+                    </tr>
+
+                    <tr>
+                        <td>17</td>
+                        <td>36307</td>
+                        <td>P. S. Santa Ana Costa</td>
+                        <td>I-2</td>
+                        <td><a href="mailto:p.s.santa_ana_costa@rspnorte.gob.pe">p.s.santa_ana_costa@rspnorte.gob.pe</a></td>
+                        <td>AA.HH. San Miguel Mz L Lote 2</td>
+                    </tr>
+
+                    <tr>
+                        <td>18</td>
+                        <td>1663</td>
+                        <td>P. S. Tupac Amaru</td>
+                        <td>I-2</td>
+                        <td><a href="mailto:p.s.tupac_amaru@rspnorte.gob.pe">p.s.tupac_amaru@rspnorte.gob.pe</a></td>
+                        <td>Otros Urb. El Carmen Mz 13- Lote 8-A</td>
+                    </tr>
+                </tbody>
+                </table>
+                </div>
+
+                <h3 class="microred-title">Microred Santa</h3>
+                <div class="table-responsive">
+                <table class="directory-table">
+                
+                <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>RENAES</th>
+                    <th>IPRESS</th>
+                    <th>Categoría</th>
+                    <th>Correo</th>
+                    <th>Dirección</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                 <tr>
+                    <td>19</td>
+                    <td>1681</td>
+                    <td>P. S. Alto Peru</td>
+                    <td>I-1</td>
+                    <td><a href="mailto:p.s.alto_peru@rspnorte.gob.pe">p.s.alto_peru@rspnorte.gob.pe</a></td>
+                    <td>Av. Camino Real Mza. Ll Lte. 02</td>
+                </tr>
+
+                <tr>
+                    <td>20</td>
+                    <td>1665</td>
+                    <td>P. S. Cascajal</td>
+                    <td>I-2</td>
+                    <td><a href="mailto:p.s.cascajal@rspnorte.gob.pe">p.s.cascajal@rspnorte.gob.pe</a></td>
+                    <td>Av.Cascajal S/N</td>
+                </tr>
+
+                <tr>
+                    <td>21</td>
+                    <td>1674</td>
+                    <td>P. S. Huanroc</td>
+                    <td>I-1</td>
+                    <td><a href="mailto:p.s.huanroc@rspnorte.gob.pe">p.s.huanroc@rspnorte.gob.pe</a></td>
+                    <td>Otros Tucupara - Bellavista - Huarac</td>
+                </tr>
+
+                <tr>
+                    <td>22</td>
+                    <td>1673</td>
+                    <td>P. S. Macate</td>
+                    <td>I-2</td>
+                    <td><a href="mailto:p.s.macate@rspnorte.gob.pe">p.s.macate@rspnorte.gob.pe</a></td>
+                    <td>Jr. Alfonso Ugarte S/N</td>
+                </tr>
+
+                <tr>
+                    <td>23</td>
+                    <td>1677</td>
+                    <td>P. S. Puerto Santa</td>
+                    <td>I-1</td>
+                    <td><a href="mailto:p.s.puerto_santa@rspnorte.gob.pe">p.s.puerto_santa@rspnorte.gob.pe</a></td>
+                    <td>Otros Puerto Santa Mza E Lte. 04</td>
+                </tr>
+
+                <tr>
+                    <td>24</td>
+                    <td>1678</td>
+                    <td>P. S. Rinconada</td>
+                    <td>I-1</td>
+                    <td><a href="mailto:p.s.rinconada@rspnorte.gob.pe">p.s.rinconada@rspnorte.gob.pe</a></td>
+                    <td>Av.Victor Raul Haya De La Torre S/N</td>
+                </tr>
+
+                <tr>
+                    <td>25</td>
+                    <td>1676</td>
+                    <td>C. S. Santa</td>
+                    <td>I-3</td>
+                    <td><a href="mailto:c.s.santa@rspnorte.gob.pe">c.s.santa@rspnorte.gob.pe</a></td>
+                    <td>Jr. Rio Santa Nº 510 Mz. A Lt 02</td>
+                </tr>
+
+                <tr>
+                    <td>26</td>
+                    <td>1679</td>
+                    <td>P. S. Tambo Real</td>
+                    <td>I-1</td>
+                    <td><a href="mailto:p.s.tambo_real@rspnorte.gob.pe">p.s.tambo_real@rspnorte.gob.pe</a></td>
+                    <td>Av. America Mza. M Lte 04</td>
+                </tr>
+
+                <tr>
+                    <td>27</td>
+                    <td>1680</td>
+                    <td>P. S. Vinzos</td>
+                    <td>I-1</td>
+                    <td><a href="mailto:p.s.vinzos@rspnorte.gob.pe">p.s.vinzos@rspnorte.gob.pe</a></td>
+                    <td>Otros Vinzos Mz. S Lte 02</td>
+                </tr>   
+                </tbody>
+                </table>
+                </div>
+
+                <h3 class="microred-title">Microred Cabana</h3>
+                <div class="table-responsive">
+                <table class="directory-table">
+
+                <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>RENAES</th>
+                    <th>IPRESS</th>
+                    <th>Categoría</th>
+                    <th>Correo</th>
+                    <th>Dirección</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>28</td>
+                    <td>1685</td>
+                    <td>P. S. Bolognesi</td>
+                    <td>I-1</td>
+                    <td><a href="mailto:p.s.bolognesi@rspnorte.gob.pe">p.s.bolognesi@rspnorte.gob.pe</a></td>
+                    <td>Av.Bolognesi S/N</td>
+                </tr>
+
+                <tr>
+                    <td>29</td>
+                    <td>1684</td>
+                    <td>C. S. Cabana</td>
+                    <td>I-3</td>
+                    <td><a href="mailto:c.s.cabana@rspnorte.gob.pe">c.s.cabana@rspnorte.gob.pe</a></td>
+                    <td>Jr. La Pampa S/N</td>
+                </tr>
+
+                <tr>
+                    <td>30</td>
+                    <td>1686</td>
+                    <td>P. S. Ferrer</td>
+                    <td>I-1</td>
+                    <td><a href="mailto:p.s.ferrer@rspnorte.gob.pe">p.s.ferrer@rspnorte.gob.pe</a></td>
+                    <td>Otros Teresa De Calculta Mz C Lote 19 Distrito</td>
+                </tr>
+
+                <tr>
+                    <td>31</td>
+                    <td>1701</td>
+                    <td>P. S. Hualalay</td>
+                    <td>I-1</td>
+                    <td><a href="mailto:p.s.hualalay@rspnorte.gob.pe">p.s.hualalay@rspnorte.gob.pe</a></td>
+                    <td>Otros Hualalay S/N Número</td>
+                </tr>
+
+                <tr>
+                    <td>32</td>
+                    <td>1687</td>
+                    <td>P. S. Huandoval</td>
+                    <td>I-2</td>
+                    <td><a href="mailto:p.s.huandoval@rspnorte.gob.pe">p.s.huandoval@rspnorte.gob.pe</a></td>
+                    <td>Jr/Calle Grande S/N</td>
+                </tr>
+
+                <tr>
+                    <td>33</td>
+                    <td>1702</td>
+                    <td>P. S. Llapo</td>
+                    <td>I-1</td>
+                    <td><a href="mailto:p.s.llapo@rspnorte.gob.pe">p.s.llapo@rspnorte.gob.pe</a></td>
+                    <td>Otros Llapo Mza F1 Lte 17</td>
+                </tr>
+
+                <tr>
+                    <td>34</td>
+                    <td>1699</td>
+                    <td>P. S. Santa Rosa</td>
+                    <td>I-2</td>
+                    <td><a href="mailto:p.s.santa_rosa@rspnorte.gob.pe">p.s.santa_rosa@rspnorte.gob.pe</a></td>
+                    <td>Av. Santa Rosa S/N</td>
+                </tr>
+
+                <tr>
+                    <td>35</td>
+                    <td>1700</td>
+                    <td>P. S. Tauca</td>
+                    <td>I-2</td>
+                    <td><a href="mailto:p.s.tauca@rspnorte.gob.pe">p.s.tauca@rspnorte.gob.pe</a></td>
+                    <td>Pasaje Psje Santo Domingo Y Jr. La Mar S/N</td>
+                </tr>                    
+                </tbody>
+                </table>
+                </div>
+
+                <h3 class="microred-title">Microred Pallasca</h3>
+                <div class="table-responsive">
+                <table class="directory-table">
+                
+                <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>RENAES</th>
+                    <th>IPRESS</th>
+                    <th>Categoría</th>
+                    <th>Correo</th>
+                    <th>Dirección</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>36</td>
+                    <td>1691</td>
+                    <td>P. S. Chalan</td>
+                    <td>I-2</td>
+                    <td><a href="mailto:p.s.chalan@rspnorte.gob.pe">p.s.chalan@rspnorte.gob.pe</a></td>
+                    <td>Otros Centro Poblado De Chalan S/N Número</td>
+                </tr>
+
+                <tr>
+                    <td>37</td>
+                    <td>1688</td>
+                    <td>C. S. Conchucos</td>
+                    <td>I-3</td>
+                    <td><a href="mailto:c.s.conchucos@rspnorte.gob.pe">c.s.conchucos@rspnorte.gob.pe</a></td>
+                    <td>Av. 10 De Noviembre Nº 1025</td>
+                </tr>
+
+                <tr>
+                    <td>38</td>
+                    <td>1693</td>
+                    <td>P. S. Huacaschuque</td>
+                    <td>I-1</td>
+                    <td><a href="mailto:p.s.huacaschuque@rspnorte.gob.pe">p.s.huacaschuque@rspnorte.gob.pe</a></td>
+                    <td>Otros Huacaschuque - Mza. A1 Lote 3</td>
+                </tr>
+
+                <tr>
+                    <td>39</td>
+                    <td>1690</td>
+                    <td>P. S. Huataullo</td>
+                    <td>I-2</td>
+                    <td><a href="mailto:p.s.huataullo@rspnorte.gob.pe">p.s.huataullo@rspnorte.gob.pe</a></td>
+                    <td>Otros Centro Poblado De Huataullo S/N</td>
+                </tr>
+
+                <tr>
+                    <td>40</td>
+                    <td>1692</td>
+                    <td>P. S. Lacabamba</td>
+                    <td>I-1</td>
+                    <td><a href="mailto:p.s.lacabamba@rspnorte.gob.pe">p.s.lacabamba@rspnorte.gob.pe</a></td>
+                    <td>Otros Lacabamba Mza. B. Lote. 2</td>
+                </tr>
+
+                <tr>
+                    <td>41</td>
+                    <td>1689</td>
+                    <td>P. S. Mayas</td>
+                    <td>I-1</td>
+                    <td><a href="mailto:p.s.mayas@rspnorte.gob.pe">p.s.mayas@rspnorte.gob.pe</a></td>
+                    <td>Otros Centro Poblado De Mayas S/N</td>
+                </tr>
+
+                <tr>
+                    <td>42</td>
+                    <td>1697</td>
+                    <td>P. S. Mongon</td>
+                    <td>I-1</td>
+                    <td><a href="mailto:p.s.mongon@rspnorte.gob.pe">p.s.mongon@rspnorte.gob.pe</a></td>
+                    <td>Otros Centro Poblado Mongon</td>
+                </tr>
+
+                <tr>
+                    <td>43</td>
+                    <td>1695</td>
+                    <td>C. S. Pallasca</td>
+                    <td>I-3</td>
+                    <td><a href="mailto:c.s.pallasca@rspnorte.gob.pe">c.s.pallasca@rspnorte.gob.pe</a></td>
+                    <td>Jr. Soledad Mza C Lte 03</td>
+                </tr>
+
+                <tr>
+                    <td>44</td>
+                    <td>1696</td>
+                    <td>C. S. Pampas</td>
+                    <td>I-3</td>
+                    <td><a href="mailto:c.s.pampas@rspnorte.gob.pe">c.s.pampas@rspnorte.gob.pe</a></td>
+                    <td>Av. Consuzo S/N</td>
+                </tr>
+
+                <tr>
+                    <td>45</td>
+                    <td>6634</td>
+                    <td>P. S. Puyalli</td>
+                    <td>I-1</td>
+                    <td><a href="mailto:p.s.puyalli@rspnorte.gob.pe">p.s.puyalli@rspnorte.gob.pe</a></td>
+                    <td>Otros Puyalli S/N Barrio La Pampa - Centro Poblado De Puyalli S/N</td>
+                </tr>
+
+                <tr>
+                    <td>46</td>
+                    <td>1698</td>
+                    <td>P. S. Uchupampa</td>
+                    <td>I-1</td>
+                    <td><a href="mailto:p.s.uchupampa@rspnorte.gob.pe">p.s.uchupampa@rspnorte.gob.pe</a></td>
+                    <td>Otros Centro Poblado Uchupampa S/N</td>
+                </tr>                    
+                </tbody>
+                </table>
+                </div>
+            </section>
+
+        <section id="procesos-bpm" class="inst-section">
+
+            <h2>Procesos Institucionales BPM</h2>
+
+            <p>
+                Consulta los diagramas de procesos institucionales de la
+                Red Integrada de Salud Pacífico Norte, así como los
+                documentos normativos que respaldan cada procedimiento.
+            </p>
+
+            <div class="proceso-card">
+
+                <h3>Proceso de Reclamos</h3>
+
+                <p class="proceso-descripcion">
+                    Flujo del proceso de reclamos presentados por los usuarios,
+                    desde su recepción hasta la emisión de la respuesta
+                    correspondiente, garantizando el cumplimiento de los
+                    procedimientos institucionales establecidos.
+                </p>
+
+                <div class="diagrama-preview">
+                    <img src="img/ProceosBPM/ProcesoReclamos.png"
+                        alt="Proceso de Reclamos">
+                </div>
+
+                <div class="documentos-grid">
+
+                    <div class="documento-card">
+
+                        <i class="fas fa-project-diagram"></i>
+
+                        <h4>Diagrama de Procesos</h4>
+
+                        <p>
+                            Visualizar o descargar el diagrama completo.
+                        </p>
+
+                        <div class="botones">
+                            <a href="pdf/ProceosBPM/ProcesoReclamos.pdf"
+                            target="_blank">
+                                Ver PDF
+                            </a>
+
+                            <a href="pdf/ProceosBPM/ProcesoReclamos.pdf"
+                            download>
+                                Descargar
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <div class="documento-card">
+
+                        <i class="fas fa-file-signature"></i>
+
+                        <h4>Documento de Aprobación</h4>
+
+                        <p>
+                            Documento normativo que sustenta y regula el
+                            procedimiento institucional para la atención
+                            de reclamos y denuncias.
+                        </p>
+
+                        <div class="botones">
+
+                            <a href="pdf/ProceosBPM/DECRETO_SUPREMO.PDF"
+                            target="_blank">
+                                Ver Documento
+                            </a>
+
+                            <a href="pdf/ProceosBPM/DECRETO_SUPREMO.PDF"
+                            download>
+                                Descargar
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
         </div>
     </main>
+    
+    <footer class="footer">
+        <div class="footer-grid">
+            <!-- COLUMNA 1 -->
+            <div class="footer-col">
+                <h3>RED INTEGRADA DE SALUD PACÍFICO NORTE</h3>
+                <div class="footer-logos">
+                    <img src="img/Index/logo.png" alt="Logo 1">
+                    <img src="img/Index/DireccionReginalSalud.png" alt="Logo 2">
+                    <img src="img/Index/LogoAncash.png" alt="Logo 3">
+                </div>
+            </div>
+
+            <!-- COLUMNA 2 -->
+            <div class="footer-col">
+                <a href="institucional.html"><h4>Nosotros</h4></a>
+                <a href="institucional.html#quienes-somos">
+                    ¿Quiénes Somos?
+                </a>
+                <a href="institucional.html#historia">
+                    Historia
+                </a>
+                <a href="institucional.html#mision-vision">
+                    Misión y Visión
+                </a>
+                <a href="institucional.html#directorio">
+                    Directorio Institucional
+                </a>
+                <a href="institucional.html#directorio-telefonico">
+                    Directorio Telefónico
+                </a>
+                <a href="convocatorias.html">
+                    <h4 class="footer-subtitulo">
+                    Convocatorias
+                    </h4>
+                </a>
+            </div>
+
+            <!-- COLUMNA 3 -->
+            <div class="footer-col">
+                <a href="Normativa.html">
+                    <h4>Normativas</h4>
+                </a>
+                <h4 class="footer-subtitulo">
+                    <a href="noticias.html">
+                        Noticias
+                    </a>
+                </h4>
+                <a href="noticias.html?noticia=1">
+                    Últimas noticias
+                </a>
+                <a href="transparencia.html">
+                    <h4>Transparencia</h4>
+                </a>
+                <a href="https://www.transparencia.gob.pe/enlaces/pte_transparencia_enlaces.aspx?id_entidad=17409#.YPq80Y5KjIU">
+                    Portal Transparencia
+                </a>
+            </div>
+
+            <!-- COLUMNA 4 -->
+            <div class="footer-col">
+                <a href="contacto.html">
+                    <h4>Contacto</h4>
+                </a>
+                <p>Ubicación: Av. Enrique Meiggs 835, Chimbote</p>
+                <p>Teléfono: 43-698402</p>
+                <h4>Horario de atencion</h4>
+                <p>Lunes a Viernes</p>
+                <p>7:45 am - 3:30 pm</p>
+
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/rispnorte" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/rispacificonorte/" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 Red Integrada de Salud Pacífico Norte
+        </div>
+    </footer>
+
+<script>
+console.log("JS cargado");
+</script>
+<script>
+let lastScroll = 0;
+const nav = document.querySelector(".main-nav");
+
+window.addEventListener("scroll", () => {
+
+    const currentScroll = window.scrollY;
+
+    if(currentScroll > lastScroll && currentScroll > 150){
+        nav.style.transform = "translateY(-100%)";
+    }else{
+        nav.style.transform = "translateY(0)";
+    }
+
+    lastScroll = currentScroll;
+});
+</script>
 </body>
 
 </html>

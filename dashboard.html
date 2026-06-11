@@ -2,46 +2,30 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="css/dashboard.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - Red de Salud Pacífico Norte</title>
+
+<link rel="stylesheet" href="css/dashboard.css">
 </head>
 
 <body>
 
-    <div class="container">
+<div class="dashboard">
 
-        <h1>Panel del Sistema</h1>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
 
-        <!-- RESUMEN -->
-        <div class="resumen">
+    <div class="perfil">
 
-            <div class="box">
-                <h3>CRM</h3>
-                <p>Clientes registrados: <span id="clientesCount">0</span></p>
-            </div>
+        <img src="img/index/logo.png" alt="Red de Salud Pacífico Norte">
 
-            <div class="box">
-                <h3>ERP</h3>
-                <p>Productos registrados: <span id="productosCount">0</span></p>
-            </div>
+        <h2>
+            Red de Salud<br>
+            Pacífico Norte
+        </h2>
 
-        </div>
-
-        <!-- ACCESOS -->
-        <div class="menu">
-
-            <div class="card" onclick="goCRM()">
-                <h2>📊 CRM</h2>
-                <p>Gestión de clientes</p>
-            </div>
-
-            <div class="card" onclick="goERP()">
-                <h2>📦 ERP</h2>
-                <p>Inventario y productos</p>
-            </div>
-
-        </div>
+        <p>Administrador</p>
 
         <button onclick="logout()">Cerrar sesión</button>
 
@@ -52,33 +36,235 @@
             window.location.href = "login.html";
         }
 
-        /* navegación */
-        function goCRM() {
-            // Si estás en un servidor local (sea puerto 3000 o cualquier otro), te manda al puerto de Flask
-            if (window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost") {
-                window.location.href = "http://127.0.0.1:5000/crm";
-            } else {
-                // Si lo abren por archivo plano (file:///)
-                window.location.href = "templates/crm.html";
-            }
-        }
+    <ul>
 
-        function goERP() {
-            window.location.href = "erp.html";
-        }
+        <li class="active">
+            🏠 Dashboard
+        </li>
 
-        function logout() {
-            localStorage.removeItem("session");
-            window.location.href = "index.html";
-        }
+        <li onclick="goCRM()">
+            👥 CRM Pacientes
+        </li>
 
-        /* RESUMEN */
-        const clientes = JSON.parse(localStorage.getItem("clientes")) || [];
-        const productos = JSON.parse(localStorage.getItem("productos")) || [];
+        <li onclick="goERP()">
+            📦 ERP Inventario
+        </li>
 
-        document.getElementById("clientesCount").textContent = clientes.length;
-        document.getElementById("productosCount").textContent = productos.length;
-    </script>
+        <li>
+            💊 Farmacia
+        </li>
+
+        <li>
+            📅 Citas Médicas
+        </li>
+
+        <li>
+            📊 Reportes
+        </li>
+
+        <li>
+            ⚙ Configuración
+        </li>
+
+    </ul>
+
+        <div class="sidebar-footer">
+
+            <button class="btnSalir" onclick="logout()">
+                🚪 Cerrar Sesión
+            </button>
+
+        </div>
+
+    </aside>
+
+    <!-- CONTENIDO -->
+    <main class="contenido">
+
+        <header>
+            <h1>Dashboard General</h1>
+
+            <input
+            type="text"
+            placeholder="Buscar paciente o producto">
+        </header>
+
+        <!-- TARJETAS -->
+        <section class="cards">
+
+            <div class="card-info">
+                <h3>Pacientes</h3>
+                <span id="clientesCount">0</span>
+            </div>
+
+            <div class="card-info">
+                <h3>Productos</h3>
+                <span id="productosCount">0</span>
+            </div>
+
+            <div class="card-info">
+                <h3>Citas Hoy</h3>
+                <span>25</span>
+            </div>
+
+            <div class="card-info">
+                <h3>Personal</h3>
+                <span>48</span>
+            </div>
+
+        </section>
+
+        <!-- GRAFICO -->
+        <section class="grafico">
+
+            <h2>Atenciones Semanales</h2>
+
+            <div class="bars">
+                <div style="height:60%"></div>
+                <div style="height:85%"></div>
+                <div style="height:40%"></div>
+                <div style="height:90%"></div>
+                <div style="height:75%"></div>
+                <div style="height:100%"></div>
+            </div>
+
+        </section>
+
+        <!-- PANEL INFERIOR -->
+        <section class="bottom">
+
+            <div class="inventario">
+                <h2>Inventario Crítico</h2>
+
+                <ul>
+                    <li>Paracetamol - 10 unidades</li>
+                    <li>Guantes - 15 cajas</li>
+                    <li>Jeringas - 8 paquetes</li>
+                </ul>
+            </div>
+
+            <div class="noticias">
+                <h2>Noticias Internas</h2>
+
+                <p>Nuevo lote de medicamentos recibido.</p>
+
+                <p>Campaña médica programada para el sábado.</p>
+            </div>
+
+        </section>
+    </main>
+
+</div>
+
+<script>
+
+// ====================
+// SEGURIDAD
+// ====================
+
+if(localStorage.getItem("session") !== "active"){
+    window.location.href = "login.html";
+}
+
+// ====================
+// NAVEGACIÓN
+// ====================
+
+function goCRM(){
+    window.location.href = "crm.html";
+}
+
+function goERP(){
+    window.location.href = "erp.html";
+}
+
+function logout(){
+
+    if(confirm("¿Desea cerrar sesión?")){
+
+        localStorage.removeItem("session");
+        window.location.href = "index.html";
+
+    }
+
+}
+
+// ====================
+// DATOS CRM
+// ====================
+
+const clientes =
+JSON.parse(localStorage.getItem("clientes")) || [];
+
+document.getElementById("clientesCount")
+.textContent = clientes.length;
+
+// ====================
+// DATOS ERP
+// ====================
+
+const productos =
+JSON.parse(localStorage.getItem("productos")) || [];
+
+document.getElementById("productosCount")
+.textContent = productos.length;
+
+// ====================
+// CITAS
+// ====================
+
+const citas =
+JSON.parse(localStorage.getItem("citas")) || [];
+
+document.getElementById("citasCount")
+.textContent = citas.length;
+
+// ====================
+// PERSONAL
+// ====================
+
+const personal =
+JSON.parse(localStorage.getItem("personal")) || [];
+
+document.getElementById("personalCount")
+.textContent = personal.length;
+
+// ====================
+// INVENTARIO CRÍTICO
+// ====================
+
+const listaInventario =
+document.getElementById("inventarioCritico");
+
+listaInventario.innerHTML = "";
+
+const inventarioCritico =
+productos.filter(producto =>
+Number(producto.stock) <= 10
+);
+
+if(inventarioCritico.length === 0){
+
+    listaInventario.innerHTML =
+    "<li>No existen productos críticos.</li>";
+
+}else{
+
+    inventarioCritico.forEach(producto => {
+
+        const li =
+        document.createElement("li");
+
+        li.innerHTML =
+        `${producto.nombre} - ${producto.stock} unidades`;
+
+        listaInventario.appendChild(li);
+
+    });
+
+}
+
+</script>
 
 </body>
 

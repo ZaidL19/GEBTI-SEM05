@@ -1,40 +1,232 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
 body{
-    font-family:Arial;
-    background:linear-gradient(135deg,#0077b6,#00a6ff);
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
+
+    background:linear-gradient(
+        135deg,
+        #005f8f,
+        #0077b6,
+        #00a6ff
+    );
+
+    padding:20px;
 }
 
-.login-container{
+/* CONTENEDOR GENERAL */
+.login-wrapper{
+    width:1100px;
+    height:650px;
+
     background:white;
-    padding:40px;
-    border-radius:15px;
-    width:300px;
+
+    border-radius:30px;
+    overflow:hidden;
+
+    display:flex;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.20);
+}
+
+/* PANEL IZQUIERDO */
+.left-panel{
+    flex:1;
+
+    background:linear-gradient(
+        135deg,
+        #0077b6,
+        #00a6ff
+    );
+
+    display:flex;
+    flex-direction:column;
+
+    padding:35px;
+    color:white;
+}
+
+/* LOGO */
+.brand{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.brand img{
+    width:65px;
+    height:85px;
+}
+
+.brand h1{
+    font-size:22px;
+    margin-bottom:5px;
+}
+
+.brand h3{
+    font-size:13px;
+    font-weight:normal;
+    opacity:.9;
+}
+
+/* IMAGEN */
+.medical-image{
+    flex:1;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.medical-image img{
+    max-width:90%;
+    max-height:620px;
+    transform: translateX(-15px);
+}
+
+/* TEXTO */
+.footer-text{
     text-align:center;
-    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    font-size:15px;
+    opacity:.9;
+}
+
+/* PANEL DERECHO */
+.right-panel{
+    flex:1;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:#f8fbff;
+}
+
+/* LOGIN */
+.login-container{
+    width:380px;
+    text-align:center;
+}
+
+.login-container h2{
+    color:#0077b6;
+    margin-bottom:35px;
+    font-size:32px;
 }
 
 input{
     width:100%;
-    padding:10px;
-    margin:10px 0;
-    border:1px solid #ccc;
-    border-radius:8px;
+    padding:15px;
+
+    margin-bottom:18px;
+
+    border:none;
+    border-bottom:2px solid #d7e2eb;
+
+    background:transparent;
+
+    font-size:15px;
+}
+
+input:focus{
+    outline:none;
+    border-bottom:2px solid #0077b6;
 }
 
 button{
     width:100%;
-    padding:10px;
+
+    padding:15px;
+
     margin-top:10px;
-    background:#0077b6;
-    color:white;
+
     border:none;
-    border-radius:8px;
+
+    border-radius:10px;
+
+    background:#0077b6;
+
+    color:white;
+
+    font-size:16px;
+
     cursor:pointer;
+
+    transition:.3s;
 }
 
 button:hover{
     background:#005f8f;
+}
+
+.btn-register{
+    background:white;
+    color:#0077b6;
+    border:2px solid #0077b6;
+}
+
+.btn-register:hover{
+    background:#0077b6;
+    color:white;
+}
+
+/* REDES */
+.social-title{
+    margin-top:35px;
+    margin-bottom:20px;
+    color:#666;
+}
+
+.socials{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+}
+
+.socials a{
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    border:1px solid #0077b6;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    transition:.3s;
+}
+
+.socials a:hover{
+    background:#0077b6;
+    transform:translateY(-4px);
+}
+
+.socials img{
+    width:22px;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+
+    .login-wrapper{
+        flex-direction:column;
+        height:auto;
+    }
+
+    .left-panel{
+        min-height:300px;
+    }
+
+    .medical-image img{
+        max-height:250px;
+    }
 }
