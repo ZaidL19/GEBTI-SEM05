@@ -6,7 +6,7 @@
     <title>ERP - Red de Salud Pacífico Norte</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        /* Ocultar las flechas feas del input numérico por defecto */
+        /* Ocultar las flechas del input numérico */
         input[type="number"]::-webkit-inner-spin-button, 
         input[type="number"]::-webkit-outer-spin-button { 
             -webkit-appearance: none; 
@@ -34,24 +34,44 @@
                 <div class="space-y-4">
                     <div class="p-4 border border-gray-200 rounded-lg bg-teal-50">
                         <h3 class="font-bold text-teal-800 text-base">Abastecimiento MINSA</h3>
-                        <p class="text-xs text-gray-600 mt-1"><strong>Proceso automático:</strong> Genera órdenes de compra para insumos con stock crítico en farmacias.</p>
+                        <p class="text-xs text-gray-600 mt-1">Genera órdenes de compra para insumos con stock crítico.</p>
                         <button onclick="alert('Órdenes generadas correctamente.')" class="w-full mt-3 bg-teal-600 text-white font-semibold py-2 px-4 rounded hover:bg-teal-700 transition text-sm">
-                            Generar Órdenes de Insumos
+                            Generar Órdenes
                         </button>
                     </div>
 
                     <div class="p-4 border border-gray-200 rounded-lg bg-indigo-50">
                         <h3 class="font-bold text-indigo-800 text-base">Ejecución Presupuestal</h3>
-                        <p class="text-xs text-gray-600 mt-1"><strong>Proceso automático:</strong> Libera los fondos aprobados para el pago de proveedores y planillas médicas.</p>
+                        <p class="text-xs text-gray-600 mt-1">Libera fondos aprobados para pago de proveedores.</p>
                         <button onclick="alert('Pagos liberados en lote.')" class="w-full mt-3 bg-indigo-600 text-white font-semibold py-2 px-4 rounded hover:bg-indigo-700 transition text-sm">
-                            Aprobar Pagos en Lote
+                            Aprobar Pagos
                         </button>
                     </div>
                 </div>
             </div>
 
             <div class="bg-white p-6 rounded-lg shadow-md lg:col-span-2">
-                <h2 class="text-xl font-bold text-gray-800 mb-4">📦 Estado de Inventario y Recursos en Microredes</h2>
+                
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-gray-800">📦 Estado de Inventario</h2>
+                    <button onclick="toggleFormulario()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow text-sm font-bold transition">
+                        + Añadir Nuevo Insumo
+                    </button>
+                </div>
+
+                <div id="form-nuevo-insumo" class="hidden bg-gray-50 p-4 rounded border border-gray-200 mb-4">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
+                        <input type="text" id="nuevo-nombre" placeholder="Nombre del Insumo (ej. Gasa)" class="p-2 border rounded text-sm w-full">
+                        <input type="text" id="nuevo-categoria" placeholder="Categoría (ej. Material)" class="p-2 border rounded text-sm w-full">
+                        <input type="text" id="nuevo-microred" placeholder="Microred (ej. Santa)" class="p-2 border rounded text-sm w-full">
+                        <input type="number" id="nuevo-cantidad" placeholder="Cantidad Inicial" class="p-2 border rounded text-sm w-full font-bold text-center">
+                    </div>
+                    <div class="flex justify-end gap-2">
+                        <button onclick="toggleFormulario()" class="bg-gray-400 hover:bg-gray-500 text-white px-3 py-1 rounded text-sm font-bold">Cancelar</button>
+                        <button onclick="agregarNuevoInsumo()" class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-1 rounded text-sm font-bold shadow">Guardar en Inventario</button>
+                    </div>
+                </div>
+
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse text-sm">
                         <thead>
@@ -59,11 +79,11 @@
                                 <th class="p-3">Ítem / Insumo</th>
                                 <th class="p-3">Categoría</th>
                                 <th class="p-3">Microred Asignada</th>
-                                <th class="p-3">Estado (Stock Editable)</th>
+                                <th class="p-3">Estado (Stock)</th>
                                 <th class="p-3 text-center">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-100 text-gray-600">
+                        <tbody id="tabla-inventario" class="divide-y divide-gray-100 text-gray-600">
                             
                             <tr class="hover:bg-gray-50">
                                 <td class="p-3 font-medium text-gray-900">Paracetamol 500mg</td>
@@ -72,49 +92,13 @@
                                 <td class="p-3">
                                     <span id="badge-1" class="px-2 py-1 rounded text-xs bg-green-100 text-green-800 inline-flex items-center">
                                         <span id="label-1" class="w-14">Óptimo</span> (
-                                        <input type="number" id="stock-1" value="1500" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b focus:border-green-800" oninput="verificarEstado(1)"> )
+                                        <input type="number" id="stock-1" value="1500" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(1)"> )
                                     </span>
                                 </td>
                                 <td class="p-3">
                                     <div class="flex justify-center gap-2">
                                         <button onclick="actualizarStock(1, -50)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold" title="Quitar 50">-</button>
                                         <button onclick="actualizarStock(1, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-bold" title="Agregar 50">+</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="hover:bg-gray-50">
-                                <td class="p-3 font-medium text-gray-900">Vacuna Influenza</td>
-                                <td class="p-3">Biológicos</td>
-                                <td class="p-3">Microred Coishco</td>
-                                <td class="p-3">
-                                    <span id="badge-2" class="px-2 py-1 rounded text-xs bg-green-100 text-green-800 inline-flex items-center">
-                                        <span id="label-2" class="w-14">Óptimo</span> (
-                                        <input type="number" id="stock-2" value="585" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b focus:border-green-800" oninput="verificarEstado(2)"> )
-                                    </span>
-                                </td>
-                                <td class="p-3">
-                                    <div class="flex justify-center gap-2">
-                                        <button onclick="actualizarStock(2, -50)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold" title="Quitar 50">-</button>
-                                        <button onclick="actualizarStock(2, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-bold" title="Agregar 50">+</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="hover:bg-gray-50">
-                                <td class="p-3 font-medium text-gray-900">Jeringas 5ml</td>
-                                <td class="p-3">Material Médico</td>
-                                <td class="p-3">Microred Progreso</td>
-                                <td class="p-3">
-                                    <span id="badge-3" class="px-2 py-1 rounded text-xs bg-yellow-100 text-yellow-800 inline-flex items-center">
-                                        <span id="label-3" class="w-14">Regular</span> (
-                                        <input type="number" id="stock-3" value="350" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b focus:border-yellow-800" oninput="verificarEstado(3)"> )
-                                    </span>
-                                </td>
-                                <td class="p-3">
-                                    <div class="flex justify-center gap-2">
-                                        <button onclick="actualizarStock(3, -50)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold" title="Quitar 50">-</button>
-                                        <button onclick="actualizarStock(3, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-bold" title="Agregar 50">+</button>
                                     </div>
                                 </td>
                             </tr>
@@ -127,42 +111,105 @@
     </div>
 
     <script>
-        // Función para sumar o restar con los botones
+        // Contador global para asignar IDs únicos a las nuevas filas
+        let contadorFilas = 1;
+
+        // Mostrar/Ocultar el formulario
+        function toggleFormulario() {
+            const form = document.getElementById('form-nuevo-insumo');
+            form.classList.toggle('hidden');
+        }
+
+        // Función para inyectar un nuevo ítem en la tabla
+        function agregarNuevoInsumo() {
+            // Obtener los valores de los inputs
+            const nombre = document.getElementById('nuevo-nombre').value;
+            const categoria = document.getElementById('nuevo-categoria').value || 'Sin categoría';
+            const microred = document.getElementById('nuevo-microred').value || 'General';
+            const cantidad = parseInt(document.getElementById('nuevo-cantidad').value);
+
+            // Validar que no estén vacíos
+            if (!nombre || isNaN(cantidad)) {
+                alert("Por favor, ingresa al menos el Nombre del Insumo y una Cantidad Inicial válida.");
+                return;
+            }
+
+            // Incrementar el ID para la nueva fila
+            contadorFilas++;
+            const nuevoId = contadorFilas;
+
+            // Determinar colores iniciales de la etiqueta según la cantidad ingresada
+            let colorFondo, colorTexto, textoEtiqueta;
+            if (cantidad <= 100) {
+                colorFondo = "bg-red-100"; colorTexto = "text-red-800"; textoEtiqueta = "Crítico";
+            } else if (cantidad > 100 && cantidad <= 500) {
+                colorFondo = "bg-yellow-100"; colorTexto = "text-yellow-800"; textoEtiqueta = "Regular";
+            } else {
+                colorFondo = "bg-green-100"; colorTexto = "text-green-800"; textoEtiqueta = "Óptimo";
+            }
+
+            // Crear el código HTML de la nueva fila (<tr>)
+            const nuevaFila = document.createElement('tr');
+            nuevaFila.className = "hover:bg-gray-50";
+            nuevaFila.innerHTML = `
+                <td class="p-3 font-medium text-gray-900">${nombre}</td>
+                <td class="p-3">${categoria}</td>
+                <td class="p-3">${microred}</td>
+                <td class="p-3">
+                    <span id="badge-${nuevoId}" class="px-2 py-1 rounded text-xs inline-flex items-center ${colorFondo} ${colorTexto}">
+                        <span id="label-${nuevoId}" class="w-14">${textoEtiqueta}</span> (
+                        <input type="number" id="stock-${nuevoId}" value="${cantidad}" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(${nuevoId})"> )
+                    </span>
+                </td>
+                <td class="p-3">
+                    <div class="flex justify-center gap-2">
+                        <button onclick="actualizarStock(${nuevoId}, -50)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold">-</button>
+                        <button onclick="actualizarStock(${nuevoId}, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-bold">+</button>
+                    </div>
+                </td>
+            `;
+
+            // Inyectar la fila al final de la tabla
+            document.getElementById('tabla-inventario').appendChild(nuevaFila);
+
+            // Limpiar el formulario y ocultarlo
+            document.getElementById('nuevo-nombre').value = '';
+            document.getElementById('nuevo-categoria').value = '';
+            document.getElementById('nuevo-microred').value = '';
+            document.getElementById('nuevo-cantidad').value = '';
+            toggleFormulario();
+        }
+
+        // Función para los botones de + y -
         function actualizarStock(id, cantidadCambio) {
             let inputStock = document.getElementById('stock-' + id);
-            
             let stockActual = parseInt(inputStock.value);
-            if (isNaN(stockActual)) stockActual = 0; // Por si el campo está vacío
+            if (isNaN(stockActual)) stockActual = 0;
             
             let nuevoStock = stockActual + cantidadCambio;
-            if (nuevoStock < 0) nuevoStock = 0; // Evitar negativos
+            if (nuevoStock < 0) nuevoStock = 0; 
             
             inputStock.value = nuevoStock;
-            
-            // Llamar a la función que revisa los colores
             verificarEstado(id);
         }
 
-        // Función que evalúa el número (ya sea manual o por botón) y cambia colores
+        // Función que revisa si baja a crítico (manual o botones)
         function verificarEstado(id) {
             let inputStock = document.getElementById('stock-' + id);
             let spanBadge = document.getElementById('badge-' + id);
             let spanLabel = document.getElementById('label-' + id);
             
             let stock = parseInt(inputStock.value);
-            if (isNaN(stock) || stock < 0) {
-                stock = 0; // Si borran todo o ponen negativos
-            }
+            if (isNaN(stock) || stock < 0) stock = 0; 
 
-            // Lógica de colores según cantidades
             if (stock <= 100) {
-                spanBadge.className = "px-2 py-1 rounded text-xs bg-red-100 text-red-800 inline-flex items-center";
+                spanBadge.className = "px-2 py-1 rounded text-xs inline-flex items-center bg-red-100 text-red-800";
                 spanLabel.innerText = "Crítico";
             } else if (stock > 100 && stock <= 500) {
-                spanBadge.className = "px-2 py-1 rounded text-xs bg-yellow-100 text-yellow-800 inline-flex items-center";
+                spanBadge.className = "px-2 py-1 rounded text-xs inline-flex items-center bg-yellow-100 text-yellow-800";
                 spanLabel.innerText = "Regular";
             } else {
-                spanBadge.className = "px-2 py-1 rounded text-xs bg-green-100 text-green-800 inline-flex items-center";
+                spanBadge.className = "px-2 py-1 rounded text-xs inline-flex items-center bg-green-100 text-green-800";
                 spanLabel.innerText = "Óptimo";
             }
         }
