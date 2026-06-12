@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ERP - Red de Salud Pacífico Norte</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        /* Ocultar las flechas feas del input numérico por defecto */
+        input[type="number"]::-webkit-inner-spin-button, 
+        input[type="number"]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
 </head>
 <body class="bg-gray-100 font-sans min-h-screen">
 
@@ -48,7 +59,7 @@
                                 <th class="p-3">Ítem / Insumo</th>
                                 <th class="p-3">Categoría</th>
                                 <th class="p-3">Microred Asignada</th>
-                                <th class="p-3">Estado (Stock)</th>
+                                <th class="p-3">Estado (Stock Editable)</th>
                                 <th class="p-3 text-center">Acciones</th>
                             </tr>
                         </thead>
@@ -59,14 +70,15 @@
                                 <td class="p-3">Medicamento</td>
                                 <td class="p-3">Microred Santa</td>
                                 <td class="p-3">
-                                    <span id="badge-1" class="px-2 py-1 rounded text-xs bg-green-100 text-green-800">
-                                        Óptimo (<span id="stock-1">1500</span>)
+                                    <span id="badge-1" class="px-2 py-1 rounded text-xs bg-green-100 text-green-800 inline-flex items-center">
+                                        <span id="label-1" class="w-14">Óptimo</span> (
+                                        <input type="number" id="stock-1" value="1500" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b focus:border-green-800" oninput="verificarEstado(1)"> )
                                     </span>
                                 </td>
                                 <td class="p-3">
                                     <div class="flex justify-center gap-2">
-                                        <button onclick="actualizarStock(1, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold" title="Quitar 50">-</button>
-                                        <button onclick="actualizarStock(1, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold" title="Agregar 50">+</button>
+                                        <button onclick="actualizarStock(1, -50)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold" title="Quitar 50">-</button>
+                                        <button onclick="actualizarStock(1, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-bold" title="Agregar 50">+</button>
                                     </div>
                                 </td>
                             </tr>
@@ -76,14 +88,15 @@
                                 <td class="p-3">Biológicos</td>
                                 <td class="p-3">Microred Coishco</td>
                                 <td class="p-3">
-                                    <span id="badge-2" class="px-2 py-1 rounded text-xs bg-red-100 text-red-800">
-                                        Crítico (<span id="stock-2">45</span>)
+                                    <span id="badge-2" class="px-2 py-1 rounded text-xs bg-green-100 text-green-800 inline-flex items-center">
+                                        <span id="label-2" class="w-14">Óptimo</span> (
+                                        <input type="number" id="stock-2" value="585" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b focus:border-green-800" oninput="verificarEstado(2)"> )
                                     </span>
                                 </td>
                                 <td class="p-3">
                                     <div class="flex justify-center gap-2">
-                                        <button onclick="actualizarStock(2, -10)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold" title="Quitar 10">-</button>
-                                        <button onclick="actualizarStock(2, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold" title="Agregar 50">+</button>
+                                        <button onclick="actualizarStock(2, -50)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold" title="Quitar 50">-</button>
+                                        <button onclick="actualizarStock(2, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-bold" title="Agregar 50">+</button>
                                     </div>
                                 </td>
                             </tr>
@@ -93,14 +106,15 @@
                                 <td class="p-3">Material Médico</td>
                                 <td class="p-3">Microred Progreso</td>
                                 <td class="p-3">
-                                    <span id="badge-3" class="px-2 py-1 rounded text-xs bg-yellow-100 text-yellow-800">
-                                        Regular (<span id="stock-3">300</span>)
+                                    <span id="badge-3" class="px-2 py-1 rounded text-xs bg-yellow-100 text-yellow-800 inline-flex items-center">
+                                        <span id="label-3" class="w-14">Regular</span> (
+                                        <input type="number" id="stock-3" value="350" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b focus:border-yellow-800" oninput="verificarEstado(3)"> )
                                     </span>
                                 </td>
                                 <td class="p-3">
                                     <div class="flex justify-center gap-2">
-                                        <button onclick="actualizarStock(3, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold" title="Quitar 50">-</button>
-                                        <button onclick="actualizarStock(3, 100)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold" title="Agregar 100">+</button>
+                                        <button onclick="actualizarStock(3, -50)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold" title="Quitar 50">-</button>
+                                        <button onclick="actualizarStock(3, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-bold" title="Agregar 50">+</button>
                                     </div>
                                 </td>
                             </tr>
@@ -113,31 +127,43 @@
     </div>
 
     <script>
+        // Función para sumar o restar con los botones
         function actualizarStock(id, cantidadCambio) {
-            // Obtenemos los elementos del stock y el diseño (badge)
-            let spanStock = document.getElementById('stock-' + id);
-            let spanBadge = document.getElementById('badge-' + id);
+            let inputStock = document.getElementById('stock-' + id);
             
-            // Calculamos el nuevo stock
-            let stockActual = parseInt(spanStock.innerText);
+            let stockActual = parseInt(inputStock.value);
+            if (isNaN(stockActual)) stockActual = 0; // Por si el campo está vacío
+            
             let nuevoStock = stockActual + cantidadCambio;
+            if (nuevoStock < 0) nuevoStock = 0; // Evitar negativos
             
-            // Evitamos que el stock baje de 0
-            if (nuevoStock < 0) nuevoStock = 0;
+            inputStock.value = nuevoStock;
             
-            // Actualizamos el número en pantalla
-            spanStock.innerText = nuevoStock;
+            // Llamar a la función que revisa los colores
+            verificarEstado(id);
+        }
 
-            // Cambiamos el color de la etiqueta según la cantidad
-            if (nuevoStock <= 100) {
-                spanBadge.className = "px-2 py-1 rounded text-xs bg-red-100 text-red-800";
-                spanBadge.innerHTML = `Crítico (<span id="stock-${id}">${nuevoStock}</span>)`;
-            } else if (nuevoStock > 100 && nuevoStock <= 500) {
-                spanBadge.className = "px-2 py-1 rounded text-xs bg-yellow-100 text-yellow-800";
-                spanBadge.innerHTML = `Regular (<span id="stock-${id}">${nuevoStock}</span>)`;
+        // Función que evalúa el número (ya sea manual o por botón) y cambia colores
+        function verificarEstado(id) {
+            let inputStock = document.getElementById('stock-' + id);
+            let spanBadge = document.getElementById('badge-' + id);
+            let spanLabel = document.getElementById('label-' + id);
+            
+            let stock = parseInt(inputStock.value);
+            if (isNaN(stock) || stock < 0) {
+                stock = 0; // Si borran todo o ponen negativos
+            }
+
+            // Lógica de colores según cantidades
+            if (stock <= 100) {
+                spanBadge.className = "px-2 py-1 rounded text-xs bg-red-100 text-red-800 inline-flex items-center";
+                spanLabel.innerText = "Crítico";
+            } else if (stock > 100 && stock <= 500) {
+                spanBadge.className = "px-2 py-1 rounded text-xs bg-yellow-100 text-yellow-800 inline-flex items-center";
+                spanLabel.innerText = "Regular";
             } else {
-                spanBadge.className = "px-2 py-1 rounded text-xs bg-green-100 text-green-800";
-                spanBadge.innerHTML = `Óptimo (<span id="stock-${id}">${nuevoStock}</span>)`;
+                spanBadge.className = "px-2 py-1 rounded text-xs bg-green-100 text-green-800 inline-flex items-center";
+                spanLabel.innerText = "Óptimo";
             }
         }
     </script>
