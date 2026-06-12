@@ -14,11 +14,20 @@
         }
         input[type="number"] {
             -moz-appearance: textfield;
-            appearance: textfield; /* Corrección de compatibilidad estándar aplicada */
+            appearance: textfield;
         }
     </style>
 </head>
 <body class="bg-gray-100 font-sans min-h-screen relative">
+
+    <div id="notificacion-exito" class="hidden fixed top-10 right-10 z-[100] bg-emerald-500 text-white px-6 py-4 rounded-lg shadow-2xl flex items-center gap-3 transition-opacity duration-300">
+        <div class="bg-white text-emerald-500 rounded-full p-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+            </svg>
+        </div>
+        <span id="texto-notificacion" class="font-bold text-sm md:text-base">Operación realizada exitosamente</span>
+    </div>
 
     <div class="container mx-auto p-6">
         <header class="bg-blue-800 text-white p-6 rounded-lg shadow-md mb-8">
@@ -169,6 +178,19 @@
     <script>
         let contadorFilas = 2; 
 
+        /* FUNCIÓN PARA MOSTRAR LA NOTIFICACIÓN DE ÉXITO */
+        function mostrarExito(mensaje) {
+            const notificacion = document.getElementById('notificacion-exito');
+            document.getElementById('texto-notificacion').innerText = mensaje;
+            
+            notificacion.classList.remove('hidden');
+            
+            // Ocultar automáticamente después de 3.5 segundos
+            setTimeout(() => {
+                notificacion.classList.add('hidden');
+            }, 3500);
+        }
+
         /* LÓGICA BÁSICA DE LA TABLA */
         function toggleFormulario() {
             document.getElementById('form-nuevo-insumo').classList.toggle('hidden');
@@ -220,6 +242,9 @@
             document.getElementById('nuevo-nombre').value = '';
             document.getElementById('nuevo-cantidad').value = '';
             toggleFormulario();
+            
+            // Llamar al nuevo mensaje de éxito
+            mostrarExito('Insumo agregado al inventario correctamente.');
         }
 
         function actualizarStock(id, cantidadCambio) {
@@ -313,8 +338,9 @@
                 }
             });
 
-            alert('✅ Orden de abastecimiento generada. El nuevo lote se ha integrado automáticamente al inventario.');
             cerrarModalOrdenes();
+            // Reemplazo del alert por el cuadro de éxito
+            mostrarExito('Orden de abastecimiento generada y stock actualizado.');
         }
 
         function abrirModalPagos() {
@@ -326,8 +352,9 @@
         }
 
         function procesarPagos() {
-            alert('✅ Pagos aprobados y fondos liberados exitosamente a las cuentas correspondientes.');
             cerrarModalPagos();
+            // Reemplazo del alert por el cuadro de éxito
+            mostrarExito('Pagos aprobados y fondos liberados exitosamente.');
         }
 
     </script>
