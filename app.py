@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify, request
 from datetime import datetime
+import sys
 
 app = Flask(__name__)
 
@@ -71,5 +72,38 @@ def disparar_campana():
         "detalles": config["titulo"]
     })
 
-if __name__ == '__main__':
-    app.run(debug=True)
+import socket  # 🔥 Librería nativa para revisar los puertos de Windows
+
+
+def encontrar_puerto_libre():
+    # Puertos que queremos intentar en orden de preferencia
+    puertos_a_probar = [5000, 3000, 5500, 8000]
+
+    for p in puertos_a_probar:
+        # Creamos un conector temporal para ver si el puerto está libre
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        try:
+            # Si se puede amarrar al puerto, significa que está libre
+            sock.bind(("127.0.0.1", p))
+            sock.close()
+            return p  # Retorna el primer puerto libre que encuentre
+        except OSError:
+            # Si da error, es porque el puerto está ocupado (ej: por Live Server)
+            continue
+
+    # Si todos están ocupados, dejamos que el sistema operativo asigne uno al azar
+    return 0
+
+
+if __name__ == "__main__":
+    puerto_libre = encontrar_puerto_libre()
+
+    print("\n" + "=" * 50)
+    print(f"🚀 CRM DETECTÓ PUERTO LIBRE: {puerto_libre}")
+    print(f"🔗 Abre en tu navegador: http://127.0.0.1:{puerto_libre}/crm")
+    print("=" * 50 + "\n")
+
+    # Corre Flask exactamente en el puerto que encontró libre
+    app.run(host="127.0.0.1", port=puerto_libre, debug=True, use_reloader=False)
+
+    #app.run(debug=True)
