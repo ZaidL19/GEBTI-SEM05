@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ERP - Red de Salud Pacífico Norte</title>
+    <title>ERP Inventario - Red de Salud Pacífico Norte</title>
+    <link rel="stylesheet" href="css/dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         input[type="number"]::-webkit-inner-spin-button, 
@@ -17,639 +19,700 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 font-sans min-h-screen relative">
 
-    <div id="notificacion-exito" class="hidden fixed top-10 right-10 z-[100] bg-emerald-500 text-white px-6 py-4 rounded-lg shadow-2xl flex items-center gap-3 transition-opacity duration-300">
-        <div class="bg-white text-emerald-500 rounded-full p-1">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-            </svg>
-        </div>
-        <span id="texto-notificacion" class="font-bold text-sm md:text-base">Operación realizada exitosamente</span>
+<body>
+
+<div id="notificacion-exito" class="hidden fixed top-10 right-10 z-[100] bg-emerald-500 text-white px-6 py-4 rounded-lg shadow-2xl flex items-center gap-3 transition-opacity duration-300">
+    <div class="bg-white text-emerald-500 rounded-full p-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+        </svg>
     </div>
+    <span id="texto-notificacion" class="font-bold text-sm md:text-base">Operación realizada exitosamente</span>
+</div>
 
-    <div class="container mx-auto p-6 max-w-[1600px]">
-        <header class="bg-blue-800 text-white p-6 rounded-lg shadow-md mb-8">
-            <h1 class="text-3xl font-bold">Módulo ERP: Gestión y Control de Recursos</h1>
-            <p class="text-blue-200 mt-1">Dirección del Sistema Integrado de Salud - Red Pacífico Norte</p>
-        </header>
+<div class="dashboard">
 
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            
-            <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-emerald-500 h-fit lg:col-span-1">
-                <h2 class="text-xl font-bold text-gray-800 mb-4">⚙️ Automatización</h2>
+    <aside class="sidebar">
+        <div class="perfil">
+            <img src="img/index/logo.png" alt="Red de Salud Pacífico Norte" onerror="this.src='https://via.placeholder.com/80?text=Logo'">
+            <h2>
+                Red de Salud<br>
+                Pacífico Norte
+            </h2>
+            <p>Administrador</p>
+        </div>
+
+        <ul>
+            <li onclick="goDashboard()" style="cursor: pointer;">
+                🏠 Dashboard
+            </li>
+            <li onclick="goCRM()" style="cursor: pointer;">
+                👥 CRM Pacientes
+            </li>
+            <li class="active">
+                📦 ERP Inventario
+            </li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <button class="btnSalir" onclick="logout()" style="cursor: pointer;">
+                🚪 Cerrar Sesión
+            </button>
+        </div>
+    </aside>
+
+    <main class="contenido" style="background-color: #f3f4f6; overflow-y: auto;">
+        
+        <div class="container mx-auto p-6 max-w-[1600px]">
+            <header class="bg-blue-800 text-white p-6 rounded-lg shadow-md mb-8 flex justify-between items-center w-full">
+                <div>
+                    <h1 class="text-3xl font-bold">Módulo ERP: Gestión de Recursos</h1>
+                    <p class="text-blue-200 mt-1">Dirección del Sistema Integrado de Salud - Red Pacífico Norte</p>
+                </div>
+            </header>
+
+            <div class="grid grid-cols-1 xl:grid-cols-4 gap-6">
                 
-                <div class="space-y-4">
-                    <div class="p-4 border border-gray-200 rounded-lg bg-teal-50">
-                        <h3 class="font-bold text-teal-800 text-base">Abastecimiento MINSA</h3>
-                        <p class="text-xs text-gray-600 mt-1">Genera órdenes de compra para stock crítico.</p>
-                        <button onclick="abrirModalOrdenes()" class="w-full mt-3 bg-teal-600 text-white font-semibold py-2 px-4 rounded hover:bg-teal-700 transition text-sm shadow">
-                            Generar Órdenes
-                        </button>
-                    </div>
-
-                    <div class="p-4 border border-gray-200 rounded-lg bg-indigo-50">
-                        <h3 class="font-bold text-indigo-800 text-base">Ejecución Presupuestal</h3>
-                        <p class="text-xs text-gray-600 mt-1">Libera fondos aprobados (Devengados).</p>
-                        <button onclick="abrirModalPagos()" class="w-full mt-3 bg-indigo-600 text-white font-semibold py-2 px-4 rounded hover:bg-indigo-700 transition text-sm shadow">
-                            Aprobar Pagos
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white p-6 rounded-lg shadow-md lg:col-span-3">
-                
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-xl font-bold text-gray-800">📦 Inventario y Expedientes SIAF</h2>
-                    <button onclick="toggleFormulario()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow text-sm font-bold transition">
-                        + Añadir Nuevo
-                    </button>
-                </div>
-
-                <div id="form-nuevo-insumo" class="hidden bg-gray-50 p-4 rounded border border-gray-200 mb-4">
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
-                        <input type="text" id="nuevo-nombre" placeholder="Nombre (ej. Gasa)" class="p-2 border rounded text-xs w-full">
-                        <input type="number" id="nuevo-cantidad" placeholder="Cantidad Inicial" class="p-2 border rounded text-xs w-full font-bold">
-                        <input type="number" id="nuevo-monto" placeholder="Monto (S/.)" class="p-2 border rounded text-xs w-full">
-                        <input type="text" id="nuevo-razon" placeholder="Razón Social (Proveedor)" class="p-2 border rounded text-xs w-full">
-                        <input type="text" id="nuevo-ruc" placeholder="RUC" class="p-2 border rounded text-xs w-full">
-                        <input type="text" id="nuevo-categoria" placeholder="Categoría" class="p-2 border rounded text-xs w-full">
-                        <input type="text" id="nuevo-microred" placeholder="Microred Asignada" class="p-2 border rounded text-xs w-full">
-                    </div>
-                    <div class="flex justify-end gap-2">
-                        <button onclick="toggleFormulario()" class="bg-gray-400 hover:bg-gray-500 text-white px-3 py-1 rounded text-sm font-bold">Cancelar</button>
-                        <button onclick="agregarNuevoInsumo()" class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-1 rounded text-sm font-bold shadow">Guardar</button>
-                    </div>
-                </div>
-
-                <div class="overflow-x-auto max-h-[600px] border rounded-lg">
-                    <table class="w-full text-left border-collapse text-xs whitespace-nowrap">
-                        <thead class="sticky top-0 bg-gray-800 text-white shadow z-10">
-                            <tr>
-                                <th class="p-3">Ítem / Descripción</th>
-                                <th class="p-3">Fecha Emisión</th>
-                                <th class="p-3">Estado SIAF</th>
-                                <th class="p-3">Monto (S/.)</th>
-                                <th class="p-3">RUC</th>
-                                <th class="p-3">Razón Social</th>
-                                <th class="p-3">Categoría / Microred</th>
-                                <th class="p-3 text-center">Estado (Stock)</th>
-                                <th class="p-3 text-center">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabla-inventario" class="divide-y divide-gray-200 text-gray-700">
-                            
-                            <tr class="hover:bg-blue-50">
-                                <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]" title="ADQUISICION DE TIAMINA">ADQUISICION DE TIAMINA</td>
-                                <td class="p-3">2025-06-03</td>
-                                <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
-                                <td class="p-3 font-mono font-bold text-emerald-600">8,699.99</td>
-                                <td class="p-3 font-mono">20554303812</td>
-                                <td class="p-3 truncate max-w-[150px]" title="INVERSIONES GENERALES MIJA SAC">INVERSIONES GENERALES MIJA...</td>
-                                <td class="p-3 text-[10px] leading-tight">Medicamento<br><span class="text-gray-500">Almacén Central</span></td>
-                                <td class="p-3 text-center">
-                                    <span id="badge-1" class="px-2 py-1 rounded bg-green-100 text-green-800 flex items-center justify-center gap-1">
-                                        <span id="label-1">Óptimo</span> (
-                                        <input type="number" id="stock-1" value="850" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(1)">)
-                                    </span>
-                                </td>
-                                <td class="p-3">
-                                    <div class="flex justify-center gap-1">
-                                        <button onclick="actualizarStock(1, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold">-</button>
-                                        <button onclick="actualizarStock(1, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold">+</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="hover:bg-blue-50">
-                                <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">ADQUISICION DE MATERIALES</td>
-                                <td class="p-3">2025-06-04</td>
-                                <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
-                                <td class="p-3 font-mono font-bold text-emerald-600">4,000.00</td>
-                                <td class="p-3 font-mono">10432081058</td>
-                                <td class="p-3 truncate max-w-[150px]" title="RIOS CHICCHIS RUBEN DARIO">RIOS CHICCHIS RUBEN...</td>
-                                <td class="p-3 text-[10px] leading-tight">Materiales<br><span class="text-gray-500">Almacén Central</span></td>
-                                <td class="p-3 text-center">
-                                    <span id="badge-2" class="px-2 py-1 rounded bg-yellow-100 text-yellow-800 flex items-center justify-center gap-1">
-                                        <span id="label-2">Regular</span> (
-                                        <input type="number" id="stock-2" value="320" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(2)">)
-                                    </span>
-                                </td>
-                                <td class="p-3">
-                                    <div class="flex justify-center gap-1">
-                                        <button onclick="actualizarStock(2, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold">-</button>
-                                        <button onclick="actualizarStock(2, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold">+</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="hover:bg-blue-50">
-                                <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">ADQUISICION EQUIPOS DE SONIDO</td>
-                                <td class="p-3">2025-06-04</td>
-                                <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
-                                <td class="p-3 font-mono font-bold text-emerald-600">4,800.00</td>
-                                <td class="p-3 font-mono">20531936257</td>
-                                <td class="p-3 truncate max-w-[150px]" title="INVERSIONES TRIVISION S.A.C.">INVERSIONES TRIVISION...</td>
-                                <td class="p-3 text-[10px] leading-tight">Equipos<br><span class="text-gray-500">Sede Adm.</span></td>
-                                <td class="p-3 text-center">
-                                    <span id="badge-3" class="px-2 py-1 rounded bg-red-100 text-red-800 flex items-center justify-center gap-1">
-                                        <span id="label-3">Crítico</span> (
-                                        <input type="number" id="stock-3" value="5" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(3)">)
-                                    </span>
-                                </td>
-                                <td class="p-3">
-                                    <div class="flex justify-center gap-1">
-                                        <button onclick="actualizarStock(3, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold">-</button>
-                                        <button onclick="actualizarStock(3, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold">+</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="hover:bg-blue-50">
-                                <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">ADQUISICION DE SELLOS</td>
-                                <td class="p-3">2025-06-05</td>
-                                <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
-                                <td class="p-3 font-mono font-bold text-emerald-600">70.00</td>
-                                <td class="p-3 font-mono">10328608061</td>
-                                <td class="p-3 truncate max-w-[150px]" title="LOYOLA COBILLAN MARCIANO CARLOS">LOYOLA COBILLAN MARCIANO...</td>
-                                <td class="p-3 text-[10px] leading-tight">Oficina<br><span class="text-gray-500">Sede Adm.</span></td>
-                                <td class="p-3 text-center">
-                                    <span id="badge-4" class="px-2 py-1 rounded bg-red-100 text-red-800 flex items-center justify-center gap-1">
-                                        <span id="label-4">Crítico</span> (
-                                        <input type="number" id="stock-4" value="15" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(4)">)
-                                    </span>
-                                </td>
-                                <td class="p-3">
-                                    <div class="flex justify-center gap-1">
-                                        <button onclick="actualizarStock(4, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold">-</button>
-                                        <button onclick="actualizarStock(4, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold">+</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="hover:bg-blue-50">
-                                <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">ADQUISICION DE EQUIPOS MEDICOS</td>
-                                <td class="p-3">2025-06-05</td>
-                                <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
-                                <td class="p-3 font-mono font-bold text-emerald-600">9,660.00</td>
-                                <td class="p-3 font-mono">20611031573</td>
-                                <td class="p-3 truncate max-w-[150px]" title="CM MEDICAL PERU E.I.R.L.">CM MEDICAL PERU E.I.R.L.</td>
-                                <td class="p-3 text-[10px] leading-tight">Equipos Méd.<br><span class="text-gray-500">Microred Santa</span></td>
-                                <td class="p-3 text-center">
-                                    <span id="badge-5" class="px-2 py-1 rounded bg-red-100 text-red-800 flex items-center justify-center gap-1">
-                                        <span id="label-5">Crítico</span> (
-                                        <input type="number" id="stock-5" value="40" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(5)">)
-                                    </span>
-                                </td>
-                                <td class="p-3">
-                                    <div class="flex justify-center gap-1">
-                                        <button onclick="actualizarStock(5, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold">-</button>
-                                        <button onclick="actualizarStock(5, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold">+</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="hover:bg-blue-50">
-                                <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">ADQUISICION DE MATERIAL MEDICO</td>
-                                <td class="p-3">2025-06-05</td>
-                                <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
-                                <td class="p-3 font-mono font-bold text-emerald-600">2,827.74</td>
-                                <td class="p-3 font-mono">20608648641</td>
-                                <td class="p-3 truncate max-w-[150px]">FBH WORLD S.A.C</td>
-                                <td class="p-3 text-[10px] leading-tight">Material Méd.<br><span class="text-gray-500">Microred Coishco</span></td>
-                                <td class="p-3 text-center">
-                                    <span id="badge-6" class="px-2 py-1 rounded bg-green-100 text-green-800 flex items-center justify-center gap-1">
-                                        <span id="label-6">Óptimo</span> (
-                                        <input type="number" id="stock-6" value="1200" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(6)">)
-                                    </span>
-                                </td>
-                                <td class="p-3">
-                                    <div class="flex justify-center gap-1">
-                                        <button onclick="actualizarStock(6, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold">-</button>
-                                        <button onclick="actualizarStock(6, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold">+</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="hover:bg-blue-50">
-                                <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">MATERIAL E INSUMOS MEDICOS</td>
-                                <td class="p-3">2025-06-05</td>
-                                <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
-                                <td class="p-3 font-mono font-bold text-emerald-600">5,339.46</td>
-                                <td class="p-3 font-mono">20606618787</td>
-                                <td class="p-3 truncate max-w-[150px]" title="HOUSEMEDIC INTERNATIONAL E.I.R.L.">HOUSEMEDIC INTL...</td>
-                                <td class="p-3 text-[10px] leading-tight">Material Méd.<br><span class="text-gray-500">Microred Progreso</span></td>
-                                <td class="p-3 text-center">
-                                    <span id="badge-7" class="px-2 py-1 rounded bg-yellow-100 text-yellow-800 flex items-center justify-center gap-1">
-                                        <span id="label-7">Regular</span> (
-                                        <input type="number" id="stock-7" value="450" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(7)">)
-                                    </span>
-                                </td>
-                                <td class="p-3">
-                                    <div class="flex justify-center gap-1">
-                                        <button onclick="actualizarStock(7, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold">-</button>
-                                        <button onclick="actualizarStock(7, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold">+</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="hover:bg-blue-50">
-                                <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">INSUMOS DE LABORATORIO</td>
-                                <td class="p-3">2025-06-05</td>
-                                <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
-                                <td class="p-3 font-mono font-bold text-emerald-600">6,000.00</td>
-                                <td class="p-3 font-mono">20606618787</td>
-                                <td class="p-3 truncate max-w-[150px]" title="HOUSEMEDIC INTERNATIONAL E.I.R.L.">HOUSEMEDIC INTL...</td>
-                                <td class="p-3 text-[10px] leading-tight">Laboratorio<br><span class="text-gray-500">Almacén Central</span></td>
-                                <td class="p-3 text-center">
-                                    <span id="badge-8" class="px-2 py-1 rounded bg-red-100 text-red-800 flex items-center justify-center gap-1">
-                                        <span id="label-8">Crítico</span> (
-                                        <input type="number" id="stock-8" value="80" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(8)">)
-                                    </span>
-                                </td>
-                                <td class="p-3">
-                                    <div class="flex justify-center gap-1">
-                                        <button onclick="actualizarStock(8, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold">-</button>
-                                        <button onclick="actualizarStock(8, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold">+</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="hover:bg-blue-50">
-                                <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">EQUIPOS DE AIRE ACONDICIONADO</td>
-                                <td class="p-3">2025-06-05</td>
-                                <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
-                                <td class="p-3 font-mono font-bold text-emerald-600">36,502.50</td>
-                                <td class="p-3 font-mono">20611576456</td>
-                                <td class="p-3 truncate max-w-[150px]" title="INVERSIONES DE ADALUNA E.I.R.L">INVERSIONES ADALUNA...</td>
-                                <td class="p-3 text-[10px] leading-tight">Infraestructura<br><span class="text-gray-500">Red Norte</span></td>
-                                <td class="p-3 text-center">
-                                    <span id="badge-9" class="px-2 py-1 rounded bg-red-100 text-red-800 flex items-center justify-center gap-1">
-                                        <span id="label-9">Crítico</span> (
-                                        <input type="number" id="stock-9" value="8" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(9)">)
-                                    </span>
-                                </td>
-                                <td class="p-3">
-                                    <div class="flex justify-center gap-1">
-                                        <button onclick="actualizarStock(9, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold">-</button>
-                                        <button onclick="actualizarStock(9, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold">+</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="hover:bg-blue-50">
-                                <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">UTILES DE ESCRITORIO</td>
-                                <td class="p-3">2025-06-06</td>
-                                <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
-                                <td class="p-3 font-mono font-bold text-emerald-600">3,600.47</td>
-                                <td class="p-3 font-mono">20610010700</td>
-                                <td class="p-3 truncate max-w-[150px]" title="COMERCIALIZACION Y MULTISERVICIOS MAJO S.A.C.">MULTISERVICIOS MAJO...</td>
-                                <td class="p-3 text-[10px] leading-tight">Oficina<br><span class="text-gray-500">Sede Adm.</span></td>
-                                <td class="p-3 text-center">
-                                    <span id="badge-10" class="px-2 py-1 rounded bg-green-100 text-green-800 flex items-center justify-center gap-1">
-                                        <span id="label-10">Óptimo</span> (
-                                        <input type="number" id="stock-10" value="550" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(10)">)
-                                    </span>
-                                </td>
-                                <td class="p-3">
-                                    <div class="flex justify-center gap-1">
-                                        <button onclick="actualizarStock(10, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold">-</button>
-                                        <button onclick="actualizarStock(10, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold">+</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="hover:bg-blue-50">
-                                <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">ADQUISICION INSUMOS MEDICOS</td>
-                                <td class="p-3">2025-06-06</td>
-                                <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
-                                <td class="p-3 font-mono font-bold text-emerald-600">4,200.00</td>
-                                <td class="p-3 font-mono">20608648641</td>
-                                <td class="p-3 truncate max-w-[150px]">FBH WORLD S.A.C</td>
-                                <td class="p-3 text-[10px] leading-tight">Material Méd.<br><span class="text-gray-500">Microred Santa</span></td>
-                                <td class="p-3 text-center">
-                                    <span id="badge-11" class="px-2 py-1 rounded bg-yellow-100 text-yellow-800 flex items-center justify-center gap-1">
-                                        <span id="label-11">Regular</span> (
-                                        <input type="number" id="stock-11" value="210" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(11)">)
-                                    </span>
-                                </td>
-                                <td class="p-3">
-                                    <div class="flex justify-center gap-1">
-                                        <button onclick="actualizarStock(11, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold">-</button>
-                                        <button onclick="actualizarStock(11, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold">+</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="hover:bg-blue-50">
-                                <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">MICROCUBETA HEMOCUE HB 201</td>
-                                <td class="p-3">2025-06-06</td>
-                                <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
-                                <td class="p-3 font-mono font-bold text-emerald-600">58,133.10</td>
-                                <td class="p-3 font-mono">20602734740</td>
-                                <td class="p-3 truncate max-w-[150px]" title="GLASSGOW MEDICAL CORPORATION S.A.C.">GLASSGOW MEDICAL...</td>
-                                <td class="p-3 text-[10px] leading-tight">Laboratorio<br><span class="text-gray-500">Microred Coishco</span></td>
-                                <td class="p-3 text-center">
-                                    <span id="badge-12" class="px-2 py-1 rounded bg-green-100 text-green-800 flex items-center justify-center gap-1">
-                                        <span id="label-12">Óptimo</span> (
-                                        <input type="number" id="stock-12" value="1500" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(12)">)
-                                    </span>
-                                </td>
-                                <td class="p-3">
-                                    <div class="flex justify-center gap-1">
-                                        <button onclick="actualizarStock(12, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold">-</button>
-                                        <button onclick="actualizarStock(12, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold">+</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="hover:bg-blue-50">
-                                <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">MAT. MEDICO RED PACIFICO NORTE</td>
-                                <td class="p-3">2025-06-06</td>
-                                <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
-                                <td class="p-3 font-mono font-bold text-emerald-600">52,051.40</td>
-                                <td class="p-3 font-mono">20604321272</td>
-                                <td class="p-3 truncate max-w-[150px]" title="NEWTECH HOSPI SOCIEDAD ANONIMA CERRADA">NEWTECH HOSPI S.A.C.</td>
-                                <td class="p-3 text-[10px] leading-tight">Material Méd.<br><span class="text-gray-500">Red Norte</span></td>
-                                <td class="p-3 text-center">
-                                    <span id="badge-13" class="px-2 py-1 rounded bg-green-100 text-green-800 flex items-center justify-center gap-1">
-                                        <span id="label-13">Óptimo</span> (
-                                        <input type="number" id="stock-13" value="3000" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(13)">)
-                                    </span>
-                                </td>
-                                <td class="p-3">
-                                    <div class="flex justify-center gap-1">
-                                        <button onclick="actualizarStock(13, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold">-</button>
-                                        <button onclick="actualizarStock(13, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold">+</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="hover:bg-blue-50">
-                                <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">MATERIAL MEDICO VENTA MEDICA</td>
-                                <td class="p-3">2025-06-06</td>
-                                <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
-                                <td class="p-3 font-mono font-bold text-emerald-600">21,639.50</td>
-                                <td class="p-3 font-mono">20464936646</td>
-                                <td class="p-3 truncate max-w-[150px]">VENTA MEDICA S.A.</td>
-                                <td class="p-3 text-[10px] leading-tight">Material Méd.<br><span class="text-gray-500">Microred Progreso</span></td>
-                                <td class="p-3 text-center">
-                                    <span id="badge-14" class="px-2 py-1 rounded bg-yellow-100 text-yellow-800 flex items-center justify-center gap-1">
-                                        <span id="label-14">Regular</span> (
-                                        <input type="number" id="stock-14" value="340" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(14)">)
-                                    </span>
-                                </td>
-                                <td class="p-3">
-                                    <div class="flex justify-center gap-1">
-                                        <button onclick="actualizarStock(14, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold">-</button>
-                                        <button onclick="actualizarStock(14, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold">+</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="hover:bg-blue-50 border-b">
-                                <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">ADQUISICION DE REFRIGERADORAS</td>
-                                <td class="p-3">2025-06-11</td>
-                                <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
-                                <td class="p-3 font-mono font-bold text-emerald-600">5,000.00</td>
-                                <td class="p-3 font-mono">20612221775</td>
-                                <td class="p-3 truncate max-w-[150px]">FAREN GROUP S.R.L.</td>
-                                <td class="p-3 text-[10px] leading-tight">Equipos<br><span class="text-gray-500">Almacén Central</span></td>
-                                <td class="p-3 text-center">
-                                    <span id="badge-15" class="px-2 py-1 rounded bg-red-100 text-red-800 flex items-center justify-center gap-1">
-                                        <span id="label-15">Crítico</span> (
-                                        <input type="number" id="stock-15" value="12" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(15)">)
-                                    </span>
-                                </td>
-                                <td class="p-3">
-                                    <div class="flex justify-center gap-1">
-                                        <button onclick="actualizarStock(15, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold">-</button>
-                                        <button onclick="actualizarStock(15, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold">+</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="modal-ordenes" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-        <div class="bg-gray-100 w-full max-w-lg rounded-lg shadow-2xl overflow-hidden">
-            <div class="bg-teal-600 text-white p-4 flex justify-between items-center">
-                <h3 class="font-bold text-lg">Generar Orden de Abastecimiento</h3>
-                <button onclick="cerrarModalOrdenes()" class="text-white hover:text-gray-200 font-bold text-xl">&times;</button>
-            </div>
-            
-            <div class="p-5">
-                <p class="text-sm text-gray-600 mb-4">Los siguientes insumos han sido detectados en estado <strong>Crítico</strong> y requieren reabastecimiento urgente:</p>
-                
-                <div id="lista-criticos" class="max-h-60 overflow-y-auto space-y-2 mb-4 p-2 bg-white rounded border border-gray-200">
-                    </div>
-
-                <div class="flex justify-end gap-3 mt-4">
-                    <button onclick="cerrarModalOrdenes()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded font-bold transition">Cancelar</button>
-                    <button id="btn-procesar-ordenes" onclick="procesarOrdenes()" class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded font-bold shadow transition">Aprobar Orden e Ingresar Stock</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="modal-pagos" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-        <div class="bg-white w-full max-w-md rounded-lg shadow-2xl overflow-hidden">
-            <div class="bg-indigo-600 text-white p-4 flex justify-between items-center">
-                <h3 class="font-bold text-lg">Aprobación de Ejecución</h3>
-                <button onclick="cerrarModalPagos()" class="text-white hover:text-gray-200 font-bold text-xl">&times;</button>
-            </div>
-            <div class="p-5 text-center">
-                <p class="text-gray-700 mb-6 mt-2">¿Está seguro de que desea liberar los fondos presupuestales para las órdenes de compras pendientes y planillas de proveedores?</p>
-                <div class="flex justify-center gap-3">
-                    <button onclick="cerrarModalPagos()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded font-bold transition">Cancelar</button>
-                    <button onclick="procesarPagos()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded font-bold shadow transition">Sí, Liberar Fondos</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        let contadorFilas = 15; 
-
-        function mostrarExito(mensaje) {
-            const notificacion = document.getElementById('notificacion-exito');
-            document.getElementById('texto-notificacion').innerText = mensaje;
-            notificacion.classList.remove('hidden');
-            setTimeout(() => { notificacion.classList.add('hidden'); }, 3500);
-        }
-
-        function toggleFormulario() {
-            document.getElementById('form-nuevo-insumo').classList.toggle('hidden');
-        }
-
-        function agregarNuevoInsumo() {
-            const nombre = document.getElementById('nuevo-nombre').value;
-            const cantidad = parseInt(document.getElementById('nuevo-cantidad').value);
-            const monto = document.getElementById('nuevo-monto').value || '0.00';
-            const razon = document.getElementById('nuevo-razon').value || 'POR DEFINIR';
-            const ruc = document.getElementById('nuevo-ruc').value || '00000000000';
-            const categoria = document.getElementById('nuevo-categoria').value || 'General';
-            const microred = document.getElementById('nuevo-microred').value || 'General';
-
-            if (!nombre || isNaN(cantidad)) {
-                alert("Ingresa al menos un Nombre y una Cantidad Inicial válida."); return;
-            }
-
-            contadorFilas++;
-            const id = contadorFilas;
-
-            let colFondo, colTexto, txtEtiqueta;
-            if (cantidad <= 100) {
-                colFondo = "bg-red-100"; colTexto = "text-red-800"; txtEtiqueta = "Crítico";
-            } else if (cantidad > 100 && cantidad <= 500) {
-                colFondo = "bg-yellow-100"; colTexto = "text-yellow-800"; txtEtiqueta = "Regular";
-            } else {
-                colFondo = "bg-green-100"; colTexto = "text-green-800"; txtEtiqueta = "Óptimo";
-            }
-
-            // Obtenemos la fecha de hoy para la "Fecha Emisión"
-            const hoy = new Date().toISOString().split('T')[0];
-
-            const tr = document.createElement('tr');
-            tr.className = "hover:bg-blue-50";
-            tr.innerHTML = `
-                <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]" title="${nombre}">${nombre}</td>
-                <td class="p-3">${hoy}</td>
-                <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
-                <td class="p-3 font-mono font-bold text-emerald-600">${monto}</td>
-                <td class="p-3 font-mono">${ruc}</td>
-                <td class="p-3 truncate max-w-[150px]" title="${razon}">${razon}</td>
-                <td class="p-3 text-[10px] leading-tight">${categoria}<br><span class="text-gray-500">${microred}</span></td>
-                <td class="p-3 text-center">
-                    <span id="badge-${id}" class="px-2 py-1 rounded text-xs inline-flex items-center justify-center gap-1 ${colFondo} ${colTexto}">
-                        <span id="label-${id}">${txtEtiqueta}</span> (
-                        <input type="number" id="stock-${id}" value="${cantidad}" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(${id})"> )
-                    </span>
-                </td>
-                <td class="p-3">
-                    <div class="flex justify-center gap-1">
-                        <button onclick="actualizarStock(${id}, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold">-</button>
-                        <button onclick="actualizarStock(${id}, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold">+</button>
-                    </div>
-                </td>
-            `;
-
-            document.getElementById('tabla-inventario').appendChild(tr);
-            
-            // Limpiar
-            document.getElementById('nuevo-nombre').value = '';
-            document.getElementById('nuevo-cantidad').value = '';
-            document.getElementById('nuevo-monto').value = '';
-            document.getElementById('nuevo-razon').value = '';
-            document.getElementById('nuevo-ruc').value = '';
-            document.getElementById('nuevo-categoria').value = '';
-            document.getElementById('nuevo-microred').value = '';
-            
-            toggleFormulario();
-            mostrarExito('Insumo y datos SIAF agregados correctamente.');
-        }
-
-        function actualizarStock(id, cantidadCambio) {
-            let inputStock = document.getElementById('stock-' + id);
-            let stockActual = parseInt(inputStock.value);
-            if (isNaN(stockActual)) stockActual = 0;
-            
-            let nuevoStock = stockActual + cantidadCambio;
-            if (nuevoStock < 0) nuevoStock = 0; 
-            
-            inputStock.value = nuevoStock;
-            verificarEstado(id);
-        }
-
-        function verificarEstado(id) {
-            let inputStock = document.getElementById('stock-' + id);
-            let spanBadge = document.getElementById('badge-' + id);
-            let spanLabel = document.getElementById('label-' + id);
-            
-            let stock = parseInt(inputStock.value);
-            if (isNaN(stock) || stock < 0) stock = 0; 
-
-            if (stock <= 100) {
-                spanBadge.className = "px-2 py-1 rounded text-xs inline-flex items-center justify-center gap-1 bg-red-100 text-red-800";
-                spanLabel.innerText = "Crítico";
-            } else if (stock > 100 && stock <= 500) {
-                spanBadge.className = "px-2 py-1 rounded text-xs inline-flex items-center justify-center gap-1 bg-yellow-100 text-yellow-800";
-                spanLabel.innerText = "Regular";
-            } else {
-                spanBadge.className = "px-2 py-1 rounded text-xs inline-flex items-center justify-center gap-1 bg-green-100 text-green-800";
-                spanLabel.innerText = "Óptimo";
-            }
-        }
-
-        function abrirModalOrdenes() {
-            const contenedor = document.getElementById('lista-criticos');
-            contenedor.innerHTML = ''; 
-            let hayCriticos = false;
-
-            const inputsStock = document.querySelectorAll('input[id^="stock-"]');
-            
-            inputsStock.forEach(input => {
-                let stock = parseInt(input.value);
-                if(isNaN(stock)) stock = 0;
-
-                if(stock <= 100) {
-                    hayCriticos = true;
-                    const idExtracted = input.id.split('-')[1];
-                    const filaTr = input.closest('tr');
-                    const nombreItem = filaTr.querySelector('td:first-child').innerText;
-
-                    contenedor.innerHTML += `
-                        <div class="flex flex-col md:flex-row justify-between items-center bg-gray-50 p-3 rounded border border-gray-200">
-                            <div class="text-left w-full md:w-auto mb-2 md:mb-0">
-                                <p class="font-bold text-sm text-gray-800">${nombreItem}</p>
-                                <p class="text-xs text-red-600 font-semibold">Stock actual: ${stock}</p>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <label class="text-xs text-gray-600 font-bold">Solicitar lote:</label>
-                                <input type="number" class="input-pedido w-20 p-1 border border-gray-300 rounded text-center text-sm focus:outline-none focus:border-teal-500" data-target-id="${idExtracted}" value="200" min="1">
-                            </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-emerald-500 h-fit xl:col-span-1">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">⚙️ Automatización</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="p-4 border border-gray-200 rounded-lg bg-teal-50">
+                            <h3 class="font-bold text-teal-800 text-base">Abastecimiento MINSA</h3>
+                            <p class="text-xs text-gray-600 mt-1">Genera órdenes de compra para stock crítico.</p>
+                            <button onclick="abrirModalOrdenes()" class="w-full mt-3 bg-teal-600 text-white font-semibold py-2 px-4 rounded hover:bg-teal-700 transition text-sm shadow cursor-pointer">
+                                Generar Órdenes
+                            </button>
                         </div>
-                    `;
-                }
-            });
 
-            if(!hayCriticos) {
-                contenedor.innerHTML = '<div class="p-6 text-center text-gray-500 font-semibold">✅ No hay insumos en estado crítico. Todo el stock es óptimo o regular.</div>';
-                document.getElementById('btn-procesar-ordenes').style.display = 'none';
-            } else {
-                document.getElementById('btn-procesar-ordenes').style.display = 'block';
+                        <div class="p-4 border border-gray-200 rounded-lg bg-indigo-50">
+                            <h3 class="font-bold text-indigo-800 text-base">Ejecución Presupuestal</h3>
+                            <p class="text-xs text-gray-600 mt-1">Libera fondos aprobados (Devengados).</p>
+                            <button onclick="abrirModalPagos()" class="w-full mt-3 bg-indigo-600 text-white font-semibold py-2 px-4 rounded hover:bg-indigo-700 transition text-sm shadow cursor-pointer">
+                                Aprobar Pagos
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md xl:col-span-3">
+                    
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold text-gray-800">📦 Inventario y Expedientes SIAF</h2>
+                        <button onclick="toggleFormulario()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow text-sm font-bold transition cursor-pointer">
+                            + Añadir Nuevo
+                        </button>
+                    </div>
+
+                    <div id="form-nuevo-insumo" class="hidden bg-gray-50 p-4 rounded border border-gray-200 mb-4">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
+                            <input type="text" id="nuevo-nombre" placeholder="Nombre (ej. Gasa)" class="p-2 border rounded text-xs w-full">
+                            <input type="number" id="nuevo-cantidad" placeholder="Cantidad Inicial" class="p-2 border rounded text-xs w-full font-bold">
+                            <input type="number" id="nuevo-monto" placeholder="Monto (S/.)" class="p-2 border rounded text-xs w-full">
+                            <input type="text" id="nuevo-razon" placeholder="Razón Social" class="p-2 border rounded text-xs w-full">
+                            <input type="text" id="nuevo-ruc" placeholder="RUC" class="p-2 border rounded text-xs w-full">
+                            <input type="text" id="nuevo-categoria" placeholder="Categoría" class="p-2 border rounded text-xs w-full">
+                            <input type="text" id="nuevo-microred" placeholder="Microred Asignada" class="p-2 border rounded text-xs w-full">
+                        </div>
+                        <div class="flex justify-end gap-2">
+                            <button onclick="toggleFormulario()" class="bg-gray-400 hover:bg-gray-500 text-white px-3 py-1 rounded text-sm font-bold cursor-pointer">Cancelar</button>
+                            <button onclick="agregarNuevoInsumo()" class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-1 rounded text-sm font-bold shadow cursor-pointer">Guardar</button>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto max-h-[600px] border rounded-lg">
+                        <table class="w-full text-left border-collapse text-xs whitespace-nowrap">
+                            <thead class="sticky top-0 bg-gray-800 text-white shadow z-10">
+                                <tr>
+                                    <th class="p-3">Ítem / Descripción</th>
+                                    <th class="p-3">Fecha Emisión</th>
+                                    <th class="p-3">Estado SIAF</th>
+                                    <th class="p-3">Monto (S/.)</th>
+                                    <th class="p-3">RUC</th>
+                                    <th class="p-3">Razón Social</th>
+                                    <th class="p-3">Categoría / Microred</th>
+                                    <th class="p-3 text-center">Estado (Stock)</th>
+                                    <th class="p-3 text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-inventario" class="divide-y divide-gray-200 text-gray-700">
+                                
+                                <tr class="hover:bg-blue-50">
+                                    <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]" title="ADQUISICION DE TIAMINA">ADQUISICION DE TIAMINA</td>
+                                    <td class="p-3">2025-06-03</td>
+                                    <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
+                                    <td class="p-3 font-mono font-bold text-emerald-600">8,699.99</td>
+                                    <td class="p-3 font-mono">20554303812</td>
+                                    <td class="p-3 truncate max-w-[150px]">INVERSIONES GENERALES MIJA...</td>
+                                    <td class="p-3 text-[10px] leading-tight">Medicamento<br><span class="text-gray-500">Almacén Central</span></td>
+                                    <td class="p-3 text-center">
+                                        <span id="badge-1" class="px-2 py-1 rounded bg-green-100 text-green-800 flex items-center justify-center gap-1">
+                                            <span id="label-1">Óptimo</span> (
+                                            <input type="number" id="stock-1" value="850" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(1)">)
+                                        </span>
+                                    </td>
+                                    <td class="p-3">
+                                        <div class="flex justify-center gap-1">
+                                            <button onclick="actualizarStock(1, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold cursor-pointer">-</button>
+                                            <button onclick="actualizarStock(1, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold cursor-pointer">+</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <tr class="hover:bg-blue-50">
+                                    <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">ADQUISICION DE MATERIALES</td>
+                                    <td class="p-3">2025-06-04</td>
+                                    <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
+                                    <td class="p-3 font-mono font-bold text-emerald-600">4,000.00</td>
+                                    <td class="p-3 font-mono">10432081058</td>
+                                    <td class="p-3 truncate max-w-[150px]">RIOS CHICCHIS RUBEN...</td>
+                                    <td class="p-3 text-[10px] leading-tight">Materiales<br><span class="text-gray-500">Almacén Central</span></td>
+                                    <td class="p-3 text-center">
+                                        <span id="badge-2" class="px-2 py-1 rounded bg-yellow-100 text-yellow-800 flex items-center justify-center gap-1">
+                                            <span id="label-2">Regular</span> (
+                                            <input type="number" id="stock-2" value="320" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(2)">)
+                                        </span>
+                                    </td>
+                                    <td class="p-3">
+                                        <div class="flex justify-center gap-1">
+                                            <button onclick="actualizarStock(2, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold cursor-pointer">-</button>
+                                            <button onclick="actualizarStock(2, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold cursor-pointer">+</button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-blue-50">
+                                    <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">ADQUISICION EQUIPOS DE SONIDO</td>
+                                    <td class="p-3">2025-06-04</td>
+                                    <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
+                                    <td class="p-3 font-mono font-bold text-emerald-600">4,800.00</td>
+                                    <td class="p-3 font-mono">20531936257</td>
+                                    <td class="p-3 truncate max-w-[150px]">INVERSIONES TRIVISION...</td>
+                                    <td class="p-3 text-[10px] leading-tight">Equipos<br><span class="text-gray-500">Sede Adm.</span></td>
+                                    <td class="p-3 text-center">
+                                        <span id="badge-3" class="px-2 py-1 rounded bg-red-100 text-red-800 flex items-center justify-center gap-1">
+                                            <span id="label-3">Crítico</span> (
+                                            <input type="number" id="stock-3" value="5" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(3)">)
+                                        </span>
+                                    </td>
+                                    <td class="p-3">
+                                        <div class="flex justify-center gap-1">
+                                            <button onclick="actualizarStock(3, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold cursor-pointer">-</button>
+                                            <button onclick="actualizarStock(3, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold cursor-pointer">+</button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-blue-50">
+                                    <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">ADQUISICION DE SELLOS</td>
+                                    <td class="p-3">2025-06-05</td>
+                                    <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
+                                    <td class="p-3 font-mono font-bold text-emerald-600">70.00</td>
+                                    <td class="p-3 font-mono">10328608061</td>
+                                    <td class="p-3 truncate max-w-[150px]">LOYOLA COBILLAN MARCIANO...</td>
+                                    <td class="p-3 text-[10px] leading-tight">Oficina<br><span class="text-gray-500">Sede Adm.</span></td>
+                                    <td class="p-3 text-center">
+                                        <span id="badge-4" class="px-2 py-1 rounded bg-red-100 text-red-800 flex items-center justify-center gap-1">
+                                            <span id="label-4">Crítico</span> (
+                                            <input type="number" id="stock-4" value="15" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(4)">)
+                                        </span>
+                                    </td>
+                                    <td class="p-3">
+                                        <div class="flex justify-center gap-1">
+                                            <button onclick="actualizarStock(4, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold cursor-pointer">-</button>
+                                            <button onclick="actualizarStock(4, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold cursor-pointer">+</button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-blue-50">
+                                    <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">ADQUISICION DE EQUIPOS MEDICOS</td>
+                                    <td class="p-3">2025-06-05</td>
+                                    <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
+                                    <td class="p-3 font-mono font-bold text-emerald-600">9,660.00</td>
+                                    <td class="p-3 font-mono">20611031573</td>
+                                    <td class="p-3 truncate max-w-[150px]">CM MEDICAL PERU E.I.R.L.</td>
+                                    <td class="p-3 text-[10px] leading-tight">Equipos Méd.<br><span class="text-gray-500">Microred Santa</span></td>
+                                    <td class="p-3 text-center">
+                                        <span id="badge-5" class="px-2 py-1 rounded bg-red-100 text-red-800 flex items-center justify-center gap-1">
+                                            <span id="label-5">Crítico</span> (
+                                            <input type="number" id="stock-5" value="40" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(5)">)
+                                        </span>
+                                    </td>
+                                    <td class="p-3">
+                                        <div class="flex justify-center gap-1">
+                                            <button onclick="actualizarStock(5, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold cursor-pointer">-</button>
+                                            <button onclick="actualizarStock(5, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold cursor-pointer">+</button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-blue-50">
+                                    <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">ADQUISICION DE MATERIAL MEDICO</td>
+                                    <td class="p-3">2025-06-05</td>
+                                    <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
+                                    <td class="p-3 font-mono font-bold text-emerald-600">2,827.74</td>
+                                    <td class="p-3 font-mono">20608648641</td>
+                                    <td class="p-3 truncate max-w-[150px]">FBH WORLD S.A.C</td>
+                                    <td class="p-3 text-[10px] leading-tight">Material Méd.<br><span class="text-gray-500">Microred Coishco</span></td>
+                                    <td class="p-3 text-center">
+                                        <span id="badge-6" class="px-2 py-1 rounded bg-green-100 text-green-800 flex items-center justify-center gap-1">
+                                            <span id="label-6">Óptimo</span> (
+                                            <input type="number" id="stock-6" value="1200" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(6)">)
+                                        </span>
+                                    </td>
+                                    <td class="p-3">
+                                        <div class="flex justify-center gap-1">
+                                            <button onclick="actualizarStock(6, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold cursor-pointer">-</button>
+                                            <button onclick="actualizarStock(6, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold cursor-pointer">+</button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-blue-50">
+                                    <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">MATERIAL E INSUMOS MEDICOS</td>
+                                    <td class="p-3">2025-06-05</td>
+                                    <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
+                                    <td class="p-3 font-mono font-bold text-emerald-600">5,339.46</td>
+                                    <td class="p-3 font-mono">20606618787</td>
+                                    <td class="p-3 truncate max-w-[150px]">HOUSEMEDIC INTL...</td>
+                                    <td class="p-3 text-[10px] leading-tight">Material Méd.<br><span class="text-gray-500">Microred Progreso</span></td>
+                                    <td class="p-3 text-center">
+                                        <span id="badge-7" class="px-2 py-1 rounded bg-yellow-100 text-yellow-800 flex items-center justify-center gap-1">
+                                            <span id="label-7">Regular</span> (
+                                            <input type="number" id="stock-7" value="450" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(7)">)
+                                        </span>
+                                    </td>
+                                    <td class="p-3">
+                                        <div class="flex justify-center gap-1">
+                                            <button onclick="actualizarStock(7, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold cursor-pointer">-</button>
+                                            <button onclick="actualizarStock(7, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold cursor-pointer">+</button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-blue-50">
+                                    <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">INSUMOS DE LABORATORIO</td>
+                                    <td class="p-3">2025-06-05</td>
+                                    <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
+                                    <td class="p-3 font-mono font-bold text-emerald-600">6,000.00</td>
+                                    <td class="p-3 font-mono">20606618787</td>
+                                    <td class="p-3 truncate max-w-[150px]">HOUSEMEDIC INTL...</td>
+                                    <td class="p-3 text-[10px] leading-tight">Laboratorio<br><span class="text-gray-500">Almacén Central</span></td>
+                                    <td class="p-3 text-center">
+                                        <span id="badge-8" class="px-2 py-1 rounded bg-red-100 text-red-800 flex items-center justify-center gap-1">
+                                            <span id="label-8">Crítico</span> (
+                                            <input type="number" id="stock-8" value="80" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(8)">)
+                                        </span>
+                                    </td>
+                                    <td class="p-3">
+                                        <div class="flex justify-center gap-1">
+                                            <button onclick="actualizarStock(8, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold cursor-pointer">-</button>
+                                            <button onclick="actualizarStock(8, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold cursor-pointer">+</button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-blue-50">
+                                    <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">EQUIPOS DE AIRE ACONDICIONADO</td>
+                                    <td class="p-3">2025-06-05</td>
+                                    <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
+                                    <td class="p-3 font-mono font-bold text-emerald-600">36,502.50</td>
+                                    <td class="p-3 font-mono">20611576456</td>
+                                    <td class="p-3 truncate max-w-[150px]">INVERSIONES ADALUNA...</td>
+                                    <td class="p-3 text-[10px] leading-tight">Infraestructura<br><span class="text-gray-500">Red Norte</span></td>
+                                    <td class="p-3 text-center">
+                                        <span id="badge-9" class="px-2 py-1 rounded bg-red-100 text-red-800 flex items-center justify-center gap-1">
+                                            <span id="label-9">Crítico</span> (
+                                            <input type="number" id="stock-9" value="8" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(9)">)
+                                        </span>
+                                    </td>
+                                    <td class="p-3">
+                                        <div class="flex justify-center gap-1">
+                                            <button onclick="actualizarStock(9, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold cursor-pointer">-</button>
+                                            <button onclick="actualizarStock(9, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold cursor-pointer">+</button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-blue-50">
+                                    <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">UTILES DE ESCRITORIO</td>
+                                    <td class="p-3">2025-06-06</td>
+                                    <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
+                                    <td class="p-3 font-mono font-bold text-emerald-600">3,600.47</td>
+                                    <td class="p-3 font-mono">20610010700</td>
+                                    <td class="p-3 truncate max-w-[150px]">MULTISERVICIOS MAJO...</td>
+                                    <td class="p-3 text-[10px] leading-tight">Oficina<br><span class="text-gray-500">Sede Adm.</span></td>
+                                    <td class="p-3 text-center">
+                                        <span id="badge-10" class="px-2 py-1 rounded bg-green-100 text-green-800 flex items-center justify-center gap-1">
+                                            <span id="label-10">Óptimo</span> (
+                                            <input type="number" id="stock-10" value="550" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(10)">)
+                                        </span>
+                                    </td>
+                                    <td class="p-3">
+                                        <div class="flex justify-center gap-1">
+                                            <button onclick="actualizarStock(10, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold cursor-pointer">-</button>
+                                            <button onclick="actualizarStock(10, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold cursor-pointer">+</button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-blue-50">
+                                    <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">ADQUISICION INSUMOS MEDICOS</td>
+                                    <td class="p-3">2025-06-06</td>
+                                    <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
+                                    <td class="p-3 font-mono font-bold text-emerald-600">4,200.00</td>
+                                    <td class="p-3 font-mono">20608648641</td>
+                                    <td class="p-3 truncate max-w-[150px]">FBH WORLD S.A.C</td>
+                                    <td class="p-3 text-[10px] leading-tight">Material Méd.<br><span class="text-gray-500">Microred Santa</span></td>
+                                    <td class="p-3 text-center">
+                                        <span id="badge-11" class="px-2 py-1 rounded bg-yellow-100 text-yellow-800 flex items-center justify-center gap-1">
+                                            <span id="label-11">Regular</span> (
+                                            <input type="number" id="stock-11" value="210" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(11)">)
+                                        </span>
+                                    </td>
+                                    <td class="p-3">
+                                        <div class="flex justify-center gap-1">
+                                            <button onclick="actualizarStock(11, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold cursor-pointer">-</button>
+                                            <button onclick="actualizarStock(11, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold cursor-pointer">+</button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-blue-50">
+                                    <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">MICROCUBETA HEMOCUE HB 201</td>
+                                    <td class="p-3">2025-06-06</td>
+                                    <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
+                                    <td class="p-3 font-mono font-bold text-emerald-600">58,133.10</td>
+                                    <td class="p-3 font-mono">20602734740</td>
+                                    <td class="p-3 truncate max-w-[150px]">GLASSGOW MEDICAL...</td>
+                                    <td class="p-3 text-[10px] leading-tight">Laboratorio<br><span class="text-gray-500">Microred Coishco</span></td>
+                                    <td class="p-3 text-center">
+                                        <span id="badge-12" class="px-2 py-1 rounded bg-green-100 text-green-800 flex items-center justify-center gap-1">
+                                            <span id="label-12">Óptimo</span> (
+                                            <input type="number" id="stock-12" value="1500" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(12)">)
+                                        </span>
+                                    </td>
+                                    <td class="p-3">
+                                        <div class="flex justify-center gap-1">
+                                            <button onclick="actualizarStock(12, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold cursor-pointer">-</button>
+                                            <button onclick="actualizarStock(12, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold cursor-pointer">+</button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-blue-50">
+                                    <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">MAT. MEDICO RED PACIFICO NORTE</td>
+                                    <td class="p-3">2025-06-06</td>
+                                    <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
+                                    <td class="p-3 font-mono font-bold text-emerald-600">52,051.40</td>
+                                    <td class="p-3 font-mono">20604321272</td>
+                                    <td class="p-3 truncate max-w-[150px]">NEWTECH HOSPI S.A.C.</td>
+                                    <td class="p-3 text-[10px] leading-tight">Material Méd.<br><span class="text-gray-500">Red Norte</span></td>
+                                    <td class="p-3 text-center">
+                                        <span id="badge-13" class="px-2 py-1 rounded bg-green-100 text-green-800 flex items-center justify-center gap-1">
+                                            <span id="label-13">Óptimo</span> (
+                                            <input type="number" id="stock-13" value="3000" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(13)">)
+                                        </span>
+                                    </td>
+                                    <td class="p-3">
+                                        <div class="flex justify-center gap-1">
+                                            <button onclick="actualizarStock(13, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold cursor-pointer">-</button>
+                                            <button onclick="actualizarStock(13, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold cursor-pointer">+</button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-blue-50">
+                                    <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">MATERIAL MEDICO VENTA MEDICA</td>
+                                    <td class="p-3">2025-06-06</td>
+                                    <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
+                                    <td class="p-3 font-mono font-bold text-emerald-600">21,639.50</td>
+                                    <td class="p-3 font-mono">20464936646</td>
+                                    <td class="p-3 truncate max-w-[150px]">VENTA MEDICA S.A.</td>
+                                    <td class="p-3 text-[10px] leading-tight">Material Méd.<br><span class="text-gray-500">Microred Progreso</span></td>
+                                    <td class="p-3 text-center">
+                                        <span id="badge-14" class="px-2 py-1 rounded bg-yellow-100 text-yellow-800 flex items-center justify-center gap-1">
+                                            <span id="label-14">Regular</span> (
+                                            <input type="number" id="stock-14" value="340" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(14)">)
+                                        </span>
+                                    </td>
+                                    <td class="p-3">
+                                        <div class="flex justify-center gap-1">
+                                            <button onclick="actualizarStock(14, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold cursor-pointer">-</button>
+                                            <button onclick="actualizarStock(14, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold cursor-pointer">+</button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-blue-50 border-b">
+                                    <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]">ADQUISICION DE REFRIGERADORAS</td>
+                                    <td class="p-3">2025-06-11</td>
+                                    <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
+                                    <td class="p-3 font-mono font-bold text-emerald-600">5,000.00</td>
+                                    <td class="p-3 font-mono">20612221775</td>
+                                    <td class="p-3 truncate max-w-[150px]">FAREN GROUP S.R.L.</td>
+                                    <td class="p-3 text-[10px] leading-tight">Equipos<br><span class="text-gray-500">Almacén Central</span></td>
+                                    <td class="p-3 text-center">
+                                        <span id="badge-15" class="px-2 py-1 rounded bg-red-100 text-red-800 flex items-center justify-center gap-1">
+                                            <span id="label-15">Crítico</span> (
+                                            <input type="number" id="stock-15" value="12" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(15)">)
+                                        </span>
+                                    </td>
+                                    <td class="p-3">
+                                        <div class="flex justify-center gap-1">
+                                            <button onclick="actualizarStock(15, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold cursor-pointer">-</button>
+                                            <button onclick="actualizarStock(15, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold cursor-pointer">+</button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<div id="modal-ordenes" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[200]">
+    <div class="bg-gray-100 w-full max-w-lg rounded-lg shadow-2xl overflow-hidden">
+        <div class="bg-teal-600 text-white p-4 flex justify-between items-center">
+            <h3 class="font-bold text-lg">Generar Orden de Abastecimiento</h3>
+            <button onclick="cerrarModalOrdenes()" class="text-white hover:text-gray-200 font-bold text-xl cursor-pointer">&times;</button>
+        </div>
+        
+        <div class="p-5">
+            <p class="text-sm text-gray-600 mb-4">Los siguientes insumos han sido detectados en estado <strong>Crítico</strong> y requieren reabastecimiento urgente:</p>
+            
+            <div id="lista-criticos" class="max-h-60 overflow-y-auto space-y-2 mb-4 p-2 bg-white rounded border border-gray-200">
+                </div>
+
+            <div class="flex justify-end gap-3 mt-4">
+                <button onclick="cerrarModalOrdenes()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded font-bold transition cursor-pointer">Cancelar</button>
+                <button id="btn-procesar-ordenes" onclick="procesarOrdenes()" class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded font-bold shadow transition cursor-pointer">Aprobar Orden e Ingresar Stock</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-pagos" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[200]">
+    <div class="bg-white w-full max-w-md rounded-lg shadow-2xl overflow-hidden">
+        <div class="bg-indigo-600 text-white p-4 flex justify-between items-center">
+            <h3 class="font-bold text-lg">Aprobación de Ejecución</h3>
+            <button onclick="cerrarModalPagos()" class="text-white hover:text-gray-200 font-bold text-xl cursor-pointer">&times;</button>
+        </div>
+        <div class="p-5 text-center">
+            <p class="text-gray-700 mb-6 mt-2">¿Está seguro de que desea liberar los fondos presupuestales para las órdenes de compras pendientes y planillas de proveedores?</p>
+            <div class="flex justify-center gap-3">
+                <button onclick="cerrarModalPagos()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded font-bold transition cursor-pointer">Cancelar</button>
+                <button onclick="procesarPagos()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded font-bold shadow transition cursor-pointer">Sí, Liberar Fondos</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ====================
+    // NAVEGACIÓN LATERAL
+    // ====================
+    function goDashboard() {
+        const isLocal = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost" || window.location.protocol === "file:";
+        window.location.href = isLocal ? "dashboard.html" : "templates/dashboard.html"; // Ajusta esto si tu dashboard principal se llama index.html
+    }
+
+    function goCRM() {
+        const isLocal = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost" || window.location.protocol === "file:";
+        window.location.href = isLocal ? "crm.html" : "templates/crm.html";
+    }
+
+    function logout() {
+        if (confirm("¿Desea cerrar sesión?")) {
+            localStorage.removeItem("session");
+            window.location.href = "index.html";
+        }
+    }
+
+    // ====================
+    // LÓGICA DEL ERP
+    // ====================
+    let contadorFilas = 15; 
+
+    function mostrarExito(mensaje) {
+        const notificacion = document.getElementById('notificacion-exito');
+        document.getElementById('texto-notificacion').innerText = mensaje;
+        notificacion.classList.remove('hidden');
+        setTimeout(() => { notificacion.classList.add('hidden'); }, 3500);
+    }
+
+    function toggleFormulario() {
+        document.getElementById('form-nuevo-insumo').classList.toggle('hidden');
+    }
+
+    function agregarNuevoInsumo() {
+        const nombre = document.getElementById('nuevo-nombre').value;
+        const cantidad = parseInt(document.getElementById('nuevo-cantidad').value);
+        const monto = document.getElementById('nuevo-monto').value || '0.00';
+        const razon = document.getElementById('nuevo-razon').value || 'POR DEFINIR';
+        const ruc = document.getElementById('nuevo-ruc').value || '00000000000';
+        const categoria = document.getElementById('nuevo-categoria').value || 'General';
+        const microred = document.getElementById('nuevo-microred').value || 'General';
+
+        if (!nombre || isNaN(cantidad)) {
+            alert("Ingresa al menos un Nombre y una Cantidad Inicial válida."); return;
+        }
+
+        contadorFilas++;
+        const id = contadorFilas;
+
+        let colFondo, colTexto, txtEtiqueta;
+        if (cantidad <= 100) {
+            colFondo = "bg-red-100"; colTexto = "text-red-800"; txtEtiqueta = "Crítico";
+        } else if (cantidad > 100 && cantidad <= 500) {
+            colFondo = "bg-yellow-100"; colTexto = "text-yellow-800"; txtEtiqueta = "Regular";
+        } else {
+            colFondo = "bg-green-100"; colTexto = "text-green-800"; txtEtiqueta = "Óptimo";
+        }
+
+        const hoy = new Date().toISOString().split('T')[0];
+
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-blue-50";
+        tr.innerHTML = `
+            <td class="p-3 font-bold text-gray-900 truncate max-w-[200px]" title="${nombre}">${nombre}</td>
+            <td class="p-3">${hoy}</td>
+            <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Devengada</span></td>
+            <td class="p-3 font-mono font-bold text-emerald-600">${monto}</td>
+            <td class="p-3 font-mono">${ruc}</td>
+            <td class="p-3 truncate max-w-[150px]" title="${razon}">${razon}</td>
+            <td class="p-3 text-[10px] leading-tight">${categoria}<br><span class="text-gray-500">${microred}</span></td>
+            <td class="p-3 text-center">
+                <span id="badge-${id}" class="px-2 py-1 rounded text-xs inline-flex items-center justify-center gap-1 ${colFondo} ${colTexto}">
+                    <span id="label-${id}">${txtEtiqueta}</span> (
+                    <input type="number" id="stock-${id}" value="${cantidad}" class="w-10 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(${id})"> )
+                </span>
+            </td>
+            <td class="p-3">
+                <div class="flex justify-center gap-1">
+                    <button onclick="actualizarStock(${id}, -50)" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded font-bold cursor-pointer">-</button>
+                    <button onclick="actualizarStock(${id}, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded font-bold cursor-pointer">+</button>
+                </div>
+            </td>
+        `;
+
+        document.getElementById('tabla-inventario').appendChild(tr);
+        
+        document.getElementById('nuevo-nombre').value = '';
+        document.getElementById('nuevo-cantidad').value = '';
+        document.getElementById('nuevo-monto').value = '';
+        document.getElementById('nuevo-razon').value = '';
+        document.getElementById('nuevo-ruc').value = '';
+        document.getElementById('nuevo-categoria').value = '';
+        document.getElementById('nuevo-microred').value = '';
+        
+        toggleFormulario();
+        mostrarExito('Insumo y datos SIAF agregados correctamente.');
+    }
+
+    function actualizarStock(id, cantidadCambio) {
+        let inputStock = document.getElementById('stock-' + id);
+        let stockActual = parseInt(inputStock.value);
+        if (isNaN(stockActual)) stockActual = 0;
+        
+        let nuevoStock = stockActual + cantidadCambio;
+        if (nuevoStock < 0) nuevoStock = 0; 
+        
+        inputStock.value = nuevoStock;
+        verificarEstado(id);
+    }
+
+    function verificarEstado(id) {
+        let inputStock = document.getElementById('stock-' + id);
+        let spanBadge = document.getElementById('badge-' + id);
+        let spanLabel = document.getElementById('label-' + id);
+        
+        let stock = parseInt(inputStock.value);
+        if (isNaN(stock) || stock < 0) stock = 0; 
+
+        if (stock <= 100) {
+            spanBadge.className = "px-2 py-1 rounded text-xs inline-flex items-center justify-center gap-1 bg-red-100 text-red-800";
+            spanLabel.innerText = "Crítico";
+        } else if (stock > 100 && stock <= 500) {
+            spanBadge.className = "px-2 py-1 rounded text-xs inline-flex items-center justify-center gap-1 bg-yellow-100 text-yellow-800";
+            spanLabel.innerText = "Regular";
+        } else {
+            spanBadge.className = "px-2 py-1 rounded text-xs inline-flex items-center justify-center gap-1 bg-green-100 text-green-800";
+            spanLabel.innerText = "Óptimo";
+        }
+    }
+
+    function abrirModalOrdenes() {
+        const contenedor = document.getElementById('lista-criticos');
+        contenedor.innerHTML = ''; 
+        let hayCriticos = false;
+
+        const inputsStock = document.querySelectorAll('input[id^="stock-"]');
+        
+        inputsStock.forEach(input => {
+            let stock = parseInt(input.value);
+            if(isNaN(stock)) stock = 0;
+
+            if(stock <= 100) {
+                hayCriticos = true;
+                const idExtracted = input.id.split('-')[1];
+                const filaTr = input.closest('tr');
+                const nombreItem = filaTr.querySelector('td:first-child').innerText;
+
+                contenedor.innerHTML += `
+                    <div class="flex flex-col md:flex-row justify-between items-center bg-gray-50 p-3 rounded border border-gray-200">
+                        <div class="text-left w-full md:w-auto mb-2 md:mb-0">
+                            <p class="font-bold text-sm text-gray-800">${nombreItem}</p>
+                            <p class="text-xs text-red-600 font-semibold">Stock actual: ${stock}</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <label class="text-xs text-gray-600 font-bold">Solicitar lote:</label>
+                            <input type="number" class="input-pedido w-20 p-1 border border-gray-300 rounded text-center text-sm focus:outline-none focus:border-teal-500" data-target-id="${idExtracted}" value="200" min="1">
+                        </div>
+                    </div>
+                `;
             }
+        });
 
-            document.getElementById('modal-ordenes').classList.remove('hidden');
+        if(!hayCriticos) {
+            contenedor.innerHTML = '<div class="p-6 text-center text-gray-500 font-semibold">✅ No hay insumos en estado crítico. Todo el stock es óptimo o regular.</div>';
+            document.getElementById('btn-procesar-ordenes').style.display = 'none';
+        } else {
+            document.getElementById('btn-procesar-ordenes').style.display = 'block';
         }
 
-        function cerrarModalOrdenes() { document.getElementById('modal-ordenes').classList.add('hidden'); }
+        document.getElementById('modal-ordenes').classList.remove('hidden');
+    }
 
-        function procesarOrdenes() {
-            const pedidos = document.querySelectorAll('.input-pedido');
-            pedidos.forEach(pedido => {
-                const idTarget = pedido.getAttribute('data-target-id');
-                const cantidadAPedir = parseInt(pedido.value);
-                if(!isNaN(cantidadAPedir) && cantidadAPedir > 0) {
-                    actualizarStock(idTarget, cantidadAPedir);
-                }
-            });
-            cerrarModalOrdenes();
-            mostrarExito('Orden de abastecimiento generada y stock actualizado.');
-        }
+    function cerrarModalOrdenes() { document.getElementById('modal-ordenes').classList.add('hidden'); }
 
-        function abrirModalPagos() { document.getElementById('modal-pagos').classList.remove('hidden'); }
-        function cerrarModalPagos() { document.getElementById('modal-pagos').classList.add('hidden'); }
-        function procesarPagos() {
-            cerrarModalPagos();
-            mostrarExito('Pagos aprobados y fondos liberados exitosamente.');
-        }
-    </script>
+    function procesarOrdenes() {
+        const pedidos = document.querySelectorAll('.input-pedido');
+        pedidos.forEach(pedido => {
+            const idTarget = pedido.getAttribute('data-target-id');
+            const cantidadAPedir = parseInt(pedido.value);
+            if(!isNaN(cantidadAPedir) && cantidadAPedir > 0) {
+                actualizarStock(idTarget, cantidadAPedir);
+            }
+        });
+        cerrarModalOrdenes();
+        mostrarExito('Orden de abastecimiento generada y stock actualizado.');
+    }
+
+    function abrirModalPagos() { document.getElementById('modal-pagos').classList.remove('hidden'); }
+    function cerrarModalPagos() { document.getElementById('modal-pagos').classList.add('hidden'); }
+    function procesarPagos() {
+        cerrarModalPagos();
+        mostrarExito('Pagos aprobados y fondos liberados exitosamente.');
+    }
+</script>
+
 </body>
 </html>
