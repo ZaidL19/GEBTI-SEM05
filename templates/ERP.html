@@ -371,6 +371,26 @@
     }
 
     renderizarTabla();
+    
+    function guardarInventarioERP() {
+
+            const inventarioERP = dbSIAF.map(item => ({
+                id: item[0],
+                nombre: item[1],
+                fecha: item[2],
+                estado: item[3],
+                monto: item[4],
+                ruc: item[5],
+                razonSocial: item[6],
+                stock: item[7]
+            }));
+
+            localStorage.setItem(
+                "inventarioERP",
+                JSON.stringify(inventarioERP)
+        );
+    }
+    guardarInventarioERP();
 
     function actualizarStock(id, cambio) {
         let index = dbSIAF.findIndex(i => i[0] === id);
@@ -381,6 +401,8 @@
             let inp = document.getElementById(`stock-${id}`);
             if(inp) { inp.value = ns; aplicarColores(id, ns); }
         }
+        guardarInventarioERP();
+
     }
 
     function actualizarArrayDOM(id) {
@@ -389,6 +411,7 @@
         let idx = dbSIAF.findIndex(i => i[0] === id);
         if (idx !== -1) dbSIAF[idx][7] = ns;
         aplicarColores(id, ns);
+        guardarInventarioERP();
     }
 
     function aplicarColores(id, cant) {
@@ -414,6 +437,7 @@
         renderizarTabla();
         toggleFormulario();
         mostrarExito('Expediente guardado.');
+        guardarInventarioERP();
     }
 
     function mostrarExito(msg) {

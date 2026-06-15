@@ -188,16 +188,11 @@ if (listaInventario) {
 </script>
 <script>
 
-function cargarDashboardERP(){
+function cargarDashboardERP() {
 
     let inventario =
         JSON.parse(
             localStorage.getItem("inventarioERP")
-        ) || [];
-
-    let noticias =
-        JSON.parse(
-            localStorage.getItem("noticiasERP")
         ) || [];
 
     document.getElementById("productosCount")
@@ -214,9 +209,9 @@ function cargarDashboardERP(){
 
     listaCriticos.innerHTML = "";
 
-    inventario.forEach(item=>{
+    inventario.forEach(item => {
 
-        if(item.stock <= 100){
+        if (item.stock <= 100) {
 
             criticos++;
 
@@ -228,14 +223,12 @@ function cargarDashboardERP(){
             `;
 
         }
-
-        else if(item.stock <= 500){
+        else if (item.stock <= 500) {
 
             regulares++;
 
         }
-
-        else{
+        else {
 
             optimos++;
 
@@ -243,44 +236,43 @@ function cargarDashboardERP(){
 
     });
 
-    let total =
-        criticos + regulares + optimos;
+    let total = criticos + regulares + optimos;
 
-    if(total > 0){
+    if (total > 0) {
 
-        document.getElementById(
-            "barraCritico"
-        ).style.height =
-        ((criticos/total)*100) + "%";
+        document.getElementById("barraCritico")
+            .style.height =
+            ((criticos / total) * 100) + "%";
 
-        document.getElementById(
-            "barraRegular"
-        ).style.height =
-        ((regulares/total)*100) + "%";
+        document.getElementById("barraRegular")
+            .style.height =
+            ((regulares / total) * 100) + "%";
 
-        document.getElementById(
-            "barraOptimo"
-        ).style.height =
-        ((optimos/total)*100) + "%";
+        document.getElementById("barraOptimo")
+            .style.height =
+            ((optimos / total) * 100) + "%";
 
     }
 
     let noticiasDiv =
-        document.getElementById(
-            "noticiasERP"
-        );
+        document.getElementById("noticiasERP");
 
     noticiasDiv.innerHTML = "";
 
-    noticias.slice(-5).reverse().forEach(
-        noticia => {
+    inventario
+        .slice(-5)
+        .reverse()
+        .forEach(item => {
 
             noticiasDiv.innerHTML += `
-                <p>${noticia}</p>
+                <p>
+                    📦 ${item.nombre}
+                    | Stock: ${item.stock}
+                    | Estado: ${item.estado}
+                </p>
             `;
 
-        }
-    );
+        });
 
 }
 
