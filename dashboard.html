@@ -63,11 +63,15 @@
     <main class="contenido">
 
     <header>
+        <section id="resultadosBusqueda" style="display:none;">
+            <h2>🔍 Resultados de búsqueda</h2>
+            <div id="listaResultados"></div>
+        </section>
         <div>
             <h1>Dashboard General</h1>
             <p>Panel Integrado CRM + ERP</p>
         </div>
-        <input type="text" placeholder="Buscar paciente o producto">
+        <input type="text" id = "busquedaGeneral" placeholder="Buscar paciente o producto" onkeyup="buscarGeneral()">
     </header>
 
     <!-- RESUMEN GENERAL -->
@@ -366,7 +370,96 @@ function cargarDashboardERP() {
 }
 
 window.onload = cargarDashboardERP;
+function buscarGeneral() {
 
+    const texto = document
+        .getElementById("busquedaGeneral")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const resultados = document.getElementById("listaResultados");
+    const panel = document.getElementById("resultadosBusqueda");
+
+    resultados.innerHTML = "";
+
+    if (texto === "") {
+        panel.style.display = "none";
+        return;
+    }
+
+    let encontrados = 0;
+
+    // =====================
+    // PACIENTES CRM
+    // =====================
+
+    const pacientes =
+        JSON.parse(localStorage.getItem("pacientes")) || [];
+
+    pacientes.forEach(p => {
+
+        const nombre = (p.nombre || "").toLowerCase();
+        const dni = (p.dni || "").toLowerCase();
+
+        if (
+            nombre.includes(texto) ||
+            dni.includes(texto)
+        ) {
+
+            encontrados++;
+
+            resultados.innerHTML += `
+                <div class="resultado">
+                    <h3>👤 Paciente</h3>
+                    <p><strong>Nombre:</strong> ${p.nombre}</p>
+                    <p><strong>DNI:</strong> ${p.dni}</p>
+                </div>
+            `;
+        }
+    });
+
+    // =====================
+    // PRODUCTOS ERP
+    // =====================
+
+    const productos =
+        JSON.parse(localStorage.getItem("productos")) || [];
+
+    productos.forEach(prod => {
+
+        const nombre = (prod.nombre || "").toLowerCase();
+        const codigo = (prod.codigo || "").toLowerCase();
+
+        if (
+            nombre.includes(texto) ||
+            codigo.includes(texto)
+        ) {
+
+            encontrados++;
+
+            resultados.innerHTML += `
+                <div class="resultado">
+                    <h3>📦 Producto</h3>
+                    <p><strong>Nombre:</strong> ${prod.nombre}</p>
+                    <p><strong>Código:</strong> ${prod.codigo}</p>
+                    <p><strong>Stock:</strong> ${prod.stock}</p>
+                </div>
+            `;
+        }
+    });
+
+    if (encontrados === 0) {
+
+        resultados.innerHTML = `
+            <div class="resultado">
+                ❌ No se encontraron coincidencias
+            </div>
+        `;
+    }
+
+    panel.style.display = "block";
+}
 </script>
 
 </body>
