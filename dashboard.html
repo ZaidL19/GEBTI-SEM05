@@ -28,11 +28,11 @@
                 🏠 Inicio
             </li>
             <li onclick="goCRM()">
-                👥 CRM Pacientes
+                👥 Pacientes
             </li>
             <li>
                 <a href="templates/ERP.html" style="color:inherit;text-decoration:none;">
-                    📦 ERP Inventario
+                    📦 Inventario
                 </a>
             </li>
             <!-- <li>
@@ -59,61 +59,122 @@
         <!-- AQUÍ VA TODO EL CONTENIDO DEL ERP -->
         </main>
     <main class="contenido">
-        <header>
+
+    <header>
+        <div>
             <h1>Dashboard General</h1>
-            <input type="text" placeholder="Buscar paciente o producto">
-        </header>
+            <p>Panel Integrado CRM + ERP</p>
+        </div>
+        <input type="text" placeholder="Buscar paciente o producto">
+    </header>
 
-        <section class="cards">
-            <div class="card-info">
-                <h3>Pacientes</h3>
-                <span id="clientesCount">0</span>
-            </div>
-            <div class="card-info">
-                <h3>Productos</h3>
-                <span id="productosCount">0</span>
-            </div>
-            <div class="card-info">
-                <h3>Citas Hoy</h3>
-                <span id="citasCount">25</span>
-            </div>
-            <div class="card-info">
-                <h3>Personal</h3>
-                <span id="personalCount">48</span>
-            </div>
-        </section>
+    <!-- RESUMEN GENERAL -->
+    <section class="cards">
 
-        <section class="grafico">
-            <h2>Estado General del Inventario ERP</h2>
-            <div class="bars" id="graficoERP">
-                <div id="barraOptimo" style="height:0%">
-                    <span>Óptimo</span>
-                </div>
-                <div id="barraRegular" style="height:0%">
-                    <span>Regular</span>
-                </div>
-                <div id="barraCritico" style="height:0%">
-                    <span>Crítico</span>
-                </div>
-            </div>
-        </section>
+        <div class="card-info">
+            <h3>👥 Pacientes Registrados</h3>
+            <span id="clientesCount">0</span>
+        </div>
 
-        <section class="bottom">
-            <div class="inventario">
-                <h2>Inventario Crítico ERP</h2>
-                <ul id="inventarioCritico">
+        <div class="card-info">
+            <h3>📦 Materiales</h3>
+            <span id="productosCount">0</span>
+        </div>
 
-                </ul>
-            </div>
+        <div class="card-info">
+            <h3>📅 Citas Programadas</h3>
+            <span id="citasCount">0</span>
+        </div>
 
-            <div class="noticias">
-                <h2>Noticias Internas</h2>
-                <div id="noticiasERP">
-                    <!-- Noticias se cargarán dinámicamente -->
-                </div>
-            </div>
-        </section>
-    </main>
+        <div class="card-info">
+            <h3>👨‍⚕️ Personal Médico</h3>
+            <span id="personalCount">0</span>
+        </div>
+
+    </section>
+
+    <!-- ESTADÍSTICAS -->
+    <section class="cards" style="margin-top:20px;">
+
+        <div class="card-info">
+            <h3>🔴 Stock Bajo</h3>
+            <span id="totalCriticos">0</span>
+        </div>
+
+        <div class="card-info">
+            <h3>🟡 Stock Medio</h3>
+            <span id="totalRegulares">0</span>
+        </div>
+
+        <div class="card-info">
+            <h3>🟢 Stock Suficiente</h3>
+            <span id="totalOptimos">0</span>
+        </div>
+
+        <div class="card-info">
+            <h3>📊 Total Inventario</h3>
+            <span id="totalInventario">0</span>
+        </div>
+
+    </section>
+
+    <!-- GRAFICO -->
+    <section class="grafico">
+
+    <h2>Estado General del Inventario ERP</h2>
+
+    <div class="grafico-horizontal">
+
+    <div class="fila-grafico">
+        <span>🔴 Stock Bajo</span>
+        <div class="contenedor-barra">
+            <div id="barraCritico" class="barra-horizontal critico"></div>
+        </div>
+        <strong id="porcentajeCritico">0%</strong>
+    </div>
+
+    <div class="fila-grafico">
+        <span>🟡 Stock Medio</span>
+        <div class="contenedor-barra">
+            <div id="barraRegular" class="barra-horizontal regular"></div>
+        </div>
+        <strong id="porcentajeRegular">0%</strong>
+    </div>
+
+    <div class="fila-grafico">
+        <span>🟢 Stock Suficiente</span>
+        <div class="contenedor-barra">
+            <div id="barraOptimo" class="barra-horizontal optimo"></div>
+        </div>
+        <strong id="porcentajeOptimo">0%</strong>
+    </div>
+
+</div>
+
+</section>
+
+    <!-- TABLAS -->
+    <section class="bottom">
+
+        <div class="inventario">
+
+            <h2>🚨 Materiales con Stock Bajo</h2>
+
+            <ul id="inventarioCritico"></ul>
+
+        </div>
+
+        <div class="noticias">
+
+            <h2>📢 Últimos Materiales Registrados</h2>
+
+            <div id="noticiasERP"></div>
+
+        </div>
+
+    </section>
+
+</main>
 
 </div>
 
@@ -213,19 +274,21 @@ function cargarDashboardERP() {
 
     inventario.forEach(item => {
 
-        if (item.stock <= 100) {
+        let stock = Number(item.stock);
+
+        if (stock <= 100) {
 
             criticos++;
 
             listaCriticos.innerHTML += `
                 <li>
                     ${item.nombre}
-                    - ${item.stock} unidades
+                    - ${stock} unidades
                 </li>
             `;
 
         }
-        else if (item.stock <= 500) {
+        else if (stock <= 500) {
 
             regulares++;
 
@@ -240,22 +303,44 @@ function cargarDashboardERP() {
 
     let total = criticos + regulares + optimos;
 
-    if (total > 0) {
+    document.getElementById("totalCriticos").innerText = criticos;
+    document.getElementById("totalRegulares").innerText = regulares;
+    document.getElementById("totalOptimos").innerText = optimos;
+    document.getElementById("totalInventario").innerText = total;
 
-        document.getElementById("barraCritico")
-            .style.height =
-            ((criticos / total) * 100) + "%";
+    let pCritico = total > 0
+        ? ((criticos / total) * 100).toFixed(0)
+        : 0;
 
-        document.getElementById("barraRegular")
-            .style.height =
-            ((regulares / total) * 100) + "%";
+    let pRegular = total > 0
+        ? ((regulares / total) * 100).toFixed(0)
+        : 0;
 
-        document.getElementById("barraOptimo")
-            .style.height =
-            ((optimos / total) * 100) + "%";
+    let pOptimo = total > 0
+        ? ((optimos / total) * 100).toFixed(0)
+        : 0;
 
-    }
+    // Mostrar porcentajes
+    document.getElementById("porcentajeCritico").innerText =
+        pCritico + "%";
 
+    document.getElementById("porcentajeRegular").innerText =
+        pRegular + "%";
+
+    document.getElementById("porcentajeOptimo").innerText =
+        pOptimo + "%";
+
+    // Pintar barras horizontales
+    document.getElementById("barraCritico").style.width =
+        pCritico + "%";
+
+    document.getElementById("barraRegular").style.width =
+        pRegular + "%";
+
+    document.getElementById("barraOptimo").style.width =
+        pOptimo + "%";
+
+    // Noticias ERP
     let noticiasDiv =
         document.getElementById("noticiasERP");
 
@@ -267,11 +352,11 @@ function cargarDashboardERP() {
         .forEach(item => {
 
             noticiasDiv.innerHTML += `
-                <p>
-                    📦 ${item.nombre}
-                    | Stock: ${item.stock}
-                    | Estado: ${item.estado}
-                </p>
+                <div class="news-card">
+                    📦 <strong>${item.nombre}</strong><br>
+                    Stock: ${item.stock}<br>
+                    Estado: ${item.estado || "Sin estado"}
+                </div>
             `;
 
         });
