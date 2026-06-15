@@ -193,6 +193,18 @@
 </div>
 
 <script>
+
+const role = localStorage.getItem("role");
+
+if(
+    role !== "admin" &&
+    role !== "logistica"
+){
+    alert("No tiene permisos");
+
+    window.location.href =
+        "../dashboard.html";
+}
     // ==========================================
     // SISTEMA FINANCIERO Y BASE DE DATOS
     // ==========================================

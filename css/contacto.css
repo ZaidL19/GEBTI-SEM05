@@ -6,117 +6,36 @@
     font-family: Arial, sans-serif;
 }
 
+:root{
+    --primary-color:#0f4c81;
+    --header-footer:#005b8f;
+    --accent-color:#0284c7;
+    --text-color:#475569;
+}
+
+body{
+    background:#f4f7fb;
+}
 /* HEADER */
-.topbar {
-    background: #0086c7;
-    padding: 15px 5%;
-    color: white;
+.internal-page .topbar{
+    position:relative;
+    background:#005b8f;
 }
 
-/* 🔥 FILA SUPERIOR */
-.topbar-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    flex-wrap: nowrap;
+.internal-page .main-nav{
+    position:relative;
+    background:#005b8f;
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    flex: 1;
-    min-width: 0;
+
+.internal-page .topbar{
+    margin-bottom:0;
 }
 
-.logo img {
-    width: 100px;
+.internal-page .main-nav{
+    margin-top:0;
+    top:0;
 }
-
-.logo h1 {
-    font-size: 24px;
-    margin: 0;
-}
-
-/* REDES A LA DERECHA */
-.social-header {
-    display: flex;
-    gap: 10px;
-    flex-shrink: 0;
-}
-
-/* ICONOS */
-.social-header a {
-    width: 35px;
-    height: 35px;
-    background: white;
-    color: #0086c7;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-size: 16px;
-}
-
-.social-header a i {
-    color: #0086c7 !important;
-    font-size: 16px;
-}
-
-nav {
-    margin-top: 15px;
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 10px 15px;
-    border-radius: 5px;
-}
-
-nav a:hover,
-nav a.active {
-    background: white;
-    color: #0086c7;
-}
-
-.topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.social-header {
-    display: flex;
-    gap: 10px;
-    margin-left: auto;
-}
-
-.social-header a {
-    width: 35px;
-    height: 35px;
-    background: white;
-    color: #0086c7;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    text-decoration: none;
-    font-size: 14px;
-    transition: 0.3s;
-}
-
-.social-header a:hover {
-    background: #006aa3;
-    color: white;
-}
-
 /* CONTACTO */
 .contacto {
     padding: 60px 5%;

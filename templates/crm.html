@@ -92,6 +92,19 @@
     </div>
 
     <script>
+
+        const role = localStorage.getItem("role");
+
+if(
+    role !== "admin" &&
+    role !== "rrhh"
+){
+    alert("No tiene permisos");
+
+    window.location.href =
+        "dashboard.html";
+}
+
         function enviarCampana(tipo) {
             fetch('/disparar_campana', {
                 method: 'POST',
