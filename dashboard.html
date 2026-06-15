@@ -7,7 +7,23 @@
     <title>Dashboard - Red de Salud Pacífico Norte</title>
     <link rel="stylesheet" href="css/dashboard.css">
 </head>
+<div id="modalBusqueda" class="modal-busqueda">
 
+    <div class="contenedor-busqueda">
+
+        <div class="header-busqueda">
+            <span>🔍 Resultados de búsqueda</span>
+
+            <button onclick="cerrarBusqueda()">
+                ✖
+            </button>
+        </div>
+
+        <div id="listaResultadosBusqueda"></div>
+
+    </div>
+
+</div>
 <body>
 
 <div class="dashboard">
@@ -370,95 +386,113 @@ function cargarDashboardERP() {
 }
 
 window.onload = cargarDashboardERP;
-function buscarGeneral() {
+function buscarGeneral(){
 
-    const texto = document
-        .getElementById("busquedaGeneral")
+    const texto =
+        document.getElementById("busquedaGeneral")
         .value
         .toLowerCase()
         .trim();
 
-    const resultados = document.getElementById("listaResultados");
-    const panel = document.getElementById("resultadosBusqueda");
+    const modal =
+        document.getElementById("modalBusqueda");
 
-    resultados.innerHTML = "";
+    const lista =
+        document.getElementById("listaResultadosBusqueda");
 
-    if (texto === "") {
-        panel.style.display = "none";
+    lista.innerHTML = "";
+
+    if(texto.length < 2){
+        modal.style.display = "none";
         return;
     }
 
     let encontrados = 0;
 
-    // =====================
-    // PACIENTES CRM
-    // =====================
+    // ERP
+
+    const inventario =
+        JSON.parse(localStorage.getItem("inventarioERP")) || [];
+
+    inventario.forEach(item=>{
+
+        if(
+            item.nombre.toLowerCase().includes(texto) ||
+            item.ruc.toLowerCase().includes(texto) ||
+            item.razonSocial.toLowerCase().includes(texto)
+        ){
+
+            encontrados++;
+
+            lista.innerHTML += `
+            <div class="resultado-google">
+                <h3>📦 ${item.nombre}</h3>
+
+                <p>
+                    Proveedor:
+                    ${item.razonSocial}
+                </p>
+
+                <p>
+                    Stock:
+                    ${item.stock}
+                </p>
+
+                <p>
+                    Estado:
+                    ${item.estado}
+                </p>
+            </div>
+            `;
+        }
+
+    });
+
+    // CRM
 
     const pacientes =
         JSON.parse(localStorage.getItem("pacientes")) || [];
 
-    pacientes.forEach(p => {
+    pacientes.forEach(p=>{
 
-        const nombre = (p.nombre || "").toLowerCase();
-        const dni = (p.dni || "").toLowerCase();
-
-        if (
-            nombre.includes(texto) ||
-            dni.includes(texto)
-        ) {
+        if(
+            p.nombre?.toLowerCase().includes(texto) ||
+            p.dni?.toLowerCase().includes(texto)
+        ){
 
             encontrados++;
 
-            resultados.innerHTML += `
-                <div class="resultado">
-                    <h3>👤 Paciente</h3>
-                    <p><strong>Nombre:</strong> ${p.nombre}</p>
-                    <p><strong>DNI:</strong> ${p.dni}</p>
-                </div>
-            `;
-        }
-    });
+            lista.innerHTML += `
+            <div class="resultado-google">
+                <h3>👤 ${p.nombre}</h3>
 
-    // =====================
-    // PRODUCTOS ERP
-    // =====================
+                <p>DNI: ${p.dni}</p>
 
-    const productos =
-        JSON.parse(localStorage.getItem("productos")) || [];
-
-    productos.forEach(prod => {
-
-        const nombre = (prod.nombre || "").toLowerCase();
-        const codigo = (prod.codigo || "").toLowerCase();
-
-        if (
-            nombre.includes(texto) ||
-            codigo.includes(texto)
-        ) {
-
-            encontrados++;
-
-            resultados.innerHTML += `
-                <div class="resultado">
-                    <h3>📦 Producto</h3>
-                    <p><strong>Nombre:</strong> ${prod.nombre}</p>
-                    <p><strong>Código:</strong> ${prod.codigo}</p>
-                    <p><strong>Stock:</strong> ${prod.stock}</p>
-                </div>
-            `;
-        }
-    });
-
-    if (encontrados === 0) {
-
-        resultados.innerHTML = `
-            <div class="resultado">
-                ❌ No se encontraron coincidencias
+                <p>Paciente registrado en CRM</p>
             </div>
+            `;
+        }
+
+    });
+
+    if(encontrados === 0){
+
+        lista.innerHTML = `
+        <div class="resultado-google">
+            <h3>Sin resultados</h3>
+            <p>No se encontró información relacionada.</p>
+        </div>
         `;
     }
 
-    panel.style.display = "block";
+    modal.style.display = "block";
+}
+
+function cerrarBusqueda(){
+
+    document.getElementById(
+        "modalBusqueda"
+    ).style.display = "none";
 }
 </script>
 
