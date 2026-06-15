@@ -19,8 +19,23 @@ body{
     min-width:300px;
     background:#0096e6;
     color:white;
+
+    position:fixed;
+    top:0;
+    left:0;
+
+    height:100vh;
+
     display:flex;
     flex-direction:column;
+}
+
+.contenido{
+    flex:1;
+    padding:25px;
+
+    margin-left:300px;
+    width:calc(100% - 300px);
 }
 .perfil img{
     width:90px;
@@ -39,6 +54,12 @@ body{
 .sidebar ul{
     list-style:none;
     flex:1;
+    overflow-y:auto;
+}
+
+body{
+    background:#edf2f7;
+    overflow-x:hidden;
 }
 
 .sidebar li{
@@ -50,11 +71,6 @@ body{
 .sidebar li:hover,
 .sidebar .active{
     background:#0079c9;
-}
-
-.contenido{
-    flex:1;
-    padding:25px;
 }
 
 header{
