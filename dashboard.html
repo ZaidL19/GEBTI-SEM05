@@ -25,7 +25,7 @@
 
         <ul>
             <li class="active">
-                🏠 Dashboard
+                🏠 Inicio
             </li>
             <li onclick="goCRM()">
                 👥 CRM Pacientes
@@ -82,31 +82,33 @@
         </section>
 
         <section class="grafico">
-            <h2>Atenciones Semanales</h2>
-            <div class="bars">
-                <div style="height:60%"></div>
-                <div style="height:85%"></div>
-                <div style="height:40%"></div>
-                <div style="height:90%"></div>
-                <div style="height:75%"></div>
-                <div style="height:100%"></div>
+            <h2>Estado General del Inventario ERP</h2>
+            <div class="bars" id="graficoERP">
+                <div id="barraOptimo" style="height:0%">
+                    <span>Óptimo</span>
+                </div>
+                <div id="barraRegular" style="height:0%">
+                    <span>Regular</span>
+                </div>
+                <div id="barraCritico" style="height:0%">
+                    <span>Crítico</span>
+                </div>
             </div>
         </section>
 
         <section class="bottom">
             <div class="inventario">
-                <h2>Inventario Crítico</h2>
+                <h2>Inventario Crítico ERP</h2>
                 <ul id="inventarioCritico">
-                    <li>Paracetamol - 10 unidades</li>
-                    <li>Guantes - 15 cajas</li>
-                    <li>Jeringas - 8 paquetes</li>
+
                 </ul>
             </div>
 
             <div class="noticias">
                 <h2>Noticias Internas</h2>
-                <p>Nuevo lote de medicamentos recibido.</p>
-                <p>Campaña médica programada para el sábado.</p>
+                <div id="noticiasERP">
+                    <!-- Noticias se cargarán dinámicamente -->
+                </div>
             </div>
         </section>
     </main>
@@ -182,6 +184,108 @@ if (listaInventario) {
         });
     }
 }
+
+</script>
+<script>
+
+function cargarDashboardERP(){
+
+    let inventario =
+        JSON.parse(
+            localStorage.getItem("inventarioERP")
+        ) || [];
+
+    let noticias =
+        JSON.parse(
+            localStorage.getItem("noticiasERP")
+        ) || [];
+
+    document.getElementById("productosCount")
+        .innerText = inventario.length;
+
+    let criticos = 0;
+    let regulares = 0;
+    let optimos = 0;
+
+    let listaCriticos =
+        document.getElementById(
+            "inventarioCritico"
+        );
+
+    listaCriticos.innerHTML = "";
+
+    inventario.forEach(item=>{
+
+        if(item.stock <= 100){
+
+            criticos++;
+
+            listaCriticos.innerHTML += `
+                <li>
+                    ${item.nombre}
+                    - ${item.stock} unidades
+                </li>
+            `;
+
+        }
+
+        else if(item.stock <= 500){
+
+            regulares++;
+
+        }
+
+        else{
+
+            optimos++;
+
+        }
+
+    });
+
+    let total =
+        criticos + regulares + optimos;
+
+    if(total > 0){
+
+        document.getElementById(
+            "barraCritico"
+        ).style.height =
+        ((criticos/total)*100) + "%";
+
+        document.getElementById(
+            "barraRegular"
+        ).style.height =
+        ((regulares/total)*100) + "%";
+
+        document.getElementById(
+            "barraOptimo"
+        ).style.height =
+        ((optimos/total)*100) + "%";
+
+    }
+
+    let noticiasDiv =
+        document.getElementById(
+            "noticiasERP"
+        );
+
+    noticiasDiv.innerHTML = "";
+
+    noticias.slice(-5).reverse().forEach(
+        noticia => {
+
+            noticiasDiv.innerHTML += `
+                <p>${noticia}</p>
+            `;
+
+        }
+    );
+
+}
+
+window.onload = cargarDashboardERP;
+
 </script>
 
 </body>
