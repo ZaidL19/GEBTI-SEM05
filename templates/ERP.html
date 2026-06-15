@@ -6,7 +6,6 @@
     <title>ERP - Red de Salud Pacífico Norte</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        /* Ocultar flechas de inputs numéricos */
         input[type="number"]::-webkit-inner-spin-button, 
         input[type="number"]::-webkit-outer-spin-button { 
             -webkit-appearance: none; 
@@ -82,7 +81,7 @@
             <div class="bg-white p-6 rounded-lg shadow-md lg:col-span-2">
                 
                 <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-xl font-bold text-gray-800">📦 Estado de Inventario</h2>
+                    <h2 class="text-xl font-bold text-gray-800">📦 Estado de Inventario (SIAF)</h2>
                     <button onclick="toggleFormulario()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow text-sm font-bold transition">
                         + Añadir Nuevo Insumo
                     </button>
@@ -101,10 +100,10 @@
                     </div>
                 </div>
 
-                <div class="overflow-x-auto">
+                <div class="overflow-x-auto max-h-[600px]">
                     <table class="w-full text-left border-collapse text-sm">
-                        <thead>
-                            <tr class="bg-gray-200 text-gray-700 font-semibold border-b">
+                        <thead class="sticky top-0 bg-gray-200 shadow">
+                            <tr class="text-gray-700 font-semibold border-b">
                                 <th class="p-3">Ítem / Insumo</th>
                                 <th class="p-3">Categoría</th>
                                 <th class="p-3">Microred Asignada</th>
@@ -115,13 +114,13 @@
                         <tbody id="tabla-inventario" class="divide-y divide-gray-100 text-gray-600">
                             
                             <tr class="hover:bg-gray-50">
-                                <td class="p-3 font-medium text-gray-900">Paracetamol 500mg</td>
+                                <td class="p-3 font-medium text-gray-900">Adquisición de Tiamina</td>
                                 <td class="p-3">Medicamento</td>
-                                <td class="p-3">Microred Santa</td>
+                                <td class="p-3">Almacén Central</td>
                                 <td class="p-3">
-                                    <span id="badge-1" class="px-2 py-1 rounded text-xs bg-green-100 text-green-800 inline-flex items-center">
+                                    <span id="badge-1" class="px-2 py-1 rounded text-xs inline-flex items-center bg-green-100 text-green-800">
                                         <span id="label-1" class="w-14">Óptimo</span> (
-                                        <input type="number" id="stock-1" value="1500" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(1)"> )
+                                        <input type="number" id="stock-1" value="850" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(1)"> )
                                     </span>
                                 </td>
                                 <td class="p-3">
@@ -133,19 +132,253 @@
                             </tr>
 
                             <tr class="hover:bg-gray-50">
-                                <td class="p-3 font-medium text-gray-900">Vacuna Influenza</td>
-                                <td class="p-3">Biológicos</td>
-                                <td class="p-3">Microred Coishco</td>
+                                <td class="p-3 font-medium text-gray-900">Adquisición de Materiales</td>
+                                <td class="p-3">Materiales</td>
+                                <td class="p-3">Almacén Central</td>
                                 <td class="p-3">
-                                    <span id="badge-2" class="px-2 py-1 rounded text-xs bg-red-100 text-red-800 inline-flex items-center">
-                                        <span id="label-2" class="w-14">Crítico</span> (
-                                        <input type="number" id="stock-2" value="45" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(2)"> )
+                                    <span id="badge-2" class="px-2 py-1 rounded text-xs inline-flex items-center bg-yellow-100 text-yellow-800">
+                                        <span id="label-2" class="w-14">Regular</span> (
+                                        <input type="number" id="stock-2" value="320" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(2)"> )
                                     </span>
                                 </td>
                                 <td class="p-3">
                                     <div class="flex justify-center gap-2">
                                         <button onclick="actualizarStock(2, -50)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold">-</button>
                                         <button onclick="actualizarStock(2, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-bold">+</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 font-medium text-gray-900">Equipos de Sonido</td>
+                                <td class="p-3">Equipos</td>
+                                <td class="p-3">Sede Administrativa</td>
+                                <td class="p-3">
+                                    <span id="badge-3" class="px-2 py-1 rounded text-xs inline-flex items-center bg-red-100 text-red-800">
+                                        <span id="label-3" class="w-14">Crítico</span> (
+                                        <input type="number" id="stock-3" value="5" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(3)"> )
+                                    </span>
+                                </td>
+                                <td class="p-3">
+                                    <div class="flex justify-center gap-2">
+                                        <button onclick="actualizarStock(3, -50)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold">-</button>
+                                        <button onclick="actualizarStock(3, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-bold">+</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 font-medium text-gray-900">Adquisición de Sellos</td>
+                                <td class="p-3">Oficina</td>
+                                <td class="p-3">Sede Administrativa</td>
+                                <td class="p-3">
+                                    <span id="badge-4" class="px-2 py-1 rounded text-xs inline-flex items-center bg-red-100 text-red-800">
+                                        <span id="label-4" class="w-14">Crítico</span> (
+                                        <input type="number" id="stock-4" value="15" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(4)"> )
+                                    </span>
+                                </td>
+                                <td class="p-3">
+                                    <div class="flex justify-center gap-2">
+                                        <button onclick="actualizarStock(4, -50)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold">-</button>
+                                        <button onclick="actualizarStock(4, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-bold">+</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 font-medium text-gray-900">Equipos Médicos</td>
+                                <td class="p-3">Equipos Médicos</td>
+                                <td class="p-3">Microred Santa</td>
+                                <td class="p-3">
+                                    <span id="badge-5" class="px-2 py-1 rounded text-xs inline-flex items-center bg-red-100 text-red-800">
+                                        <span id="label-5" class="w-14">Crítico</span> (
+                                        <input type="number" id="stock-5" value="40" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(5)"> )
+                                    </span>
+                                </td>
+                                <td class="p-3">
+                                    <div class="flex justify-center gap-2">
+                                        <button onclick="actualizarStock(5, -50)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold">-</button>
+                                        <button onclick="actualizarStock(5, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-bold">+</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 font-medium text-gray-900">Material Médico</td>
+                                <td class="p-3">Material Médico</td>
+                                <td class="p-3">Microred Coishco</td>
+                                <td class="p-3">
+                                    <span id="badge-6" class="px-2 py-1 rounded text-xs inline-flex items-center bg-green-100 text-green-800">
+                                        <span id="label-6" class="w-14">Óptimo</span> (
+                                        <input type="number" id="stock-6" value="1200" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(6)"> )
+                                    </span>
+                                </td>
+                                <td class="p-3">
+                                    <div class="flex justify-center gap-2">
+                                        <button onclick="actualizarStock(6, -50)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold">-</button>
+                                        <button onclick="actualizarStock(6, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-bold">+</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 font-medium text-gray-900">Material e Insumos Médicos</td>
+                                <td class="p-3">Material Médico</td>
+                                <td class="p-3">Microred Progreso</td>
+                                <td class="p-3">
+                                    <span id="badge-7" class="px-2 py-1 rounded text-xs inline-flex items-center bg-yellow-100 text-yellow-800">
+                                        <span id="label-7" class="w-14">Regular</span> (
+                                        <input type="number" id="stock-7" value="450" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(7)"> )
+                                    </span>
+                                </td>
+                                <td class="p-3">
+                                    <div class="flex justify-center gap-2">
+                                        <button onclick="actualizarStock(7, -50)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold">-</button>
+                                        <button onclick="actualizarStock(7, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-bold">+</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 font-medium text-gray-900">Insumos de Laboratorio</td>
+                                <td class="p-3">Laboratorio</td>
+                                <td class="p-3">Almacén Central</td>
+                                <td class="p-3">
+                                    <span id="badge-8" class="px-2 py-1 rounded text-xs inline-flex items-center bg-red-100 text-red-800">
+                                        <span id="label-8" class="w-14">Crítico</span> (
+                                        <input type="number" id="stock-8" value="80" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(8)"> )
+                                    </span>
+                                </td>
+                                <td class="p-3">
+                                    <div class="flex justify-center gap-2">
+                                        <button onclick="actualizarStock(8, -50)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold">-</button>
+                                        <button onclick="actualizarStock(8, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-bold">+</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 font-medium text-gray-900">Equipos de Aire Acondicionado</td>
+                                <td class="p-3">Infraestructura</td>
+                                <td class="p-3">Red Pacífico Norte</td>
+                                <td class="p-3">
+                                    <span id="badge-9" class="px-2 py-1 rounded text-xs inline-flex items-center bg-red-100 text-red-800">
+                                        <span id="label-9" class="w-14">Crítico</span> (
+                                        <input type="number" id="stock-9" value="8" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(9)"> )
+                                    </span>
+                                </td>
+                                <td class="p-3">
+                                    <div class="flex justify-center gap-2">
+                                        <button onclick="actualizarStock(9, -50)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold">-</button>
+                                        <button onclick="actualizarStock(9, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-bold">+</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 font-medium text-gray-900">Útiles de Escritorio</td>
+                                <td class="p-3">Oficina</td>
+                                <td class="p-3">Sede Administrativa</td>
+                                <td class="p-3">
+                                    <span id="badge-10" class="px-2 py-1 rounded text-xs inline-flex items-center bg-green-100 text-green-800">
+                                        <span id="label-10" class="w-14">Óptimo</span> (
+                                        <input type="number" id="stock-10" value="550" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(10)"> )
+                                    </span>
+                                </td>
+                                <td class="p-3">
+                                    <div class="flex justify-center gap-2">
+                                        <button onclick="actualizarStock(10, -50)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold">-</button>
+                                        <button onclick="actualizarStock(10, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-bold">+</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 font-medium text-gray-900">Insumos Médicos</td>
+                                <td class="p-3">Material Médico</td>
+                                <td class="p-3">Microred Santa</td>
+                                <td class="p-3">
+                                    <span id="badge-11" class="px-2 py-1 rounded text-xs inline-flex items-center bg-yellow-100 text-yellow-800">
+                                        <span id="label-11" class="w-14">Regular</span> (
+                                        <input type="number" id="stock-11" value="210" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(11)"> )
+                                    </span>
+                                </td>
+                                <td class="p-3">
+                                    <div class="flex justify-center gap-2">
+                                        <button onclick="actualizarStock(11, -50)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold">-</button>
+                                        <button onclick="actualizarStock(11, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-bold">+</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 font-medium text-gray-900">Microcubeta Hemocue HB 201</td>
+                                <td class="p-3">Laboratorio</td>
+                                <td class="p-3">Microred Coishco</td>
+                                <td class="p-3">
+                                    <span id="badge-12" class="px-2 py-1 rounded text-xs inline-flex items-center bg-green-100 text-green-800">
+                                        <span id="label-12" class="w-14">Óptimo</span> (
+                                        <input type="number" id="stock-12" value="1500" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(12)"> )
+                                    </span>
+                                </td>
+                                <td class="p-3">
+                                    <div class="flex justify-center gap-2">
+                                        <button onclick="actualizarStock(12, -50)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold">-</button>
+                                        <button onclick="actualizarStock(12, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-bold">+</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 font-medium text-gray-900">Material Médico Red Norte</td>
+                                <td class="p-3">Material Médico</td>
+                                <td class="p-3">Red Pacífico Norte</td>
+                                <td class="p-3">
+                                    <span id="badge-13" class="px-2 py-1 rounded text-xs inline-flex items-center bg-green-100 text-green-800">
+                                        <span id="label-13" class="w-14">Óptimo</span> (
+                                        <input type="number" id="stock-13" value="3000" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(13)"> )
+                                    </span>
+                                </td>
+                                <td class="p-3">
+                                    <div class="flex justify-center gap-2">
+                                        <button onclick="actualizarStock(13, -50)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold">-</button>
+                                        <button onclick="actualizarStock(13, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-bold">+</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 font-medium text-gray-900">Material Médico (Venta Médica)</td>
+                                <td class="p-3">Material Médico</td>
+                                <td class="p-3">Microred Progreso</td>
+                                <td class="p-3">
+                                    <span id="badge-14" class="px-2 py-1 rounded text-xs inline-flex items-center bg-yellow-100 text-yellow-800">
+                                        <span id="label-14" class="w-14">Regular</span> (
+                                        <input type="number" id="stock-14" value="340" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(14)"> )
+                                    </span>
+                                </td>
+                                <td class="p-3">
+                                    <div class="flex justify-center gap-2">
+                                        <button onclick="actualizarStock(14, -50)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold">-</button>
+                                        <button onclick="actualizarStock(14, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-bold">+</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 font-medium text-gray-900">Refrigeradoras Médicas</td>
+                                <td class="p-3">Equipos Médicos</td>
+                                <td class="p-3">Almacén Central</td>
+                                <td class="p-3">
+                                    <span id="badge-15" class="px-2 py-1 rounded text-xs inline-flex items-center bg-red-100 text-red-800">
+                                        <span id="label-15" class="w-14">Crítico</span> (
+                                        <input type="number" id="stock-15" value="12" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="verificarEstado(15)"> )
+                                    </span>
+                                </td>
+                                <td class="p-3">
+                                    <div class="flex justify-center gap-2">
+                                        <button onclick="actualizarStock(15, -50)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold">-</button>
+                                        <button onclick="actualizarStock(15, 50)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-bold">+</button>
                                     </div>
                                 </td>
                             </tr>
@@ -195,22 +428,15 @@
     </div>
 
     <script>
-        let contadorFilas = 2; 
+        let contadorFilas = 15; // Actualizado a 15 por las filas insertadas
 
-        /* FUNCIÓN PARA MOSTRAR LA NOTIFICACIÓN DE ÉXITO */
         function mostrarExito(mensaje) {
             const notificacion = document.getElementById('notificacion-exito');
             document.getElementById('texto-notificacion').innerText = mensaje;
-            
             notificacion.classList.remove('hidden');
-            
-            // Ocultar automáticamente después de 3.5 segundos
-            setTimeout(() => {
-                notificacion.classList.add('hidden');
-            }, 3500);
+            setTimeout(() => { notificacion.classList.add('hidden'); }, 3500);
         }
 
-        /* LÓGICA BÁSICA DE LA TABLA */
         function toggleFormulario() {
             document.getElementById('form-nuevo-insumo').classList.toggle('hidden');
         }
@@ -261,8 +487,6 @@
             document.getElementById('nuevo-nombre').value = '';
             document.getElementById('nuevo-cantidad').value = '';
             toggleFormulario();
-            
-            // Llamar al nuevo mensaje de éxito
             mostrarExito('Insumo agregado al inventario correctamente.');
         }
 
@@ -298,7 +522,6 @@
             }
         }
 
-        /* LÓGICA DE LOS MODALES (ABASTECIMIENTO Y PAGOS) */
         function abrirModalOrdenes() {
             const contenedor = document.getElementById('lista-criticos');
             contenedor.innerHTML = ''; 
@@ -358,26 +581,14 @@
             });
 
             cerrarModalOrdenes();
-            // Reemplazo del alert por el cuadro de éxito
             mostrarExito('Orden de abastecimiento generada y stock actualizado.');
         }
 
-        function abrirModalPagos() {
-            document.getElementById('modal-pagos').classList.remove('hidden');
-        }
-
-        function cerrarModalPagos() {
-            document.getElementById('modal-pagos').classList.add('hidden');
-        }
-
+        function abrirModalPagos() { document.getElementById('modal-pagos').classList.remove('hidden'); }
+        function cerrarModalPagos() { document.getElementById('modal-pagos').classList.add('hidden'); }
         function procesarPagos() {
             cerrarModalPagos();
-            // Reemplazo del alert por el cuadro de éxito
             mostrarExito('Pagos aprobados y fondos liberados exitosamente.');
-        }
-
-        function volverDashboard() {
-            window.location.href = "../dashboard.html";
         }
 
     </script>
