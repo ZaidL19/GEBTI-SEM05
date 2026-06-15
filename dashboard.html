@@ -19,7 +19,8 @@
                 Red de Salud<br>
                 Pacífico Norte
             </h2>
-            <p>Administrador</p>
+            <h4 id="currentUser"></h4>
+            <p id="userRole">Usuario</p>
            
         </div>
 
@@ -185,7 +186,41 @@
 if (localStorage.getItem("session") !== "active") {
     window.location.href = "login.html";
 }
+const role = localStorage.getItem("role");
+const currentUser = localStorage.getItem("currentUser");
 
+document.getElementById("currentUser").textContent =
+    currentUser || "Invitado";
+
+document.getElementById("userRole").textContent =
+    role || "Usuario";
+
+if(role === "admin"){
+    // acceso total
+}
+
+if(role === "logistica"){
+
+    document.getElementById("menuPacientes")
+        .style.display = "none";
+
+}
+
+if(role === "rrhh"){
+
+    document.getElementById("menuInventario")
+        .style.display = "none";
+
+}
+
+if(role === "user"){
+
+    document.getElementById("menuPacientes")
+        .style.display = "none";
+
+    document.getElementById("menuInventario")
+        .style.display = "none";
+}
 // ====================
 // NAVEGACIÓN INTELIGENTE (Rutas locales vs Flask)
 // ====================
@@ -203,6 +238,7 @@ function goCRM() {
 function goERP() {
     window.location.href = "templates/ERP.html";
 }
+
 
 function logout() {
     if (confirm("¿Desea cerrar sesión?")) {
