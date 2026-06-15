@@ -126,15 +126,15 @@ function goCRM() {
     const isLocal = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost";
     
     if (isLocal) {
-        // Redirección forzada al backend de Flask para procesar Jinja2
-        window.location.href = "http://127.0.0.1:5000/crm";
+        
+        window.location.href = "crm.html";
     } else {
         window.location.href = "templates/crm.html";
     }
 }
 
 function goERP() {
-    window.location.href = "erp.html";
+    window.location.href = "ERP.html";
 }
 
 function logout() {
