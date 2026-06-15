@@ -238,11 +238,20 @@ if(role === "user"){
 // NAVEGACIÓN INTELIGENTE (Rutas locales vs Flask)
 // ====================
 function goCRM() {
-    const isLocal = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost";
+   /*const isLocal = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost";
     
     if (isLocal) {
         
-        window.location.href = "crm.html";
+        window.location.href = "crm";
+    } else {
+        window.location.href = "templates/crm";
+    } */
+     const isLocal = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost";
+    
+    if (isLocal) {
+        // 🚀 No importa si estás en el puerto 3000, 5500 o el que sea de Live Server.
+        // Forzamos que vaya al puerto 5000, que es donde tu Flask SÍ está escuchando y respondiendo.
+        window.location.href = `http://${window.location.hostname}:5000/crm`;
     } else {
         window.location.href = "templates/crm.html";
     }
