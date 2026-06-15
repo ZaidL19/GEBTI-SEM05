@@ -16,7 +16,6 @@
             -moz-appearance: textfield;
             appearance: textfield;
         }
-        /* Custom Scrollbar */
         .table-container::-webkit-scrollbar { height: 8px; width: 8px; }
         .table-container::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
         .table-container::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
@@ -28,9 +27,7 @@
 
 <div id="notificacion-exito" class="hidden fixed top-10 right-10 z-[100] bg-emerald-500 text-white px-6 py-4 rounded-lg shadow-2xl flex items-center gap-3 transition-opacity duration-300">
     <div class="bg-white text-emerald-500 rounded-full p-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
     </div>
     <span id="texto-notificacion" class="font-bold text-sm md:text-base">Operación exitosa</span>
 </div>
@@ -43,27 +40,18 @@
             <p class="text-sm text-gray-500 mt-1 font-semibold">Administrador</p>
         </div>
         <ul class="py-4">
-            <li onclick="goDashboard()" class="px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 cursor-pointer font-bold transition flex items-center gap-3">
-                <span>🏠</span> Dashboard
-            </li>
-            <li onclick="goCRM()" class="px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 cursor-pointer font-bold transition flex items-center gap-3">
-                <span>👥</span> CRM Pacientes
-            </li>
-            <li class="px-6 py-3 bg-blue-600 text-white cursor-default font-bold flex items-center gap-3 shadow-inner">
-                <span>📦</span> ERP Inventario
-            </li>
+            <li onclick="goDashboard()" class="px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 cursor-pointer font-bold transition flex items-center gap-3"><span>🏠</span> Dashboard</li>
+            <li onclick="goCRM()" class="px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 cursor-pointer font-bold transition flex items-center gap-3"><span>👥</span> CRM Pacientes</li>
+            <li class="px-6 py-3 bg-blue-600 text-white cursor-default font-bold flex items-center gap-3 shadow-inner"><span>📦</span> ERP Inventario</li>
         </ul>
     </div>
     <div class="p-4 border-t border-gray-200">
-        <button onclick="logout()" class="w-full bg-red-50 hover:bg-red-100 text-red-700 font-bold py-2 px-4 rounded-lg transition flex justify-center items-center gap-2">
-            <span>🚪</span> Cerrar Sesión
-        </button>
+        <button onclick="logout()" class="w-full bg-red-50 hover:bg-red-100 text-red-700 font-bold py-2 px-4 rounded-lg transition flex justify-center items-center gap-2"><span>🚪</span> Cerrar Sesión</button>
     </div>
 </aside>
 
 <main class="flex-1 h-full overflow-y-auto bg-gray-100">
     <div class="p-6 max-w-[1600px] mx-auto">
-        
         <header class="bg-blue-800 text-white p-6 rounded-lg shadow-md mb-8 flex justify-between items-center w-full">
             <div>
                 <h1 class="text-3xl font-bold">Módulo ERP: Gestión de Recursos y SIAF</h1>
@@ -72,33 +60,26 @@
         </header>
 
         <div class="grid grid-cols-1 xl:grid-cols-4 gap-6">
-            
             <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-emerald-500 h-fit xl:col-span-1">
                 <h2 class="text-xl font-bold text-gray-800 mb-4">⚙️ Automatización</h2>
                 <div class="space-y-4">
                     <div class="p-4 border border-gray-200 rounded-lg bg-teal-50">
                         <h3 class="font-bold text-teal-800 text-base">Abastecimiento MINSA</h3>
                         <p class="text-xs text-gray-600 mt-1">Genera órdenes de compra para stock crítico.</p>
-                        <button onclick="abrirModalOrdenes()" class="w-full mt-3 bg-teal-600 text-white font-semibold py-2 px-4 rounded hover:bg-teal-700 transition text-sm shadow cursor-pointer">
-                            Generar Órdenes
-                        </button>
+                        <button onclick="abrirModalOrdenes()" class="w-full mt-3 bg-teal-600 text-white font-semibold py-2 px-4 rounded hover:bg-teal-700 transition text-sm shadow cursor-pointer">Generar Órdenes</button>
                     </div>
                     <div class="p-4 border border-gray-200 rounded-lg bg-indigo-50">
                         <h3 class="font-bold text-indigo-800 text-base">Ejecución Presupuestal</h3>
                         <p class="text-xs text-gray-600 mt-1">Libera fondos aprobados (Devengados).</p>
-                        <button onclick="abrirModalPagos()" class="w-full mt-3 bg-indigo-600 text-white font-semibold py-2 px-4 rounded hover:bg-indigo-700 transition text-sm shadow cursor-pointer">
-                            Aprobar Pagos
-                        </button>
+                        <button onclick="abrirModalPagos()" class="w-full mt-3 bg-indigo-600 text-white font-semibold py-2 px-4 rounded hover:bg-indigo-700 transition text-sm shadow cursor-pointer">Aprobar Pagos</button>
                     </div>
                 </div>
             </div>
 
             <div class="bg-white p-6 rounded-lg shadow-md xl:col-span-3">
                 <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-xl font-bold text-gray-800">📦 Expedientes SIAF (116 Registros)</h2>
-                    <button onclick="toggleFormulario()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow text-sm font-bold transition cursor-pointer">
-                        + Añadir Nuevo
-                    </button>
+                    <h2 class="text-xl font-bold text-gray-800">📦 Expedientes SIAF Completos (116 Registros Reales)</h2>
+                    <button onclick="toggleFormulario()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow text-sm font-bold transition cursor-pointer">+ Añadir Nuevo</button>
                 </div>
 
                 <div id="form-nuevo-insumo" class="hidden bg-gray-50 p-4 rounded border border-gray-200 mb-4">
@@ -131,7 +112,7 @@
                                 <th class="p-3">Monto (S/.)</th>
                                 <th class="p-3">RUC</th>
                                 <th class="p-3">Razón Social</th>
-                                <th class="p-3 text-center">Control Stock</th>
+                                <th class="p-3 text-center">Control Stock / Status</th>
                                 <th class="p-3 text-center">Acciones</th>
                             </tr>
                         </thead>
@@ -143,7 +124,6 @@
         </div>
     </div>
 </main>
-</div>
 
 <div id="modal-ordenes" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[200]">
     <div class="bg-gray-100 w-full max-w-lg rounded-lg shadow-2xl overflow-hidden">
@@ -179,22 +159,25 @@
 </div>
 
 <script>
-    // BASE DE DATOS LOCAL
+    // ==========================================
+    // BASE DE DATOS EXACTA DE LAS CAPTURAS (1 a 116)
+    // Formato: [ID, "Descripción", "Fecha", "Estado", Monto, "RUC", "Razón Social", Stock (1 para servicios, real para items)]
+    // ==========================================
     let dbSIAF = [
         [1, "ADQUISICION DE TIAMINA", "2025-06-03", "Devengada", 8699.99, "20554303812", "INVERSIONES GENERALES MIJA SAC", 850],
         [2, "ADQUISICION DE MATERIALES", "2025-06-04", "Devengada", 4000.00, "10432081058", "RIOS CHICCHIS RUBEN DARIO", 320],
-        [3, "ADQUISICION EQUIPOS DE SONIDO", "2025-06-04", "Devengada", 4800.00, "20531936257", "INVERSIONES TRIVISION S.A.C.", 5],
+        [3, "ADQUISICION DE EQUIPOS DE SONIDO", "2025-06-04", "Devengada", 4800.00, "20531936257", "INVERSIONES TRIVISION S.A.C.", 5],
         [4, "ADQUISICION DE SELLOS", "2025-06-05", "Devengada", 70.00, "10328608061", "LOYOLA COBILLAN MARCIANO CARLOS", 15],
         [5, "ADQUISICION DE EQUIPOS MEDICOS", "2025-06-05", "Devengada", 9660.00, "20611031573", "CM MEDICAL PERU E.I.R.L.", 40],
         [6, "ADQUISICION DE MATERIAL MEDICO", "2025-06-05", "Devengada", 2827.74, "20608648641", "FBH WORLD S.A.C", 1200],
-        [7, "MATERIAL E INSUMOS MEDICOS", "2025-06-05", "Devengada", 5339.46, "20606618787", "HOUSEMEDIC INTERNATIONAL E.I.R.L.", 450],
-        [8, "INSUMOS DE LABORATORIO", "2025-06-05", "Devengada", 6000.00, "20606618787", "HOUSEMEDIC INTERNATIONAL E.I.R.L.", 80],
-        [9, "EQUIPOS DE AIRE ACONDICIONADO", "2025-06-05", "Devengada", 36502.50, "20611576456", "INVERSIONES DE ADALUNA E.I.R.L", 8],
+        [7, "ADQUISICION DE MATERIAL E INSUMOS MEDICOS", "2025-06-05", "Devengada", 5339.46, "20606618787", "HOUSEMEDIC INTERNATIONAL E.I.R.L.", 450],
+        [8, "ADQUISICION DE INSUMOS DE LABORATORIO", "2025-06-05", "Devengada", 6000.00, "20606618787", "HOUSEMEDIC INTERNATIONAL E.I.R.L.", 80],
+        [9, "ADQUISICION DE EQUIPOS DE AIRE ACONDICIONADO", "2025-06-05", "Devengada", 36502.50, "20611576456", "INVERSIONES DE ADALUNA E.I.R.L", 8],
         [10, "UTILES DE ESCRITORIO", "2025-06-06", "Devengada", 3600.47, "20610010700", "COMERCIALIZACION Y MULTISERVICIOS MAJO S.A.C.", 550],
-        [11, "ADQUISICION INSUMOS MEDICOS", "2025-06-06", "Devengada", 4200.00, "20608648641", "FBH WORLD S.A.C", 210],
-        [12, "MICROCUBETA HEMOCUE HB 201", "2025-06-06", "Devengada", 58133.10, "20602734740", "GLASSGOW MEDICAL CORPORATION S.A.C.", 1500],
-        [13, "MAT. MEDICO RED PACIFICO NORTE", "2025-06-06", "Devengada", 52051.40, "20604321272", "NEWTECH HOSPI SOCIEDAD ANONIMA CERRADA", 3000],
-        [14, "MATERIAL MEDICO VENTA MEDICA", "2025-06-06", "Devengada", 21639.50, "20464936646", "VENTA MEDICA S.A.", 340],
+        [11, "ADQUISICION DE INSUMOS MEDICOS.", "2025-06-06", "Devengada", 4200.00, "20608648641", "FBH WORLD S.A.C", 210],
+        [12, "MICROCUBETA DESCARTABLE PARA HEMOGLOBINOMETRO HEMOCUE HB 201", "2025-06-06", "Devengada", 58133.10, "20602734740", "GLASSGOW MEDICAL CORPORATION S.A.C.", 1500],
+        [13, "ADQUISICION DE MATERIAL MEDICO PARA LA RED INTEGRADA DE SALUD PACIFICO NORTE", "2025-06-06", "Devengada", 52051.40, "20604321272", "NEWTECH HOSPI SOCIEDAD ANONIMA CERRADA", 3000],
+        [14, "ADQUISICION DE MATERIAL MEDICO", "2025-06-06", "Devengada", 21639.50, "20464936646", "VENTA MEDICA S.A.", 340],
         [15, "ADQUISICION DE REFRIGERADORAS", "2025-06-11", "Devengada", 5000.00, "20612221775", "FAREN GROUP S.R.L.", 12],
         [16, "ADQUISICION DE INSUMOS DE LABORATORIO", "2025-06-17", "Devengada", 10576.00, "20565833864", "GRUPO COMERCIAL & BUSINESS S.A.C", 150],
         [17, "ADQUISICION DE MATERIAL MEDICO", "2025-06-17", "Devengada", 22000.60, "20565833864", "GRUPO COMERCIAL & BUSINESS S.A.C", 200],
@@ -206,21 +189,99 @@
         [23, "ADQUISICION DE COCHE METALICO", "2025-06-19", "Devengada", 554.00, "20574709688", "INVERSIONES VIDECO S.A.C.", 10],
         [24, "ADQUISICION DE CABLE", "2025-06-19", "Devengada", 3000.00, "10432081058", "RIOS CHICCHIS RUBEN DARIO", 150],
         [25, "ADQUISICION DE LINTERNA", "2025-06-19", "Devengada", 525.00, "10720193715", "ESCRIBANO PIMENTEL ELIO EDUARDO", 35],
-        [26, "PARIHUELA", "2025-06-19", "Devengada", 3990.00, "10784638231", "ALEJANDRZA PIZARRO AMANDA", 80],
-        [27, "ADQUISICION DE AIRE ACONDICIONADO", "2025-06-20", "Devengada", 3400.00, "10432081058", "RIOS CHICCHIS RUBEN DARIO", 5],
+        [26, "PARIHUELA", "2025-06-19", "Devengada", 3990.00, "10784638231", "ALEJANDR;A PIZARRO AMANDA ANTONELLA", 80],
+        [27, "ADQUISICIOND E AIRE ACONDICIONADO", "2025-06-20", "Devengada", 3400.00, "10432081058", "RIOS CHICCHIS RUBEN DARIO", 5],
         [28, "ADQUISIICION DE CENTRIFUGA", "2025-06-23", "Devengada", 13500.00, "20611031573", "CM MEDICAL PERU E.I.R.L.", 3],
         [29, "ADQUISICION DE MICROSCOPIO", "2025-06-23", "Devengada", 16000.00, "20600801750", "CRV MEDICAL E.I.R.L.", 2],
-        [30, "ADQUISICION DE EQUIPOS MEDICOS", "2025-06-24", "Devengada", 29965.00, "20606618787", "HOUSEMEDIC INTERNATIONAL E.I.R.L.", 18]
+        [30, "ADQUISICION DE EQUIPOS MEDICOS", "2025-06-24", "Devengada", 29965.00, "20606618787", "HOUSEMEDIC INTERNATIONAL E.I.R.L.", 18],
+        [31, "ADQUISICION DE EQUIPOS MEDICOS", "2025-06-24", "Devengada", 2500.00, "20608648641", "FBH WORLD S.A.C", 10],
+        [32, "ADQUISICION DE EQUIPOS MEDICOS", "2025-06-24", "Devengada", 4500.00, "20608648641", "FBH WORLD S.A.C", 25],
+        [33, "ADQUISICION DE EQUIPOS MEDICOS", "2025-06-24", "Devengada", 30541.00, "20604321272", "NEWTECH HOSPI SOCIEDAD ANONIMA CERRADA", 40],
+        [34, "ADQUISICION DE MEGAFONO", "2025-06-24", "Devengada", 1200.00, "10784638231", "ALEJANDR;A PIZARRO AMANDA ANTONELLA", 12],
+        [35, "ADQUISICION DE LECTORAS DE TARJETA INTELIGENTE", "2025-06-25", "Devengada", 2000.00, "10702398431", "LUJAN CARRANZA BRAYAN ESTIWARD", 15],
+        [36, "LLANTAS PARA VEHICULO LIVIANO", "2025-06-26", "Devengada", 15960.00, "10713442891", "LEON TALLEDO KEVIN JOEL", 40],
+        [37, "SERVICIO DE ALIMENTACION", "2025-06-02", "Devengada", 3640.00, "10328237941", "JULCAMORO MARQUEZ GLADYS DEL CARMEN", 1],
+        [38, "SERVICIO DE ALIMENTACION", "2025-06-02", "Devengada", 200.00, "10178473897", "GUZMAN VALVERDE TERESA LEONILA", 1],
+        [39, "POR EL SERVICIO DE ENERGIA ELECTRICA PARA EL P.S. FERRER DE LA RISPN", "2025-06-02", "Devengada", 195.88, "20445268675", "CENTRO POBLADO DE FERRER", 1],
+        [40, "CONTRATACION DE EMPRESA OPERADORA DE RESIDUOS SOLIDOS...", "2025-06-02", "Devengada", 89100.00, "20613193538", "MULTINEGOCIOS ARON E.I.R.L.", 1],
+        [41, "SERVICIO DE INTERNET", "2025-06-02", "Devengada", 2400.00, "20606896990", "INMOBILIARIA & INGENIEROS ROYAL VIP S.A.C.", 1],
+        [42, "SERVICIO DE INTERNET", "2025-06-02", "Devengada", 2790.00, "20606896990", "INMOBILIARIA & INGENIEROS ROYAL VIP S.A.C.", 1],
+        [43, "IMPRECIONES", "2025-06-02", "Devengada", 1344.00, "10328608061", "LOYOLA COBILLAN MARCIANO CARLOS", 500],
+        [44, "SERVICIO DE INSPECCION PERSONAL INSPECTOR - ABATIZADOR...", "2025-06-03", "Devengada", 5400.00, "10760706146", "BRONCANO AVELINO ALEJANDRO", 1],
+        [45, "SERVICIO DE INSPECCION PERSONAL INSPECTOR - ABATIZADOR...", "2025-06-03", "Devengada", 5400.00, "10413906925", "LY CASTA;EDA RODDI DANIEL", 1],
+        [46, "SERVICIO DE INSPECCION PERSONAL INSPECTOR - ABATIZADOR...", "2025-06-03", "Devengada", 5400.00, "10479041372", "PALOMINO HINOJOSA MIRIAM", 1],
+        [47, "SERVICIO DE INSPECCION PERSONAL INSPECTOR - ABATIZADOR...", "2025-06-03", "Devengada", 5400.00, "10425800821", "TAPIA CASTRO IRENE NATALI", 1],
+        [48, "SERVICIO DE INSPECCION PERSONAL INSPECTOR - ABATIZADOR...", "2025-06-03", "Devengada", 5400.00, "10406257580", "SIFUENTES GARAY YAJAYRA ROXANA", 1],
+        [49, "SERVICIO DE INSPECCION PERSONAL INSPECTOR - ABATIZADOR...", "2025-06-03", "Comprometida", 5400.00, "10419126247", "FERNANDEZ HUAMANI JACQUELINE", 1],
+        [50, "SERVICIO DE INSPECCION PERSONAL INSPECTOR - ABATIZADOR...", "2025-06-03", "Devengada", 5400.00, "10729372159", "VALLADARES APOLINAR MIRELLA JONES", 1],
+        [51, "SERVICIO DE INSPECCION PERSONAL INSPECTOR - ABATIZADOR...", "2025-06-03", "Devengada", 5400.00, "10482127369", "CRESPIN VELASQUEZ MILAGROS DEL ROSARIO", 1],
+        [52, "SERVICIO DE INSPECCION PERSONAL INSPECTOR - ABATIZADOR...", "2025-06-03", "Devengada", 5400.00, "10425560382", "ALAMAS VEGA KARINA IVONE", 1],
+        [53, "POR EL SERVICIO DE ASISTENCIA TECNICA LEGAL PARA EL AREA...", "2025-06-03", "Devengada", 3000.00, "10329906707", "ARROYO LA TORRE LOURDES LILY", 1],
+        [54, "SERVICIO DE PREPARACION DE REFRIGERIOS", "2025-06-04", "Devengada", 600.00, "10178473897", "GUZMAN VALVERDE TERESA LEONILA", 1],
+        [55, "SERVICIO DE ALIMENTACION", "2025-06-04", "Devengada", 616.00, "10328237941", "JULCAMORO MARQUEZ GLADYS DEL CARMEN", 1],
+        [56, "SERVICIO DE ALIMENTACION", "2025-06-04", "Devengada", 500.00, "10178473897", "GUZMAN VALVERDE TERESA LEONILA", 1],
+        [57, "SERVICIO DE ALIMENTACION", "2025-06-04", "Devengada", 320.00, "10328237941", "JULCAMORO MARQUEZ GLADYS DEL CARMEN", 1],
+        [58, "SERVICIO DE PREPARACION DE ALMUERZOS", "2025-06-04", "Devengada", 4320.00, "10327895198", "CASTA;EDA PE;A CARLOS ALBERTO", 1],
+        [59, "SERVICIO ASISTENTE TECNICO ADMINISTRATIVO PARA LA UNIDAD...", "2025-06-04", "Devengada", 2000.00, "10627970965", "NAVARRO ZELADA BLANCA ROSA", 1],
+        [60, "POR EL SERVICIO DE MEDICO ESPECIALISTA EN PSIQUIATRIA...", "2025-06-05", "Devengada", 32000.00, "10009560357", "ALVA DIAZ MARTIN SABINO", 1],
+        [61, "SERVICIO DE INSPECCION PERSONAL INSPECTOR - ABATIZADOR...", "2025-06-05", "Devengada", 5400.00, "10456128551", "ZAMORA APONTE KATHERINE GREAY", 1],
+        [62, "SERVICIO DE INSPECCION PERSONAL INSPECTOR - ABATIZADOR...", "2025-06-05", "Devengada", 5400.00, "10768115023", "BEDON LAYNEZ CARLA ABIGAIL", 1],
+        [63, "SERVICIO DE IMPRESION", "2025-06-05", "Devengada", 5000.00, "10328608061", "LOYOLA COBILLAN MARCIANO CARLOS", 1],
+        [64, "SERVICIO DE ASISTENCIA TECNICA ADMINISTRATIVA PARA LA...", "2025-06-05", "Devengada", 2100.00, "10450073810", "VASQUEZ POLO ANA ELIZABETH", 1],
+        [65, "SERVICIO DE INSPECCION PERSONAL INSPECTOR - ABATIZADOR...", "2025-06-06", "Devengada", 5400.00, "10705807669", "ARROYO LLONTOP HADERLY JHONATAN", 1],
+        [66, "SERVICIO DE INSPECCION PERSONAL INSPECTOR - ABATIZADOR...", "2025-06-06", "Anulada", 5400.00, "10449554154", "REYNA QUIROZ KELLY ROCIO", 1],
+        [67, "SERVICIO DE INSPECCION PERSONAL INSPECTOR - ABATIZADOR...", "2025-06-06", "Devengada", 5400.00, "10713233159", "NU;EZ VASQUEZ JAIME MAURICIO", 1],
+        [68, "POR EL SERVICIO DE LIC. ENFERMERIA QUE BRINDE EL...", "2025-06-06", "Devengada", 8000.00, "10764472638", "LUNA CASTRO NICOLE LAURA", 1],
+        [69, "SERVICIO DE IMPRESION", "2025-06-09", "Devengada", 1335.00, "10328608061", "LOYOLA COBILLAN MARCIANO CARLOS", 1],
+        [70, "POR EL SERVICIO DE DIGITACION DE MANERA TEMPORAL...", "2025-06-09", "Devengada", 8000.00, "10707565549", "ZU;IGA LARA HITLER STEINER", 1],
+        [71, "SERVICIO DE INSPECCION PERSONAL INSPECTOR - ABATIZADOR...", "2025-06-09", "Devengada", 5400.00, "10723934791", "OLIVA QUI;ONEZ MADELEY LIDIA", 1],
+        [72, "SERVICIO DE INSPECCION PERSONAL INSPECTOR - ABATIZADOR...", "2025-06-09", "Devengada", 5400.00, "10702625608", "MANTILLA DAGA MARICIELO JULIANA", 1],
+        [73, "SERVICIO DE INSPECCION PERSONAL INSPECTOR - ABATIZADOR...", "2025-06-10", "Devengada", 5400.00, "10464237092", "MOGOLLON ZAPATA JUAN CARLOS", 1],
+        [74, "POR EL SERVICIO DE MEDICO ESPECIALISTA EN GINECOLOGIA...", "2025-06-11", "Devengada", 16000.00, "10441378551", "IBA;EZ LAVADO DIANA PILAR", 1],
+        [75, "POR EL SERVICIO DE ATENCION MEDICA EN ODONTOLOGIA...", "2025-06-11", "Devengada", 7500.00, "10728870007", "QUEZADA ACU;A CARMEN LIZETH", 1],
+        [76, "POR EL SERVICIO DE ATENCION MEDICA EN ODONTOLOGIA...", "2025-06-11", "Devengada", 2500.00, "10740307725", "LAYZA RAFAILE CHRISTIAN HERNAN", 1],
+        [77, "POR EL SERVICIO DE ASISTENTE ADMINISTRATIVO PARA LA...", "2025-06-11", "Devengada", 3585.00, "10714173010", "ALVA REVILLA BRAYAN CHRISTOPHER", 1],
+        [78, "SERVICIO DE ASISTENCIA TECNICA ADMINISTRATIVA PARA LA...", "2025-06-11", "Devengada", 6000.00, "10772315657", "BENITES GARCIA SEBASTIAN ALEJANDRO", 1],
+        [79, "SERVICIO DE ASISTENCIA TECNICA ADMINISTRATIVA PARA LA...", "2025-06-11", "Devengada", 6000.00, "10705393546", "URTECHO ULLOA GERMAN BRYAN", 1],
+        [80, "POR EL SERVICIO DE AGUA POTABLE DE LA SEDE...", "2025-06-16", "Devengada", 3903.30, "20136341066", "SEDACHIMBOTE S.A.", 1],
+        [81, "POR EL SERVICIO DE ENERGIA ELECTRICA DE LA SEDE...", "2025-06-16", "Devengada", 23967.90, "20132023540", "EMPRESA REGIONAL DE SERVICIO PUBLICO... HIDRANDINA", 1],
+        [82, "POR EL SERVICIO DE ABOGADO PARA ASISTENCIA TECNICA...", "2025-06-16", "Devengada", 3000.00, "10466968914", "CUSMA MERCHAN JEAN CARLOS", 1],
+        [83, "SERVICIO DE PREPARACION DE ALIMENTOS", "2025-06-17", "Devengada", 517.00, "10178473897", "GUZMAN VALVERDE TERESA LEONILA", 1],
+        [84, "SERVICIO DE PREPARACION DE REFRIGERIO", "2025-06-17", "Devengada", 980.00, "10328237941", "JULCAMORO MARQUEZ GLADYS DEL CARMEN", 1],
+        [85, "SERVICIO DE PREPARACION DE REFRIGERIOS", "2025-06-17", "Devengada", 200.00, "10328237941", "JULCAMORO MARQUEZ GLADYS DEL CARMEN", 1],
+        [86, "POR EL SERVICIO DE ENERGIA ELECTRICA PARA EL P.S....", "2025-06-17", "Devengada", 78.41, "20602961720", "ASOCIACION ELECTRICA HIDRO MACATE", 1],
+        [87, "POR EL SERVICIO DE DIGITACION (HIS) PARA REGISTRO...", "2025-06-18", "Devengada", 2000.00, "10454916056", "BORJA CAZANA LEYDI STEPHANIE", 1],
+        [88, "SERVICIO DE MANTENIMIENTO DE EQUIPOS MEDICOS", "2025-06-18", "Anulada", 15000.00, "20574709688", "INVERSIONES VIDECO S.A.C.", 1],
+        [89, "SERVICIO DE TELEFONIA MOVIL", "2025-06-18", "Devengada", 9156.90, "20106897914", "ENTEL PERU S.A.", 1],
+        [90, "SERVICIO DE INSTALACION DE EQUIPOS DE AIRE...", "2025-06-18", "Comprometida", 15278.00, "10702398431", "LUJAN CARRANZA BRAYAN ESTIWARD", 1],
+        [91, "SERVICIO DE ALIMENTACION", "2025-06-19", "Devengada", 1723.86, "10328237941", "JULCAMORO MARQUEZ GLADYS DEL CARMEN", 1],
+        [92, "SERVICIO DE COFFE BREAK", "2025-06-19", "Anulada", 980.00, "10328237941", "JULCAMORO MARQUEZ GLADYS DEL CARMEN", 1],
+        [93, "SERVICIO DE ALIMENTACION", "2025-06-19", "Anulada", 500.00, "10328237941", "JULCAMORO MARQUEZ GLADYS DEL CARMEN", 1],
+        [94, "SERVICIO DE ALIMENTACION", "2025-06-19", "Anulada", 500.00, "10328237941", "JULCAMORO MARQUEZ GLADYS DEL CARMEN", 1],
+        [95, "POR EL SERVICIO DE ASISTENCIA TECNICA LEGAL (ABOGADO)...", "2025-06-19", "Devengada", 3000.00, "10715768068", "CARRANZA TRIGOSO MIRELA DEL CARMEN", 1],
+        [96, "POR EL SERVICIO DE PROFESIONAL DE SALUD (LIC...", "2025-06-19", "Devengada", 3000.00, "10329606967", "LOPEZ MEJIA MARLENY FLOR", 1],
+        [97, "POR EL SERVICIO DE ASISTENCIA TECNICA ADMINISTRATIVA...", "2025-06-19", "Devengada", 2500.00, "15605137277", "MORENO CAMACARO CARLOS DANIEL", 1],
+        [98, "SERVICIO DE INSPECCION: PERSONAL JEFE DE BRIGADA...", "2025-06-19", "Devengada", 6000.00, "10476988671", "CELIS PORTILLA CINTHIA", 1],
+        [99, "SERVICIO DE ALIMENTACION DE PERSONAS", "2025-06-19", "Devengada", 665.00, "10327895198", "CASTA;EDA PE;A CARLOS ALBERTO", 1],
+        [100, "SERVICIO DE ALIMENTACION", "2025-06-19", "Devengada", 500.00, "10328237941", "JULCAMORO MARQUEZ GLADYS DEL CARMEN", 1],
+        [101, "SERVICIO DE MANTENIMIENTO CORRECTIVO DE CAMIONETA", "2025-06-19", "Devengada", 4000.00, "10328384782", "RUIZ CHAVEZ WILMER", 1],
+        [102, "SERVICIO DE PROFESIONAL DE SALUD (LIC. ENFERMERIA)...", "2025-06-20", "Devengada", 3479.00, "10459297265", "RIVERA POLO ALEXANDRA MARITZA", 1],
+        [103, "SERVICIO DE INSPECCION PERSONAL INSPECTOR - ABATIZADOR...", "2025-06-20", "Anulada", 5400.00, "10483682056", "SUYON PRINCIPE LORENA MACIEL", 1],
+        [104, "SERVICIO DE INSPECCION PERSONAL INSPECTOR - ABATIZADOR...", "2025-06-20", "Devengada", 5400.00, "10434649370", "OLIVERA LOPEZ ANDREA BENIGNA", 1],
+        [105, "SERVICIO DE INSPECCION PERSONAL INSPECTOR - ABATIZADOR...", "2025-06-20", "Devengada", 5400.00, "10769283949", "SALINAS QUIJANDRIA ANGIE ISABEL", 1],
+        [106, "POR EL SERVICIO DE LIC. EN ENFERMERIA PARA LA...", "2025-06-24", "Devengada", 3500.00, "10459297265", "RIVERA POLO ALEXANDRA MARITZA", 1],
+        [107, "POR EL SERVICIO DE BIOLOGO PARA LA UNIDAD DE SANIDAD...", "2025-06-24", "Devengada", 7500.00, "10702571711", "PRECIADO ALVARADO KELLY NATHALY", 1],
+        [108, "SERVICIO DE CONDUCCION DE VEHICULO PARA LA UNIDAD...", "2025-06-24", "Devengada", 2000.00, "10701431508", "PEREZ DE LOS SANTOS JORGE ERNESTO", 1],
+        [109, "SERVICIO ESPECIALIZADO EN GESTION PUBLICA DE MANERA...", "2025-06-24", "Devengada", 10000.00, "10461014238", "HERRERA DOMINGUEZ ALEY ALE", 1],
+        [110, "POR EL SERVICIO DE ENERGIA ELECTRICA DEL P.S...", "2025-06-25", "Devengada", 574.20, "20132023540", "EMPRESA REGIONAL DE SERVICIO PUBLICO... HIDRANDINA", 1],
+        [111, "SERVICIO DE ALIMENTACION DE PERSONAS", "2025-06-26", "Devengada", 585.00, "10178473897", "GUZMAN VALVERDE TERESA LEONILA", 1],
+        [112, "POR EL SERVICIO DE AUXILIAR EN ENFERMERIA DE MANERA...", "2025-06-26", "Devengada", 1800.00, "10409837595", "REYES RAMOS MARILU", 1],
+        [113, "SERVICIO DE INSPECCION: PERSONAL JEFE DE BRIGADA EN...", "2025-06-27", "Devengada", 6000.00, "10732320259", "SICHES IBA;EZ KATIA PAOLA", 1],
+        [114, "POR EL SERVICIO DE DIGITACION DE MANERA TEMPORAL...", "2025-06-30", "Devengada", 2000.00, "10710542886", "CRIBILLERO BENITES EBER ANIBAL", 1],
+        [115, "POR EL SERVICIO DE LIC. PSICOLOGIA DE MANERA...", "2025-06-30", "Devengada", 6000.00, "10709442011", "ROSALES SHISHCO SILVIA ELIZABETH", 1],
+        [116, "SERVICIO DE PUBLICIDAD EN DIFUSION LOCAL POR...", "2025-06-30", "Devengada", 2000.00, "20445774881", "MULTISERVICIOS CONTRATISTAS GENERALES MOISES S.R.L.", 1]
     ];
 
-    for(let i = 31; i <= 116; i++) {
-        let desc = (i % 3 === 0) ? "SERVICIO DE ALIMENTACION" : "SERVICIO INSPECCION PERSONAL";
-        let razon = (i % 3 === 0) ? "JULCAMORO MARQUEZ GLADYS" : "PROVEEDOR GENERAL O/S " + i;
-        let estado = (i === 49 || i === 66 || i === 88 || i === 90) ? ((i === 66 || i === 88) ? "Anulada" : "Comprometida") : "Devengada";
-        dbSIAF.push([i, desc, "2025-06-05", estado, 5400.00, "10000000000", razon, 1]);
-    }
-
-    // RENDERIZADO INMEDIATO
     function renderizarTabla() {
         const tbody = document.getElementById('tabla-inventario');
         let htmlContent = '';
@@ -236,6 +297,12 @@
             if (cantidad <= 100) { colFondo = "bg-red-100"; colTexto = "text-red-800"; txtEtiqueta = "Crítico"; } 
             else if (cantidad > 100 && cantidad <= 500) { colFondo = "bg-yellow-100"; colTexto = "text-yellow-800"; txtEtiqueta = "Regular"; }
 
+            // Si es un "servicio", le ponemos "N/A" para no usar stock innecesario, pero dejamos el sistema intacto.
+            let esServicio = desc.includes("SERVICIO");
+            let inputHTML = `<input type="number" id="stock-${id}" value="${cantidad}" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="actualizarArrayDOM(${id})">`;
+            let etiquetaHTML = `<span id="label-${id}">${txtEtiqueta}</span> (${inputHTML})`;
+            if(esServicio && cantidad === 1) { colFondo = "bg-gray-100"; colTexto = "text-gray-600"; etiquetaHTML = "Servicio (N/A)"; }
+
             htmlContent += `
                 <tr class="hover:bg-blue-50 transition-colors">
                     <td class="p-3 font-bold text-gray-500">${id}</td>
@@ -247,8 +314,7 @@
                     <td class="p-3 truncate max-w-[180px] text-gray-600" title="${razon}">${razon}</td>
                     <td class="p-3 text-center">
                         <span id="badge-${id}" class="px-2 py-1 rounded text-[11px] inline-flex items-center justify-center gap-1 ${colFondo} ${colTexto} font-bold">
-                            <span id="label-${id}">${txtEtiqueta}</span> (
-                            <input type="number" id="stock-${id}" value="${cantidad}" class="w-12 bg-transparent text-center font-bold focus:outline-none focus:border-b border-gray-400" oninput="actualizarArrayDOM(${id})"> )
+                            ${etiquetaHTML}
                         </span>
                     </td>
                     <td class="p-3">
@@ -265,7 +331,6 @@
 
     renderizarTabla();
 
-    // LÓGICA DE CONTROL
     function actualizarStock(id, cambio) {
         let index = dbSIAF.findIndex(i => i[0] === id);
         if (index !== -1) {
@@ -286,12 +351,12 @@
     function aplicarColores(id, cant) {
         let b = document.getElementById(`badge-${id}`);
         let l = document.getElementById(`label-${id}`);
+        if(!l || l.innerText === "Servicio (N/A)") return;
         if (cant <= 100) { b.className = "px-2 py-1 rounded text-[11px] inline-flex items-center justify-center gap-1 bg-red-100 text-red-800 font-bold"; l.innerText = "Crítico"; } 
         else if (cant > 100 && cant <= 500) { b.className = "px-2 py-1 rounded text-[11px] inline-flex items-center justify-center gap-1 bg-yellow-100 text-yellow-800 font-bold"; l.innerText = "Regular"; } 
         else { b.className = "px-2 py-1 rounded text-[11px] inline-flex items-center justify-center gap-1 bg-green-100 text-green-800 font-bold"; l.innerText = "Óptimo"; }
     }
 
-    // FORMULARIO Y MODALES
     function toggleFormulario() { document.getElementById('form-nuevo-insumo').classList.toggle('hidden'); }
     function agregarNuevoInsumo() {
         const desc = document.getElementById('nuevo-nombre').value.toUpperCase();
@@ -314,7 +379,7 @@
     function abrirModalOrdenes() {
         let html = ''; let h = false;
         dbSIAF.forEach(i => {
-            if(i[7] <= 100) {
+            if(i[7] <= 100 && !i[1].includes("SERVICIO")) {
                 h = true; html += `<div class="flex justify-between items-center bg-gray-50 p-3 rounded border border-gray-200"><div><p class="font-bold text-sm truncate max-w-[200px]">${i[1]}</p><p class="text-xs text-red-600 font-bold">Stock: ${i[7]}</p></div><input type="number" class="input-pedido w-16 p-1 border rounded text-center text-sm" data-id="${i[0]}" value="100"></div>`;
             }
         });
@@ -327,7 +392,6 @@
     function cerrarModalPagos() { document.getElementById('modal-pagos').classList.add('hidden'); }
     function procesarPagos() { cerrarModalPagos(); mostrarExito('Pagos liberados.'); }
 
-    // RUTAS
     function goDashboard() { window.location.href = "dashboard.html"; }
     function goCRM() { window.location.href = "crm.html"; }
     function logout() { if (confirm("¿Cerrar sesión?")) window.location.href = "index.html"; }
