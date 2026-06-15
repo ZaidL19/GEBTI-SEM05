@@ -553,6 +553,22 @@
             
             toggleFormulario();
             mostrarExito('Insumo y datos SIAF agregados correctamente.');
+
+            guardarInventarioERP();
+
+            let noticias =
+            JSON.parse(
+            localStorage.getItem("noticiasERP")
+            ) || [];
+
+            noticias.push(
+            "Nuevo insumo agregado: " + nombre
+            );
+
+            localStorage.setItem(
+            "noticiasERP",
+            JSON.stringify(noticias)
+            );
         }
 
         function actualizarStock(id, cantidadCambio) {
@@ -565,6 +581,7 @@
             
             inputStock.value = nuevoStock;
             verificarEstado(id);
+            guardarInventarioERP();
         }
 
         function verificarEstado(id) {
@@ -649,6 +666,49 @@
         function procesarPagos() {
             cerrarModalPagos();
             mostrarExito('Pagos aprobados y fondos liberados exitosamente.');
+        }
+
+        function guardarInventarioERP(){
+
+            let inventario = [];
+
+            document
+                .querySelectorAll(
+                    "#tabla-inventario tr"
+                )
+                .forEach(fila=>{
+
+                    let nombre =
+                        fila.children[0].innerText;
+
+                    let stockInput =
+                        fila.querySelector(
+                            "input[id^='stock-']"
+                        );
+
+                    if(stockInput){
+
+                        inventario.push({
+                            nombre:nombre,
+                            stock:parseInt(
+                                stockInput.value
+                            )
+                        });
+
+                    }
+
+                });
+
+            localStorage.setItem(
+                "inventarioERP",
+                JSON.stringify(inventario)
+            );
+
+        }
+        window.onload = function(){
+
+            guardarInventarioERP();
+
         }
     </script>
 </body>
