@@ -3,123 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRM - Red de Salud Pacífico Norte</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>CRM Preventivo - Red Pacífico Norte</title>
+    <link rel="stylesheet" href="/css/style_crm.css">
 </head>
-<body class="bg-gray-100 font-sans min-h-screen">
+<body>
 
-    <div class="container mx-auto p-6">
-        <header class="bg-blue-800 text-white p-6 rounded-lg shadow-md mb-8">
-            <h1 class="text-3xl font-bold">Módulo CRM: Campañas de Prevención Automatizadas</h1>
-            <p class="text-blue-200 mt-1">Dirección del Sistema Integrado de Salud - Red Pacífico Norte</p>
-        </header>
+    <div class="nav-bar">
+        <h1>CRM Red Pacífico Norte — Gestión de Campañas Sanitarias</h1>
+        <a href="/dashboard.html" class="btn-dashboard">🏠 Volver al Dashboard</a>
+    </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            
-            <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-emerald-500">
-                <h2 class="text-xl font-bold text-gray-800 mb-4">🚀 Automatización de Campañas</h2>
-                <p class="text-sm text-gray-600 mb-6">El motor de reglas del CRM analiza brotes epidemiológicos o vulnerabilidad y segmenta en tiempo real.</p>
-                
-                <div class="space-y-4">
-                    <div class="p-4 border border-gray-200 rounded-lg bg-orange-50">
-                        <h3 class="font-bold text-orange-800 text-base">Alerta Brote de Dengue</h3>
-                        <p class="text-xs text-gray-600 mt-1"><strong>Filtro automático:</strong> Sectores con alta tasa vectorial (Coishco, Santa, Chimbote Centro).</p>
-                        <button onclick="enviarCampana('DENGUE')" class="w-full mt-3 bg-orange-600 text-white font-semibold py-2 px-4 rounded hover:bg-orange-700 transition text-sm">
-                            Ejecutar Alerta Georreferenciada
-                        </button>
-                    </div>
-
-                    <div class="p-4 border border-gray-200 rounded-lg bg-blue-50">
-                        <h3 class="font-bold text-blue-800 text-base">Campaña Invierno (Influenza)</h3>
-                        <p class="text-xs text-gray-600 mt-1"><strong>Filtro automático:</strong> Población vulnerable (Adultos mayores de 60 años y Niños).</p>
-                        <button onclick="enviarCampana('INFLUENZA')" class="w-full mt-3 bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition text-sm">
-                            Ejecutar Segmentación por Riesgo
-                        </button>
-                    </div>
+    <div class="dashboard-grid">
+        
+        <div class="row-superior">
+            <div class="box flex-1">
+                <h3>🚀 Disparador Automatizado de Alertas</h3>
+                <p class="txt-sub">Filtra y notifica instantáneamente a bases vulnerables.</p>
+                <div class="crm-actions">
+                    <button class="btn btn-dengue" onclick="dispararCampana('DENGUE')">Alerta Dengue (Zonas)</button>
+                    <button class="btn btn-influenza" onclick="dispararCampana('INFLUENZA')">Campaña Vacunación (Riesgo)</button>
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-md lg:col-span-2">
-                <h2 class="text-xl font-bold text-gray-800 mb-4">👥 Base de Datos Segmentada del Ciudadano</h2>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse text-sm">
+            <div class="box flex-1">
+                <h3>🛠️ Consola de Control de Registros</h3>
+                <p class="txt-sub">Selecciona un paciente de la tabla abajo para activar las acciones:</p>
+                <div class="action-bar">
+                    <button id="btn-global-editar" class="btn btn-edit" onclick="iniciarEdicion()" disabled>✏️ Editar Seleccionado</button>
+                    <button id="btn-global-eliminar" class="btn btn-delete" onclick="eliminarPaciente()" disabled>🗑️ Eliminar Seleccionado</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row-inferior">
+            
+            <div class="box flex-1">
+                <h3 id="titulo-formulario">Registrar Nuevo Paciente</h3>
+                <form id="form-paciente" onsubmit="guardarPaciente(event)">
+                    <label>Nombre Completo:</label>
+                    <input type="text" id="form-nombre" required placeholder="Ej. Justyn Lector">
+
+                    <label>Edad:</label>
+                    <input type="number" id="form-edad" required min="0" max="115">
+
+                    <label>Zona / Distrito:</label>
+                    <select id="form-zona" required>
+                        <option value="Nuevo Chimbote">Nuevo Chimbote</option>
+                        <option value="Chimbote Centro">Chimbote Centro</option>
+                        <option value="Coishco">Coishco</option>
+                        <option value="Santa">Santa</option>
+                    </select>
+
+                    <label>Población de Riesgo:</label>
+                    <select id="form-riesgo" required>
+                        <option value="Ninguno">Ninguno (Población General)</option>
+                        <option value="Adulto Mayor">Adulto Mayor</option>
+                        <option value="Pediátrico">Pediátrico</option>
+                    </select>
+
+                    <label>Celular de Contacto:</label>
+                    <input type="text" id="form-telefono" required pattern="[0-9]{9}" placeholder="9XXXXXXXX">
+                    
+                    <button type="submit" id="btn-enviar" class="btn btn-submit">Registrar Paciente</button>
+                    <button type="button" id="btn-cancelar" class="btn btn-cancel" onclick="cancelarEdicion()">Cancelar Selección</button>
+                </form>
+            </div>
+
+            <div class="box flex-2">
+                <h3>📋 Padrón de Ciudadanos Activos</h3>
+                <div class="table-responsive">
+                    <table>
                         <thead>
-                            <tr class="bg-gray-200 text-gray-700 font-semibold">
-                                <th class="p-3">Paciente</th>
-                                <th class="p-3">Edad</th>
-                                <th class="p-3">Distrito / Zona</th>
-                                <th class="p-3">Grupo Riesgo</th>
-                                <th class="p-3">Celular</th>
+                            <tr>
+                                <th>Paciente</th>
+                                <th>Edad</th>
+                                <th>Zona / Distrito</th>
+                                <th>Grupo Riesgo</th>
+                                <th>Celular</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-100 text-gray-600">
-                            {% for c in ciudadanos %}
-                            <tr class="hover:bg-gray-50">
-                                <td class="p-3 font-medium text-gray-900">{{ c.nombre }}</td>
-                                <td class="p-3">{{ c.edad }} años</td>
-                                <td class="p-3">{{ c.zona }}</td>
-                                <td class="p-3">
-                                    <span class="px-2 py-1 rounded text-xs {{ 'bg-red-100 text-red-800' if c.riesgo != 'Ninguno' else 'bg-gray-100 text-gray-800' }}">
-                                        {{ c.riesgo }}
-                                    </span>
-                                </td>
-                                <td class="p-3 text-mono">{{ c.telefono }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
+                        <tbody id="tabla-ciudadanos">
+                            </tbody>
                     </table>
                 </div>
             </div>
-        </div>
 
-        <div class="bg-white p-6 rounded-lg shadow-md mt-8 border-t-4 border-blue-600">
-            <h2 class="text-xl font-bold text-gray-800 mb-4">📊 Historial de Salida de Alertas Preventivas (Log del Servidor)</h2>
-            <div class="overflow-y-auto max-h-60" id="contenedor-log">
-                {% if not historial %}
-                <p id="sin-datos" class="text-gray-500 text-sm italic">Esperando ejecuciones automáticas del motor CRM...</p>
-                {% endif %}
-                <div id="lista-logs" class="space-y-2">
-                    {% for h in historial %}
-                    <div class="p-3 bg-gray-50 border-l-4 border-blue-500 rounded text-xs">
-                        <span class="text-gray-400 font-mono">[{{ h.fecha }}]</span> 
-                        <strong class="text-blue-700">{{ h.campana }}</strong> enviado a <strong>{{ h.ciudadano }}</strong> ({{ h.zona }}) al número <span class="underline">{{ h.contacto }}</span>.
-                        <p class="text-gray-600 italic mt-1">"{{ h.mensaje_enviado }}"</p>
-                    </div>
-                    {% endfor %}
+            <div class="box flex-1">
+                <h3>💬 Historial SMS Enviados</h3>
+                <button class="btn-clear" onclick="reiniciarHistorial()">
+                    🗑️ Limpiar Historial
+                </button>
+                <div id="historial-envios">
                 </div>
             </div>
+
         </div>
     </div>
 
-    <script>
-
-        const role = localStorage.getItem("role");
-
-if(
-    role !== "admin" &&
-    role !== "rrhh"
-){
-    alert("No tiene permisos");
-
-    window.location.href =
-        "dashboard.html";
-}
-
-        function enviarCampana(tipo) {
-            fetch('/disparar_campana', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ tipo_campana: tipo })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    alert(`CRM Automatizado: Se enviaron ${data.enviados} alertas para la ${data.detalles}.`);
-                    window.location.reload(); // Recarga para refrescar los logs simulados
-                }
-            })
-            .catch(err => console.error("Error en el CRM:", err));
-        }
-    </script>
+    <script src="/crm_logic.js"></script>
 </body>
 </html>
