@@ -193,7 +193,6 @@
 </div>
 
 <script>
-
 const role = localStorage.getItem("role");
 
 if(
@@ -201,17 +200,32 @@ if(
     role !== "logistica"
 ){
     alert("No tiene permisos");
-
-    window.location.href =
-        "../dashboard.html";
+    window.location.href = "../dashboard.html";
 }
+
     // ==========================================
     // SISTEMA FINANCIERO Y BASE DE DATOS
     // ==========================================
-    let carritoPagos = []; // Almacena las órdenes generadas pendientes de pago
+    
+    // Cargar Presupuesto en cuanto cargue la página
+    document.addEventListener("DOMContentLoaded", () => {
+        let inputPresupuesto = document.getElementById('input-presupuesto');
+        let savedPresupuesto = localStorage.getItem('erp_presupuesto');
+        if (savedPresupuesto) {
+            inputPresupuesto.value = savedPresupuesto;
+        }
+        
+        // Guardar automáticamente si lo editas a mano
+        inputPresupuesto.addEventListener('input', () => {
+            localStorage.setItem('erp_presupuesto', inputPresupuesto.value);
+        });
 
-    // [ID, "Descripción", "Fecha", "Estado", Monto, "RUC", "Razón Social", Cantidad]
-    let dbSIAF = [
+        actualizarBadgePagos();
+    });
+
+    let carritoPagos = JSON.parse(localStorage.getItem('erp_carritoPagos')) || []; 
+
+    let defaultDB = [
         [1, "ADQUISICION DE TIAMINA", "2025-06-03", "Devengada", 8699.99, "20554303812", "INVERSIONES GENERALES MIJA SAC", 850],
         [2, "ADQUISICION DE MATERIALES", "2025-06-04", "Devengada", 4000.00, "10432081058", "RIOS CHICCHIS RUBEN DARIO", 320],
         [3, "ADQUISICION DE EQUIPOS DE SONIDO", "2025-06-04", "Devengada", 4800.00, "20531936257", "INVERSIONES TRIVISION S.A.C.", 5],
@@ -330,13 +344,26 @@ if(
         [116, "SERVICIO DE PUBLICIDAD EN DIFUSION LOCAL POR...", "2025-06-30", "Devengada", 2000.00, "20445774881", "MULTISERVICIOS CONTRATISTAS GENERALES MOISES S.R.L.", 150]
     ];
 
-    // Calculamos y añadimos el Precio Unitario (PU) a la base de datos (Index 8)
-    dbSIAF = dbSIAF.map(item => {
-        let pu = item[7] > 0 ? (item[4] / item[7]) : item[4]; // Monto / Cantidad
-        if (!isFinite(pu) || pu === 0) pu = 100; // Resguardo
-        item.push(pu);
-        return item;
-    });
+    // Cargar la DB desde LocalStorage. Si no existe, preparamos la defaultDB y la guardamos
+    let dbSIAF = JSON.parse(localStorage.getItem('erp_dbSIAF'));
+    if (!dbSIAF) {
+        dbSIAF = defaultDB.map(item => {
+            let pu = item[7] > 0 ? (item[4] / item[7]) : item[4]; 
+            if (!isFinite(pu) || pu === 0) pu = 100; 
+            item.push(pu);
+            return item;
+        });
+        localStorage.setItem('erp_dbSIAF', JSON.stringify(dbSIAF));
+    }
+
+    // Funciones correctas de Guardado
+    function guardarDB() {
+        localStorage.setItem('erp_dbSIAF', JSON.stringify(dbSIAF));
+    }
+    
+    function guardarCarrito() {
+        localStorage.setItem('erp_carritoPagos', JSON.stringify(carritoPagos));
+    }
 
     function renderizarTabla() {
         const tbody = document.getElementById('tabla-inventario');
@@ -384,46 +411,29 @@ if(
 
     renderizarTabla();
     
-    function guardarInventarioERP() {
-
-            const inventarioERP = dbSIAF.map(item => ({
-                id: item[0],
-                nombre: item[1],
-                fecha: item[2],
-                estado: item[3],
-                monto: item[4],
-                ruc: item[5],
-                razonSocial: item[6],
-                stock: item[7]
-            }));
-
-            localStorage.setItem(
-                "inventarioERP",
-                JSON.stringify(inventarioERP)
-        );
-    }
-    guardarInventarioERP();
-
     function actualizarStock(id, cambio) {
         let index = dbSIAF.findIndex(i => i[0] === id);
         if (index !== -1) {
             let ns = dbSIAF[index][7] + cambio;
             if (ns < 0) ns = 0;
             dbSIAF[index][7] = ns;
+            
             let inp = document.getElementById(`stock-${id}`);
             if(inp) { inp.value = ns; aplicarColores(id, ns); }
+            
+            guardarDB(); // Se guarda en LocalStorage
         }
-        guardarInventarioERP();
-
     }
 
     function actualizarArrayDOM(id) {
         let ns = parseInt(document.getElementById(`stock-${id}`).value);
         if(isNaN(ns) || ns < 0) ns = 0;
         let idx = dbSIAF.findIndex(i => i[0] === id);
-        if (idx !== -1) dbSIAF[idx][7] = ns;
+        if (idx !== -1) {
+            dbSIAF[idx][7] = ns;
+            guardarDB(); // Se guarda en LocalStorage
+        }
         aplicarColores(id, ns);
-        guardarInventarioERP();
     }
 
     function aplicarColores(id, cant) {
@@ -446,10 +456,11 @@ if(
         let pu = c > 0 ? (m/c) : m;
         
         dbSIAF.push([nid, desc, new Date().toISOString().split('T')[0], document.getElementById('nuevo-estado').value, m, document.getElementById('nuevo-ruc').value || '-', document.getElementById('nuevo-razon').value.toUpperCase() || '-', c, pu]);
+        
+        guardarDB(); // Se guarda en LocalStorage
         renderizarTabla();
         toggleFormulario();
-        mostrarExito('Expediente guardado.');
-        guardarInventarioERP();
+        mostrarExito('Expediente guardado exitosamente.');
     }
 
     function mostrarExito(msg) {
@@ -504,10 +515,8 @@ if(
             let cantPedir = parseInt(p.value) || 0;
             
             if(cantPedir > 0) {
-                // Actualizar stock en la tabla
-                actualizarStock(idTarget, cantPedir);
+                actualizarStock(idTarget, cantPedir); // Aquí ya se llama a guardarDB internamente
                 
-                // Buscar el item para calcular el costo y mandarlo al carrito
                 let itemDB = dbSIAF.find(i => i[0] === idTarget);
                 let costoTotalItem = cantPedir * itemDB[8];
                 
@@ -519,6 +528,8 @@ if(
                 });
             }
         }); 
+        
+        guardarCarrito(); // Guardamos el carrito en LocalStorage
         actualizarBadgePagos();
         cerrarModalOrdenes(); 
         mostrarExito('Órdenes emitidas y enviadas a ejecución presupuestal.'); 
@@ -569,28 +580,31 @@ if(
         // Descontar
         let nuevoPresupuesto = presupuestoActual - totalAPagar;
         inputPresupuesto.value = nuevoPresupuesto.toFixed(2);
+        localStorage.setItem('erp_presupuesto', inputPresupuesto.value); // Guardamos el nuevo presupuesto
         
-        // Vaciar carrito y actualizar vista
+        // Vaciar carrito
         carritoPagos = [];
+        guardarCarrito(); // Guardamos el carrito vacío
+        
         actualizarBadgePagos();
         cerrarModalPagos(); 
         mostrarExito(`Pagos aprobados. S/. ${totalAPagar.toFixed(2)} descontados del Presupuesto Institucional.`); 
     }
 
     // RUTAS
-        function goDashboard() {
-            window.location.href = "../dashboard.html";
-        }
+    function goDashboard() {
+        window.location.href = "../dashboard.html";
+    }
 
-        function goCRM() {
-            window.location.href = "crm.html";
-        }
+    function goCRM() {
+        window.location.href = "crm.html";
+    }
 
-        function logout() {
-            if (confirm("¿Cerrar sesión?")) {
-                window.location.href = "../index.html";
-            }
+    function logout() {
+        if (confirm("¿Cerrar sesión?")) {
+            window.location.href = "../index.html";
         }
+    }
 </script>
 
 </body>
