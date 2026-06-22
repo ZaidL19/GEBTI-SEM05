@@ -1,7 +1,7 @@
-// Base de datos en memoria dinámica (Semilla inicial al cargar la página)
+// Base de datos en memoria dinamica - Semilla inicial
 let CIUDADANOS = [];
 
-// El historial de campañas sí lo dejamos en localStorage para que no sature la hoja principal
+// El historial de campañas si lo dejamos en localStorage para que no sature la hoja principal
 let historialEnvios = JSON.parse(localStorage.getItem("crm_historial")) || [];
 let idPacienteSeleccionado = null;
 
@@ -68,7 +68,6 @@ function guardarPaciente(event) {
     }
 
     // Refrescar UI local de inmediato
-    localStorage.setItem("crm_historial", JSON.stringify(historialEnvios)); // Solo guardamos historial
     document.getElementById("form-paciente").reset();
     idPacienteSeleccionado = null;
     cargarCiudadanos();
@@ -92,7 +91,6 @@ function eliminarPaciente() {
     }
 }
 
-// --- TODO EL RESTO DE TUS FUNCIONES SE MANTIENEN IGUAL ---
 function cargarCiudadanos() {
     const tbody = document.getElementById("tabla-ciudadanos");
     if(!tbody) return;
@@ -214,7 +212,7 @@ function actualizarHistorialHtml() {
 }
 
 function reiniciarHistorial() {
-    if (confirm("¿Estás seguro de limpiar todo el historial de envíos para la deonstración?")) {
+    if (confirm("¿Estás seguro de limpiar todo el historial de envíos para la demostración?")) {
         historialEnvios = [];
         localStorage.removeItem("crm_historial");
         actualizarHistorialHtml();
