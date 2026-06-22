@@ -1,405 +1,622 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convocatorias - RIS Pacífico Norte</title>
+    <title>Convocatorias - RIS Pacífico Norte</title>
 
-<link rel="stylesheet" href="css/convocatorias.css">
-<link rel="stylesheet" href="css/convocatorias.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/convocatorias.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
 
-<!-- HEADER -->
+<body class="internal-page">
 
-<header class="topbar">
+    <!-- HEADER -->
 
-    <div class="topbar-top">
+    <header class="topbar">
+        <div class="logo-section">
+            <img src="img/Index/logo.png" alt="Logo 1">
 
-        <div class="logo">
-            <img src="img/Index/logo.png" alt="">
-            <h1>RED INTEGRADA DE SALUD PACÍFICO NORTE</h1>
+            <div class="titulo-header">
+                <h1>
+                    RED INTEGRADA DE SALUD PACÍFICO NORTE
+                </h1>
+            </div>
         </div>
+    </header>
 
-        <div class="social-header">
-            <a href="https://www.facebook.com/rispnorte" target="_blank">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://www.instagram.com/rispacificonorte/" target="_blank">
-                <i class="fab fa-instagram"></i>
-            </a>
-        </div>
+    <nav class="main-nav">
+        <ul class="nav-links">
 
-    </div>
+            <li>
+                <a href="index.html">Inicio</a>
+            </li>
 
-    <nav>
-        <a href="index.html">Inicio</a>
-        <a href="institucional.html">Institucional</a>
-        <a href="noticias.html">Noticias</a>
-        <a href="convocatorias.html">Convocatorias</a>
-        <a href="bpm.html">Procesos</a>
-        <a href="contacto.html">Contacto</a>
+            <li class="dropdown">
+
+                <a href="institucional.html" class="dropdown-trigger">
+                    Nosotros
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="institucional.html#quienes-somos">
+                            ¿Quiénes Somos?
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="institucional.html#historia">
+                            Historia
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="institucional.html#mision-vision">
+                            Visión y Misión
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="institucional.html#directorio">
+                            Directorio Institucional
+                        </a>
+                    </li>
+                </ul>
+
+            </li>
+
+            <li>
+                <a href="noticias.html">Noticias</a>
+            </li>
+
+            <li>
+                <a href="convocatorias.html">Convocatorias</a>
+            </li>
+
+            <li class="dropdown">
+                <a href="Normativa.html" class="dropdown-trigger">Normativas</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#ascenso">Ascenso</a></li>
+                    <li><a href="#nombramiento">Nombramiento</a></li>
+                    <li><a href="#resoluciones">Resoluciones</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="contacto.html">Contacto</a>
+            </li>
+
+            <li>
+                <a href="login.html" class="btn-login">
+                    Acceder
+                </a>
+            </li>
+
+        </ul>
     </nav>
 
-</header>
+    <section class="news-hero">
+
+        <h1>Convocatorias</h1>
 
-<!-- TITULO -->
+        <p>
+            Consulta los procesos CAS, locación de servicios,
+            concursos internos y convocatorias vigentes de la
+            Red Integrada de Salud Pacífico Norte.
+        </p>
 
-<section class="titulo">
+    </section>
 
-    <h2>CONVOCATORIAS DE RED INTEGRADA DE SALUD PACÍFICO NORTE</h2>
+    <!-- CONVOCATORIAS CAS -->
 
-</section>
+    <section class="tabla-section">
 
-<!-- CONVOCATORIAS CAS -->
+        <h3>CONVOCATORIAS CAS</h3>
 
-<section class="tabla-section">
+        <div class="tabla-container">
 
-    <h3>CONVOCATORIAS CAS</h3>
+            <table>
 
-    <div class="tabla-container">
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>FECHA</th>
+                        <th>NOMBRE</th>
+                        <th>BASES</th>
+                        <th>FORMATO POSTULACIÓN</th>
+                        <th>FE DE ERRATAS 01</th>
+                        <th>FE DE ERRATAS 02</th>
+                        <th>RESULTADOS DE EVALUACIÓN CURRICULAR</th>
+                        <th>COMUNICADO</th>
+                        <th>CRONOGRAMA</th>
+                        <th>ABSOLUCIÓN RECURSOS DE RECONSIDERACIÓN</th>
+                        <th>CRONOGRAMA DE ENTREVISTA PERSONAL</th>
+                        <th>RESULTADOS FINALES</th>
+                        <th>ESTADO</th>
+                    </tr>
+                </thead>
 
-        <table>
+                <tbody>
 
-            <thead>
-                <tr>
-                    <th>N°</th>
-                    <th>FECHA</th>
-                    <th>NOMBRE</th>
-                    <th>BASES</th>
-                    <th>FORMATO POSTULACIÓN</th>
-                    <th>FE DE ERRATAS 01</th>
-                    <th>FE DE ERRATAS 02</th>
-                    <th>RESULTADOS DE EVALUACIÓN CURRICULAR</th>
-                    <th>COMUNICADO</th>
-                    <th>CRONOGRAMA</th>
-                    <th>ABSOLUCIÓN RECURSOS DE RECONSIDERACIÓN</th>
-                    <th>CRONOGRAMA DE ENTREVISTA PERSONAL</th>
-                    <th>RESULTADOS FINALES</th>
-                    <th>ESTADO</th>
-                </tr>
-            </thead>
+                    <tr>
 
-            <tbody>
+                        <td>1</td>
 
-                <tr>
+                        <td>06-04-2026</td>
 
-                    <td>1</td>
+                        <td>
+                            CONVOCATORIA PÚBLICA DE PERSONAL BAJO EL RÉGIMEN ESPECIAL DE CONTRATACIÓN ADMINISTRATIVA DE
+                            SERVICIO CAS A PLAZO DETERMINADO N001-2026-RISPN-CH
+                        </td>
 
-                    <td>06-04-2026</td>
+                        <td>
+                            <a href="pdf/convocatoria CAS/2026_111_1_Bases.pdf" target="_blank">📄 PDF</a>
+                        </td>
 
-                    <td>
-                        CONVOCATORIA PÚBLICA DE PERSONAL BAJO EL RÉGIMEN ESPECIAL DE CONTRATACIÓN ADMINISTRATIVA DE SERVICIO CAS A PLAZO DETERMINADO N001-2026-RISPN-CH
-                    </td>
+                        <td>
+                            <a href="pdf/convocatoria CAS/2026_111_2_Formato-Postulacion.xlsx" target="_blank">📄
+                                XLSX</a>
+                        </td>
 
-                    <td>
-                        <a href="pdf/convocatoria CAS/2026_111_1_Bases.pdf" target="_blank">📄 PDF</a>
-                    </td>
+                        <td>
+                            <a href="pdf/convocatoria CAS/2026_111_3_FE-DE-ERRATAS-01.pdf" target="_blank">📄 PDF</a>
+                        </td>
 
-                    <td>
-                        <a href="pdf/convocatoria CAS/2026_111_2_Formato-Postulacion.xlsx" target="_blank">📄 XLSX</a>
-                    </td>
+                        <td>
+                            <a href="pdf/convocatoria CAS/2026_111_4_FE-DE-ERRATAS-02.pdf" target="_blank">📄 PDF</a>
+                        </td>
 
-                    <td>
-                        <a href="pdf/convocatoria CAS/2026_111_3_FE-DE-ERRATAS-01.pdf" target="_blank">📄 PDF</a>
-                    </td>
+                        <td>
+                            <a href="pdf/convocatoria CAS/2026_111_5_RESULTADOS-DE-EVALUACIÓN-CURRICULAR.pdf"
+                                target="_blank">📄 PDF</a>
+                        </td>
 
-                    <td>
-                        <a href="pdf/convocatoria CAS/2026_111_4_FE-DE-ERRATAS-02.pdf" target="_blank">📄 PDF</a>
-                    </td>
+                        <td>
+                            <a href="pdf/convocatoria CAS/2026_111_6_COMUNICADO.pdf" target="_blank">📄 PDF</a>
+                        </td>
 
-                    <td>
-                        <a href="pdf/convocatoria CAS/2026_111_5_RESULTADOS-DE-EVALUACIÓN-CURRICULAR.pdf" target="_blank">📄 PDF</a>
-                    </td>
+                        <td>
+                            <a href="pdf/convocatoria CAS/2026_111_7_CRONOGRAMA.pdf" target="_blank">📄 PDF</a>
+                        </td>
 
-                    <td>
-                        <a href="pdf/convocatoria CAS/2026_111_6_COMUNICADO.pdf" target="_blank">📄 PDF</a>
-                    </td>
+                        <td>
+                            <a href="pdf/convocatoria CAS/2026_111_8_ABSOLUCIÓN-DE-RECURSOS-DE-RECONSIDERACIÓN.pdf"
+                                target="_blank">📄 PDF</a>
+                        </td>
 
-                    <td>
-                        <a href="pdf/convocatoria CAS/2026_111_7_CRONOGRAMA.pdf" target="_blank">📄 PDF</a>
-                    </td>
+                        <td>
+                            <a href="pdf/convocatoria CAS/2026_111_9_CRONOGRAMA-DE-ENTREVISTA-PERSONAL.pdf"
+                                target="_blank">📄 PDF</a>
+                        </td>
 
-                    <td>
-                        <a href="pdf/convocatoria CAS/2026_111_8_ABSOLUCIÓN-DE-RECURSOS-DE-RECONSIDERACIÓN.pdf" target="_blank">📄 PDF</a>
-                    </td>
+                        <td>
+                            <a href="pdf/convocatoria CAS/2026_111_10_RESULTADOS-FINALES.pdf" target="_blank">📄 PDF</a>
+                        </td>
 
-                    <td>
-                        <a href="pdf/convocatoria CAS/2026_111_9_CRONOGRAMA-DE-ENTREVISTA-PERSONAL.pdf" target="_blank">📄 PDF</a>
-                    </td>
+                        <td class="proceso">
+                            EN PROCESO
+                        </td>
 
-                    <td>
-                        <a href="pdf/convocatoria CAS/2026_111_10_RESULTADOS-FINALES.pdf" target="_blank">📄 PDF</a>
-                    </td>
+                    </tr>
 
-                    <td class="proceso">
-                        EN PROCESO
-                    </td>
+                </tbody>
 
-                </tr>
+            </table>
 
-            </tbody>
+        </div>
 
-        </table>
+    </section>
 
-    </div>
+    <!-- CONVOCATORIA LOCACIÓN 2026 -->
 
-</section>
+    <section class="tabla-section">
 
-<!-- TABLA LOCACION -->
+        <h3>CONVOCATORIA LOCACIÓN</h3>
 
-<!-- CONVOCATORIA LOCACIÓN 2026 -->
+        <div class="tabla-container">
 
-<section class="tabla-section">
+            <table>
 
-    <h3>CONVOCATORIA LOCACIÓN</h3>
+                <thead>
 
-    <div class="tabla-container">
+                    <tr>
+                        <th>N°</th>
+                        <th>FECHA</th>
+                        <th>NOMBRE</th>
+                        <th>TDR LOCADORES</th>
+                        <th>ANEXOS</th>
+                        <th>FICHA ÚNICA DE DATOS</th>
+                        <th>RESULTADOS FINALES</th>
+                        <th>ESTADO</th>
+                    </tr>
 
-        <table>
+                </thead>
 
-            <thead>
+                <tbody>
 
-                <tr>
-                    <th>N°</th>
-                    <th>FECHA</th>
-                    <th>NOMBRE</th>
-                    <th>TDR LOCADORES</th>
-                    <th>ANEXOS</th>
-                    <th>FICHA ÚNICA DE DATOS</th>
-                    <th>RESULTADOS FINALES</th>
-                    <th>ESTADO</th>
-                </tr>
+                    <tr>
 
-            </thead>
+                        <td>1</td>
 
-            <tbody>
+                        <td>27-01-2026</td>
 
-                <tr>
+                        <td>
+                            CONVOCATORIA DE LOCACIÓN DE SERVICIOS
+                        </td>
 
-                    <td>1</td>
+                        <td>
+                            <a href="pdf/convocatoria Locacion/servicios_2026/2026_72_1_TDR-LOCADORES.pdf">📄 PDF</a>
+                        </td>
 
-                    <td>27-01-2026</td>
+                        <td>
+                            <a href="pdf/convocatoria Locacion/servicios_2026/2026_72_2_ANEXOS.pdf">📄 PDF</a>
+                        </td>
 
-                    <td>
-                        CONVOCATORIA DE LOCACIÓN DE SERVICIOS
-                    </td>
+                        <td>
+                            <a href="pdf/convocatoria Locacion/servicios_2026/2026_72_3_FICHA-UNICA-DE-DATOS.pdf">📄
+                                PDF</a>
+                        </td>
 
-                    <td>
-                        <a href="pdf/convocatoria Locacion/servicios_2026/2026_72_1_TDR-LOCADORES.pdf">📄 PDF</a>
-                    </td>
+                        <td>
+                            <a href="pdf/convocatoria Locacion/servicios_2026/2026_72_4_RESULTADOS_FINALES.pdf">📄
+                                PDF</a>
+                        </td>
 
-                    <td>
-                        <a href="pdf/convocatoria Locacion/servicios_2026/2026_72_2_ANEXOS.pdf">📄 PDF</a>
-                    </td>
+                        <td class="finalizado">
+                            FINALIZADO
+                        </td>
 
-                    <td>
-                        <a href="pdf/convocatoria Locacion/servicios_2026/2026_72_3_FICHA-UNICA-DE-DATOS.pdf">📄 PDF</a>
-                    </td>
+                    </tr>
 
-                    <td>
-                        <a href="pdf/convocatoria Locacion/servicios_2026/2026_72_4_RESULTADOS_FINALES.pdf">📄 PDF</a>
-                    </td>
+                </tbody>
 
-                    <td class="finalizado">
-                        FINALIZADO
-                    </td>
+            </table>
 
-                </tr>
+        </div>
 
-            </tbody>
+    </section>
 
-        </table>
+    <!-- LOCACIÓN DENGUE -->
 
-    </div>
+    <section class="tabla-section">
 
-</section>
+        <div class="tabla-container">
 
-<!-- LOCACIÓN DENGUE -->
+            <table>
 
-<section class="tabla-section">
+                <thead>
 
-    <div class="tabla-container">
+                    <tr>
 
-        <table>
+                        <th>N°</th>
+                        <th>FECHA</th>
+                        <th>NOMBRE</th>
+                        <th>TDR-LIC.ENFERMERÍA</th>
+                        <th>TDR-JEDE DE BRIGADAS</th>
+                        <th>TDR-BIÓLOGO</th>
+                        <th>TDR-ABATIZADOR</th>
+                        <th>FICHA DATOS</th>
+                        <th>ANEXOS</th>
+                        <th>RESULTADOS FINALES</th>
+                        <th>COMUNICADO</th>
+                        <th>ESTADO</th>
 
-            <thead>
+                    </tr>
 
-                <tr>
+                </thead>
 
-                    <th>N°</th>
-                    <th>FECHA</th>
-                    <th>NOMBRE</th>
-                    <th>TDR-LIC.ENFERMERÍA</th>
-                    <th>TDR-JEDE DE BRIGADAS</th>
-                    <th>TDR-BIÓLOGO</th>
-                    <th>TDR-ABATIZADOR</th>
-                    <th>FICHA DATOS</th>
-                    <th>ANEXOS</th>
-                    <th>RESULTADOS FINALES</th>
-                    <th>COMUNICADO</th>
-                    <th>ESTADO</th>
+                <tbody>
 
-                </tr>
+                    <tr>
 
-            </thead>
+                        <td>2</td>
 
-            <tbody>
+                        <td>03-02-2026</td>
 
-                <tr>
+                        <td>
+                            CONVOCATORIA DE SERVICIOS DENGUE
+                        </td>
 
-                    <td>2</td>
+                        <td><a href="pdf/convocatoria Locacion/servicios_dengue/2026_74_1_TDR-LIC.ENFERMERIA.pdf">📄
+                                PDF</a></td>
 
-                    <td>03-02-2026</td>
+                        <td><a href="pdf/convocatoria Locacion/servicios_dengue/2026_74_2_TDR-JEFE-DE-BRIGADAS.pdf">📄
+                                PDF</a></td>
 
-                    <td>
-                        CONVOCATORIA DE SERVICIOS DENGUE
-                    </td>
+                        <td><a href="pdf/convocatoria Locacion/servicios_dengue/2026_74_3_TDR-BIOLOGO.pdf">📄 PDF</a>
+                        </td>
 
-                    <td><a href="pdf/convocatoria Locacion/servicios_dengue/2026_74_1_TDR-LIC.ENFERMERIA.pdf">📄 PDF</a></td>
+                        <td><a href="pdf/convocatoria Locacion/servicios_dengue/2026_74_4_TDR-ABATIZADOR.pdf">📄 PDF</a>
+                        </td>
 
-                    <td><a href="pdf/convocatoria Locacion/servicios_dengue/2026_74_2_TDR-JEFE-DE-BRIGADAS.pdf">📄 PDF</a></td>
+                        <td><a href="pdf/convocatoria Locacion/servicios_dengue/2026_74_5_FICHA-DATOS.xlsx">📄 XLSX</a>
+                        </td>
 
-                    <td><a href="pdf/convocatoria Locacion/servicios_dengue/2026_74_3_TDR-BIOLOGO.pdf">📄 PDF</a></td>
+                        <td><a href="pdf/convocatoria Locacion/servicios_dengue/2026_74_6_ANEXOS.pdf">📄 PDF</a></td>
 
-                    <td><a href="pdf/convocatoria Locacion/servicios_dengue/2026_74_4_TDR-ABATIZADOR.pdf">📄 PDF</a></td>
+                        <td><a href="pdf/convocatoria Locacion/servicios_dengue/2026_74_7_RESULTADOS-FINALES.pdf">📄
+                                PDF</a></td>
 
-                    <td><a href="pdf/convocatoria Locacion/servicios_dengue/2026_74_5_FICHA-DATOS.xlsx">📄 XLSX</a></td>
+                        <td><a href="pdf/convocatoria Locacion/servicios_dengue/2026_74_8_COMUNICADO.pdf">📄 PDF</a>
+                        </td>
 
-                    <td><a href="pdf/convocatoria Locacion/servicios_dengue/2026_74_6_ANEXOS.pdf">📄 PDF</a></td>
+                        <td class="finalizado">
+                            FINALIZADO
+                        </td>
 
-                    <td><a href="pdf/convocatoria Locacion/servicios_dengue/2026_74_7_RESULTADOS-FINALES.pdf">📄 PDF</a></td>
+                    </tr>
 
-                    <td><a href="pdf/convocatoria Locacion/servicios_dengue/2026_74_8_COMUNICADO.pdf">📄 PDF</a></td>
+                </tbody>
 
-                    <td class="finalizado">
-                        FINALIZADO
-                    </td>
+            </table>
 
-                </tr>
+        </div>
 
-            </tbody>
+    </section>
 
-        </table>
+    <!-- CONVOCATORIA ASCENSO -->
 
-    </div>
+    <section class="tabla-section">
 
-</section>
+        <h3>CONVOCATORIA ASCENSO</h3>
 
-<!-- CONVOCATORIA ASCENSO -->
+        <div class="tabla-container">
 
-<section class="tabla-section">
+            <table>
 
-    <h3>CONVOCATORIA ASCENSO</h3>
+                <thead>
 
-    <div class="tabla-container">
+                    <tr>
 
-        <table>
+                        <th>N°</th>
+                        <th>FECHA</th>
+                        <th>NOMBRE</th>
+                        <th>ACTAS</th>
+                        <th>CONCURSO INTERNO DE MERITOS DE ASCENSO 01-2026</th>
+                        <th>ANEXOS</th>
+                        <th>ACTA DE LOS RESULTADOS DE LA EVALUACIÓN</th>
+                        <th>ESTADO</th>
 
-            <thead>
+                    </tr>
 
-                <tr>
+                </thead>
 
-                    <th>N°</th>
-                    <th>FECHA</th>
-                    <th>NOMBRE</th>
-                    <th>ACTAS</th>
-                    <th>CONCURSO INTERNO DE MERITOS DE ASCENSO 01-2026</th>
-                    <th>ANEXOS</th>
-                    <th>ACTA DE LOS RESULTADOS DE LA EVALUACIÓN</th>
-                    <th>ESTADO</th>
+                <tbody>
 
-                </tr>
+                    <tr>
 
-            </thead>
+                        <td>1</td>
 
-            <tbody>
+                        <td>21-06-2026</td>
 
-                <tr>
+                        <td>
+                            CONCURSO INTERNO DE MÉRITOS
+                        </td>
 
-                    <td>1</td>
+                        <td>
+                            <a href="pdf/convocatoria Ascenso/2026_112_1_ACTAS.pdf">📄 PDF</a>
+                        </td>
 
-                    <td>21-06-2026</td>
+                        <td>
+                            <a
+                                href="pdf/convocatoria Ascenso/2026_112_2_CONCURSO-INTERNO-DE-MERITOS-PARA-ASCENSO-01-2026.pdf">📄
+                                PDF</a>
+                        </td>
 
-                    <td>
-                        CONCURSO INTERNO DE MÉRITOS
-                    </td>
+                        <td>
+                            <a href="pdf/convocatoria Ascenso/2026_112_3_ANEXOS.pdf">📄 PDF</a>
+                        </td>
 
-                    <td>
-                        <a href="pdf/convocatoria Ascenso/2026_112_1_ACTAS.pdf">📄 PDF</a>
-                    </td>
+                        <td>
+                            <a href="pdf/convocatoria Ascenso/2026_112_4_ACTA-DE-LOS-RESULTADOS-DE-LA-EVALUACIÓN.pdf">📄
+                                PDF</a>
+                        </td>
 
-                    <td>
-                        <a href="pdf/convocatoria Ascenso/2026_112_2_CONCURSO-INTERNO-DE-MERITOS-PARA-ASCENSO-01-2026.pdf">📄 PDF</a>
-                    </td>
+                        <td class="proceso">
+                            EN PROCESO
+                        </td>
 
-                    <td>
-                        <a href="pdf/convocatoria Ascenso/2026_112_3_ANEXOS.pdf">📄 PDF</a>
-                    </td>
+                    </tr>
 
-                    <td>
-                        <a href="pdf/convocatoria Ascenso/2026_112_4_ACTA-DE-LOS-RESULTADOS-DE-LA-EVALUACIÓN.pdf">📄 PDF</a>
-                    </td>
+                </tbody>
 
-                    <td class="proceso">
-                        EN PROCESO
-                    </td>
+            </table>
 
-                </tr>
+        </div>
 
-            </tbody>
+    </section>
+    <footer class="footer">
+        <div class="footer-grid">
 
-        </table>
+            <!-- COLUMNA 1 -->
+            <div class="footer-col">
 
-    </div>
+                <h3>
+                    RED INTEGRADA DE SALUD PACÍFICO NORTE
+                </h3>
 
-</section>
+                <div class="footer-logos">
+                    <img src="img/Index/logo.png" alt="Logo RIS">
+                    <img src="img/Index/DireccionReginalSalud.png" alt="DIRESA">
+                    <img src="img/Index/LogoAncash.png" alt="Ancash">
+                </div>
 
-<div class="transition-screen"></div>
+            </div>
 
-<script>
+            <!-- COLUMNA 2 -->
+            <div class="footer-col">
 
-const transition =
-document.querySelector(".transition-screen");
+                <a href="institucional.html">
+                    <h4>Nosotros</h4>
+                </a>
 
-/* ANIMACION ENTRADA */
+                <a href="institucional.html#quienes-somos">
+                    ¿Quiénes Somos?
+                </a>
 
-window.addEventListener("load", () => {
+                <a href="institucional.html#historia">
+                    Historia
+                </a>
 
-    transition.classList.add("enter");
+                <a href="institucional.html#mision-vision">
+                    Misión y Visión
+                </a>
 
-});
+                <a href="institucional.html#directorio">
+                    Directorio Institucional
+                </a>
 
-/* ANIMACION SALIDA */
+                <a href="institucional.html#directorio-telefonico">
+                    Directorio Telefónico
+                </a>
 
-document.querySelectorAll("a").forEach(link => {
+                <a href="convocatorias.html">
+                    <h4 class="footer-subtitulo">
+                        Convocatorias
+                    </h4>
+                </a>
 
-    link.addEventListener("click", function(e){
+            </div>
 
-        const href = this.getAttribute("href");
+            <!-- COLUMNA 3 -->
+            <div class="footer-col">
 
-        if(href && !href.startsWith("#")){
+                <a href="Normativa.html">
+                    <h4>Normativas</h4>
+                </a>
 
-            e.preventDefault();
+                <a href="Normativa.html#ascenso">
+                    Ascenso
+                </a>
 
-            transition.classList.remove("enter");
+                <a href="Normativa.html#nombramiento">
+                    Nombramiento
+                </a>
 
-            transition.classList.add("exit");
+                <a href="Normativa.html#resoluciones">
+                    Resoluciones
+                </a>
+                <h4 class="footer-subtitulo">
+                    <a href="noticias.html">
+                        Noticias
+                    </a>
+                </h4>
 
-            setTimeout(() => {
+                <a href="noticias.html">
+                    Últimas noticias
+                </a>
 
-                window.location.href = href;
+                <a href="transparencia.html">
+                    <h4>Transparencia</h4>
+                </a>
 
-            }, 450);
+                <a
+                    href="https://www.transparencia.gob.pe/enlaces/pte_transparencia_enlaces.aspx?id_entidad=17409#.YPq80Y5KjIU">
+                    Portal Transparencia
+                </a>
 
-        }
+            </div>
 
-    });
+            <!-- COLUMNA 4 -->
+            <div class="footer-col">
 
-});
+                <a href="contacto.html">
+                    <h4>Contacto</h4>
+                </a>
 
-</script>
+                <p>
+                    Ubicación: Av. Enrique Meiggs 835, Chimbote
+                </p>
+
+                <p>
+                    Teléfono: 43-698402
+                </p>
+
+                <h4>
+                    Horario de atención
+                </h4>
+
+                <p>
+                    Lunes a Viernes
+                </p>
+
+                <p>
+                    7:45 am - 3:30 pm
+                </p>
+
+                <div class="footer-social">
+
+                    <a href="https://www.facebook.com/rispnorte" target="_blank">
+
+                        <i class="fab fa-facebook-f"></i>
+
+                    </a>
+
+                    <a href="https://www.instagram.com/rispacificonorte/" target="_blank">
+
+                        <i class="fab fa-instagram"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 Red Integrada de Salud Pacífico Norte
+        </div>
+
+    </footer>
+    <div class="transition-screen"></div>
+
+    <script>
+
+        const transition =
+            document.querySelector(".transition-screen");
+
+        /* ANIMACION ENTRADA */
+
+        window.addEventListener("load", () => {
+
+            transition.classList.add("enter");
+
+        });
+
+        /* ANIMACION SALIDA */
+
+        document.querySelectorAll("a").forEach(link => {
+
+            link.addEventListener("click", function (e) {
+
+                const href = this.getAttribute("href");
+
+                if (href && !href.startsWith("#")) {
+
+                    e.preventDefault();
+
+                    transition.classList.remove("enter");
+
+                    transition.classList.add("exit");
+
+                    setTimeout(() => {
+
+                        window.location.href = href;
+
+                    }, 450);
+
+                }
+
+            });
+
+        });
+
+    </script>
 </body>
+
 </html>

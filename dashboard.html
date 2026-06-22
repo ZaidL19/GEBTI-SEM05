@@ -7,23 +7,7 @@
     <title>Dashboard - Red de Salud Pacífico Norte</title>
     <link rel="stylesheet" href="css/dashboard.css">
 </head>
-<div id="modalBusqueda" class="modal-busqueda">
 
-    <div class="contenedor-busqueda">
-
-        <div class="header-busqueda">
-            <span>🔍 Resultados de búsqueda</span>
-
-            <button onclick="cerrarBusqueda()">
-                ✖
-            </button>
-        </div>
-
-        <div id="listaResultadosBusqueda"></div>
-
-    </div>
-
-</div>
 <body>
 
 <div class="dashboard">
@@ -35,7 +19,8 @@
                 Red de Salud<br>
                 Pacífico Norte
             </h2>
-            <p>Administrador</p>
+            <h4 id="currentUser"></h4>
+            <p id="userRole">Usuario</p>
            
         </div>
 
@@ -43,12 +28,11 @@
             <li class="active">
                 🏠 Inicio
             </li>
-            <li onclick="goCRM()">
-                <a href="templates/ERP.html" style="color:inherit;text-decoration:none;">
-                    👥 Pacientes
-                </a>
+            <li id="menuPacientes" onclick="goCRM()">
+                👥 Pacientes
             </li>
-            <li>
+
+            <li id="menuInventario">
                 <a href="templates/ERP.html" style="color:inherit;text-decoration:none;">
                     📦 Inventario
                 </a>
@@ -79,15 +63,11 @@
     <main class="contenido">
 
     <header>
-        <section id="resultadosBusqueda" style="display:none;">
-            <h2>🔍 Resultados de búsqueda</h2>
-            <div id="listaResultados"></div>
-        </section>
         <div>
             <h1>Dashboard General</h1>
             <p>Panel Integrado CRM + ERP</p>
         </div>
-        <input type="text" id = "busquedaGeneral" placeholder="Buscar paciente o producto" onkeyup="buscarGeneral()">
+        <input type="text" placeholder="Buscar paciente o producto">
     </header>
 
     <!-- RESUMEN GENERAL -->
@@ -204,27 +184,68 @@
 // ====================
 // SEGURIDAD
 // ====================
-if (localStorage.getItem("session") !== "active") {
-    window.location.href = "login.html";
+const role = localStorage.getItem("role");
+const currentUser = localStorage.getItem("currentUser");
+
+document.getElementById("currentUser").textContent =
+    currentUser || "Invitado";
+
+document.getElementById("userRole").textContent =
+    role || "Usuario";
+
+// CONTROL DE ROLES
+
+if(role === "logistica"){
+    document.getElementById("menuPacientes").style.display = "none";
 }
 
+if(role === "rrhh"){
+    document.getElementById("menuInventario").style.display = "none";
+}
+
+if(role === "director"){
+    document.getElementById("menuPacientes").style.display = "none";
+    document.getElementById("menuInventario").style.display = "none";
+}
+
+if(role === "admin"){
+    // acceso total
+}
+
+if(role === "logistica"){
+
+    document.getElementById("menuPacientes")
+        .style.display = "none";
+
+}
+
+if(role === "rrhh"){
+
+    document.getElementById("menuInventario")
+        .style.display = "none";
+
+}
+
+if(role === "user"){
+
+    document.getElementById("menuPacientes")
+        .style.display = "none";
+
+    document.getElementById("menuInventario")
+        .style.display = "none";
+}
 // ====================
 // NAVEGACIÓN INTELIGENTE (Rutas locales vs Flask)
-// ====================
 function goCRM() {
-    const isLocal = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost";
     
-    if (isLocal) {
-        
-        window.location.href = "crm.html";
-    } else {
-        window.location.href = "templates/crm.html";
-    }
+    window.location.href = "templates/crm.html";
+    
 }
 
 function goERP() {
     window.location.href = "templates/ERP.html";
 }
+
 
 function logout() {
     if (confirm("¿Desea cerrar sesión?")) {
@@ -385,115 +406,33 @@ function cargarDashboardERP() {
 
 }
 
-window.onload = cargarDashboardERP;
-function buscarGeneral(){
+window.onload = function () {
 
-    const texto =
-        document.getElementById("busquedaGeneral")
-        .value
-        .toLowerCase()
-        .trim();
+    cargarDashboardERP();
 
-    const modal =
-        document.getElementById("modalBusqueda");
+    const role = localStorage.getItem("role");
+    const currentUser = localStorage.getItem("currentUser");
 
-    const lista =
-        document.getElementById("listaResultadosBusqueda");
+    document.getElementById("currentUser").textContent =
+        currentUser || "Invitado";
 
-    lista.innerHTML = "";
+    document.getElementById("userRole").textContent =
+        role || "Usuario";
 
-    if(texto.length < 2){
-        modal.style.display = "none";
-        return;
+    if(role === "logistica"){
+        document.getElementById("menuPacientes").style.display = "none";
     }
 
-    let encontrados = 0;
-
-    // ERP
-
-    const inventario =
-        JSON.parse(localStorage.getItem("inventarioERP")) || [];
-
-    inventario.forEach(item=>{
-
-        if(
-            item.nombre.toLowerCase().includes(texto) ||
-            item.ruc.toLowerCase().includes(texto) ||
-            item.razonSocial.toLowerCase().includes(texto)
-        ){
-
-            encontrados++;
-
-            lista.innerHTML += `
-            <div class="resultado-google">
-                <h3>📦 ${item.nombre}</h3>
-
-                <p>
-                    Proveedor:
-                    ${item.razonSocial}
-                </p>
-
-                <p>
-                    Stock:
-                    ${item.stock}
-                </p>
-
-                <p>
-                    Estado:
-                    ${item.estado}
-                </p>
-            </div>
-            `;
-        }
-
-    });
-
-    // CRM
-
-    const pacientes =
-        JSON.parse(localStorage.getItem("pacientes")) || [];
-
-    pacientes.forEach(p=>{
-
-        if(
-            p.nombre?.toLowerCase().includes(texto) ||
-            p.dni?.toLowerCase().includes(texto)
-        ){
-
-            encontrados++;
-
-            lista.innerHTML += `
-            <div class="resultado-google">
-                <h3>👤 ${p.nombre}</h3>
-
-                <p>DNI: ${p.dni}</p>
-
-                <p>Paciente registrado en CRM</p>
-            </div>
-            `;
-        }
-
-    });
-
-    if(encontrados === 0){
-
-        lista.innerHTML = `
-        <div class="resultado-google">
-            <h3>Sin resultados</h3>
-            <p>No se encontró información relacionada.</p>
-        </div>
-        `;
+    if(role === "rrhh"){
+        document.getElementById("menuInventario").style.display = "none";
     }
 
-    modal.style.display = "block";
-}
+    if(role === "director"){
+        document.getElementById("menuPacientes").style.display = "none";
+        document.getElementById("menuInventario").style.display = "none";
+    }
+};
 
-function cerrarBusqueda(){
-
-    document.getElementById(
-        "modalBusqueda"
-    ).style.display = "none";
-}
 </script>
 
 </body>
