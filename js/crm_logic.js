@@ -221,6 +221,30 @@ function reiniciarHistorial() {
 }
 
 window.onload = function() {
-    cargarCiudadanos();
     actualizarHistorialHtml();
+    if (document.getElementById("form-paciente")) {
+        document.getElementById("form-paciente").reset();
+    }
+
+    // ☁️ JALAR DATOS REALES DE GOOGLE SHEETS AL CARGAR O DAR F5
+    const tbody = document.getElementById("tabla-ciudadanos");
+    if (tbody) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#888;">📥 Cargando padrón desde Google Sheets...</td></tr>`;
+    }
+
+    fetch(URL_GOOGLE_SCRIPT, { method: "GET" })
+        .then(res => res.json())
+        .then(datosNube => {
+            if (Array.isArray(datosNube)) {
+                CIUDADANOS = datosNube; // Guardamos lo que hay en Excel en nuestra memoria local
+                console.log("📊 Datos sincronizados desde Google Sheets con éxito.");
+                cargarCiudadanos(); // Pintamos la tabla con la data real
+            }
+        })
+        .catch(err => {
+            console.error("❌ Error al cargar datos de la nube:", err);
+            if (tbody) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:red;">Error al conectar con la nube.</td></tr>`;
+            }
+        });
 };
