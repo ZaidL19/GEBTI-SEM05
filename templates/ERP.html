@@ -89,7 +89,7 @@
 
             <div class="bg-white p-6 rounded-lg shadow-md xl:col-span-3">
                 <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-xl font-bold text-gray-800">📦 Expedientes SIAF Completos (116 Registros Reales)</h2>
+                    <h2 class="text-xl font-bold text-gray-800">📦 Expedientes SIAF Completos</h2>
                     <button onclick="toggleFormulario()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow text-sm font-bold transition cursor-pointer">+ Añadir Nuevo</button>
                 </div>
 
@@ -128,7 +128,7 @@
                             </tr>
                         </thead>
                         <tbody id="tabla-inventario" class="divide-y divide-gray-200 text-gray-700 bg-white">
-                            </tbody>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -193,6 +193,7 @@
 </div>
 
 <script>
+
 const role = localStorage.getItem("role");
 
 if(
@@ -200,12 +201,10 @@ if(
     role !== "logistica"
 ){
     alert("No tiene permisos");
-    window.location.href = "../dashboard.html";
-}
 
-    // ==========================================
-    // SISTEMA FINANCIERO Y BASE DE DATOS
-    // ==========================================
+    window.location.href =
+        "../dashboard.html";
+}
     
     // Cargar Presupuesto en cuanto cargue la página
     document.addEventListener("DOMContentLoaded", () => {
@@ -215,7 +214,6 @@ if(
             inputPresupuesto.value = savedPresupuesto;
         }
         
-        // Guardar automáticamente si lo editas a mano
         inputPresupuesto.addEventListener('input', () => {
             localStorage.setItem('erp_presupuesto', inputPresupuesto.value);
         });
@@ -344,7 +342,6 @@ if(
         [116, "SERVICIO DE PUBLICIDAD EN DIFUSION LOCAL POR...", "2025-06-30", "Devengada", 2000.00, "20445774881", "MULTISERVICIOS CONTRATISTAS GENERALES MOISES S.R.L.", 150]
     ];
 
-    // Cargar la DB desde LocalStorage. Si no existe, preparamos la defaultDB y la guardamos
     let dbSIAF = JSON.parse(localStorage.getItem('erp_dbSIAF'));
     if (!dbSIAF) {
         dbSIAF = defaultDB.map(item => {
@@ -356,7 +353,6 @@ if(
         localStorage.setItem('erp_dbSIAF', JSON.stringify(dbSIAF));
     }
 
-    // Funciones correctas de Guardado
     function guardarDB() {
         localStorage.setItem('erp_dbSIAF', JSON.stringify(dbSIAF));
     }
@@ -421,7 +417,7 @@ if(
             let inp = document.getElementById(`stock-${id}`);
             if(inp) { inp.value = ns; aplicarColores(id, ns); }
             
-            guardarDB(); // Se guarda en LocalStorage
+            guardarDB();
         }
     }
 
@@ -431,7 +427,7 @@ if(
         let idx = dbSIAF.findIndex(i => i[0] === id);
         if (idx !== -1) {
             dbSIAF[idx][7] = ns;
-            guardarDB(); // Se guarda en LocalStorage
+            guardarDB();
         }
         aplicarColores(id, ns);
     }
@@ -450,17 +446,45 @@ if(
         const desc = document.getElementById('nuevo-nombre').value.toUpperCase();
         const m = parseFloat(document.getElementById('nuevo-monto').value) || 0;
         const c = parseInt(document.getElementById('nuevo-cantidad').value);
+        const estadoSiaf = document.getElementById('nuevo-estado').value;
+        const rucSiaf = document.getElementById('nuevo-ruc').value || '-';
+        const razonSiaf = document.getElementById('nuevo-razon').value.toUpperCase() || '-';
+
         if (!desc || isNaN(c)) { alert("Faltan datos"); return; }
         
         const nid = dbSIAF.length ? dbSIAF[dbSIAF.length - 1][0] + 1 : 1;
         let pu = c > 0 ? (m/c) : m;
+        let fechaHoy = new Date().toISOString().split('T')[0];
         
-        dbSIAF.push([nid, desc, new Date().toISOString().split('T')[0], document.getElementById('nuevo-estado').value, m, document.getElementById('nuevo-ruc').value || '-', document.getElementById('nuevo-razon').value.toUpperCase() || '-', c, pu]);
-        
-        guardarDB(); // Se guarda en LocalStorage
+        dbSIAF.push([nid, desc, fechaHoy, estadoSiaf, m, rucSiaf, razonSiaf, c, pu]);
+        guardarDB();
         renderizarTabla();
         toggleFormulario();
-        mostrarExito('Expediente guardado exitosamente.');
+        
+        const datosParaExcel = {
+            id: nid,
+            descripcion: desc,
+            fecha: fechaHoy,
+            estado: estadoSiaf,
+            monto: m,
+            ruc: rucSiaf,
+            razon: razonSiaf,
+            cantidad: c,
+            pu: pu
+        };
+
+        const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbx_Oq5P-6Y1x366dj9KYcYN1m0BrVEiBP7svg1V62-uBt5g3aRprS-nXHiDMRNK5wXA/exec';
+
+        fetch(WEBHOOK_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(datosParaExcel)
+        }).then(() => {
+            console.log("Fila enviada a Google Sheets");
+        }).catch(error => console.error("Error al enviar a Excel:", error));
+
+        mostrarExito('Expediente guardado localmente y en Google Sheets.');
     }
 
     function mostrarExito(msg) {
@@ -470,10 +494,6 @@ if(
         setTimeout(() => n.classList.add('hidden'), 3000);
     }
 
-    // ==========================================
-    // LÓGICA DE PRESUPUESTO Y ÓRDENES
-    // ==========================================
-    
     function actualizarBadgePagos() {
         let badge = document.getElementById('badge-pagos');
         if(carritoPagos.length > 0) {
@@ -515,7 +535,7 @@ if(
             let cantPedir = parseInt(p.value) || 0;
             
             if(cantPedir > 0) {
-                actualizarStock(idTarget, cantPedir); // Aquí ya se llama a guardarDB internamente
+                actualizarStock(idTarget, cantPedir);
                 
                 let itemDB = dbSIAF.find(i => i[0] === idTarget);
                 let costoTotalItem = cantPedir * itemDB[8];
@@ -529,7 +549,7 @@ if(
             }
         }); 
         
-        guardarCarrito(); // Guardamos el carrito en LocalStorage
+        guardarCarrito();
         actualizarBadgePagos();
         cerrarModalOrdenes(); 
         mostrarExito('Órdenes emitidas y enviadas a ejecución presupuestal.'); 
@@ -577,21 +597,18 @@ if(
             return;
         }
 
-        // Descontar
         let nuevoPresupuesto = presupuestoActual - totalAPagar;
         inputPresupuesto.value = nuevoPresupuesto.toFixed(2);
-        localStorage.setItem('erp_presupuesto', inputPresupuesto.value); // Guardamos el nuevo presupuesto
+        localStorage.setItem('erp_presupuesto', inputPresupuesto.value);
         
-        // Vaciar carrito
         carritoPagos = [];
-        guardarCarrito(); // Guardamos el carrito vacío
+        guardarCarrito();
         
         actualizarBadgePagos();
         cerrarModalPagos(); 
         mostrarExito(`Pagos aprobados. S/. ${totalAPagar.toFixed(2)} descontados del Presupuesto Institucional.`); 
     }
 
-    // RUTAS
     function goDashboard() {
         window.location.href = "../dashboard.html";
     }
