@@ -193,8 +193,11 @@ header input{
     margin-bottom:15px;
 }
 
-.cards{
-    margin-bottom:20px;
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Crea 4 columnas iguales */
+    gap: 20px;                            /* Espacio entre los cuadraditos */
+    margin-bottom: 20px;
 }
 
 .inventario,
