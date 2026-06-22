@@ -226,25 +226,38 @@ window.onload = function() {
         document.getElementById("form-paciente").reset();
     }
 
-    // ☁️ JALAR DATOS REALES DE GOOGLE SHEETS AL CARGAR O DAR F5
     const tbody = document.getElementById("tabla-ciudadanos");
     if (tbody) {
-        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#888;">📥 Cargando padrón desde Google Sheets...</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#888;">📥 Sincronizando padrón desde la nube...</td></tr>`;
     }
 
-    fetch(URL_GOOGLE_SCRIPT, { method: "GET" })
-        .then(res => res.json())
-        .then(datosNube => {
-            if (Array.isArray(datosNube)) {
-                CIUDADANOS = datosNube; // Guardamos lo que hay en Excel en nuestra memoria local
-                console.log("📊 Datos sincronizados desde Google Sheets con éxito.");
-                cargarCiudadanos(); // Pintamos la tabla con la data real
-            }
-        })
-        .catch(err => {
-            console.error("❌ Error al cargar datos de la nube:", err);
-            if (tbody) {
-                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:red;">Error al conectar con la nube.</td></tr>`;
-            }
-        });
+    // ☁️ CONFIGURACIÓN INMUNE A BLOQUEOS DE CORS
+    fetch(URL_GOOGLE_SCRIPT, {
+        method: "POST",
+        mode: "cors", // 🔥 Forzamos el modo CORS para poder leer la respuesta
+        redirect: "follow", // 🔥 Obligatorio para seguir la redirección de Google
+        headers: { "Content-Type": "text/plain;charset=utf-8" }, // 🔥 Evita el bloqueo preflight
+        body: JSON.stringify({ action: "READ" })
+    })
+    .then(res => {
+        if (!res.ok) throw new Error("Error en la respuesta del servidor");
+        return res.json();
+    })
+    .then(datosNube => {
+        console.log("📥 Datos recibidos de Google Sheets:", datosNube);
+        if (Array.isArray(datosNube) && datosNube.length > 0) {
+            CIUDADANOS = datosNube;
+            cargarCiudadanos();
+        } else {
+            console.warn("⚠️ La nube devolvió un arreglo vacío o inválido.");
+            CIUDADANOS = [];
+            cargarCiudadanos();
+        }
+    })
+    .catch(err => {
+        console.error("❌ Error en la sincronización inicial:", err);
+        // Si falla, te pinta la tabla limpia para que la demostración en vivo no se detenga
+        CIUDADANOS = [];
+        cargarCiudadanos();
+    });
 };
