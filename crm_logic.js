@@ -71,6 +71,9 @@ function actualizarBotonesAccion() {
     }
 }
 
+// Pega aquí la URL larga que te dio Google después de darle "Allow" y desplegar
+const URL_GOOGLE_SCRIPT = "https://script.google.com/macros/s/AKfycbyzV7ioEo8ag5EXziEJfrtxJJ62IZmr1baoURMOSJOM4VpFwufR9czCKo4HrDypyU-GKA/exec";
+
 function guardarPaciente(event) {
     event.preventDefault();
 
@@ -82,9 +85,25 @@ function guardarPaciente(event) {
 
     const btnForm = document.getElementById("btn-enviar");
 
+    // Creamos el objeto con los datos exactos que espera recibir tu Google Sheets
+    const datosPaciente = { nombre, edad, zona, riesgo, telefono };
+
     if (btnForm.innerText === "Registrar Paciente") {
         const nuevoId = CIUDADANOS.length > 0 ? Math.max(...CIUDADANOS.map(c => c.id)) + 1 : 1;
         CIUDADANOS.push({ id: nuevoId, nombre, edad, zona, riesgo, telefono });
+
+        // 🚀 ENVIAR A GOOGLE SHEETS (Solo cuando se registra un paciente nuevo)
+        fetch(URL_GOOGLE_SCRIPT, {
+            method: "POST",
+            mode: "no-cors", // Crucial para evitar bloqueos por políticas de Google desde localhost
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(datosPaciente)
+        })
+        .then(() => console.log("Sincronizado con Google Sheets con éxito"))
+        .catch(err => console.error("Error al enviar a la nube:", err));
+
     } else {
         const paciente = CIUDADANOS.find(c => c.id === idPacienteSeleccionado);
         if (paciente) {
@@ -97,6 +116,7 @@ function guardarPaciente(event) {
         cancelarEdicion();
     }
 
+    // Mantener la persistencia local y refrescar la tabla del CRM
     guardarEnLocalStorage();
     document.getElementById("form-paciente").reset();
     idPacienteSeleccionado = null;
