@@ -9,28 +9,31 @@ const CAMPANAS_CONFIG = {
     "DENGUE": {
         titulo: "Campaña de Prevención Contra el Dengue",
         mensaje: "Alerta Red Pacífico Norte: Se registran brotes en tu zona. Elimina recipientes con agua estancada. Usa repelente.",
-        filtro_zona: ["Coishco", "Santa", "Chimbote Centro"]
+        filter_zona: ["Coishco", "Santa", "Chimbote Centro"]
     },
     "INFLUENZA": {
         titulo: "Vacunación Neumococo e Influenza 2026",
         mensaje: "Red Pacífico Norte: Protege tu salud este invierno. Acude al puesto de salud más cercano para tu vacunación gratuita.",
-        filtro_riesgo: ["Adulto Mayor", "Pediátrico"]
+        filter_riesgo: ["Adulto Mayor", "Pediátrico"]
     }
 };
 
 const URL_GOOGLE_SCRIPT = "https://script.google.com/macros/s/AKfycbyzV7ioEo8ag5EXziEJfrtxJJ62IZmr1baoURMOSJOM4VpFwufR9czCKo4HrDypyU-GKA/exec";
 
-// Función auxiliar para enviar datos de manera asíncrona a Google Sheets
+// 🌟 FUNCIÓN AUXILIAR CORREGIDA: Ahora usa promesas para asegurar la escritura antes de pintar
 function sincronizarConNube(payload) {
-    fetch(URL_GOOGLE_SCRIPT, {
+    return fetch(URL_GOOGLE_SCRIPT, {
         method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
+        mode: "cors",
+        redirect: "follow",
+        headers: { "Content-Type": "text/plain;charset=utf-8" }, 
         body: JSON.stringify(payload)
     })
-    .then(() => console.log(`☁️ Sincronización exitosa: Acción [${payload.action}]`))
-    .catch(err => console.error("❌ Error de conexión con Google Sheets:", err));
-}
+    .then(res => {
+        if (!res.ok) throw new Error("Error en el servidor de Google");
+        return res.json();
+    });
+}   
 
 function guardarPaciente(event) {
     event.preventDefault();
@@ -42,32 +45,70 @@ function guardarPaciente(event) {
     const telefono = document.getElementById("form-telefono").value;
     const btnForm = document.getElementById("btn-enviar");
 
-    if (btnForm.innerText === "Registrar Paciente") {
-        const nuevoId = CIUDADANOS.length > 0 ? Math.max(...CIUDADANOS.map(c => c.id)) + 1 : 1;
-        CIUDADANOS.push({ id: nuevoId, nombre, edad, zona, riesgo, telefono });
+    // Mostrar estado de carga en el botón para evitar doble clic
+    const textoOriginalBoton = btnForm.innerText;
+    btnForm.innerText = "Sincronizando...";
+    btnForm.setAttribute("disabled", "true");
 
-        // Enviar inserción a la nube
-        sincronizarConNube({ action: "INSERT", nombre, edad, zona, riesgo, telefono });
+    if (textoOriginalBoton === "Registrar Paciente") {
+        const nuevoId = CIUDADANOS.length > 0 ? Math.max(...CIUDADANOS.map(c => c.id)) + 1 : 1;
+
+        // ☁️ Primero guardamos en la nube, si responde bien, actualizamos la interfaz local
+        sincronizarConNube({ action: "INSERT", nombre, edad, zona, riesgo, telefono })
+        .then(respuesta => {
+            if(respuesta.status === "success") {
+                CIUDADANOS.push({ id: nuevoId, nombre, edad, zona, riesgo, telefono });
+                console.log("📥 Registrado correctamente en Sheets");
+                finalizarGuardado();
+            } else {
+                alert("Error al registrar: " + respuesta.message);
+                restaurarBotonForm(btnForm, textoOriginalBoton);
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert("No se pudo conectar con la nube. Inténtalo de nuevo.");
+            restaurarBotonForm(btnForm, textoOriginalBoton);
+        });
 
     } else {
         const paciente = CIUDADANOS.find(c => c.id === idPacienteSeleccionado);
         if (paciente) {
-            // Guardamos el teléfono que tenía antes por si lo editó (sirve de ID de búsqueda en Excel)
             const telefonoOriginal = paciente.telefono;
 
-            paciente.nombre = nombre;
-            paciente.edad = edad;
-            paciente.zona = zona;
-            paciente.riesgo = riesgo;
-            paciente.telefono = telefono;
-
-            // Enviar actualización a la nube
-            sincronizarConNube({ action: "UPDATE", telefonoOriginal, nombre, edad, zona, riesgo, telefono });
+            sincronizarConNube({ action: "UPDATE", telefonoOriginal, nombre, edad, zona, riesgo, telefono })
+            .then(respuesta => {
+                if(respuesta.status === "success") {
+                    paciente.nombre = nombre;
+                    paciente.edad = edad;
+                    paciente.zona = zona;
+                    paciente.riesgo = riesgo;
+                    paciente.telefono = telefono;
+                    console.log("📥 Actualizado correctamente en Sheets");
+                    cancelarEdicion();
+                    finalizarGuardado();
+                } else {
+                    alert("Error al actualizar: " + respuesta.message);
+                    restaurarBotonForm(btnForm, textoOriginalBoton);
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Error de red al actualizar.");
+                restaurarBotonForm(btnForm, textoOriginalBoton);
+            });
         }
-        cancelarEdicion();
     }
+}
 
-    // Refrescar UI local de inmediato
+function restaurarBotonForm(btn, texto) {
+    btn.innerText = texto;
+    btn.removeAttribute("disabled");
+}
+
+function finalizarGuardado() {
+    const btnForm = document.getElementById("btn-enviar");
+    btnForm.removeAttribute("disabled");
     document.getElementById("form-paciente").reset();
     idPacienteSeleccionado = null;
     cargarCiudadanos();
@@ -78,16 +119,26 @@ function eliminarPaciente() {
     const paciente = CIUDADANOS.find(c => c.id === idPacienteSeleccionado);
     
     if (paciente && confirm(`¿Deseas eliminar permanentemente a ${paciente.nombre} tanto del CRM como de Google Sheets?`)) {
-        
-        // Enviar orden de eliminación a la nube usando su número telefónico
-        sincronizarConNube({ action: "DELETE", telefono: paciente.telefono });
+        const btnEliminar = document.getElementById("btn-global-eliminar");
+        btnEliminar.innerText = "Eliminando...";
+        btnEliminar.setAttribute("disabled", "true");
 
-        // Remover del arreglo local en memoria
-        CIUDADANOS = CIUDADANOS.filter(c => c.id !== idPacienteSeleccionado);
-        idPacienteSeleccionado = null;
-        
-        cancelarEdicion();
-        cargarCiudadanos();
+        sincronizarConNube({ action: "DELETE", telefono: paciente.telefono })
+        .then(respuesta => {
+            if (respuesta.status === "success") {
+                CIUDADANOS = CIUDADANOS.filter(c => c.id !== idPacienteSeleccionado);
+                idPacienteSeleccionado = null;
+                cancelarEdicion();
+                cargarCiudadanos();
+            } else {
+                alert("No se pudo eliminar de la nube: " + respuesta.message);
+            }
+        })
+        .catch(err => console.error("Error al eliminar:", err))
+        .finally(() => {
+            btnEliminar.innerText = "Eliminar Seleccionado";
+            actualizarBotonesAccion();
+        });
     }
 }
 
@@ -118,6 +169,8 @@ function seleccionarFila(id) {
 function actualizarBotonesAccion() {
     const btnEditar = document.getElementById("btn-global-editar");
     const btnEliminar = document.getElementById("btn-global-eliminar");
+    if(!btnEditar || !btnEliminar) return;
+    
     if (idPacienteSeleccionado !== null) {
         btnEditar.removeAttribute("disabled");
         btnEliminar.removeAttribute("disabled");
@@ -158,9 +211,9 @@ function dispararCampana(tipo) {
     let beneficiariosFiltrados = [];
 
     CIUDADANOS.forEach(c => {
-        if (tipo === "DENGUE" && config.filtro_zona.includes(c.zona)) {
+        if (tipo === "DENGUE" && config.filter_zona.includes(c.zona)) {
             beneficiariosFiltrados.push(c);
-        } else if (tipo === "INFLUENZA" && config.filtro_riesgo.includes(c.riesgo)) {
+        } else if (tipo === "INFLUENZA" && config.filter_riesgo.includes(c.riesgo)) {
             beneficiariosFiltrados.push(c);
         }
     });
@@ -220,6 +273,7 @@ function reiniciarHistorial() {
     }
 }
 
+// ☁️ CARGA INICIAL INTEGRADA SIN CACHÉ NI ERRORES DE CONTROL
 window.onload = function() {
     actualizarHistorialHtml();
     if (document.getElementById("form-paciente")) {
@@ -231,33 +285,34 @@ window.onload = function() {
         tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#888;">📥 Sincronizando padrón desde la nube...</td></tr>`;
     }
 
-    // ☁️ CONFIGURACIÓN INMUNE A BLOQUEOS DE CORS
+    // 🌟 ENVIAMOS POR POST CON REDIRECT FOLLOW PARA EVITAR EL BLOQUEO CORS EN LA CARGA
     fetch(URL_GOOGLE_SCRIPT, {
         method: "POST",
-        mode: "cors", // 🔥 Forzamos el modo CORS para poder leer la respuesta
-        redirect: "follow", // 🔥 Obligatorio para seguir la redirección de Google
-        headers: { "Content-Type": "text/plain;charset=utf-8" }, // 🔥 Evita el bloqueo preflight
+        mode: "cors", // Cambiado para que el navegador acepte la negociación
+        redirect: "follow", // Obligatorio para seguir el salto de servidor de Google
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify({ action: "READ" })
     })
     .then(res => {
         if (!res.ok) throw new Error("Error en la respuesta del servidor");
-        return res.json();
+        return res.json(); // Leemos la respuesta estructurada directamente
     })
     .then(datosNube => {
-        console.log("📥 Datos recibidos de Google Sheets:", datosNube);
-        if (Array.isArray(datosNube) && datosNube.length > 0) {
-            CIUDADANOS = datosNube;
+        console.log("📥 Datos recibidos con éxito en la carga inicial:", datosNube);
+        if (Array.isArray(datosNube)) {
+            // Filtramos en local para asegurarnos de que no pinte filas vacías
+            CIUDADANOS = datosNube.filter(c => c.nombre && c.nombre !== "Sin Nombre" && c.nombre.trim() !== "");
             cargarCiudadanos();
         } else {
-            console.warn("⚠️ La nube devolvió un arreglo vacío o inválido.");
+            console.warn("⚠️ Los datos recibidos no son un arreglo válido:", datosNube);
             CIUDADANOS = [];
             cargarCiudadanos();
         }
     })
     .catch(err => {
-        console.error("❌ Error en la sincronización inicial:", err);
-        // Si falla, te pinta la tabla limpia para que la demostración en vivo no se detenga
-        CIUDADANOS = [];
-        cargarCiudadanos();
+        console.error("❌ Error crítico en la carga inicial:", err);
+        if (tbody) {
+            tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:red;">❌ Error de CORS/Conexión con Google Sheets. Revisa la consola.</td></tr>`;
+        }
     });
 };
