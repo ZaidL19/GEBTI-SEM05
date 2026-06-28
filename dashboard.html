@@ -35,18 +35,6 @@
             <li id="menuInventario" onclick="goERP()">
                 📦 Inventario
             </li>
-            <!-- <li>
-                💊 Farmacia
-            </li> 
-            <li>
-                📅 Citas Médicas
-            </li>
-            <li>
-                📊 Reportes
-            </li>
-            <li>
-                ⚙ Configuración
-            </li> -->
         </ul>
 
         <div class="sidebar-footer">
@@ -61,11 +49,15 @@
     <main class="contenido">
 
     <header>
-        <div>
-            <h1>Dashboard General</h1>
-            <p>Panel Integrado CRM + ERP</p>
+        <div> <h1>Dashboard General</h1> <p>Panel Integrado CRM + ERP</p> </div>
+        <div class="buscador-wrapper">
+            <input type="text" id="buscador"
+                placeholder="Buscar por DNI o nombre del paciente..."
+                oninput="buscarPaciente()"
+                onfocus="mostrarUltimasBusquedas()">
+
+            <div id="resultadosBuscador" class="resultados-busqueda"></div>
         </div>
-        <input type="text" placeholder="Buscar paciente o producto">
     </header>
 
     <!-- RESUMEN GENERAL -->

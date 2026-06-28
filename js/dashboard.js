@@ -303,3 +303,98 @@ function actualizarBarra(id, porcentaje) {
     }
 
 }
+const API_URL = "https://script.google.com/macros/s/AKfycbyzV7ioEo8ag5EXziEJfrtxJJ62IZmr1baoURMOSJOM4VpFwufR9czCKo4HrDypyU-GKA/exec";
+
+let ultimasBusquedas = [];
+
+async function buscarPaciente() {
+    const input = document.getElementById("buscador").value.trim();
+    const contenedor = document.getElementById("resultadosBuscador");
+    
+    if (input.length === 0) {
+        contenedor.style.display = "none";
+        contenedor.innerHTML = "";
+        return;
+    }
+    // ❌ si está vacío → mostrar últimas búsquedas
+    if (input === "") {
+        mostrarUltimasBusquedas();
+        return;
+    }
+
+    try {
+        const res = await fetch(`${API_URL}?q=${encodeURIComponent(input)}`);
+        const data = await res.json();
+
+        contenedor.innerHTML = "";
+
+        if (data.length === 0) {
+            contenedor.innerHTML = "<div class='resultado-item'>No se encontraron pacientes</div>";
+            contenedor.style.display = "block";
+            return;
+        }
+
+        data.forEach(p => {
+            const div = document.createElement("div");
+            div.classList.add("resultado-item");
+
+            div.innerHTML = `
+                <strong>${p.nombre}</strong>
+                <small>DNI: ${p.dni}</small>
+                <small>Tel: ${p.telefono}</small>
+            `;
+
+            div.onclick = () => seleccionarPaciente(p);
+
+            contenedor.appendChild(div);
+        });
+
+        contenedor.style.display = "block";
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function seleccionarPaciente(paciente) {
+    document.getElementById("buscador").value = paciente.nombre;
+    document.getElementById("resultadosBuscador").style.display = "none";
+
+    // 🧠 guardar historial (evitar duplicados)
+    ultimasBusquedas = ultimasBusquedas.filter(p => p.dni !== paciente.dni);
+    ultimasBusquedas.unshift(paciente);
+
+    // máximo 5
+    if (ultimasBusquedas.length > 5) {
+        ultimasBusquedas.pop();
+    }
+
+    console.log("Paciente seleccionado:", paciente);
+}
+
+function mostrarUltimasBusquedas() {
+    const contenedor = document.getElementById("resultadosBuscador");
+    contenedor.innerHTML = "";
+
+    if (ultimasBusquedas.length === 0) {
+        contenedor.innerHTML = "<div class='resultado-item'>Escribe para buscar pacientes...</div>";
+        contenedor.style.display = "block";
+        return;
+    }
+
+    ultimasBusquedas.forEach(p => {
+        const div = document.createElement("div");
+        div.classList.add("resultado-item");
+
+        div.innerHTML = `
+            <strong>🕘 ${p.nombre}</strong>
+            <small>DNI: ${p.dni}</small>
+        `;
+
+        div.onclick = () => seleccionarPaciente(p);
+
+        contenedor.appendChild(div);
+    });
+
+    contenedor.style.display = "block";
+}
